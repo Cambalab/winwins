@@ -28,12 +28,25 @@ class SponsorController extends CrudController{
         $this->grid->add('contact_name',  'Contact Name');
         $this->grid->add('contact_email', 'Contact Email');
         $this->grid->add('contact_phone', 'Contact Phone');
+
         $this->addStylesToGrid();
+        $this->grid->edit('edit', trans('panel::fields.edit'), 'show|modify|aprobar|delete');
+
 
         return $this->returnView();
     }
 
     public function  edit($entity){
+
+        $request = Request();
+        if ($request->has('aprobar')) {
+            $sponsor = \Winwins\Sponsor::find($request->input('aprobar'));
+            if ($sponsor) {
+                $sponsor->status = 'active';
+                $sponsor->save();
+            }
+            return $this->all($entity);
+        }
 
         parent::edit($entity);
 
@@ -60,5 +73,6 @@ class SponsorController extends CrudController{
 
         return $this->returnEditView();
     }
+
 }
 
