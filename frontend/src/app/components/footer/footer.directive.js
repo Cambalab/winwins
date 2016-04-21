@@ -20,8 +20,20 @@
 
     return directive;
 
-    function FooterController() {
-      //var vm = this;
+    /** @ngInject */
+    function FooterController($mdDialog, $document) {
+      var vm = this;
+      
+      vm.showLoginDialog = function(ev) {
+        $mdDialog.show({
+          controller: 'LoginController',
+          controllerAs: 'login',
+          templateUrl: 'app/login/login.tmpl.html',
+          parent: angular.element($document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true
+        });
+      };
     }
   }
 
