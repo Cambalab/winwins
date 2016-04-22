@@ -33,7 +33,7 @@
                   <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
                 </md-button>
                 </div>
-<!--                 <md-button class="md-icon-button" ng-click="login.authenticate('twitter')" aria-label="Twitter">
+<!--            <md-button class="md-icon-button" ng-click="login.authenticate('twitter')" aria-label="Twitter">
                   <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="login.authenticate('google')" aria-label="Google">
@@ -48,7 +48,7 @@
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="violet" translate>Vamos a tu cuenta.</p></div>
               </div>
-              <div layout="column" layout-align="center center" class="login-ok" ng-if="login.login_status == 'error'" ng-click="login.login_status = 'login'">
+              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.login_status == 'error'" ng-click="login.login_status = 'login'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
                 <div flex><p class="gray" translate>Usuario/password no correctos<br /></div>
               </div
@@ -105,7 +105,7 @@
                 <div layout-gt-sm="row">
                   <md-input-container class="md-block" flex-gt-sm>
                     <md-checkbox class="green" ng-model="login.register.terms" name="terms">
-                      {{ 'He leído y acepto los' | translate }} <a href="#" translate>términos y condiciones</a>.
+                      {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
                     </md-checkbox>
                     <div ng-messages="registerForm.terms.$error" class="help-block" ng-if="registerForm.terms.$error.notTerms">
                       <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
@@ -119,7 +119,7 @@
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="gray font-16">{{ 'Te enviamos un correo a' | translate }}
-                            <span class="violet">{{register.email}}</span>
+                            <span class="violet">{{ login.register.email}}</span>
                              {{ 'para confirmar tu cuenta' | translate }}.</p>
                              <p class="gray font-16" translate>Vamos a completar tu perfil.</p></div>
               </div>
