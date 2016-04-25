@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $auth) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
@@ -17,6 +17,31 @@
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
     });
+
+    vm.join = function() {
+      if($auth.isAuthenticated()) {
+        winwin.join(vm.winwinId).then(function(data) {
+          
+        });
+
+
+        // $http.get(api_host+'/api/winwins/join/'+$scope.winwin.id).success(function(data) {
+        //   $state.go('winwin-joined', {
+        //     winwinId: $scope.winwin.id,
+        //     winwinName: $scope.winwin.title
+        //   }); 
+        // });
+
+      } else {
+        // $rootScope.returnState = {
+        //   state: 'ww-join',
+        //   parameters: {
+        //       winwinId: $scope.winwin.id
+        //   }
+        // };
+        $state.go('signIn');
+      }
+    }
 
     vm.showMasDetalleDialog = function(ev) {
       $mdDialog.show({
