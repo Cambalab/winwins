@@ -208,7 +208,7 @@
               <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
             </ul>
           </div>
-          <div class="content-bg">
+          <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
             <p><md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin</p>
           </div>
           <div class="content-bg">
