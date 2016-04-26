@@ -5,6 +5,7 @@
     .module('winwins')
     .controller('LoginController', LoginController);
 
+  /** @ngInject */
   function LoginController($mdDialog, $auth, $state, $timeout, account, $rootScope) {
     var vm = this;
 

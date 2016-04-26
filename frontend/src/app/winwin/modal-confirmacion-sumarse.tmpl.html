@@ -1,0 +1,67 @@
+<div layout="column" class="lightbox-crear" ng-show="vm.status == 'success'">
+	<md-dialog-content class="acme-crearwinwin">
+		<div layout="column" layout-align="center center" layout-margin class="comparti">
+		  <md-icon md-svg-src="assets/images/icon-ok.svg" class="icon-big"></md-icon>
+		  <h3 translate>Buenísimo!</h3>
+		  <p class="enfasis-blue"><span translate>Te uniste a : </span></p>
+		  <p class="medium"><em translate>“{{vm.winwin.title}}”</em></p> 
+		</div>
+	</md-dialog-content>
+</div>
+
+<div layout="column" class="lightbox-crear" ng-show="vm.status == 'share'">
+  <md-dialog-content class="acme-crearwinwin">
+	  <div class="container">
+	    <div layout="column" layout-align="center center" class="comparti">
+	      <h2 translate>Compartí tu Winwin</h2>
+	      <p translate>en las redes sociales y sumá personas para concretarlo!</p>
+	    </div>
+	    <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
+	      <div
+	      	socialshare
+         	socialshare-provider="facebook" 
+         	socialshare-text="{{vm.winwin.title}}" 
+         	socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}"  
+         	socialshare-media="{{vm.imageServer}}/{{vm.winwin.image}}"
+         	socialshare-via="{{vm.facebookId}}">
+         	<md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
+ 				</div>
+	      <div 
+	      	socialshare  
+	      	socialshare-text="{{vm.winwin.title}}" 
+	      	socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}" 
+	      	socialshare-provider="twitter">
+	      	<md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
+	      </div>
+	      <div
+	      	socialshare 
+         	socialshare-provider="google" 
+         	socialshare-text="{{vm.winwin.title}}" 
+         	socialshare-media="{{vm.imageServer}}/{{vm.winwin.image}}"
+         	socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}">
+	      	<md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon>
+	      </div>
+	    </div>
+	    <div layout="row" layout-align="center center">
+	      <div layout="column" class="comparti" flex-xs="80" flex="40" ng-show="!vm.emailsOK">
+	        <p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
+	        <div class="wrap-md-input-container">
+	          <md-input-container class="md-icon-float md-icon-right md-block">
+	            <label>Ingresa mails para invitar</label>
+	            <md-chips ng-model="vm.mails" md-on-add="vm.validateMail($chip)">
+	            	<input type="email" length="30" class="validate">
+	          	</md-chips>
+	            <md-button class="md-fab send" aria-label="" ng-click="vm.sentInvitations()">
+	              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
+	            </md-button>
+	          </md-input-container>
+	        </div>
+	      </div>
+	      <div layout="column" layout-align="center center" ng-show="vm.emailsOK">
+          <div flex><md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button></div>
+          <div flex><p class="gray">Las invitaciones fueron enviadas!</p></div>
+        </div>
+	    </div>
+	  </div>
+  </md-dialog-content>
+</div>

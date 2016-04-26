@@ -21,17 +21,22 @@
     vm.join = function() {
       if($auth.isAuthenticated()) {
         winwin.join(vm.winwinId).then(function(data) {
+          winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+            vm.winwin = winwin_data;
+            vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+          });
           
+          $mdDialog.show({
+            controller: ModalConfirmacionSumarse,
+            controllerAs: 'vm',
+            templateUrl: 'app/winwin/modal-confirmacion-sumarse.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_winwin: vm.winwin
+            }
+          });
         });
-
-
-        // $http.get(api_host+'/api/winwins/join/'+$scope.winwin.id).success(function(data) {
-        //   $state.go('winwin-joined', {
-        //     winwinId: $scope.winwin.id,
-        //     winwinName: $scope.winwin.title
-        //   }); 
-        // });
-
       } else {
         // $rootScope.returnState = {
         //   state: 'ww-join',
@@ -39,7 +44,7 @@
         //       winwinId: $scope.winwin.id
         //   }
         // };
-        $state.go('signIn');
+        //$state.go('signIn');
       }
     }
 
@@ -66,10 +71,45 @@
     };
   }
 
+  /** @ngInject */
   function MasDetalleController($scope, winwin) {
     $scope.winwin = winwin;
   }
 
   function ParticipantesController(){}
+
+  /** @ngInject */
+  function ModalConfirmacionSumarse($scope, $timeout, current_winwin, ENV, winwin) {
+    var vm = this;
+
+    vm.base = ENV.base;
+    vm.imageServer = ENV.imageServer;
+    vm.facebookId = ENV.satellizer.facebook.clientId;
+    vm.status = 'success';
+    vm.winwin = current_winwin;
+    vm.emailsOK = false;
+
+    vm.mails = [];
+
+    $timeout(function() {
+      vm.status = 'share';
+    }, 3000);
+
+    vm.validateMail = function(chip) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(chip))
+      {
+        var index = vm.mails.indexOf(chip);
+        vm.mails.splice(index, 1);
+      }
+    }
+
+    vm.sentInvitations = function() {
+      winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
+        vm.mails = [];
+        vm.emailsOK = true;
+      });
+    }
+  }
 
 })();
