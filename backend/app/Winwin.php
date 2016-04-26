@@ -28,6 +28,10 @@ class Winwin extends Model {
         return $this->belongsToMany('Winwins\Sponsor', 'sponsors_winwins')->withPivot('ww_accept', 'sponsor_accept', 'sponsor_text', 'sponsor_message', 'ww_message');
     }
 
+    public function interests() {
+        return $this->belongsToMany('Winwins\Interest', 'interests_interested','interested_id', 'interest_id');
+    }
+
     public function polls() {
         return $this->hasMany('Winwins\Poll');
     }
