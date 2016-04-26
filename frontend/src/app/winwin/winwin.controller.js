@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $auth) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $auth, $rootScope) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
@@ -38,13 +38,19 @@
           });
         });
       } else {
-        // $rootScope.returnState = {
-        //   state: 'ww-join',
-        //   parameters: {
-        //       winwinId: $scope.winwin.id
-        //   }
-        // };
-        //$state.go('signIn');
+        $rootScope.returnState = {
+          state: 'home.winwin',
+          parameters: {
+              winwinId: vm.winwin.id
+          }
+        };
+        $mdDialog.show({
+          controller: 'LoginController',
+          controllerAs: 'login',
+          templateUrl: 'app/login/login.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true
+        });
       }
     }
 
