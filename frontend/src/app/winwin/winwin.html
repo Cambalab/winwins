@@ -219,7 +219,11 @@
             </ul>
           </div>
           <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
-            <p><md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin</p>
+            <p>
+              <md-button  ng-href ng-click="winwin.left()">
+                <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+              </md-button>
+            </p>
           </div>
           <div class="content-bg">
             <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>

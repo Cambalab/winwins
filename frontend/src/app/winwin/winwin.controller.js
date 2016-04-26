@@ -27,7 +27,7 @@
           });
           
           $mdDialog.show({
-            controller: ModalConfirmacionSumarse,
+            controller: ModalConfirmacionSumarseController,
             controllerAs: 'vm',
             templateUrl: 'app/winwin/modal-confirmacion-sumarse.tmpl.html',
             parent: angular.element($document.body),
@@ -46,6 +46,25 @@
         // };
         //$state.go('signIn');
       }
+    }
+
+    vm.left = function() {
+      $mdDialog.show({
+        controller: ModalAbandonarController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-abandonar.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_winwin: vm.winwin
+        }
+      })
+      .then(function(data) {
+        winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+          vm.winwin = winwin_data;
+          vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+        });
+      });
     }
 
     vm.showMasDetalleDialog = function(ev) {
@@ -79,7 +98,7 @@
   function ParticipantesController(){}
 
   /** @ngInject */
-  function ModalConfirmacionSumarse($scope, $timeout, current_winwin, ENV, winwin) {
+  function ModalConfirmacionSumarseController($timeout, current_winwin, ENV, winwin) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -109,6 +128,21 @@
         vm.mails = [];
         vm.emailsOK = true;
       });
+    }
+  }
+
+  /** @ngInject */
+  function ModalAbandonarController(current_winwin, $mdDialog, winwin) {
+    var vm = this;
+
+    vm.left = function() {
+      winwin.left(current_winwin.id).then(function(data) {
+         $mdDialog.hide(data);
+      });
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
     }
   }
 

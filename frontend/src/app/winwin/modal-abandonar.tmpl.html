@@ -1,0 +1,9 @@
+<div layout="column" layout-align="center center"  layout-padding layout-magin>
+	<div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
+	<div flex><h2 class="gray" translate>Atención!</h2></div>
+	<div flex><p class="gray" translate>Estás seguro que deseas abandonar este Winwin?</p></div>
+	<div flex>
+		<button class="md-raised md-primary" ng-click="vm.left()">{{ 'Abandonar' | translate }}</button>
+		<button class="md-raised md-primary" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</button>
+	</div>
+</div>
