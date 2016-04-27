@@ -62,4 +62,12 @@
     $scope.users = users;
   }
 
+  angular
+    .module('winwins')
+    .filter('moment', function() {
+      return function(dateString, format) {
+        return moment(dateString).format(format);
+      };
+  });
+
 })();
