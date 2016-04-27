@@ -101,22 +101,27 @@
         </div>
       </div>
       <div class="comments">
-        <md-card class="md-whiteframe-7dp">
+        <md-card class="md-whiteframe-7dp" ng-repeat="item_post in winwin.posts">
           <div class="card-labels">
             <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
             <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
           </div>
           <md-card-header>
             <md-card-avatar>
-              <img class="md-user-avatar" src="assets/images/profile-avatar.jpg"/>
+              <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}"/>
             </md-card-avatar>
             <md-card-header-text>
-              Nombre de usuario
+              {{item_post.user.username}}
             </md-card-header-text>
           </md-card-header>
           <md-card-content>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce finibus urna vitae tellus mollis, sit amet viverra orci lobortis. Vestibulum in quam in urna consectetur porta. Integer in finibus purus. Vestibulum blandit, ligula vitae laoreet viverra, erat odio dapibus nunc, vitae congue lacus augue pharetra tellus. Donec luctus accumsan risus, vel elementum velit consectetur quis. Nam posuere, lorem nec ultricies egestas, tellus felis pretium dui, eu volutpat sapien est eget urna. Aliquam dapibus libero sapien, ut rutrum mauris vestibulum nec. Cras id accumsan ante. In tincidunt est nunc, a blandit sapien faucibus ut.
-            </p>
+            <p>{{item_post.content}}</p>
+            <div ng-show="item_post.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
+              <img ng-src="{{winwin.imageServer}}/400x/smart/{{item_post.media.name}}" class="img-responsive">
+            </div>
+            <!-- <div ng-show="item_post.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
+             <iframe class="embed-responsive-item" ng-src="{{getIframeSrc(item_post.media.path)}}" allowfullscreen=""></iframe>
+            </div> -->
           </md-card-content>
             <md-card-actions layout="row" layout-margin>
               <div><md-icon class="icon icon-access_time">access_time</md-icon>21/12/12</div>
@@ -126,7 +131,7 @@
               <div><md-icon class="icon share">sharet</md-icon></div>
           </md-card-actions>
         </md-card>
-        <md-card class="md-whiteframe-7dp" flex-offset="15">
+<!--         <md-card class="md-whiteframe-7dp" flex-offset="15">
           <div layout="row" layout-align="space-between center">
             <div layout-padding>
               <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
@@ -155,7 +160,7 @@
               <div><md-icon class="icon insert_comment">insert_comment</md-icon></div>
               <div><md-icon class="icon share">sharet</md-icon></div>
           </md-card-actions>
-        </md-card>
+        </md-card> -->
       </div>
       <div class="aside">
         <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
