@@ -6,7 +6,7 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController(account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document) {
+  function ProfileController(account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document, winwin) {
     var vm = this;
 
     if (!$auth.isAuthenticated()) {
@@ -15,9 +15,12 @@
 
     vm.imageServer = ENV.imageServer;
 
+    vm.user = {interests_list:[]};
+
     account.getProfile()
     .then(function(data) {
       vm.isActive = data.active;
+      
       user.getUser(data.user.id)
       .then(function(user_data) {
         vm.user = user_data;
@@ -25,8 +28,36 @@
         if (vm.user.birthdate) {
           vm.user.birthdate = new Date(vm.user.birthdate);
         }
+        winwin.getInterests().then(function(data) {
+          vm.interests = data;
+        });
       });
     });
+
+    vm.setCategories = function(item) {
+      var _index = -1
+      angular.forEach(vm.user.interests_list, function(value, key) {
+        if (value.id == item.id) {
+          _index = key;
+        }
+      });
+      
+      if (_index == -1) {
+        vm.user.interests_list.push(item);
+      } else {
+        vm.user.interests_list.splice(_index, 1);
+      }
+    };
+
+    vm.isChecked = function(id) {
+      var _index = -1
+      angular.forEach(vm.user.interests_list, function(value, key) {
+        if (value.id == id) {
+          _index = key;
+        }
+      });
+      return _index > -1;
+    }
 
     vm.saveProfile = function() {
       vm.processing = true;
