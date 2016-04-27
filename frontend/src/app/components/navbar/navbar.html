@@ -14,9 +14,9 @@
 		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Cómo funciona</translate></md-button></div>
 		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Winwins</translate></md-button></div>
 		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Miembros</translate></md-button></div>
-		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Sponsors</translate></md-button></div>
+		<div class="seccion space-right"><md-button class="md-primary" ng-href="#"><translate>Sponsors</translate></md-button></div>
 		<div class="logo"><a href="#"><img src="../assets/images/logo.png" alt="" /></a></div>
-		<div class="seccion"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
+		<div class="seccion space-left"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
 		</div>
 		<div class="crear"><md-button class="md-primary" ng-href="#"><translate>+ Crear Winwin</translate></md-button></div>
 		<div class="menu-search">
@@ -27,8 +27,8 @@
 		</div>
   </div>
   <div class="menu hide {{ vm.isAuthenticated()?'show-gt-sm':'show-md' }}">
-  	<div layout="row" layout-align="center center">
-		  <div flex="30">
+  	<div layout="row" layout-align="space-between center" layout-padding>
+		  <div>
 		  	<div layout="row" layout-align="center center">
 					<div>
 						<span>ES</span>
@@ -47,8 +47,8 @@
 					</div>
 				</div>
 			</div>
-		  <div flex="45"><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
-			<div flex="25" layout="row" layout-align="space-around center center">
+		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
+			<div layout="row" layout-align="space-around center center">
 		  		<div class="menu-notifications" ng-if="vm.isAuthenticated()">
 					<md-icon>notifications</md-icon>
 					<span class="badge">1</span>
@@ -132,8 +132,8 @@
 	  </div>
   </md-content>
 </md-sidenav>
-<md-toolbar class="md-accent notice green" layout="row" layout-align="center center" ng-show="!vm.account.isActive" ng-if="vm.isAuthenticated()">
+<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.account.isActive" ng-if="vm.isAuthenticated()">
   <p>
-    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a,' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace,' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
+    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
   </p>
 </md-toolbar>
