@@ -36,6 +36,7 @@
           .then(function(data) {
              vm.account = data.profile;
              vm.account.email = data.user.email;
+             vm.isActive = data.active;
           });
         }
       });

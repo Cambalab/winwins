@@ -16,6 +16,9 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+      vm.sponsors = _.filter(vm.winwin.sponsors, function(model) {
+        return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
+      });
     });
 
     vm.showMasDetalleDialog = function(ev) {

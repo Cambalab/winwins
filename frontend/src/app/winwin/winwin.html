@@ -95,23 +95,8 @@
           <md-icon md-svg-src="assets/images/icon-sponsors-title.svg"></md-icon>{{ 'SPONSORS' | translate }}
         </h3>
         <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
+          <div ng-repeat="sponsor in winwin.sponsors">
+            <img ng-src="{{winwin.imageServer}}/250x120/{{sponsor.photo}}" alt="" class="sponsors-img">
           </div>
         </div>
       </div>
