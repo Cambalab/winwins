@@ -67,7 +67,7 @@
             </p>
             <p><strong>te sumarías?</strong></p>
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
-            <md-button class="bt-green md-whiteframe-17dp">SI, ME SUMO!</md-button>
+            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
           </div>
           <div flex="5">
             <md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
@@ -194,8 +194,12 @@
               <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
             </ul>
           </div>
-          <div class="content-bg">
-            <p><md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin</p>
+          <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
+            <p>
+              <md-button ng-href ng-click="winwin.left()" class="no-padding">
+                <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+              </md-button>
+            </p>
           </div>
           <div class="content-bg">
             <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
