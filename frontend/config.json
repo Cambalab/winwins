@@ -13,8 +13,8 @@
         "availableLangs": ["es", "en"],
         "satellizer": {
           "facebook": {
-            "clientId": "1082199191794840",
-            "scope": "email,public_profile"
+            "clientId": "244219785966079",
+            "scope": "email,public_profile,user_birthday"
           },
           "google": {
             "clientId": "313110710680-p22p1s5brqn7tfaqj9v16u67bic5smqk.apps.googleusercontent.com"
@@ -39,8 +39,8 @@
         "availableLangs": ["es", "en"],
         "satellizer": {
           "facebook": {
-            "clientId": "1082199191794840",
-            "scope": "email,public_profile"
+            "clientId": "244219785966079",
+            "scope": "email,public_profile,user_birthday"
           },
           "google": {
             "clientId": "313110710680-p22p1s5brqn7tfaqj9v16u67bic5smqk.apps.googleusercontent.com"
