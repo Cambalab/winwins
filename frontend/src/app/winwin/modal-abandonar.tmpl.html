@@ -1,9 +1,9 @@
-<div layout="column" layout-align="center center"  layout-padding layout-magin>
-	<div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
-	<div flex><h2 class="gray" translate>Atención!</h2></div>
-	<div flex><p class="gray" translate>Estás seguro que deseas abandonar este Winwin?</p></div>
+<div layout="column" layout-align="center center" layout-padding class="lightbox-abandonar">
+	<div flex><md-button class="report"><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></md-button></div>
+	<div flex><h2 translate>Atención!</h2></div>
+	<div flex><p translate>Estás seguro que deseas abandonar este Winwin?</p></div>
 	<div flex>
-		<button class="md-raised md-primary" ng-click="vm.left()">{{ 'Abandonar' | translate }}</button>
-		<button class="md-raised md-primary" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</button>
+		<md-button class="md-raised md-primary md-green" ng-click="vm.left()">{{ 'Abandonar' | translate }}</md-button>
+		<md-button class="md-raised md-primary md-gray" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</md-button>
 	</div>
 </div>

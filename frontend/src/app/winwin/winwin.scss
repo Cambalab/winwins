@@ -138,14 +138,9 @@
     }
   }
   .bt-green {
-    background: #4cae4e;
-    color:#fff;
-    font-weight: 700;
-    font-size: 16px;
-    border-radius: 0;
-    height: 62px;
-    width: 100%;
-    margin: 0;
+    &:after {
+      display: none;
+    }
     &:before {
       width: 0; 
       height: 0; 
@@ -205,6 +200,16 @@
       color: #8d8d8d;
       font-size: 12px;
       margin: 0;
+    }
+    .no-padding {
+      margin: 0;
+      padding: 0;
+      text-transform: inherit;
+      font-size: 12px;
+      &:hover {
+        background: none;
+        color: #353535;
+      }
     }
   }
   h3.title-notificaction {

@@ -1,15 +1,15 @@
-<div layout="column" class="lightbox-crear" ng-show="vm.status == 'success'">
+<div layout="column" layout-padding class="lightbox-crear" ng-show="vm.status == 'success'">
 	<md-dialog-content class="acme-crearwinwin">
 		<div layout="column" layout-align="center center" layout-margin class="comparti">
 		  <md-icon md-svg-src="assets/images/icon-ok.svg" class="icon-big"></md-icon>
 		  <h3 translate>Buenísimo!</h3>
-		  <p class="enfasis-blue"><span translate>Te uniste a : </span></p>
+		  <p class="enfasis-blue"><span translate>Te uniste a: </span></p>
 		  <p class="medium"><em translate>“{{vm.winwin.title}}”</em></p> 
 		</div>
 	</md-dialog-content>
 </div>
 
-<div layout="column" class="lightbox-crear" ng-show="vm.status == 'share'">
+<div layout="column" layout-padding class="lightbox-crear" ng-show="vm.status == 'share'">
   <md-dialog-content class="acme-crearwinwin">
 	  <div class="container">
 	    <div layout="column" layout-align="center center" class="comparti">
@@ -17,7 +17,7 @@
 	      <p translate>en las redes sociales y sumá personas para concretarlo!</p>
 	    </div>
 	    <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
-	      <div
+	      <div class="fb"
 	      	socialshare
          	socialshare-provider="facebook" 
          	socialshare-text="{{vm.winwin.title}}" 
@@ -26,14 +26,14 @@
          	socialshare-via="{{vm.facebookId}}">
          	<md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
  				</div>
-	      <div 
+	      <div class="tw"
 	      	socialshare  
 	      	socialshare-text="{{vm.winwin.title}}" 
 	      	socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}" 
 	      	socialshare-provider="twitter">
 	      	<md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
 	      </div>
-	      <div
+	      <div class="go"
 	      	socialshare 
          	socialshare-provider="google" 
          	socialshare-text="{{vm.winwin.title}}" 
@@ -43,7 +43,7 @@
 	      </div>
 	    </div>
 	    <div layout="row" layout-align="center center">
-	      <div layout="column" class="comparti" flex-xs="80" flex="40" ng-show="!vm.emailsOK">
+	      <div layout="column" class="comparti" flex-xs="100" flex="80" ng-show="!vm.emailsOK">
 	        <p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
 	        <div class="wrap-md-input-container">
 	          <md-input-container class="md-icon-float md-icon-right md-block">
