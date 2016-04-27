@@ -6,12 +6,16 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
 
     vm.winwinId = $stateParams.winwinId;
+
+    account.getProfile().then(function(data) {
+       vm.account = data.profile;
+    });
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
@@ -24,6 +28,10 @@
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
       vm.posts = posts_data.posts;
     });
+
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+    };
 
     vm.showMasDetalleDialog = function(ev) {
       $mdDialog.show({
