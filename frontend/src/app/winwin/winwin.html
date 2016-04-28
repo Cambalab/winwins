@@ -10,13 +10,16 @@
     <p>También podés subir una imagen o un video.</p>
   </md-toolbar>
   <div class="container">
-    <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column">
-      <div flex="45">
+    <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column" class="primary-content">
+      <div flex flex-gt-sm="45">
          <md-card class="md-whiteframe-17dp no-padding">
           <md-card-content>
             <div class="wrap-card-img">
               <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img"/>
             </div>
+            <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
+              <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
+            </md-card-title-text>
             <div class="card-labels">
               <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
               <md-icon class="icon icon-watshot" ng-if="winwin.winwin.popular">whatshot</md-icon>
@@ -24,6 +27,23 @@
             </div>
           </md-card-content>
           <md-card-actions layout="row" layout-align="space-between center">
+            <div flex layout="row" hide class="card-social-media">
+              <md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
+                <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" ng-href="/#/login" aria-label="google">
+                <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" ng-href="/#/login" aria-label="twitter">
+                <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
+                <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
+                <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+              </md-button>
+            </div>
             <div class="card-numbers">
               <div layout="row" layout-wrap layout-align="center center">
                 <div class="md-item-text bg-green">
@@ -42,8 +62,8 @@
           </md-card-actions>
         </md-card>
       </div>
-      <div flex="15">
-        <div layout="column" layout-align="center center">
+      <div flex flex-gt-md="15">
+        <div layout-gt-xs="column" layout="row" layout-align="center center">
           <div class="creadores">
             <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
             <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
@@ -59,8 +79,8 @@
           </div>
         </div>
       </div>
-      <div flex="40">
-        <h2>{{winwin.winwin.title}}</h2>
+      <div flex flex-gt-sm="40">
+        <h2 class="main-title">{{winwin.winwin.title}}</h2>
         <div layout="col" layout-align="center start">
           <div flex="83">
             <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
@@ -69,7 +89,7 @@
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
             <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
           </div>
-          <div flex="15" layout="column">
+          <div flex="15" layout="column" class="content-social-media">
             <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
               <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
             </md-button></div>

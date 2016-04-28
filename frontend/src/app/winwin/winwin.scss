@@ -1,14 +1,65 @@
 .acme-winwin {
   background: #fff;
+  @media (max-width: 960px) {
+    .container {
+      padding: 0;
+    }
+    .primary-content {
+      padding:0;
+      .flex {
+        padding:0;
+      }
+      .content-social-media {
+        display: none;
+      }
+      .card-social-media {
+        display: block;
+        .md-icon-button.md-button.md-ink-ripple {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+      .main-title {
+        display: none;
+      }
+    }
+  }
   .md-crear.md-blue h2 {
     position: relative;
     padding-right: 30px;
   }
   md-card {
     &.no-padding {
+      @media (max-width: 960px) {
+        margin:0;
+      }
       md-card-content {
         padding: 0;
         position: relative;
+        md-card-title-text {
+          @media (max-width: 960px) {
+            display: flex;
+          }
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          padding: 10px;
+          background: rgba(43, 43, 43, 0.7);
+          position: absolute;
+          color: #fff;
+          text-transform: uppercase;
+          text-align: center;
+          .md-headline {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 20px;
+            white-space: inherit;
+            &:hover {
+              background:none;
+            }
+          }
+        }
         .card-labels {
           position: absolute;
           top: 0;
@@ -79,6 +130,9 @@
     }
     .card-time {
       text-align: right;
+      @media (max-width: 960px) {
+        display: none;
+      }
       strong {
         display: block;
         color: #ee8222;
@@ -98,6 +152,11 @@
   }
   .avatar-creador {
     border: solid 6px #144a9d;
+    @media (max-width: 960px) {
+      width: 45px;
+      height: 45px;
+      float: left;
+    }
   }
   .creadores {
     text-align: center;
@@ -105,6 +164,9 @@
       font-size: 12px;
       font-weight: 400;
       margin: 10px 0 0 0;
+      @media (max-width: 960px) {
+        overflow: hidden;
+      }
     }
     strong {
       display: block;
@@ -115,6 +177,9 @@
   }
   .activadores {
     text-align: center;
+    @media (max-width: 960px) {
+      display: none;
+    }
     div {
       margin: 1px;
     }
@@ -133,13 +198,19 @@
   }
   p.detalle {
     margin: 5px 0 0 ;
-    strong {
-      color: #144a9d;
-    }
+  }
+  p strong {
+    color: #144a9d;
   }
   .detalle {
     max-height: 135px;
     overflow: hidden;
+  }
+  @media (max-width: 960px) {
+    p {
+      text-align: center;
+      padding: 0 15px;
+    }
   }
   .ver-mas {
     background: #88888c;
