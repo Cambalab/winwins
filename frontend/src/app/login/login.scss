@@ -126,3 +126,9 @@
     height: 44px;
   }
 }
+md-content.section-login {
+  padding: 25px 40px;
+  @media (max-width: 480px) {
+    padding: 0;
+  }
+}
