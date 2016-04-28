@@ -16,6 +16,7 @@ use Winwins\UserDetail;
 use Winwins\Model\Repository\UserRepository;
 use Winwins\Post;
 use Winwins\Media;
+use Winwins\InterestsInterested;
 
 class UserController extends Controller {
 
@@ -104,6 +105,13 @@ class UserController extends Controller {
                 }
                 //$notification->formatted = trans('ww.'.$notification->body, $notification->object->toArray());
             });
+
+            $userDetail->interests_list = DB::table('interests')
+            ->join('interests_interested', 'interests.id', '=', 'interests_interested.interest_id')
+            ->where('type', '=', 'USER')
+            ->where('interested_id', '=', $user->id)
+            ->select('interests.name','interests.description', 'interests.id')
+            ->get();
 
             //$userDetail->followers = $user->followers;
             //$userDetail->following = $user->following;
@@ -276,6 +284,18 @@ class UserController extends Controller {
         }
 		if($request->has('interests')) {
             $userDetail->interests = $request->input('interests');
+        }
+        if($request->has('interests_list')){
+
+            DB::table('interests_interested')->where('type', 'USER')->where('interested_id', $user->id)->delete();
+            $interests = $request->input('interests_list');
+            foreach($interests as $interest) {
+                $interestsInterested = InterestsInterested::firstOrCreate([
+                    'interest_id' => $interest['id'],
+                    'interested_id' => $user->id,
+                    'type' => 'USER'
+                ]);
+            }
         }
 		if($request->has('language_code')) {
             $userDetail->language_code = $request->input('language_code');

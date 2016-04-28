@@ -27,8 +27,8 @@
                 <button type="submit" ng-disabled="loginForm.$invalid" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
                 </button>
               </form>
-              <div layout="row" layout-align="center center" layout-padding class="section-login" ng-show="login.login_status == 'login'">
-                <div flex><small translate>Ingresá con un clic con tu red social:</small></div>
+              <div layout="row" layout-align="center center" class="section-login" ng-show="login.login_status == 'login'">
+                <div flex="60"><small translate>Ingresá con un clic con tu red social:</small></div>
                 <div flex><md-button class="md-icon-button" ng-click="login.authenticate('facebook')" aria-label="Facebook">
                   <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
                 </md-button>
@@ -43,12 +43,12 @@
                   <md-icon md-svg-src="assets/images/icon-yahoo.svg"></md-icon>
                 </md-button></div> -->
               </div>
-              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.login_status == 'success'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.login_status == 'success'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="violet" translate>Vamos a tu cuenta.</p></div>
               </div>
-              <div layout="column" layout-align="center center" class="login-ok" ng-if="login.login_status == 'error'" ng-click="login.login_status = 'login'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-if="login.login_status == 'error'" ng-click="login.login_status = 'login'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
                 <div flex><p class="gray" translate>Usuario/password no correctos<br /></div>
               </div
@@ -115,7 +115,7 @@
                 <button type="submit" name="action" ng-disabled="registerForm.$invalid" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
                 </button>
               </form>
-              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.register_status == 'success'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.register_status == 'success'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="gray font-16">{{ 'Te enviamos un correo a' | translate }}
@@ -123,7 +123,7 @@
                              {{ 'para confirmar tu cuenta' | translate }}.</p>
                              <p class="gray font-16" translate>Vamos a completar tu perfil.</p></div>
               </div>
-              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.register_status == 'error'" ng-click="login.register_status = 'register'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.register_status == 'error'" ng-click="login.register_status = 'register'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
                 <div flex><p class="gray" translate>{{ login.message }}<br /></div>
               </div
@@ -149,11 +149,11 @@
                 <button type="submit" ng-disabled="changePassForm.$invalid" name="action" translate class="md-raised md-primary bt-default">{{ 'Enviar contraseña' | translate }}
                 </button>
               </form>
-              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.change_pass_status == 'success'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.change_pass_status == 'success'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button></div>
                 <div flex><p class="gray">{{ 'Te enviamos tu contraseña a' | translate }} <span class="violet">{{login.changePass.email}}</span></p></div>
               </div>
-              <div layout="column" layout-align="center center" class="login-ok" ng-show="login.change_pass_status == 'error'">
+              <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.change_pass_status == 'error'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
                 <div flex><p class="gray">{{ 'El email' | translate }} <span class="red">{{login.changePass.email}}</span>
                   {{ 'no es un usuario de Winwins' | translate }}.<br />
