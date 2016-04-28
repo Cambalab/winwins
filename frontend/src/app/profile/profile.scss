@@ -123,6 +123,9 @@ md-toolbar.md-tall.md-warn.ng-scope {
       &.md-input-has-value label {
         display: none;
       }
+      .md-chips .md-chip .md-chip-content {
+        font-size: 12px;
+      }
     }
     .wrap-input {
       background:#fff;
@@ -270,6 +273,14 @@ md-toolbar.md-tall.md-warn.ng-scope {
 }
 .login-ok {
   border:solid 7px #e0e0e0;
+  padding: 30px 90px 40px 90px;
+  @media (max-width: 480px) {
+    padding: 0;
+  }
+  &.envio-correo {
+    border:none;
+    padding-bottom: 40px;
+  }
 }
 .md-button.md-raised.md-green {
   background: #4cae4e;
