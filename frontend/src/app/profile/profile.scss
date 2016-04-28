@@ -125,6 +125,16 @@ md-toolbar.md-tall.md-warn.ng-scope {
       }
       .md-chips .md-chip .md-chip-content {
         font-size: 12px;
+        cursor: pointer;
+      }
+      .seleccionar {
+        font-size: 12px;
+        background: #DAD9D9;
+        border-radius: 3px;
+        padding: 5px;
+        display: block;
+        color: #424040;
+        cursor: pointer;
       }
     }
     .wrap-input {

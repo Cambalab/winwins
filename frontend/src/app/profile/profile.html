@@ -53,7 +53,7 @@
             <label translate>Intereses</label>
             <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
               <div ng-click="$mdOpenMenu($event)" style="min-height: 20px; margin-top: 20px;">
-              <span ng-show="profile.user.interests_list.length == 0">Seleccionar</span>  
+              <span ng-show="profile.user.interests_list.length == 0" class="seleccionar">Seleccionar</span>  
               <md-chips ng-model="profile.user.interests_list" readonly="true" >
                 <md-chip-template>
                   <strong>{{$chip.description}}</strong>          
