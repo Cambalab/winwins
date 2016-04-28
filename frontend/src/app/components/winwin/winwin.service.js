@@ -45,6 +45,18 @@
       return Restangular.one('winwins', id).get();
     }
 
+    _winwin.join = function(id) {
+      return Restangular.one('winwins/join', id).get();
+    }
+
+    _winwin.left = function(id) {
+     return Restangular.one('winwins/left', id).get(); 
+    }
+
+    _winwin.shareMails = function(id, mails) {
+      return Restangular.one('winwins', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
+    }
+
     return _winwin;
   }
 
