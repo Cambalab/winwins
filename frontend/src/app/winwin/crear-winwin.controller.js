@@ -15,7 +15,17 @@
 		};
     
     vm.nexStage = function() {
+    	if (!vm.winwin.terms){
+        vm.crearForm1.terms.$setValidity("notTerms", false);
+        return;
+      }
 			vm.stage = 2;
+    }
+
+    vm.clearError = function() {
+  		if (vm.winwin.terms) {
+				vm.crearForm1.terms.$setValidity("notTerms", true);
+  		}
     }
 
    	winwin.getInterests().then(function(data) {

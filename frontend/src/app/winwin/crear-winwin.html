@@ -3,7 +3,7 @@
     <h2><span translate>CREA TU WINWIN, COMIENZA UNA ACCIÓN  POSITIVA</span></h2>
   </md-toolbar>
   <div class="container">
-    <form method="post" name="crearForm">
+    <form method="post" name="winwin.crearForm1" ng-submit="winwin.nexStage()">
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
           <div class="wrap-md-input-container">
@@ -16,7 +16,7 @@
                 </div>
               </div>
               <input required name="name" ng-model="winwin.winwin.name">
-              <div ng-messages="crearForm.name.$error">
+              <div ng-messages="winwin.crearForm1.name.$error">
                 <div ng-message="required" translate>No se puede crear un WinWin sin nombre!</div>
               </div>
             </md-input-container>
@@ -37,8 +37,8 @@
                   <strong class="enfasis" translate>¿Si supieras que somos </strong>
                 </div>
                 <md-input-container class="md-block">
-                  <input required name="users_amount" ng-model="winwin.winwin.users_amount" placeholder="Ej: 200">
-                  <div ng-messages="crearForm.users_amount.$error">
+                  <input class="numero" type="number" min="2" name="users_amount" placeholder="Ej:200" ng-model="winwin.winwin.users_amount"  ng-required="true" ng-minlength="1"/>
+                  <div ng-messages="winwin.crearForm1.users_amount.$error">
                     <div ng-message="required" translate>Campo requerido.</div>
                   </div>
                 </md-input-container>
@@ -49,7 +49,7 @@
               <div layout="column">
                 <md-input-container class="md-block">
                   <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
-                  <div ng-messages="crearForm.what_we_do.$error">
+                  <div ng-messages="winwin.crearForm1.what_we_do.$error">
                     <div ng-message="required" translate>Campo requerido.</div>
                   </div>
                 </md-input-container>
@@ -68,7 +68,7 @@
                 <span class="icon-help">?</span>
                 <div class="tooltip-text" translate>
                   Acá ingresa información detallada del Winwin, datos e información importante. Lugares, fechas, acciones
-y toda la información que te resulte relevante.
+  y toda la información que te resulte relevante.
                 </div>
               </div>
               </md-button>
@@ -80,24 +80,24 @@ y toda la información que te resulte relevante.
                 <span class="icon-help">?</span>
                 <div class="tooltip-text" translate>
                    Algunos Winwins requieren fecha
-límite para su concreción, si el tuyo 
-es uno de ellos, ingresala aquí.
+  límite para su concreción, si el tuyo 
+  es uno de ellos, ingresala aquí.
                 </div>
               </div>
             <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-placeholder="20/4/2016"></md-datepicker>
           </div>
           <md-input-container class="md-block" flex-gt-sm>
-            <md-checkbox class="green" ng-model="winwin.terms" name="terms">
+            <md-checkbox class="green" ng-model="winwin.winwin.terms" name="terms" ng-change="winwin.clearError()">
               {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
             </md-checkbox>
-            <div ng-messages="crearForm.terms.$error" class="help-block" ng-if="crearForm.terms.$error.notTerms">
+            <div ng-messages="winwin.crearForm1.terms.$error" class="help-block" ng-if="winwin.crearForm1.terms.$error.notTerms">
               <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
             </div>
           </md-input-container>
-          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-click="winwin.nexStage()" translate>{{ 'CONTINUAR' | translate }}</md-button>
+          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="winwin.crearForm1.$invalid" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
         </div>
-      </div>  
-    </form>
+      </div> 
+    </form> 
   </div>
 </md-content>
 
@@ -106,7 +106,7 @@ es uno de ellos, ingresala aquí.
     <h2><md-icon md-svg-src="assets/images/icon-flag.svg"></md-icon><span translate>DALE IDENTIDAD A TU WINWIN</span></h2>
   </md-toolbar>
   <div class="container">
-    <form method="post" name="crearForm">
+    <form method="post" name="winwin.crearForm2" ng-submit="winwin.saveWinwin()">
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
           <md-card>
@@ -190,13 +190,13 @@ es uno de ellos, ingresala aquí.
               </md-input-container>
             </div>
           </div>
-          
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
         </div>
-      </div>  
-    </form>
+      </div>
+    </form> 
   </div>
 </md-content>
+
 
 <md-content class="acme-crearwinwin" ng-show="winwin.stage==3">
   <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
