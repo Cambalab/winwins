@@ -294,3 +294,18 @@ md-menu-content {
   background-color: #cecece;
   color: #fff;
 }
+md-dialog-content {
+  padding: 15px 32px;
+  @media (max-width: 480px) {
+    padding: 0;
+  }
+}
+md-dialog md-tab-content {
+  background: #e7e7e7;
+}
+md-dialog md-tabs {
+  background: #e7e7e7;
+}
+md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon, md-checkbox:not([disabled]).md-primary.md-checked .md-icon {
+  background-color: #4cae4e;
+}
