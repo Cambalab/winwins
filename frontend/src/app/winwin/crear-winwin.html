@@ -1,4 +1,4 @@
-<md-content class="acme-crearwinwin">
+<md-content class="acme-crearwinwin" ng-show="winwin.stage==1">
   <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
     <h2><span translate>CREA TU WINWIN, COMIENZA UNA ACCIÓN  POSITIVA</span></h2>
   </md-toolbar>
@@ -15,9 +15,9 @@
                   Nombra tu winwin con  un título que lo represente.
                 </div>
               </div>
-              <input required name="name" ng-model="crear.name">
+              <input required name="name" ng-model="winwin.winwin.name">
               <div ng-messages="crearForm.name.$error">
-                <div ng-message="required" translate>Campo requerido.</div>
+                <div ng-message="required" translate>No se puede crear un WinWin sin nombre!</div>
               </div>
             </md-input-container>
           </div>
@@ -37,8 +37,8 @@
                   <strong class="enfasis" translate>¿Si supieras que somos </strong>
                 </div>
                 <md-input-container class="md-block">
-                  <input required name="numero" ng-model="crear.numero" placeholder="Ej: 200">
-                  <div ng-messages="crearForm.name.$error">
+                  <input required name="users_amount" ng-model="winwin.winwin.users_amount" placeholder="Ej: 200">
+                  <div ng-messages="crearForm.users_amount.$error">
                     <div ng-message="required" translate>Campo requerido.</div>
                   </div>
                 </md-input-container>
@@ -48,8 +48,8 @@
               </div>
               <div layout="column">
                 <md-input-container class="md-block">
-                  <textarea ng-model="rear.name" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
-                  <div ng-messages="crearForm.texto.$error">
+                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
+                  <div ng-messages="crearForm.what_we_do.$error">
                     <div ng-message="required" translate>Campo requerido.</div>
                   </div>
                 </md-input-container>
@@ -72,7 +72,7 @@ y toda la información que te resulte relevante.
                 </div>
               </div>
               </md-button>
-              <textarea ng-model="rear.name" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
           </div>
           <div class="wrap-md-input-container">
@@ -84,12 +84,113 @@ límite para su concreción, si el tuyo
 es uno de ellos, ingresala aquí.
                 </div>
               </div>
-            <md-datepicker ng-model="myDate" md-placeholder="20/4/2016"></md-datepicker>
+            <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-placeholder="20/4/2016"></md-datepicker>
+          </div>
+          <md-input-container class="md-block" flex-gt-sm>
+            <md-checkbox class="green" ng-model="winwin.terms" name="terms">
+              {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
+            </md-checkbox>
+            <div ng-messages="crearForm.terms.$error" class="help-block" ng-if="crearForm.terms.$error.notTerms">
+              <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
+            </div>
+          </md-input-container>
+          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-click="winwin.nexStage()" translate>{{ 'CONTINUAR' | translate }}</md-button>
+        </div>
+      </div>  
+    </form>
+  </div>
+</md-content>
+
+<md-content class="acme-crearwinwin" ng-show="winwin.stage==2">
+  <md-toolbar class="md-tall md-crear md-violet" layout="row" layout-align="center center">
+    <h2><md-icon md-svg-src="assets/images/icon-flag.svg"></md-icon><span translate>DALE IDENTIDAD A TU WINWIN</span></h2>
+  </md-toolbar>
+  <div class="container">
+    <form method="post" name="crearForm">
+      <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
+        <div flex>
+          <md-card>
+            <img ng-src="{{ winwin.cover_image.file }}" src="assets/images/profile-img.jpg" class="md-card-image" alt="">
+            <md-card-title-text layout-align="center center" layout="column">
+              <md-button class="md-headline">{{winwin.winwin.name}}</md-button>
+            </md-card-title-text>
+          </md-card>
+          <div layout="row" layout-align="center center">
+            <p class="legend">Subí una foto, elegí un video o una  imagen de la galería.</p>
+          </div>
+          <div layout="row" layout-align="center center" class="layout-icons">
+            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="winwin.showCropCoverDialog()">
+              <md-icon>photo_camera</md-icon>
+            </md-whiteframe>
+            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex>
+              <md-icon md-svg-src="assets/images/icon-youtube.svg"></md-icon>
+            </md-whiteframe>
+            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="winwin.showGaleriaDialog()">
+              <md-icon>image</md-icon>
+            </md-whiteframe>
+          </div>
+        </div>
+        <div flex>
+          <div class="wrap-md-input-container">
+            <div layout="row" layout-align="center center">
+              <label>Escala del Winwin</label>
+              <div class="wrap-tooltip">
+                <span class="icon-help">?</span>
+                <div class="tooltip-text" translate>Selecciona una escala territorial.
+                </div>
+              </div>
+            </div>
+            <div layout="row" layout-align="center center">
+              <md-input-container class="md-block">
+                <md-select ng-model="winwin.winwin.scope" md-selected-text="getSelectedText1()">
+                  <md-optgroup>
+                    <md-option>GLOBAL</md-option>
+                    <md-option>LOCAL</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div layout="row" layout-align="center center" ng-if="winwin.winwin.scope == 'LOCAL'">
+              <md-input-container class="md-block">
+                <label translate>Lugar</label>
+                <input required name="winwin_location" ng-model="winwin.winwin.winwin_location">
+              </md-input-container>
+            </div>
+          </div>
+          <div class="wrap-md-input-container">
+            <div layout="row" layout-align="center center">
+              <label>Elegí categorías. (Podes elegir más de una.)</label>
+              <div class="wrap-tooltip">
+                <span class="icon-help">?</span>
+                <div class="tooltip-text" translate>Clasifica tu Winwin en las categorías disponibles. Puedes elegir más de una.
+                </div>
+              </div>
+            </div>
+            <div layout="row" layout-align="center center">
+              <md-input-container class="md-block">
+                <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
+                  <div ng-click="$mdOpenMenu($event)" style="min-height: 20px; margin-top: 20px;">
+                    <span ng-show="winwin.winwin.interests.length == 0">Seleccionar</span>  
+                    <md-chips ng-model="winwin.winwin.interests" readonly="true" >
+                      <md-chip-template>
+                        <strong>{{$chip.description}}</strong>          
+                      </md-chip-template>
+                    </md-chips>
+                  </div>
+                  <md-menu-content width="7">
+                    <md-menu-item ng-repeat="item in winwin.interests">
+                      <md-button>
+                        <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="winwin.isChecked(item.id)" ng-click="winwin.setCategories(item)">
+                          <span md-menu-align-target></span> {{item.description}}
+                        </md-checkbox>
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-input-container>
+            </div>
           </div>
           
-          <md-checkbox class="green terminos" ng-model="register.terms" name="terms">
-            {{ 'He leído y acepto los' | translate }} <a href="#" translate>términos y condiciones</a>.
-          </md-checkbox>
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
         </div>
       </div>  
@@ -97,7 +198,7 @@ es uno de ellos, ingresala aquí.
   </div>
 </md-content>
 
-<md-content class="acme-crearwinwin">
+<md-content class="acme-crearwinwin" ng-show="winwin.stage==3">
   <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
     <h2><md-icon md-svg-src="assets/images/icon-megafono.svg"></md-icon><span translate>Difundí tu Winwin</span></h2>
   </md-toolbar>
@@ -132,87 +233,7 @@ es uno de ellos, ingresala aquí.
     </div>
   </div>
 </md-content>
-<md-content class="acme-crearwinwin">
-  <md-toolbar class="md-tall md-crear md-violet" layout="row" layout-align="center center">
-    <h2><md-icon md-svg-src="assets/images/icon-flag.svg"></md-icon><span translate>DALE IDENTIDAD A TU WINWIN</span></h2>
-  </md-toolbar>
-  <div class="container">
-    <form method="post" name="crearForm">
-      <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
-        <div flex>
-          <md-card>
-            <img ng-src="assets/images/profile-img.jpg" class="md-card-image" alt="">
-            <md-card-title-text layout-align="center center" layout="column">
-              <md-button class="md-headline">TITULO DEL WINWIN</md-button>
-            </md-card-title-text>
-          </md-card>
-          <div layout="row" layout-align="center center">
-            <p class="legend">Subí una foto, elegí un video o una  imagen de la galería.</p>
-          </div>
-          <div layout="row" layout-align="center center" class="layout-icons">
-            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex>
-              <md-icon>photo_camera</md-icon>
-            </md-whiteframe>
-            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex>
-              <md-icon md-svg-src="assets/images/icon-youtube.svg"></md-icon>
-            </md-whiteframe>
-            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex>
-              <md-icon>image</md-icon>
-            </md-whiteframe>
-          </div>
-        </div>
-        <div flex>
-          <div class="wrap-md-input-container">
-            <div layout="row" layout-align="center center">
-              <label>Escala del Winwin</label>
-              <div class="wrap-tooltip">
-                <span class="icon-help">?</span>
-                <div class="tooltip-text" translate>Texto tooltip
-                </div>
-              </div>
-            </div>
-            <div layout="row" layout-align="center center">
-              <md-input-container class="md-block">
-                <md-select ng-model="selectedItem1" md-selected-text="getSelectedText1()">
-                  <md-optgroup label="Global">
-                    <md-option>Global</md-option>
-                    <md-option>Global</md-option>
-                    <md-option>Global</md-option>
-                    <md-option>Global</md-option>
-                  </md-optgroup>
-                </md-select>
-              </md-input-container>
-            </div>
-          </div>
-          <div class="wrap-md-input-container">
-            <div layout="row" layout-align="center center">
-              <label>Elegí categorías. (Podes elegir más de una.)</label>
-              <div class="wrap-tooltip">
-                <span class="icon-help">?</span>
-                <div class="tooltip-text" translate>Texto tooltip
-                </div>
-              </div>
-            </div>
-            <div layout="row" layout-align="center center">
-              <md-input-container class="md-block">
-                <md-select ng-model="selectedItem2" md-selected-text="getSelectedText2()">
-                  <md-optgroup label="Internet - Tecnología">
-                    <md-option>Internet - Tecnología</md-option>
-                    <md-option>Internet - Tecnología</md-option>
-                    <md-option>Internet - Tecnología</md-option>
-                    <md-option>Internet - Tecnología</md-option>
-                  </md-optgroup>
-                </md-select>
-              </md-input-container>
-            </div>
-          </div>
-          
-          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
-        </div>
-      </div>  
-    </form>
-  </div>
-</md-content>
+
 
 <div layout="column" class="lightbox-crear">
   <md-dialog-content>
@@ -233,52 +254,6 @@ es uno de ellos, ingresala aquí.
         <md-button class="md-raised md-primary" translate>LISTO</md-button>
         <md-button class="md-raised md-grey" translate>CANCELAR</md-button>
       </md-card-actions>
-    </div>
-  </md-dialog-content>
-</div>
-
-<div layout="column" class="lightbox-crear">
-  <md-dialog-content>
-    <div layout="column" layout-padding layout-margin>
-      <h2 translate>Elegí una imagen de la galería.</h2>
-      <div layout="row" layout-margin layout-wrap class="galeria">
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img selected" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-        <div>
-          <img ng-src="assets/images/imagen-video.jpg" alt="" class="galeria-img" />
-        </div>
-      </div>
     </div>
   </md-dialog-content>
 </div>
