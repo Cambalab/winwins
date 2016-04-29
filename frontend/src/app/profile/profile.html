@@ -51,20 +51,34 @@
           </md-input-container>
           <md-input-container class="md-block">
             <label translate>Intereses</label>
-            <input md-maxlength="30" md-no-asterisk name="interests" ng-model="profile.user.interests">
-            <div ng-messages="profileForm.interests.$error">
-              <div ng-message="required" translate>Campo requerido.</div>
-              <div ng-message="md-maxlength" translate>The name has to be less than 30 characters long.</div>
-            </div>
+            <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
+              <div ng-click="$mdOpenMenu($event)" style="min-height: 20px; margin-top: 20px;">
+              <span ng-show="profile.user.interests_list.length == 0" class="seleccionar">Seleccionar</span>  
+              <md-chips ng-model="profile.user.interests_list" readonly="true" >
+                <md-chip-template>
+                  <strong>{{$chip.description}}</strong>          
+                </md-chip-template>
+              </md-chips>
+              </div>
+              <md-menu-content width="7">
+                <md-menu-item ng-repeat="item in profile.interests">
+                  <md-button>
+                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="profile.isChecked(item.id)" ng-click="profile.setCategories(item)">
+                      <span md-menu-align-target></span> {{item.description}}
+                    </md-checkbox>
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
           </md-input-container>        
         </div>
         <div flex>
           <md-input-container class="md-block">
             <label translate>Sobre vos</label>
-            <input md-maxlength="30" md-no-asterisk name="about" ng-model="profile.user.about">
+            <input md-maxlength="500" md-no-asterisk name="about" ng-model="profile.user.about">
             <div ng-messages="profileForm.about.$error">
               <div ng-message="required" translate>Campo requerido.</div>
-              <div ng-message="md-maxlength" translate>The name has to be less than 30 characters long.</div>
+              <div ng-message="md-maxlength" translate>The name has to be less than 500 characters long.</div>
             </div>
           </md-input-container>
           <div class="md-block wrap-input">

@@ -148,12 +148,18 @@
       color: #fb8c00;
       font-size: 36px;
       margin-bottom: 10px;
+      @media (max-width: 480px) { 
+        font-size: 28px;
+      }
     }
     h3 {
       font-size: 48px;
       color: #6d6d6d;
       font-weight: 400;
       margin: 0;
+      @media (max-width: 480px) { 
+        font-size: 38px;
+      }
     }
     p {
       color: #5d5d5d;
@@ -180,10 +186,25 @@
       margin-bottom: 40px;
     }
   }
-  .comparti-social-media md-icon {
-    width: 90px;
-    height: 100px;
-    cursor: pointer;
+  .comparti-social-media {
+    .tw {
+      background: #60cbf0;
+    }
+    .fb {
+      background: #395a97;
+    }
+    .go {
+      background: #dc4e41;
+    }
+    md-icon {
+      width: 90px;
+      height: 100px;
+      cursor: pointer;
+      @media (max-width: 480px) { 
+        width: 70px;
+        height: 80px;
+      }
+    }
   }
   md-input-container.md-icon-float.md-icon-right.md-block {
     padding-left: 0;
@@ -252,7 +273,23 @@ md-toolbar.md-tall.md-crear {
     font-size: 48px;
   }
 }
-.lightbox-crear {
+.lightbox-crear, .lightbox-abandonar {
+  background: #e7e6e6;
+  .container {
+    background: #e7e6e6;
+    md-input-container.md-icon-float.md-icon-right.md-block {
+      margin: 0;
+    }
+    md-chips-wrap {
+      padding-bottom: 0
+    }
+    md-input-container.md-icon-float.md-icon-right.md-block .md-button.md-fab.send {
+      top:3px;
+    }
+    .comparti .enfasis {
+      margin: 25px 0 10px 0;
+    }
+  }
   h2 {
     font-size: 16px;
     color: #5d5d5d;
@@ -280,9 +317,40 @@ md-toolbar.md-tall.md-crear {
   }
   .acme-crearwinwin {
     background: #e7e6e6;
+    padding: 10px 40px 25px 40px;
+    @media (max-width: 480px) {
+      padding: 0;
+    }
   }
   .icon-big {
     width: 140px;
     height: 140px;
+  }
+}
+.lightbox-abandonar {
+  h2 {
+    font-size: 30px;
+    margin: 0;
+    color: #434444;
+  }
+  p {
+    color: #434444;
+  }
+  .report {
+    margin: 0;
+    padding: 0;
+    md-icon {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .md-green:hover {
+    background: #14b217;
+  }
+  .md-primary.md-button.md-raised.md-gray {
+    background-color: #929292;
+    &:hover {
+      background: #676666;
+    }
   }
 }

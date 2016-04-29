@@ -86,8 +86,23 @@
       account.getProfile();
       $timeout(function() {
         $mdDialog.hide();
-        if (redirect) {
-          $state.go(redirect);
+        if($rootScope.returnState) {
+            switch($rootScope.returnState.state) {
+              case 'home.winwin': 
+                var winwinId = $rootScope.returnState.parameters.winwinId;
+                $rootScope.returnState = null;
+                $state.go('home.winwin', {
+                    winwinId: winwinId
+                 }); 
+                break;
+              default:
+                $rootScope.returnState = null;
+                $state.go('home'); 
+            }
+        } else {
+          if (redirect) {
+            $state.go(redirect);
+          } 
         }
       }, 3000);
     };

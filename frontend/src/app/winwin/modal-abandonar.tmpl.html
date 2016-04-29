@@ -1,0 +1,9 @@
+<div layout="column" layout-align="center center" layout-padding class="lightbox-abandonar">
+	<div flex><md-button class="report"><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></md-button></div>
+	<div flex><h2 translate>Atención!</h2></div>
+	<div flex><p translate>Estás seguro que deseas abandonar este Winwin?</p></div>
+	<div flex>
+		<md-button class="md-raised md-primary md-green" ng-click="vm.left()">{{ 'Abandonar' | translate }}</md-button>
+		<md-button class="md-raised md-primary md-gray" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</md-button>
+	</div>
+</div>
