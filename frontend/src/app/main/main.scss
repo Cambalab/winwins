@@ -294,12 +294,6 @@ md-menu-content {
   background-color: #cecece;
   color: #fff;
 }
-md-dialog-content {
-  padding: 15px 32px;
-  @media (max-width: 480px) {
-    padding: 0;
-  }
-}
 md-dialog md-tab-content {
   background: #e7e7e7;
 }

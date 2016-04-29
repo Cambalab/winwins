@@ -1,5 +1,8 @@
 .acme-winwin {
   background: #fff;
+  .content-central {
+    padding-bottom: 100px;
+  }
   .md-crear.md-blue h2 {
     position: relative;
     padding-right: 30px;
@@ -311,8 +314,8 @@
     h3 {
       margin-left: 20px;
     }
-    &.img {
-      max-width: 190px;
+    .sponsors-img {
+      max-width: 100%;
       display: block;
     }
     div {
