@@ -303,3 +303,9 @@ md-dialog md-tabs {
 md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon, md-checkbox:not([disabled]).md-primary.md-checked .md-icon {
   background-color: #4cae4e;
 }
+md-dialog md-chip {
+  font-size: 12px;
+}
+md-dialog md-dialog-content.padding-lightbox {
+  padding: 30px;
+}
