@@ -208,9 +208,30 @@
       <p translate>en las redes sociales y sumá personas para concretarlo!</p>
     </div>
     <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
-      <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon></div>
-      <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon></div>
-      <div><md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon></div>
+      <div
+        socialshare
+        socialshare-provider="facebook" 
+        socialshare-text="{{winwin.winwin.title}}" 
+        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
+        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+        socialshare-via="{{winwin.facebookId}}">
+        <md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
+      <div
+        socialshare  
+        socialshare-text="{{winwin.winwin.title}}" 
+        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
+        socialshare-provider="twitter">
+        <md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
+      <div
+        socialshare 
+        socialshare-provider="google" 
+        socialshare-text="{{winwin.winwin.title}}" 
+        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
+        <md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
     </div>
     <div layout="row" layout-align="center center">
       <div layout="column" class="comparti" flex-xs="80" flex="40">
@@ -218,24 +239,22 @@
         <div class="wrap-md-input-container">
           <md-input-container class="md-icon-float md-icon-right md-block">
             <label>Ingresa mails para invitar</label>
-            <input required name="name" ng-model="crear.name">
-              <div ng-messages="crearForm.name.$error">
-                <div ng-message="required" translate>Campo requerido.</div>
-            </div>
-            <md-button class="md-fab send" aria-label="">
+            <md-chips ng-model="winwin.mails" md-on-add="winwin.validateMail($chip)">
+              <input type="email" length="30" class="validate">
+            </md-chips>
+            <md-button class="md-fab send" aria-label="" ng-click="winwin.sentInvitations()">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </md-input-container>
         </div>
-        <small>Separá los emails con una coma.</small>
-        <md-button class="md-raised md-primary md-grey">IR AL WINWIN</md-button>
+        <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})">IR AL WINWIN</md-button>
       </div>
     </div>
   </div>
 </md-content>
 
 
-<div layout="column" class="lightbox-crear">
+<div layout="column" class="lightbox-crear" ng-if="winwin.stage==4">
   <md-dialog-content>
     <div layout="column" layout-padding layout-margin>
       <h2 translate>Copia el link del video</h2>
@@ -258,7 +277,7 @@
   </md-dialog-content>
 </div>
 
-<div layout="column" class="lightbox-crear">
+<div layout="column" class="lightbox-crear" ng-if="winwin.stage==4">
   <md-dialog-content class="acme-crearwinwin">
     <div layout="column" layout-align="center center" layout-margin layout-padding class="comparti">
       <md-icon md-svg-src="assets/images/icon-ok.svg" class="icon-big"></md-icon>
@@ -291,7 +310,7 @@
   </md-dialog-content>
 </div>
 
-<div layout="column" class="lightbox-crear">
+<div layout="column" class="lightbox-crear" ng-if="winwin.stage==4">
   <md-dialog-content class="acme-crearwinwin">
     <div layout="column" layout-align="center center" layout-margin class="comparti">
       <md-icon md-svg-src="assets/images/icon-ok.svg" class="icon-big"></md-icon>

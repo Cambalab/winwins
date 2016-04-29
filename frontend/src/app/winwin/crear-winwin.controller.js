@@ -8,10 +8,17 @@
   /** @ngInject */
   function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document, $q) {
     var vm = this;
+    vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
+    vm.facebookId = ENV.satellizer.facebook.clientId;
 		vm.stage = 1; 
+    vm.emailsOK = false;
+
+    vm.mails = [];
+
 		vm.winwin = {
-			interests:[]
+			interests:[],
+      scope: 'GLOBAL'
 		};
     
     vm.nexStage = function() {
@@ -35,8 +42,9 @@
         }
 
         winwin.saveWinwin(vm.winwin)
-        .then(function(){
+        .then(function(data){
           vm.stage = 3;
+          vm.winwin.id = data.id;
         });
 
         vm.processing = false;
@@ -87,6 +95,22 @@
    		});
 	   	return _index > -1;
 	 	}
+
+    vm.validateMail = function(chip) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(chip))
+      {
+        var index = vm.mails.indexOf(chip);
+        vm.mails.splice(index, 1);
+      }
+    }
+
+    vm.sentInvitations = function() {
+      winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
+        vm.mails = [];
+        vm.emailsOK = true;
+      });
+    }
 
 	 	vm.showGaleriaDialog = function(ev) {
       $mdDialog.show({
