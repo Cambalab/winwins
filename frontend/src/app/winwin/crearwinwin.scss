@@ -284,10 +284,28 @@ md-toolbar.md-tall.md-crear {
       padding-bottom: 0
     }
     md-input-container.md-icon-float.md-icon-right.md-block .md-button.md-fab.send {
-      top:3px;
+      bottom: 0;
+      top: inherit;
     }
     .comparti .enfasis {
       margin: 25px 0 10px 0;
+    }
+    .comparti {
+      md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+        top: -37px;
+        font-size: 12px;
+      }
+      md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+        top: -37px;
+        font-size: 12px;
+      }
+      .wrap-md-input-container {
+        max-width: 500px;
+        md-input-container.md-icon-float.md-icon-right.md-block.md-has-icon.md-input-focused label {
+          font-size: inherit;
+          top: -17px;
+        }
+      }
     }
   }
   h2 {
@@ -328,6 +346,7 @@ md-toolbar.md-tall.md-crear {
   }
 }
 .lightbox-abandonar {
+  padding: 30px 40px;
   h2 {
     font-size: 30px;
     margin: 0;
