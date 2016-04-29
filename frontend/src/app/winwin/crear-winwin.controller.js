@@ -6,7 +6,7 @@
     .controller('CrearWinwinController', CrearWinwinController);
 
   /** @ngInject */
-  function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document) {
+  function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document, $q) {
     var vm = this;
     vm.imageServer = ENV.imageServer;
 		vm.stage = 1; 
@@ -21,6 +21,37 @@
       }
 			vm.stage = 2;
     }
+
+    vm.saveWinwin = function() {
+      var promises = [];
+
+      if (vm.cover_image) {
+        promises.push(winwin.uploadImage(dataURItoBlob(vm.cover_image.file), vm.cover_image.name));
+      }
+
+      $q.all(promises).then(function(data) {
+        if (vm.cover_image) {
+          vm.winwin.image = data[0].filename;
+        }
+
+        winwin.saveWinwin(vm.winwin)
+        .then(function(){
+          vm.stage = 3;
+        });
+
+        vm.processing = false;
+      });
+    }
+
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
+    };
 
     vm.clearError = function() {
   		if (vm.winwin.terms) {

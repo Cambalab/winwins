@@ -124,7 +124,7 @@
         </md-input-container></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate> Ir a mi cuenta</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-mis-winwins.svg"></md-icon><translate> Mis Winwins</translate></md-button></div>
-			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
+			<div><md-button class="md-primary" ui-sref="home.crear-winwin"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-sponsors.svg"></md-icon><translate> Sponsors</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate> Mi perfil</translate></md-button></div>

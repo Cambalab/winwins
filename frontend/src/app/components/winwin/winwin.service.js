@@ -49,6 +49,15 @@
       return Restangular.all('winwins').post(winwin);
     };
 
+    _winwin.uploadImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('winwins')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
+    }
+
     _winwin.join = function(id) {
       return Restangular.one('winwins/join', id).get();
     }
