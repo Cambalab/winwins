@@ -60,9 +60,6 @@
       color: #686868;
       font-family: 'Montserrat', serif;
     }
-    &.md-input-has-value label {
-      display: none;
-    }
     strong.enfasis {
       color: #4a6dce;
       background: #f1f1f1;
@@ -72,6 +69,9 @@
     }
     textarea {
       border-color: #3ca007;
+      font-size: 12px;
+      color: #686868;
+      font-family: 'Montserrat', serif;
     }
     .wrap-tooltip {
       right: 0;
@@ -90,6 +90,23 @@
           color: #5d5d5d;
         }
       }
+    }
+  }
+  md-input-container {
+    md-checkbox {
+      font-size: 12px;
+      color: #686868;
+      a {
+        color: #686868;
+      }
+    }
+    .menu-caterogias-btn.md-menu div>span {
+      font-size: 14px;
+      background: #DEDEDE;
+      padding: 5px 15px;
+      border-radius: 5px;
+      color: #666666;
+      cursor: pointer;
     }
   }
   .terminos {

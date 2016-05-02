@@ -309,3 +309,9 @@ md-dialog md-chip {
 md-dialog md-dialog-content.padding-lightbox {
   padding: 30px;
 }
+md-checkbox.md-checked .md-icon {
+  background-color: #4cae4e;
+}
+.md-select-menu-container.md-active.md-clickable .md-container-ignore {
+  display: none;
+}
