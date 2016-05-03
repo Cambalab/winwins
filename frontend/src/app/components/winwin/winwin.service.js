@@ -58,6 +58,15 @@
       .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
     }
 
+    _winwin.uploadPostImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('posts')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
+    }
+
     _winwin.getPosts = function(id) {
       return Restangular.one('posts/winwin', id).one('posts').get();
     }

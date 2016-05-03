@@ -1,0 +1,21 @@
+<div layout="column" class="lightbox-crear">
+  <md-dialog-content>
+    <form role="form" ng-submit="vm.setVideo()" name="videoForm">
+      <div layout="column" layout-padding layout-margin>
+        <h2 translate>Copia el link del video</h2>
+        <md-input-container class="md-block">
+          <input required name="video" ng-model="vm.video" placeholder="Ej: https://www.youtube.com/watch?v=rQxVTFVWNjA">
+          <div ng-messages="videoForm.video.$error">
+            <div ng-message="required" translate>Campo requerido.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div>
+        <md-card-actions layout="row" layout-align="center center">
+          <md-button class="md-raised md-primary" type="submit" name="action" translate>LISTO</md-button>
+          <md-button class="md-raised md-grey" ng-click="vm.cancel()" translate>CANCELAR</md-button>
+        </md-card-actions>
+      </div>
+    </form>
+  </md-dialog-content>
+</div>

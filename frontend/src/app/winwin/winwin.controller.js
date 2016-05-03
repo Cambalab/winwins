@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
@@ -26,7 +26,7 @@
         return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
       });
 
-      vm.post = {reference_id: winwin_data.id, type: 'WINWIN'}
+      vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'}
     });
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
@@ -34,24 +34,57 @@
     });
 
     vm.submitPost = function() {
-      winwin.createPost(vm.post)
-      .then(function(data){
-        if (!vm.winwin.published && !vm.winwin.canceled) {
-          winwin.activate(vm.winwinId).then(function() {
-            vm.winwin.published = true;
-          });
+      if (vm.post.content == '' && !vm.post.media_path && !vm.cover_post_image) {
+        return;
+      }
+
+      var promises = [];
+
+      if (vm.post.media_type == 'IMAGE' && vm.cover_post_image) {
+        promises.push(winwin.uploadPostImage(dataURItoBlob(vm.cover_post_image.file), vm.cover_post_image.name));
+      }
+
+      $q.all(promises).then(function(data) {
+        if (vm.cover_post_image) {
+          vm.post.media_id = data[0].media_id;
+          vm.post.media_path = data[0].filename;
+          vm.cover_post_image = null;
         }
 
-        winwin.getPosts(vm.winwinId).then(function(posts_data) {
-          vm.posts = posts_data.posts;
+        winwin.createPost(vm.post)
+        .then(function(data){
+          if (!vm.winwin.published && !vm.winwin.canceled) {
+            winwin.activate(vm.winwinId).then(function() {
+              vm.winwin.published = true;
+            });
+          }
+
+          winwin.getPosts(vm.winwinId).then(function(posts_data) {
+            vm.posts = posts_data.posts;
+          });
+          vm.post = {content: '', reference_id: vm.winwinId, type: 'WINWIN'}
         });
-        vm.post = {reference_id: vm.winwinId, type: 'WINWIN'}
       });
     }
+
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
+    };
 
     vm.getIframeSrc = function (videoId) {
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
     };
+
+    vm.matchYoutubeUrl = function(url){
+        var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        return (url.match(p)) ? RegExp.$1 : false ;
+    }
 
     vm.join = function() {
       if($auth.isAuthenticated()) {
@@ -120,6 +153,21 @@
         }
       });
     };
+
+    vm.showModalVideoPostDialog = function(ev) {
+      $mdDialog.show({
+        controller: ModalVideoPostController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-video-post.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(video) {
+        vm.post.media_type = 'VIDEO';
+        vm.post.media_path = vm.matchYoutubeUrl(video);
+      });
+    };
     
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
@@ -143,6 +191,7 @@
         clickOutsideToClose:true
       })
       .then(function(image) {
+        vm.post.media_type = 'IMAGE';
         vm.cover_post_image = image;
       });
     };
@@ -217,7 +266,20 @@
   }
 
   /** @ngInject */
-  function CropCoverController($scope, $mdDialog) {
+  function ModalVideoPostController($mdDialog) {
+    var vm = this;
+
+    vm.setVideo = function() {
+      $mdDialog.hide(vm.video);
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+  }
+
+  /** @ngInject */
+  function CropPostImageController($scope, $mdDialog) {
     $scope.myImage='';
     $scope.myCroppedImage='';
     $scope.fileName='';

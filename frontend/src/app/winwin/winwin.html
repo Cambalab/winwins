@@ -218,20 +218,20 @@
         <form role="form" ng-submit="winwin.submitPost()" name="postForm">
 
           <div ng-if="winwin.post.media_type">
-            <div ng-if="winwin.post.media_type == 'IMAGE'" background-image="http://images.dev-winwins.net/190x/{{winwin.post.media_path}}" style="height:190px;">
-            </div>
-            <div ng-if="winwin.post.media_type == 'VIDEO'" background-image="http://img.youtube.com/vi/{{winwin.post.media_path}}/default.jpg" style="height:190px;">
-            </div>
+            <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
+            </img>
+            <img ng-if="winwin.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{winwin.post.media_path}}/default.jpg" style="height:190px;">
+            </img>
           </div>
           
           <md-input-container class="md-block">
             <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
           </md-input-container>
           <div layout="column" layout-align="center center" class="social-media">
-            <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showCropPostImageDialog()">
+            <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
               <md-icon md-svg-src="assets/images/icon-youtubesmall.svg"></md-icon>
             </md-button>
-            <md-button class="md-fab camera" aria-label="">
+            <md-button class="md-fab camera" aria-label="" ng-click="winwin.showCropPostImageDialog()">
               <md-icon>photo_camera</md-icon>
             </md-button>
           </div>
