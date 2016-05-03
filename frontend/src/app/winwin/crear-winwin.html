@@ -110,9 +110,9 @@
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
           <md-card>
-            <img ng-src="{{ winwin.cover_image.file }}" src="assets/images/profile-img.jpg" class="md-card-image" alt="">
+            <img ng-src="{{ winwin.preview_image }}"  class="md-card-image" alt="">
             <md-card-title-text layout-align="center center" layout="column">
-              <md-button class="md-headline">{{winwin.winwin.name}}</md-button>
+              <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
             </md-card-title-text>
           </md-card>
           <div layout="row" layout-align="center center">
@@ -122,7 +122,7 @@
             <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="winwin.showCropCoverDialog()">
               <md-icon>photo_camera</md-icon>
             </md-whiteframe>
-            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex>
+            <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="winwin.showModalVideoPostDialog()">
               <md-icon md-svg-src="assets/images/icon-youtube.svg"></md-icon>
             </md-whiteframe>
             <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="winwin.showGaleriaDialog()">

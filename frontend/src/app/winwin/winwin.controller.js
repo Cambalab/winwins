@@ -81,11 +81,6 @@
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
     };
 
-    vm.matchYoutubeUrl = function(url){
-        var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-        return (url.match(p)) ? RegExp.$1 : false ;
-    }
-
     vm.join = function() {
       if($auth.isAuthenticated()) {
         winwin.join(vm.winwinId).then(function(data) {
@@ -165,7 +160,7 @@
       })
       .then(function(video) {
         vm.post.media_type = 'VIDEO';
-        vm.post.media_path = vm.matchYoutubeUrl(video);
+        vm.post.media_path = video;
       });
     };
     
@@ -270,11 +265,20 @@
     var vm = this;
 
     vm.setVideo = function() {
-      $mdDialog.hide(vm.video);
+      $mdDialog.hide(vm.matchYoutubeUrl(vm.video));
     }
 
     vm.cancel = function() {
       $mdDialog.cancel();
+    }
+
+    vm.previewVideo = function(e) {
+      vm.video_path = vm.matchYoutubeUrl(e.originalEvent.clipboardData.getData('text/plain'));
+    }
+
+    vm.matchYoutubeUrl = function(url){
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      return (url.match(p)) ? RegExp.$1 : false ;
     }
   }
 

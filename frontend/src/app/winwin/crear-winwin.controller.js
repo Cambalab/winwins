@@ -122,6 +122,22 @@
       });
     };
 
+    vm.showModalVideoPostDialog = function(ev) {
+      $mdDialog.show({
+        controller: ModalVideoPostController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-video-post.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(video) {
+        vm.winwin.video = video;
+        vm.preview_image = 'http://img.youtube.com/vi/'+video+'/default.jpg';
+        vm.cover_image = null;
+      });
+    };
+
     vm.showCropCoverDialog = function(ev) {
       $mdDialog.show({
         controller: CropCoverController,
@@ -132,12 +148,36 @@
       })
       .then(function(image) {
         vm.cover_image = image;
+        vm.preview_image = image.file;
+        vm.winwin.video = null;
       });
     };
   }
 
   /** @ngInject */
   function ShowGaleriaController() {
+  }
+
+  /** @ngInject */
+  function ModalVideoPostController($mdDialog) {
+    var vm = this;
+
+    vm.setVideo = function() {
+      $mdDialog.hide(vm.matchYoutubeUrl(vm.video));
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+
+    vm.previewVideo = function(e) {
+      vm.video_path = vm.matchYoutubeUrl(e.originalEvent.clipboardData.getData('text/plain'));
+    }
+
+    vm.matchYoutubeUrl = function(url){
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      return (url.match(p)) ? RegExp.$1 : false ;
+    }
   }
 
   /** @ngInject */
