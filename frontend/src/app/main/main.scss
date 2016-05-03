@@ -165,8 +165,23 @@ md-tabs.acme-tabs {
     text-transform: initial;
     font-size: 12px;
     padding: 5px 24px;
+    &:after {
+      width: 1px;
+      height: 30px;
+      background: #fff;
+      position: absolute;
+      content: '';
+      right: 0;
+      top: 8px;
+    }
     .md-ripple-container {
       color: #ec6b25;
+    }
+    &.md-active {
+      background: #1b3089;
+      &:after {
+        display: none;
+      }
     }
     &:hover {
       background: #1b3089;
