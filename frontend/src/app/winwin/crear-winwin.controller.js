@@ -11,22 +11,22 @@
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
     vm.facebookId = ENV.satellizer.facebook.clientId;
-		vm.stage = 1; 
+    vm.stage = 1; 
     vm.emailsOK = false;
 
     vm.mails = [];
 
-		vm.winwin = {
-			interests:[],
+    vm.winwin = {
+      interests:[],
       scope: 'GLOBAL'
-		};
+    };
     
     vm.nexStage = function() {
-    	if (!vm.winwin.terms){
+      if (!vm.winwin.terms){
         vm.crearForm1.terms.$setValidity("notTerms", false);
         return;
       }
-			vm.stage = 2;
+      vm.stage = 2;
     }
 
     vm.saveWinwin = function() {
@@ -62,39 +62,39 @@
     };
 
     vm.clearError = function() {
-  		if (vm.winwin.terms) {
-				vm.crearForm1.terms.$setValidity("notTerms", true);
-  		}
+      if (vm.winwin.terms) {
+        vm.crearForm1.terms.$setValidity("notTerms", true);
+      }
     }
 
-   	winwin.getInterests().then(function(data) {
-   		vm.interests = data;
- 		});
+    winwin.getInterests().then(function(data) {
+      vm.interests = data;
+    });
 
-	 	vm.setCategories = function(item) {
-   		var _index = -1
-			angular.forEach(vm.winwin.interests, function(value, key) {
-				if (value.id == item.id) {
-			 		_index = key;
-				}
-			});
-	   
-	   	if (_index == -1) {
-     		vm.winwin.interests.push(item);
-	   	} else {
-   			vm.winwin.interests.splice(_index, 1);
-	   	}
- 		};
+    vm.setCategories = function(item) {
+      var _index = -1
+      angular.forEach(vm.winwin.interests, function(value, key) {
+        if (value.id == item.id) {
+          _index = key;
+        }
+      });
+     
+      if (_index == -1) {
+        vm.winwin.interests.push(item);
+      } else {
+        vm.winwin.interests.splice(_index, 1);
+      }
+    };
 
-	 	vm.isChecked = function(id) {
-   		var _index = -1
-	   	angular.forEach(vm.winwin.interests, function(value, key) {
-     		if (value.id == id) {
-     			_index = key;
-     		}
-   		});
-	   	return _index > -1;
-	 	}
+    vm.isChecked = function(id) {
+      var _index = -1
+      angular.forEach(vm.winwin.interests, function(value, key) {
+        if (value.id == id) {
+          _index = key;
+        }
+      });
+      return _index > -1;
+    }
 
     vm.validateMail = function(chip) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -112,13 +112,13 @@
       });
     }
 
-	 	vm.showGaleriaDialog = function(ev) {
+    vm.showGaleriaDialog = function(ev) {
       $mdDialog.show({
         controller: ShowGaleriaController,
         templateUrl: 'app/winwin/modal-galeria.tmpl.html',
         parent: angular.element($document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose:true
       });
     };
 

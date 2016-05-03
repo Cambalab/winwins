@@ -13,6 +13,8 @@
 
     vm.winwinId = $stateParams.winwinId;
 
+    vm.post = {};
+
     account.getProfile().then(function(data) {
        vm.account = data.profile;
     });
@@ -23,11 +25,29 @@
       vm.sponsors = _.filter(vm.winwin.sponsors, function(model) {
         return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
       });
+
+      vm.post = {reference_id: winwin_data.id, type: 'WINWIN'}
     });
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
       vm.posts = posts_data.posts;
     });
+
+    vm.submitPost = function() {
+      winwin.createPost(vm.post)
+      .then(function(data){
+        if (!vm.winwin.published && !vm.winwin.canceled) {
+          winwin.activate(vm.winwinId).then(function() {
+            vm.winwin.published = true;
+          });
+        }
+
+        winwin.getPosts(vm.winwinId).then(function(posts_data) {
+          vm.posts = posts_data.posts;
+        });
+        vm.post = {reference_id: vm.winwinId, type: 'WINWIN'}
+      });
+    }
 
     vm.getIframeSrc = function (videoId) {
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
@@ -127,7 +147,7 @@
 
   angular
     .module('winwins')
-    .filter('moment', function() {
+    .filter('moment', function(moment) {
       return function(dateString, format) {
         return moment(dateString).format(format);
       };

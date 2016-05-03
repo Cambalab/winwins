@@ -61,6 +61,14 @@
     _winwin.getPosts = function(id) {
       return Restangular.one('posts/winwin', id).one('posts').get();
     }
+
+    _winwin.createPost = function(post) {
+      return Restangular.all('posts').post(post);
+    }
+
+    _winwin.activate = function(id) {
+      return Restangular.one('winwins/activate', id).get();
+    }
     
     _winwin.join = function(id) {
       return Restangular.one('winwins/join', id).get();
