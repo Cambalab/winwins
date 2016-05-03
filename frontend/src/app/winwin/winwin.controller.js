@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
@@ -22,7 +22,7 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
-      vm.sponsors = _.filter(vm.winwin.sponsors, function(model) {
+      vm.sponsors = $window._.filter(vm.winwin.sponsors, function(model) {
         return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
       });
 
@@ -120,6 +120,7 @@
         }
       });
     };
+    
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
         controller: ParticipantesController,
@@ -130,6 +131,19 @@
         locals: {
           users: vm.winwin.users
         }
+      });
+    };
+
+    vm.showCropPostImageDialog = function(ev) {
+      $mdDialog.show({
+        controller: CropPostImageController,
+        templateUrl: 'app/winwin/cover_post_image.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(image) {
+        vm.cover_post_image = image;
       });
     };
   }
@@ -199,6 +213,29 @@
 
     vm.cancel = function() {
       $mdDialog.cancel();
+    }
+  }
+
+  /** @ngInject */
+  function CropCoverController($scope, $mdDialog) {
+    $scope.myImage='';
+    $scope.myCroppedImage='';
+    $scope.fileName='';
+
+    $scope.handleFileSelect = function(evt) {
+      var file=evt.files[0];
+      $scope.fileName = file.name;
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function($scope){
+          $scope.myImage=evt.target.result;
+        });
+      };
+      reader.readAsDataURL(file);
+    };
+
+    $scope.cropImage = function() {
+      $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
     }
   }
 
