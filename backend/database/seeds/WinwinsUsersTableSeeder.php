@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\WinwinsUser;
+use Winwins\WinwinsUser;
 
 class WinwinsUsersTableSeeder extends Seeder {
 
@@ -779,4 +779,3 @@ class WinwinsUsersTableSeeder extends Seeder {
     }
 
 }
-

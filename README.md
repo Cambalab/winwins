@@ -60,7 +60,7 @@ cd backend
 composer install
 
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\JWTAuthServiceProvider"
-php artisan vendor:publish --tag=public
+php artisan vendor:publish
 php artisan jwt:generate
 ```
 

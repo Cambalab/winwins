@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\Language;
-use Winwins\Model\TranslateNamespace;
-use Winwins\Model\TranslateValue;
+use Winwins\Language;
+use Winwins\TranslateNamespace;
+use Winwins\TranslateValue;
 
 class LanguagesTableSeeder extends Seeder {
 

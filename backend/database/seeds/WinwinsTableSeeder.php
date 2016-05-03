@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\Winwin;
-use Winwins\Model\Post;
-use Winwins\Model\Media;
+use Winwins\Winwin;
+use Winwins\Post;
+use Winwins\Media;
 use Carbon\Carbon;
 
 class WinwinsTableSeeder extends Seeder {
@@ -21,7 +21,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "velas.png";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-11-13'; 
+        $winwin->closing_date= '2015-11-13';
         $winwin->save();
 
         $post = new Post();
@@ -97,7 +97,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-3.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -111,7 +111,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-4.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -125,7 +125,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-5.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -139,7 +139,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-6.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -153,7 +153,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-7b.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -167,7 +167,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-8.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -181,7 +181,7 @@ class WinwinsTableSeeder extends Seeder {
         $winwin->image = "ww-default-9.jpg";
         $winwin->published = 1;
         $winwin->selected = 1;
-        $winwin->closing_date= '2015-12-13'; 
+        $winwin->closing_date= '2015-12-13';
         $winwin->save();
 
         $winwin = new Winwin();
@@ -1341,4 +1341,3 @@ class WinwinsTableSeeder extends Seeder {
     }
 
 }
-

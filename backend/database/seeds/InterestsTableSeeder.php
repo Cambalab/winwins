@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\Interest;
+use Winwins\Interest;
 
 class InterestsTableSeeder extends Seeder {
 

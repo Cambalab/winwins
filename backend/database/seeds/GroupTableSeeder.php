@@ -1,9 +1,9 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\Winwin;
-use Winwins\Model\Post;
-use Winwins\Model\Media;
-use Winwins\Model\Group;
+use Winwins\Winwin;
+use Winwins\Post;
+use Winwins\Media;
+use Winwins\Group;
 
 class GroupTableSeeder extends Seeder {
 
@@ -41,4 +41,3 @@ class GroupTableSeeder extends Seeder {
     }
 
 }
-
