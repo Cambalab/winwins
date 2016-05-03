@@ -115,10 +115,20 @@
     vm.showGaleriaDialog = function(ev) {
       $mdDialog.show({
         controller: ShowGaleriaController,
+        controllerAs: 'vm',
         templateUrl: 'app/winwin/modal-galeria.tmpl.html',
         parent: angular.element($document.body),
         targetEvent: ev,
-        clickOutsideToClose:true
+        clickOutsideToClose:true,
+        locals: {
+          image_gallery_selected: vm.winwin.image
+        }
+      })
+      .then(function(image) {
+        vm.winwin.image = image;
+        vm.preview_image = vm.imageServer + '/smart/' + image;
+        vm.cover_image = null;
+        vm.winwin.video = null;
       });
     };
 
@@ -135,6 +145,7 @@
         vm.winwin.video = video;
         vm.preview_image = 'http://img.youtube.com/vi/'+video+'/default.jpg';
         vm.cover_image = null;
+        vm.winwin.image = null;
       });
     };
 
@@ -150,12 +161,20 @@
         vm.cover_image = image;
         vm.preview_image = image.file;
         vm.winwin.video = null;
+        vm.winwin.image = null;
       });
     };
   }
 
   /** @ngInject */
-  function ShowGaleriaController() {
+  function ShowGaleriaController($mdDialog, image_gallery_selected) {
+    var vm = this;
+
+    vm.image_gallery_selected = image_gallery_selected;
+
+    vm.setImage = function(image) {
+      $mdDialog.hide(image);
+    }
   }
 
   /** @ngInject */

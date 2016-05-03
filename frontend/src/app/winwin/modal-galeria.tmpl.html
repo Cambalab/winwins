@@ -4,31 +4,31 @@
       <h2 translate>Elegí una imagen de la galería.</h2>
       <div layout="row" layout-margin layout-wrap class="galeria">
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-1.jpg" alt="Tierra" class="galeria-img selected" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-1.jpg" alt="Tierra" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-1.jpg'}" ng-click="vm.setImage('ww-default-1.jpg')" />
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-2.jpg" alt="Casas" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-2.jpg" alt="Casas" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-2.jpg'}" ng-click="vm.setImage('ww-default-2.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-3.jpg" alt="Manos" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-3.jpg" alt="Manos" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-3.jpg'}" ng-click="vm.setImage('ww-default-3.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-4.jpg" alt="Libros" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-4.jpg" alt="Libros" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-4.jpg'}" ng-click="vm.setImage('ww-default-4.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-5.jpg" alt="Juego" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-5.jpg" alt="Juego" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-5.jpg'}" ng-click="vm.setImage('ww-default-5.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-6.jpg" alt="Gente" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-6.jpg" alt="Gente" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-6.jpg'}" ng-click="vm.setImage('ww-default-6.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-7.jpg" alt="Trabajo" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-7.jpg" alt="Trabajo" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-7.jpg'}" ng-click="vm.setImage('ww-default-7.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-8.jpg" alt="Oficio" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-8.jpg" alt="Oficio" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-8.jpg'}" ng-click="vm.setImage('ww-default-8.jpg')"/>
         </div>
         <div>
-          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-9.jpg" alt="Colaborar" class="galeria-img" />
+          <img ng-src="http://images.dev-winwins.net/400x200/smart/ww-default-9.jpg" alt="Colaborar" class="galeria-img" ng-class="{selected: vm.image_gallery_selected == 'ww-default-9.jpg'}" ng-click="vm.setImage('ww-default-9.jpg')"/>
         </div>
       </div>
     </div>
