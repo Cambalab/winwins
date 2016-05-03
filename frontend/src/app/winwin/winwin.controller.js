@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
@@ -20,7 +20,7 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
-      vm.sponsors = _.filter(vm.winwin.sponsors, function(model) {
+      vm.sponsors = $window._.filter(vm.winwin.sponsors, function(model) {
         return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
       });
     });
@@ -127,7 +127,7 @@
 
   angular
     .module('winwins')
-    .filter('moment', function() {
+    .filter('moment', function(moment) {
       return function(dateString, format) {
         return moment(dateString).format(format);
       };
