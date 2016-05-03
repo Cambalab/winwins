@@ -70,6 +70,7 @@ First time do this to initialize the database:
 
 ```sh
 php artisan migrate
+php artisan migrate --path="vendor/serverfireteam/panel/src/database/migrations"
 php artisan db:seed
 ```
 
