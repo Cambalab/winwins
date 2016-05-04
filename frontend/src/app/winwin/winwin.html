@@ -11,7 +11,7 @@
   </md-toolbar>
   <div class="container">
     <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column">
-      <div flex="45">
+      <div class="col-left">
          <md-card class="md-whiteframe-17dp no-padding">
           <md-card-content>
             <div class="wrap-card-img">              
@@ -43,7 +43,7 @@
           </md-card-actions>
         </md-card>
       </div>
-      <div flex="15">
+      <div class="col-central">
         <div layout="column" layout-align="center center">
           <div class="creadores">
             <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div flex="40">
+      <div class="col-right">
         <h2>{{winwin.winwin.title}}</h2>
         <div layout="col" layout-align="center start">
           <div flex="83">
@@ -91,7 +91,7 @@
       </div>
     </div>
     <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
-      <div flex="25" class="sponsors">
+      <div class="sponsors">
         <h3 class="title">
           <md-icon md-svg-src="assets/images/icon-sponsors-title.svg"></md-icon>{{ 'SPONSORS' | translate }}
         </h3>
@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div flex="55" class="comments">
+      <div class="comments">
         <div ng-repeat="item_post in winwin.posts">
           <md-card class="md-whiteframe-7dp" >
             <div class="card-labels">
@@ -163,7 +163,7 @@
           </md-card>
         </div>  
       </div>
-      <div flex="20" class="aside">
+      <div class="aside">
         <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
           <div class="content-bg">
             <h3 class="title-notificaction">

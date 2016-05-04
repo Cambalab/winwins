@@ -7,6 +7,25 @@
     position: relative;
     padding-right: 30px;
   }
+  @media (min-width: 960px) {
+    .wrap-acme-winwin {
+      padding-left:0;
+      padding-right: 0; 
+    }
+    .col-left {
+      width: 400px;
+      padding: 0;
+      md-card {
+        margin: 0;
+      }
+    }
+    .col-central {
+      width: 160px;
+    }
+    .col-right {
+      width: 375px;
+    }
+  }
   md-card {
     &.no-padding {
       md-card-content {
@@ -273,6 +292,9 @@
   }
   .comments {
     padding: 0;
+    @media (min-width: 960px) {
+      width: 515px;
+    }
     md-card {
       position: relative;
       .card-labels {
@@ -313,6 +335,9 @@
   }
   .sponsors {
     padding: 0;
+    @media (min-width: 960px) {
+      width: 210px;
+    }
     h3 {
       margin-left: 20px;
     }
@@ -327,6 +352,9 @@
   }
   .aside {
     padding: 0;
+    @media (min-width: 960px) {
+      width: 210px;
+    }
   }
   .wrap-caja-mensaje {
     position: fixed;

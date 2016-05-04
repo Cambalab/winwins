@@ -269,6 +269,9 @@ md-toolbar.md-tall.md-crear {
   height: 95px;
   color: #fff;
   box-shadow: none;
+  @media (min-width: 960px) {
+    margin-bottom: 30px;
+  }
   h2 {
     @media (min-width: 600px) { 
       font-size: 28px;

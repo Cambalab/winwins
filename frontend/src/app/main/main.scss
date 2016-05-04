@@ -179,9 +179,6 @@ md-tabs.acme-tabs {
     }
     &.md-active {
       background: #1b3089;
-      &:after {
-        display: none;
-      }
     }
     &:hover {
       background: #1b3089;
