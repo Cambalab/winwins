@@ -325,6 +325,13 @@ md-toolbar.md-tall.md-crear {
       }
     }
   }
+  &.crear-video {
+    md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+      left: 5px;
+      font-size: 12px;
+    }
+    md-input-container .md-input { font-size: 12px}
+  }
   h2 {
     font-size: 16px;
     color: #5d5d5d;
