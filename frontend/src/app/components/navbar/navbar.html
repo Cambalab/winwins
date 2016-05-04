@@ -18,7 +18,7 @@
 		<div class="logo"><a href="#"><img src="../assets/images/logo.png" alt="" /></a></div>
 		<div class="seccion space-left"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
 		</div>
-		<div class="crear"><md-button class="md-primary" ui-sref="home.crear-winwin"><translate>+ Crear Winwin</translate></md-button></div>
+		<div class="crear"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog('home.crear-winwin')"><translate>+ Crear Winwin</translate></md-button></div>
 		<div class="menu-search">
 			<md-input-container md-no-float class="md-block">
 		  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">

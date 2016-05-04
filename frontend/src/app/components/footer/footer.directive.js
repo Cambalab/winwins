@@ -21,16 +21,24 @@
     return directive;
 
     /** @ngInject */
-    function FooterController($mdDialog, $document) {
+    function FooterController($mdDialog, $document, $rootScope, $auth) {
       var vm = this;
+
+      vm.isAuthenticated = function() {
+        return $auth.isAuthenticated();
+      };
       
-      vm.showLoginDialog = function(ev) {
+      vm.showLoginDialog = function(redirect) {
+        if (redirect) {
+          $rootScope.returnState = {
+            state: redirect
+          };
+        }
         $mdDialog.show({
           controller: 'LoginController',
           controllerAs: 'login',
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
-          targetEvent: ev,
           clickOutsideToClose:true
         });
       };

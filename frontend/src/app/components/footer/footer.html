@@ -6,7 +6,7 @@
           <h2><img src="assets/images/sumate.svg"></h2>
           <p translate>Cuando la gente lidera,
     los líderes acompañan.</p>
-          <md-button ng-href ng-click="vm.showLoginDialog()" class="green">{{'COMENZA ESTA AVENTURA' | translate }}</md-button>
+          <md-button ng-href ng-click="vm.showLoginDialog()" class="green" ng-if="!vm.isAuthenticated()">{{'COMENZA ESTA AVENTURA' | translate }}</md-button>
         </div>
         <div flex class="scroll-top">
           <md-button class="md-raised md-fab md-warn scroll-top-button" scroll-top  scroll ng-class="{scrollFixed:boolChangeClass}">
@@ -29,8 +29,11 @@
         <div flex>
           <ul>
             <li><a href="#" translate>Sé sponsor</a></li>
-            <li><a href="#" translate>Crea un winwin</a></li>
-            <li><a href translate ng-click="vm.showLoginDialog()">Registrate</a></li>
+            <li>
+              <a ui-sref="home.crear-winwin" translate ng-if="vm.isAuthenticated()">Crea un winwin</a>
+              <a href translate ng-click="vm.showLoginDialog('home.crear-winwin')" ng-if="!vm.isAuthenticated()">Crea un winwin</a>
+            </li>
+            <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
           </ul>
         </div>
         <div flex class="social-media">
@@ -52,7 +55,8 @@
           </md-button>
         </div>
         <div flex>
-          <a href="#" class="crear" translate>+ Crear Winwin</a>
+          <a ui-sref="home.crear-winwin" class="crear" translate ng-if="vm.isAuthenticated()">+ Crear Winwin</a>
+          <a href class="crear" translate ng-click="vm.showLoginDialog('home.crear-winwin')" ng-if="!vm.isAuthenticated()">+ Crear Winwin</a>
         </div>
       </div>
     </div>
