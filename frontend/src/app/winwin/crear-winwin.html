@@ -152,10 +152,9 @@
                 </md-select>
               </md-input-container>
             </div>
-            <div layout="row" layout-align="center center" ng-if="winwin.winwin.scope == 'LOCAL'">
+            <div layout="row" layout-align="center center" ng-show="winwin.winwin.scope == 'LOCAL'">
               <md-input-container class="md-block">
-                <label translate>Lugar</label>
-                <input required name="winwin_location" ng-model="winwin.winwin.winwin_location">
+                <input id="winwin_location" name="winwin_location" ng-model="winwin.location_formatted">
               </md-input-container>
             </div>
           </div>
