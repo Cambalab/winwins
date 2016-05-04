@@ -221,7 +221,7 @@
       </div>
     </div>
     <div layout="row" layout-align="center center">
-      <div layout="column" class="comparti" flex-xs="80" flex="40">
+      <div layout="column" class="comparti" flex-xs="80" flex="40" ng-show="!winwin.emailsOK">
         <p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
         <div class="wrap-md-input-container">
           <md-input-container class="md-icon-float md-icon-right md-block">
@@ -234,6 +234,18 @@
             </md-button>
           </md-input-container>
         </div>
+      </div>
+      <div layout="column" layout-align="center center" ng-show="winwin.emailsOK">
+        <div flex>
+          <md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
+        </div>
+        <div flex>
+          <p class="gray">Las invitaciones fueron enviadas!</p>
+        </div>
+      </div>
+    </div>
+    <div layout="row" layout-align="center center">
+      <div layout="column" class="comparti" flex-xs="80" flex="40">
         <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})">IR AL WINWIN</md-button>
       </div>
     </div>
