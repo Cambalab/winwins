@@ -51,7 +51,7 @@
           </md-input-container>
           <md-input-container class="md-block">
             <label translate>Intereses</label>
-            <md-input-container>
+            <md-input-container class="intereses">
               <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple>
                 <md-optgroup label="intereses">
                   <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>

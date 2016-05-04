@@ -110,7 +110,7 @@
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
           <md-card>
-            <img ng-src="{{ winwin.preview_image }}"  class="md-card-image" alt="">
+            <div class="md-card-wrap"><img ng-src="{{ winwin.preview_image }}"  class="md-card-image" alt=""></div>
             <md-card-title-text layout-align="center center" layout="column">
               <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
             </md-card-title-text>
@@ -153,7 +153,7 @@
               </md-input-container>
             </div>
             <div layout="row" layout-align="center center" ng-if="winwin.winwin.scope == 'LOCAL'">
-              <md-input-container class="md-block">
+              <md-input-container class="md-block lugar">
                 <label translate>Lugar</label>
                 <input required name="winwin_location" ng-model="winwin.winwin.winwin_location">
               </md-input-container>

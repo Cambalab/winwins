@@ -326,8 +326,7 @@
   .aside {
     padding: 0;
   }
-  .caja-mensaje {
-    background: #4a6dce;
+  .wrap-caja-mensaje {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -336,6 +335,19 @@
     width: 100%;
     @media (min-width: 960px) {
       width: 500px;
+    }
+    .content-img-video {
+      background: #000;
+      text-align: center;
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .caja-mensaje {
+    background: #4a6dce;
+    @media (min-width: 960px) {
       border-radius: 5px 5px 0 0;
     }
     .caja-mensaje-img {
@@ -344,6 +356,9 @@
       border: solid 4px #6dccdd;
       border-radius: 100px;
       vertical-align: middle;
+    }
+    form {
+      padding: 0;
     }
     md-input-container {
       padding-left: 0;
