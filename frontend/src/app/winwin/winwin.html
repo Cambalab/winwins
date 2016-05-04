@@ -11,7 +11,7 @@
   </md-toolbar>
   <div class="container">
     <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column" class="primary-content">
-      <div flex flex-gt-sm="45">
+      <div flex="45">
          <md-card class="md-whiteframe-17dp no-padding">
           <md-card-content>
             <div class="wrap-card-img">
@@ -62,8 +62,8 @@
           </md-card-actions>
         </md-card>
       </div>
-      <div flex flex-gt-md="15">
-        <div layout-gt-xs="column" layout="row" layout-align="center center">
+      <div flex="15" hide show-gt-xs flex>
+        <div layout="row" layout-align="center center">
           <div class="creadores">
             <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
             <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
@@ -79,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div flex flex-gt-sm="40">
+      <div flex="40">
         <h2 class="main-title">{{winwin.winwin.title}}</h2>
         <div layout="col" layout-align="center start">
           <div flex="83">
@@ -105,6 +105,13 @@
             <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
               <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
             </md-button></div>
+          </div>
+        </div>
+        <div class="creadores" layout="row">
+          <div hide show-xs flex>
+            <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
+            <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
+            <strong>CREADOR</strong>
           </div>
         </div>
       </div>

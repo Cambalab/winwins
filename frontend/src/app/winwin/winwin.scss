@@ -6,7 +6,7 @@
     }
     .primary-content {
       padding:0;
-      .flex {
+      .flex-45 {
         padding:0;
       }
       .content-social-media {
@@ -23,6 +23,7 @@
         display: none;
       }
     }
+  }
   .content-central {
     padding-bottom: 100px;
   }
@@ -177,6 +178,15 @@
       color: #144a9d;
       font-size: 12px;
       margin: 5px 0 10px 0;
+    }
+    .show-xs {
+      background: #eee;
+      margin:  20px 0;
+      padding: 10px;
+      text-align: left;
+      img {
+        margin-right: 10px;
+      }
     }
   }
   .activadores {
