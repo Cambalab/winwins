@@ -23,6 +23,8 @@
         display: none;
       }
     }
+  .content-central {
+    padding-bottom: 100px;
   }
   .md-crear.md-blue h2 {
     position: relative;
@@ -157,6 +159,8 @@
       height: 45px;
       float: left;
     }
+    width: 120px;
+    height: 120px;
   }
   .creadores {
     text-align: center;
@@ -382,8 +386,8 @@
     h3 {
       margin-left: 20px;
     }
-    &.img {
-      max-width: 190px;
+    .sponsors-img {
+      max-width: 100%;
       display: block;
     }
     div {

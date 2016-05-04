@@ -45,6 +45,10 @@
       return Restangular.one('winwins', id).get();
     }
 
+    _winwin.getPosts = function(id) {
+      return Restangular.one('posts/winwin', id).one('posts').get();
+    }
+    
     _winwin.join = function(id) {
       return Restangular.one('winwins/join', id).get();
     }

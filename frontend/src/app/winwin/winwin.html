@@ -109,90 +109,80 @@
         </div>
       </div>
     </div>
-    <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column">
-      <div class="sponsors">
+    <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
+      <div flex="25" class="sponsors">
         <h3 class="title">
           <md-icon md-svg-src="assets/images/icon-sponsors-title.svg"></md-icon>{{ 'SPONSORS' | translate }}
         </h3>
         <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
-          </div>
-          <div>
-            <img ng-src="assets/images/partner.jpg" alt="" class="sponsors-img">
+          <div ng-repeat="sponsor in winwin.sponsors">
+            <img ng-src="{{winwin.imageServer}}/250x120/{{sponsor.photo}}" alt="" class="sponsors-img">
           </div>
         </div>
       </div>
-      <div class="comments">
-        <md-card class="md-whiteframe-7dp">
-          <div class="card-labels">
-            <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
-            <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
-          </div>
-          <md-card-header>
-            <md-card-avatar>
-              <img class="md-user-avatar" src="assets/images/profile-avatar.jpg"/>
-            </md-card-avatar>
-            <md-card-header-text>
-              Nombre de usuario
-            </md-card-header-text>
-          </md-card-header>
-          <md-card-content>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce finibus urna vitae tellus mollis, sit amet viverra orci lobortis. Vestibulum in quam in urna consectetur porta. Integer in finibus purus. Vestibulum blandit, ligula vitae laoreet viverra, erat odio dapibus nunc, vitae congue lacus augue pharetra tellus. Donec luctus accumsan risus, vel elementum velit consectetur quis. Nam posuere, lorem nec ultricies egestas, tellus felis pretium dui, eu volutpat sapien est eget urna. Aliquam dapibus libero sapien, ut rutrum mauris vestibulum nec. Cras id accumsan ante. In tincidunt est nunc, a blandit sapien faucibus ut.
-            </p>
-          </md-card-content>
-            <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>21/12/12</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>15</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>15</div>
-              <div><md-icon class="icon insert_comment">insert_comment</md-icon></div>
-              <div><md-icon class="icon share">sharet</md-icon></div>
-          </md-card-actions>
-        </md-card>
-        <md-card class="md-whiteframe-7dp" flex-offset="15">
-          <div layout="row" layout-align="space-between center">
-            <div layout-padding>
+      <div flex="55" class="comments">
+        <div ng-repeat="item_post in winwin.posts">
+          <md-card class="md-whiteframe-7dp" >
+            <div class="card-labels">
               <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+              <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
             </div>
-            <div>
-              <md-card-header>
-                <md-card-header-text>
-                  Nombre de usuario
-                </md-card-header-text>
-                <md-card-avatar>
-                  <img class="md-user-avatar" src="assets/images/profile-avatar.jpg"/>
-                </md-card-avatar>
-              </md-card-header>
+            <md-card-header>
+              <md-card-avatar>
+                <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}"/>
+              </md-card-avatar>
+              <md-card-header-text>
+                {{item_post.user.username}}
+              </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+              <p>{{item_post.content}}</p>
+              <div ng-show="item_post.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
+                <img ng-src="{{winwin.imageServer}}/400x/smart/{{item_post.media.name}}" class="img-responsive">
+              </div>
+              <div ng-show="item_post.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
+               <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(item_post.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
+              </div>
+            </md-card-content>
+              <md-card-actions layout="row" layout-margin>
+                <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
+                <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
+                <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+                <div><md-icon class="icon share">sharet</md-icon></div>
+                <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
+            </md-card-actions>
+          </md-card>
+
+          <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
+            <div layout="row" layout-align="space-between center">
+              <div layout-padding>
+                <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+              </div>
+              <div>
+                <md-card-header>
+                  <md-card-header-text>
+                    {{comment.user.username}}
+                  </md-card-header-text>
+                  <md-card-avatar>
+                    <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{comment.user.photo}}" />
+                  </md-card-avatar>
+                </md-card-header>
+              </div>
             </div>
-          </div>
-          <md-card-content>
-            <p>
-              The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-              two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-            </p>
-          </md-card-content>
+            <md-card-content>
+              <p>
+                {{comment.content}}
+              </p>
+            </md-card-content>
             <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>21/12/12</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>15</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>15</div>
-              <div><md-icon class="icon insert_comment">insert_comment</md-icon></div>
-              <div><md-icon class="icon share">sharet</md-icon></div>
-          </md-card-actions>
-        </md-card>
+              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }}</div>
+              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
+              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+            </md-card-actions>
+          </md-card>
+        </div>  
       </div>
-      <div class="aside">
+      <div flex="20" class="aside">
         <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
           <div class="content-bg">
             <h3 class="title-notificaction">
@@ -239,10 +229,11 @@
         </md-list>
       </div>
     </div>
+    <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
     <div class="caja-mensaje">
       <div layout="row" layout-align="center center" layout-padding>
         <div>
-            <img ng-src="assets/images/profile-avatar.jpg" class="caja-mensaje-img" alt="">
+            <img ng-src="{{winwin.imageServer}}/48x48/{{winwin.account.photo}}" class="caja-mensaje-img" alt="">
         </div>
         <md-input-container class="md-block">
           <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>

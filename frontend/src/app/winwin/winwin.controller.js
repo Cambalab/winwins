@@ -6,17 +6,32 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $auth, $rootScope) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window) {
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
 
     vm.winwinId = $stateParams.winwinId;
 
+    account.getProfile().then(function(data) {
+       vm.account = data.profile;
+    });
+
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+      vm.sponsors = $window._.filter(vm.winwin.sponsors, function(model) {
+        return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
+      });
     });
+
+    winwin.getPosts(vm.winwinId).then(function(posts_data) {
+      vm.posts = posts_data.posts;
+    });
+
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+    };
 
     vm.join = function() {
       if($auth.isAuthenticated()) {
@@ -110,6 +125,14 @@
     $scope.users = users;
   }
 
+  angular
+    .module('winwins')
+    .filter('moment', function(moment) {
+      return function(dateString, format) {
+        return moment(dateString).format(format);
+      };
+  });
+    
   /** @ngInject */
   function ModalConfirmacionSumarseController($timeout, current_winwin, ENV, winwin) {
     var vm = this;
