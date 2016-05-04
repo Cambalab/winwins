@@ -352,6 +352,9 @@
   }
   .aside {
     padding: 0;
+    md-list-item .md-avatar {
+      margin-right: 5px;
+    }
     @media (min-width: 960px) {
       width: 210px;
     }
