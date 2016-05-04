@@ -51,25 +51,13 @@
           </md-input-container>
           <md-input-container class="md-block">
             <label translate>Intereses</label>
-            <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
-              <div ng-click="$mdOpenMenu($event)" style="min-height: 20px; margin-top: 20px;">
-              <span ng-show="profile.user.interests_list.length == 0" class="seleccionar">Seleccionar</span>  
-              <md-chips ng-model="profile.user.interests_list" readonly="true" >
-                <md-chip-template>
-                  <strong>{{$chip.description}}</strong>          
-                </md-chip-template>
-              </md-chips>
-              </div>
-              <md-menu-content width="7">
-                <md-menu-item ng-repeat="item in profile.interests">
-                  <md-button>
-                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="profile.isChecked(item.id)" ng-click="profile.setCategories(item)">
-                      <span md-menu-align-target></span> {{item.description}}
-                    </md-checkbox>
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
+            <md-input-container>
+              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple>
+                <md-optgroup label="intereses">
+                  <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>
+                </md-optgroup>
+              </md-select>
+            </md-input-container>
           </md-input-container>        
         </div>
         <div flex>
