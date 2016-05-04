@@ -14,8 +14,9 @@
       <div flex="45">
          <md-card class="md-whiteframe-17dp no-padding">
           <md-card-content>
-            <div class="wrap-card-img">
-              <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img"/>
+            <div class="wrap-card-img">              
+              <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
+              <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
             </div>
             <div class="card-labels">
               <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
@@ -210,7 +211,7 @@
       </div>
     </div>
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje">
+    <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>

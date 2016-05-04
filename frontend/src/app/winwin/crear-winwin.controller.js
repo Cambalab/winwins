@@ -6,7 +6,7 @@
     .controller('CrearWinwinController', CrearWinwinController);
 
   /** @ngInject */
-  function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document, $q) {
+  function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document, $q, $window, $element) {
     var vm = this;
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
@@ -27,7 +27,24 @@
         return;
       }
       vm.stage = 2;
+
+      vm.setup_geo_component();
     }
+
+    vm.setup_geo_component = function () {
+        var input = $element.find('#winwin_location'),
+        options = {
+            types: ['address']
+        };
+        var searchBox = new $window.google.maps.places.Autocomplete(input[0], options);
+
+        searchBox.addListener('place_changed', function() {
+            var place = searchBox.getPlace();
+            vm.winwin.location = $window._.extend(place, {
+                coordinates: place.geometry.location.toJSON()
+            });
+        });
+    };
 
     vm.saveWinwin = function() {
       var promises = [];
