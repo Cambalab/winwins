@@ -142,11 +142,13 @@
             </div>
             <div layout="row" layout-align="center center">
               <md-input-container class="md-block">
-                <md-select ng-model="winwin.winwin.scope" md-selected-text="getSelectedText1()">
-                  <md-optgroup>
-                    <md-option>GLOBAL</md-option>
-                    <md-option>LOCAL</md-option>
-                  </md-optgroup>
+                <md-select ng-model="winwin.winwin.scope">
+                  <md-option value="GLOBAL">
+                    GLOBAL
+                  </md-option>
+                  <md-option value="LOCAL">
+                    LOCAL
+                  </md-option>
                 </md-select>
               </md-input-container>
             </div>
@@ -159,7 +161,7 @@
           </div>
           <div class="wrap-md-input-container">
             <div layout="row" layout-align="center center">
-              <label>Elegí categorías. (Podes elegir más de una.)</label>
+              <label translate>Elegí categorías. (Podes elegir más de una.)</label>
               <div class="wrap-tooltip">
                 <span class="icon-help">?</span>
                 <div class="tooltip-text" translate>Clasifica tu Winwin en las categorías disponibles. Puedes elegir más de una.
@@ -167,26 +169,12 @@
               </div>
             </div>
             <div layout="row" layout-align="center center">
-              <md-input-container class="md-block">
-                <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
-                  <div ng-click="$mdOpenMenu($event)" style="min-height: 20px; margin-top: 20px;">
-                    <span ng-show="winwin.winwin.interests.length == 0">Seleccionar</span>  
-                    <md-chips ng-model="winwin.winwin.interests" readonly="true" >
-                      <md-chip-template>
-                        <strong>{{$chip.description}}</strong>          
-                      </md-chip-template>
-                    </md-chips>
-                  </div>
-                  <md-menu-content width="7">
-                    <md-menu-item ng-repeat="item in winwin.interests">
-                      <md-button>
-                        <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="winwin.isChecked(item.id)" ng-click="winwin.setCategories(item)">
-                          <span md-menu-align-target></span> {{item.description}}
-                        </md-checkbox>
-                      </md-button>
-                    </md-menu-item>
-                  </md-menu-content>
-                </md-menu>
+              <md-input-container>
+                <md-select ng-model="winwin.winwin.interests" multiple>
+                  <md-optgroup label="vegetables">
+                    <md-option ng-value="item" ng-repeat="item in winwin.interests">{{item.description}}</md-option>
+                  </md-optgroup>
+                </md-select>
               </md-input-container>
             </div>
           </div>

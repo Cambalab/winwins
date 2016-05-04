@@ -210,7 +210,7 @@
       </div>
     </div>
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="caja-mensaje">
+    <div class="caja-mensaje" ng-if="winwin.winwin.already_joined">
       <div layout="row" layout-align="center center">
         <div ng-if="winwin.post.media_type">
           <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
