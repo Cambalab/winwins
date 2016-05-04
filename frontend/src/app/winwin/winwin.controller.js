@@ -9,7 +9,9 @@
   function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q) {
     var vm = this;
 
+    vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
+    vm.facebookId = ENV.satellizer.facebook.clientId;
 
     vm.winwinId = $stateParams.winwinId;
 
