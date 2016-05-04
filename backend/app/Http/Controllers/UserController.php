@@ -269,9 +269,11 @@ class UserController extends Controller {
         }
 		if($request->has('photo')) {
             $userDetail->photo = $request->input('photo');
+            $user->photo = $request->input('photo');
         }
 		if($request->has('cover_photo')) {
             $userDetail->cover_photo = $request->input('cover_photo');
+            $user->cover_photo = $request->input('cover_photo');
         }
 		if($request->has('lastname')) {
             $userDetail->lastname = $request->input('lastname');
