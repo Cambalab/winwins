@@ -135,7 +135,7 @@
       })
       .then(function(video) {
         vm.winwin.video = video;
-        vm.preview_image = 'http://img.youtube.com/vi/'+video+'/default.jpg';
+        vm.preview_image = 'http://img.youtube.com/vi/'+video+'/hqdefault.jpg';
         vm.cover_image = null;
         vm.winwin.image = null;
       });

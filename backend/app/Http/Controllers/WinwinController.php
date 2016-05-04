@@ -402,7 +402,7 @@ class WinwinController extends Controller {
                     'type' => 'VIDEO'
                 ]);
                 if(!isset($winwin->image)) {
-                    $youtube_img = 'http://img.youtube.com/vi/'.$request->input('video').'/maxresdefault.jpg';
+                    $youtube_img = 'http://img.youtube.com/vi/'.$request->input('video').'/hqdefault.jpg';
                 
                     Storage::disk('s3-gallery')->put('/' .$request->input('video').'.jpg', file_get_contents($youtube_img), 'public');
 
