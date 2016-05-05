@@ -127,7 +127,9 @@
           <md-card class="md-whiteframe-7dp" >
             <div class="card-labels">
               <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
-              <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+              <md-button ng-if="winwin.winwin.is_moderator || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator"  ng-click="winwin.setSticky(item_post, item_post.sticky==0)" class="md-icon-button">
+                <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+              </md-button>
             </div>
             <md-card-header>
               <md-card-avatar>

@@ -79,6 +79,10 @@
       return Restangular.one('posts', id).customPOST({positive: positive}, 'vote', undefined, undefined);
     }
 
+    _winwin.stickyPost = function(id, sticky) {
+      return Restangular.one('posts', id).customPOST({sticky: sticky}, 'sticky', undefined, undefined);
+    }
+
     _winwin.activate = function(id) {
       return Restangular.one('winwins/activate', id).get();
     }
