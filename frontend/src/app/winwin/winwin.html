@@ -187,9 +187,19 @@
               </p>
             </md-card-content>
             <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{comment.created_at | moment: 'DD/MM/YYYY' }}</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{comment.up_votes}}</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{comment.down_votes}}</div>
+              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{comment.created_at | moment:   'DD/MM/YYYY' }}</div>
+              <div class="green">
+                <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(comment, true)" class="md-icon-button">
+                  <md-icon class="icon thumb_up">thumb_up</md-icon>
+                </md-button>
+                {{comment.up_votes}}
+              </div>
+              <div class="red"> 
+                <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(comment, false)" class="md-icon-button">
+                  <md-icon class="icon thumb_down">thumb_down</md-icon>
+                </md-button>
+                {{comment.down_votes}}
+              </div>
             </md-card-actions>
           </md-card>
         </div>  
