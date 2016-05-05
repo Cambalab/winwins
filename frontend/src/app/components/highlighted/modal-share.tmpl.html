@@ -1,0 +1,30 @@
+<div layout="column" class="lightbox-crear">
+  <md-dialog-content class="acme-crearwinwin">
+    <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
+      <div
+        socialshare
+        socialshare-provider="facebook" 
+        socialshare-text="{{vm.winwin.title}}" 
+        socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}"  
+        socialshare-media="{{vm.imageServer}}/{{vm.winwin.image}}"
+        socialshare-via="{{vm.facebookId}}">
+        <md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
+      <div
+        socialshare  
+        socialshare-text="{{vm.winwin.title}}" 
+        socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}" 
+        socialshare-provider="twitter">
+        <md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
+      <div
+        socialshare 
+        socialshare-provider="google" 
+        socialshare-text="{{vm.winwin.title}}" 
+        socialshare-media="{{vm.imageServer}}/{{vm.winwin.image}}"
+        socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}">
+        <md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon>
+      </div>
+    </div>
+  </md-dialog-content>
+</div>

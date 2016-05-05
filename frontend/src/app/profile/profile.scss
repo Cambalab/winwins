@@ -6,6 +6,9 @@ md-toolbar.md-accent {
     p {
       margin: 0;
       text-align: center;
+      md-icon {
+        margin-right: 5px;
+      }
       @media (max-width: 480px) {
         font-size: 12px;
         line-height: 12px;
@@ -120,9 +123,6 @@ md-toolbar.md-tall.md-warn.ng-scope {
         color: #686868;
         font-family: 'Montserrat', serif;
       }
-      &.md-input-has-value label {
-        display: none;
-      }
       .md-chips .md-chip .md-chip-content {
         font-size: 12px;
         cursor: pointer;
@@ -135,6 +135,14 @@ md-toolbar.md-tall.md-warn.ng-scope {
         display: block;
         color: #424040;
         cursor: pointer;
+      }
+      &.intereses {
+        padding-left: 2px;
+        width: 95%;
+        .md-select-value {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
       }
     }
     .wrap-input {
