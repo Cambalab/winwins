@@ -172,7 +172,9 @@
           <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
             <div layout="row" layout-align="space-between center">
               <div layout-padding>
-                <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button">  
+                  <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                </md-button>
               </div>
               <div>
                 <md-card-header>

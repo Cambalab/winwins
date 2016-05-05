@@ -59,7 +59,7 @@ class PostController extends Controller {
             $userPost->detail;
             $post->media;
             $post->votes;
-            $post->comments = Post::where('type', 'WW_COMMENT')->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
+            $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
 
             $post->comments->each(function($comment) {
                 $userComment = $comment->user;
