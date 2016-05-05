@@ -154,6 +154,24 @@
       });
     };
 
+    vm.removePost = function(post) {
+      $mdDialog.show({
+        controller: ModalRemoveController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-remove.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_post: post
+        }
+      })
+      .then(function(data) {
+        winwin.getPosts(vm.winwinId).then(function(posts_data) {
+          vm.posts = posts_data.posts;
+        });
+      });
+    };
+
     vm.showMasDetalleDialog = function(ev) {
       $mdDialog.show({
         controller: MasDetalleController,
@@ -269,6 +287,21 @@
 
     vm.left = function() {
       winwin.left(current_winwin.id).then(function(data) {
+         $mdDialog.hide(data);
+      });
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+  }
+
+  /** @ngInject */
+  function ModalRemoveController(current_post, $mdDialog, winwin) {
+    var vm = this;
+
+    vm.remove = function() {
+      winwin.removePost(current_post.id).then(function(data) {
          $mdDialog.hide(data);
       });
     }

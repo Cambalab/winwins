@@ -83,6 +83,10 @@
       return Restangular.one('posts', id).customPOST({sticky: sticky}, 'sticky', undefined, undefined);
     }
 
+    _winwin.removePost = function(id) {
+      return Restangular.one('posts', id).customPOST(undefined, 'remove', undefined, undefined);
+    }
+
     _winwin.activate = function(id) {
       return Restangular.one('winwins/activate', id).get();
     }
