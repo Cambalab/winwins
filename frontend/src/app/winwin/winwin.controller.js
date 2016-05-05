@@ -138,6 +138,14 @@
       });
     }
 
+    vm.vote = function(post, positive) {
+      winwin.votePost(post.id, positive).then(function() {
+        winwin.getPosts(vm.winwinId).then(function(posts_data) {
+          vm.posts = posts_data.posts;
+        });
+      });
+    };
+
     vm.showMasDetalleDialog = function(ev) {
       $mdDialog.show({
         controller: MasDetalleController,

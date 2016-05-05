@@ -75,6 +75,10 @@
       return Restangular.all('posts').post(post);
     }
 
+    _winwin.votePost = function(id, positive) {
+      return Restangular.one('posts', id).customPOST({positive: positive}, 'vote', undefined, undefined);
+    }
+
     _winwin.activate = function(id) {
       return Restangular.one('winwins/activate', id).get();
     }

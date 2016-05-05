@@ -148,8 +148,18 @@
             </md-card-content>
               <md-card-actions layout="row" layout-margin>
                 <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
-                <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-                <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+                <div class="green">
+                  <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, true)" class="md-icon-button">
+                    <md-icon class="icon thumb_up">thumb_up</md-icon>
+                  </md-button>
+                  {{item_post.up_votes}}
+                </div>
+                <div class="red"> 
+                  <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, false)" class="md-icon-button">
+                    <md-icon class="icon thumb_down">thumb_down</md-icon>
+                  </md-button>
+                  {{item_post.down_votes}}
+                </div>
                 <div><md-icon class="icon share">sharet</md-icon></div>
                 <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
             </md-card-actions>
@@ -177,9 +187,9 @@
               </p>
             </md-card-content>
             <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }}</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{comment.created_at | moment: 'DD/MM/YYYY' }}</div>
+              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{comment.up_votes}}</div>
+              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{comment.down_votes}}</div>
             </md-card-actions>
           </md-card>
         </div>  
