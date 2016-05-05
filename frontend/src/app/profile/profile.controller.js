@@ -34,31 +34,6 @@
       });
     });
 
-    vm.setCategories = function(item) {
-      var _index = -1
-      angular.forEach(vm.user.interests_list, function(value, key) {
-        if (value.id == item.id) {
-          _index = key;
-        }
-      });
-      
-      if (_index == -1) {
-        vm.user.interests_list.push(item);
-      } else {
-        vm.user.interests_list.splice(_index, 1);
-      }
-    };
-
-    vm.isChecked = function(id) {
-      var _index = -1
-      angular.forEach(vm.user.interests_list, function(value, key) {
-        if (value.id == id) {
-          _index = key;
-        }
-      });
-      return _index > -1;
-    }
-
     vm.saveProfile = function() {
       vm.processing = true;
       vm.current_password_wrong_message = '';

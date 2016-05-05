@@ -21,9 +21,13 @@
     return directive;
 
     /** @ngInject */
-    function MiembroController(ENV, $mdDialog, $document) {
+    function MiembroController(ENV, $mdDialog, $document, $auth) {
       var vm = this;
       vm.imageServer = ENV.imageServer;
+
+      vm.isAuthenticated = function() {
+        return $auth.isAuthenticated();
+      };
       
       vm.showLoginDialog = function(ev) {
         $mdDialog.show({

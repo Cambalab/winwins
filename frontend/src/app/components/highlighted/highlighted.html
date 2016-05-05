@@ -32,7 +32,7 @@
             </md-card-header>
             <div layout="row" layout-align="end center">
               <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
-              <md-button class="md-icon-button">
+              <md-button class="md-icon-button" ng-click="vm.share(item)">
                 <md-icon>share</md-icon>
               </md-button>
             </div>

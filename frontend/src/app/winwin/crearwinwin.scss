@@ -11,6 +11,13 @@
     }
     form>.layout-margin  {
       margin-top: 0;
+      @media (max-width: 960px) { 
+        padding-top: 0;
+        >.flex {
+          margin-top: 0;
+          padding-top: 0;
+        }
+      }
     }
   }
   
@@ -60,9 +67,6 @@
       color: #686868;
       font-family: 'Montserrat', serif;
     }
-    &.md-input-has-value label {
-      display: none;
-    }
     strong.enfasis {
       color: #4a6dce;
       background: #f1f1f1;
@@ -72,6 +76,9 @@
     }
     textarea {
       border-color: #3ca007;
+      font-size: 12px;
+      color: #686868;
+      font-family: 'Montserrat', serif;
     }
     .wrap-tooltip {
       right: 0;
@@ -86,10 +93,31 @@
       .md-select-value {
         border:none;
         color: #5d5d5d;
+        font-size: 12px;
         .md-select-icon {
           color: #5d5d5d;
         }
       }
+    }
+  }
+  md-input-container {
+    md-checkbox {
+      font-size: 12px;
+      color: #686868;
+      a {
+        color: #686868;
+      }
+    }
+    &.lugar {
+      min-width: 250px;
+    }
+    .menu-caterogias-btn.md-menu div>span {
+      font-size: 14px;
+      background: #DEDEDE;
+      padding: 5px 15px;
+      border-radius: 5px;
+      color: #666666;
+      cursor: pointer;
     }
   }
   .terminos {
@@ -126,8 +154,13 @@
   md-card {
     margin: 0;
     position: relative;
-    img {
-      max-height: 244px;
+    .md-card-wrap {
+      background: #5d5d5d;
+      min-height: 244px;
+      border-radius: 2px 2px 0 0;
+      img {
+        max-height: 244px;
+      }
     }
     md-card-title-text {
       position: absolute;
@@ -140,6 +173,9 @@
       button {
         font-size: 21px;
         font-weight: 700;
+        &:hover {
+          background: none;
+        }
       }
     }
   }
@@ -233,6 +269,9 @@ md-toolbar.md-tall.md-crear {
   height: 95px;
   color: #fff;
   box-shadow: none;
+  @media (min-width: 960px) {
+    margin-bottom: 30px;
+  }
   h2 {
     @media (min-width: 600px) { 
       font-size: 28px;
@@ -308,6 +347,18 @@ md-toolbar.md-tall.md-crear {
       }
     }
   }
+  &.crear-video {
+    md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+      left: 5px;
+      font-size: 12px;
+    }
+    md-input-container .md-input { font-size: 12px}
+    md-dialog-content {
+      @media (min-width: 480px) {
+        min-width: 400px;
+      }
+    }
+  }
   h2 {
     font-size: 16px;
     color: #5d5d5d;
@@ -324,9 +375,13 @@ md-toolbar.md-tall.md-crear {
       opacity: .5;
       max-width: 110px;
       height: 80px;
+      cursor: pointer;
       &.selected {
         opacity: 1;
         border: solid 3px #eb6a24;
+      }
+      &:hover {
+        opacity: 1;
       }
     }
   }
@@ -370,6 +425,23 @@ md-toolbar.md-tall.md-crear {
     background-color: #929292;
     &:hover {
       background: #676666;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .acme-crearwinwin {
+    .container {
+      padding: 0;
+      form>.layout-margin.layout-padding {
+        padding: 0;
+        margin: 0;
+        &>.flex {
+          padding-left:0;
+          padding-right: 0;
+          margin-left: 0;
+          margin-right: 0; 
+        }
+      }
     }
   }
 }

@@ -354,9 +354,11 @@ class WinwinController extends Controller {
         $winwin = new Winwin;
         DB::transaction(function() use ($request, $winwin, $user) {
 
-            $arr = explode(".", $request->input('closing_date'), 2);
-            $event_date = str_replace("T", " ", $arr[0]);
-            $winwin->closing_date = Carbon::createFromFormat('Y-m-d H:i:s', $event_date);
+            if($request->has('closing_date')) {
+                $arr = explode(".", $request->input('closing_date'), 2);
+                $event_date = str_replace("T", " ", $arr[0]);
+                $winwin->closing_date = Carbon::createFromFormat('Y-m-d H:i:s', $event_date);
+            }
             $winwin->description = $request->input('description');
             $winwin->title = $request->input('title');
             $winwin->users_amount = $request->input('users_amount');
@@ -400,7 +402,7 @@ class WinwinController extends Controller {
                     'type' => 'VIDEO'
                 ]);
                 if(!isset($winwin->image)) {
-                    $youtube_img = 'http://img.youtube.com/vi/'.$request->input('video').'/maxresdefault.jpg';
+                    $youtube_img = 'http://img.youtube.com/vi/'.$request->input('video').'/hqdefault.jpg';
                 
                     Storage::disk('s3-gallery')->put('/' .$request->input('video').'.jpg', file_get_contents($youtube_img), 'public');
 

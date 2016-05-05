@@ -95,6 +95,10 @@
                     winwinId: winwinId
                  }); 
                 break;
+              case 'home.crear-winwin':
+                $rootScope.returnState = null;
+                $state.go('home.crear-winwin');
+                break;
               default:
                 $rootScope.returnState = null;
                 $state.go('home'); 

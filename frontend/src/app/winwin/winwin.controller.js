@@ -6,12 +6,16 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q) {
     var vm = this;
 
+    vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
+    vm.facebookId = ENV.satellizer.facebook.clientId;
 
     vm.winwinId = $stateParams.winwinId;
+
+    vm.post = {};
 
     account.getProfile().then(function(data) {
        vm.account = data.profile;
@@ -23,11 +27,57 @@
       vm.sponsors = $window._.filter(vm.winwin.sponsors, function(model) {
         return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
       });
+
+      vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'}
     });
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
       vm.posts = posts_data.posts;
     });
+
+    vm.submitPost = function() {
+      if (vm.post.content == '' && !vm.post.media_path && !vm.cover_post_image) {
+        return;
+      }
+
+      var promises = [];
+
+      if (vm.post.media_type == 'IMAGE' && vm.cover_post_image) {
+        promises.push(winwin.uploadPostImage(dataURItoBlob(vm.cover_post_image.file), vm.cover_post_image.name));
+      }
+
+      $q.all(promises).then(function(data) {
+        if (vm.cover_post_image) {
+          vm.post.media_id = data[0].media_id;
+          vm.post.media_path = data[0].filename;
+          vm.cover_post_image = null;
+        }
+
+        winwin.createPost(vm.post)
+        .then(function(data){
+          if (!vm.winwin.published && !vm.winwin.canceled) {
+            winwin.activate(vm.winwinId).then(function() {
+              vm.winwin.published = true;
+            });
+          }
+
+          winwin.getPosts(vm.winwinId).then(function(posts_data) {
+            vm.posts = posts_data.posts;
+          });
+          vm.post = {content: '', reference_id: vm.winwinId, type: 'WINWIN'}
+        });
+      });
+    }
+
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
+    };
 
     vm.getIframeSrc = function (videoId) {
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
@@ -100,6 +150,22 @@
         }
       });
     };
+
+    vm.showModalVideoPostDialog = function(ev) {
+      $mdDialog.show({
+        controller: ModalVideoPostController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-video-post.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(video) {
+        vm.post.media_type = 'VIDEO';
+        vm.post.media_path = video;
+      });
+    };
+    
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
         controller: ParticipantesController,
@@ -110,6 +176,20 @@
         locals: {
           users: vm.winwin.users
         }
+      });
+    };
+
+    vm.showCropPostImageDialog = function(ev) {
+      $mdDialog.show({
+        controller: CropPostImageController,
+        templateUrl: 'app/winwin/cover_post_image.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(image) {
+        vm.post.media_type = 'IMAGE';
+        vm.cover_post_image = image;
       });
     };
   }
@@ -179,6 +259,51 @@
 
     vm.cancel = function() {
       $mdDialog.cancel();
+    }
+  }
+
+  /** @ngInject */
+  function ModalVideoPostController($mdDialog) {
+    var vm = this;
+
+    vm.setVideo = function() {
+      $mdDialog.hide(vm.matchYoutubeUrl(vm.video));
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+
+    vm.previewVideo = function(e) {
+      vm.video_path = vm.matchYoutubeUrl(e.originalEvent.clipboardData.getData('text/plain'));
+    }
+
+    vm.matchYoutubeUrl = function(url){
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      return (url.match(p)) ? RegExp.$1 : false ;
+    }
+  }
+
+  /** @ngInject */
+  function CropPostImageController($scope, $mdDialog) {
+    $scope.myImage='';
+    $scope.myCroppedImage='';
+    $scope.fileName='';
+
+    $scope.handleFileSelect = function(evt) {
+      var file=evt.files[0];
+      $scope.fileName = file.name;
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function($scope){
+          $scope.myImage=evt.target.result;
+        });
+      };
+      reader.readAsDataURL(file);
+    };
+
+    $scope.cropImage = function() {
+      $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
     }
   }
 

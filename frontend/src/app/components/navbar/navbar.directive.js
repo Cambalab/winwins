@@ -63,13 +63,17 @@
         $auth.logout();
       };
 
-      vm.showLoginDialog = function(ev) {
+      vm.showLoginDialog = function(redirect) {
+        if (redirect) {
+          $rootScope.returnState = {
+            state: redirect
+          };
+        }
         $mdDialog.show({
           controller: 'LoginController',
           controllerAs: 'login',
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
-          targetEvent: ev,
           clickOutsideToClose:true
         });
       };
