@@ -10,288 +10,344 @@
     <p>También podés subir una imagen o un video.</p>
   </md-toolbar>
   <div class="container">
-    <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column" class="primary-content">
-      <div class="col-left">
-         <md-card class="md-whiteframe-17dp no-padding">
-          <md-card-content>
-            <div class="wrap-card-img">              
-              <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
-              <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
+    <md-tabs md-dynamic-height>
+      <md-tab>
+      <md-tab-label>
+        <md-icon md-svg-icon="assets/images/icon-comments.svg"></md-icon>
+      </md-tab-label>
+        <md-tab-body>
+          <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column" class="primary-content">
+            <div class="col-left">
+               <md-card class="md-whiteframe-4dp no-padding">
+                <md-card-content>
+                  <div class="wrap-card-img">              
+                    <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
+                    <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
+                  </div>
+                  <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
+                    <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
+                  </md-card-title-text>
+                  <div class="card-labels">
+                    <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
+                    <md-icon class="icon icon-watshot" ng-if="winwin.winwin.popular">whatshot</md-icon>
+                    <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="winwin.winwin.remarkable">highlighted</md-icon>
+                  </div>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="space-between center">
+                  <div flex layout="row" hide show-gt-xs class="card-social-media">
+                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
+                      <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="google">
+                      <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="twitter">
+                      <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
+                      <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
+                      <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+                    </md-button>
+                  </div>
+                  <div class="card-numbers">
+                    <div layout="row" layout-wrap layout-align="center center">
+                      <div class="md-item-text bg-green">
+                        <h3 translate>Somos</h3>
+                        <p>{{winwin.winwin.users_already_joined}}</p>
+                      </div>
+                      <div class="md-item-text bg-orange">
+                        <h3 translate>Faltan</h3>
+                        <p>{{winwin.winwin.users_left}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-time"><h3 translate>HAY TIEMPO HASTA EL</h3>
+                    <strong><md-icon class="icon icon-access_time">access_time</md-icon>{{winwin.winwin.closing_date | date:"dd/MM/yyyy" }}</strong>
+                  </div>
+                </md-card-actions>
+              </md-card>
             </div>
-            <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
-              <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
-            </md-card-title-text>
-            <div class="card-labels">
-              <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
-              <md-icon class="icon icon-watshot" ng-if="winwin.winwin.popular">whatshot</md-icon>
-              <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="winwin.winwin.remarkable">highlighted</md-icon>
-            </div>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="space-between center">
-            <div flex layout="row" hide class="card-social-media">
-              <md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
-                <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" ng-href="/#/login" aria-label="google">
-                <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" ng-href="/#/login" aria-label="twitter">
-                <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
-                <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
-                <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
-              </md-button>
-            </div>
-            <div class="card-numbers">
-              <div layout="row" layout-wrap layout-align="center center">
-                <div class="md-item-text bg-green">
-                  <h3 translate>Somos</h3>
-                  <p>{{winwin.winwin.users_already_joined}}</p>
+            <div class="col-central" hide show-gt-xs>
+              <div layout="column" layout-align="center center">
+                <div class="creadores">
+                  <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
+                  <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
+                  <strong>CREADOR</strong>
                 </div>
-                <div class="md-item-text bg-orange">
-                  <h3 translate>Faltan</h3>
-                  <p>{{winwin.winwin.users_left}}</p>
+                <div class="activadores">
+                  <div layout="row" layout-align="center center" layout-margin layout-wrap>
+                    <div ng-repeat="activador in winwin.winwin.users | filter: {pivot :{ creator: 0, moderator: 1}} as filteredActivador" >
+                      <img ng-src="{{winwin.imageServer}}/25x25/{{activador.photo}}" alt="{{activador.username}}" title="{{activador.username}}" class="profile-small style-rounded" />
+                    </div>
+                  </div>
+                  <strong ng-show="filteredActivador.length > 0">ACTIVADORES</strong>
                 </div>
               </div>
             </div>
-            <div class="card-time"><h3 translate>HAY TIEMPO HASTA EL</h3>
-              <strong><md-icon class="icon icon-access_time">access_time</md-icon>{{winwin.winwin.closing_date | date:"dd/MM/yyyy" }}</strong>
-            </div>
-          </md-card-actions>
-        </md-card>
-      </div>
-      <div class="col-central" hide show-gt-xs>
-        <div layout="column" layout-align="center center">
-          <div class="creadores">
-            <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
-            <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
-            <strong>CREADOR</strong>
-          </div>
-          <div class="activadores">
-            <div layout="row" layout-align="center center" layout-margin layout-wrap>
-              <div ng-repeat="activador in winwin.winwin.users | filter: {pivot :{ creator: 0, moderator: 1}} as filteredActivador" >
-                <img ng-src="{{winwin.imageServer}}/25x25/{{activador.photo}}" alt="{{activador.username}}" title="{{activador.username}}" class="profile-small style-rounded" />
+            <div class="col-right">
+              <h2 class="main-title">{{winwin.winwin.title}}</h2>
+              <div layout="col" layout-align="center start">
+                <div flex="83">
+                  <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
+                  </p>
+                  <p><strong>te sumarías?</strong></p>
+                  <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                </div>
+                <div flex="15" layout="column" class="content-social-media">
+                  <div
+                    socialshare
+                    socialshare-provider="facebook" 
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-via="{{winwin.facebookId}}">
+                    <md-button class="md-icon-button" ng-href aria-label="facebook">
+                      <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                    </md-button>
+                  </div>
+                  <div
+                    socialshare  
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
+                    socialshare-provider="twitter">
+                    <md-button class="md-icon-button" ng-href aria-label="twitter">
+                      <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+                    </md-button>
+                  </div>
+                  <div
+                    socialshare 
+                    socialshare-provider="google" 
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
+                    <md-button class="md-icon-button" ng-href aria-label="google">
+                      <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+                    </md-button>
+                  </div>
+      <!--             <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
+      >>>>>>> master
+                    <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
+                  </md-button></div> -->
+                  <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
+                    <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+                  </md-button></div>
+                </div>
+              </div>
+              <div class="creadores" layout="row">
+                <div hide show-xs flex>
+                  <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
+                  <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
+                  <strong>CREADOR</strong>
+                </div>
               </div>
             </div>
-            <strong ng-show="filteredActivador.length > 0">ACTIVADORES</strong>
           </div>
-        </div>
-      </div>
-      <div class="col-right">
-        <h2 class="main-title">{{winwin.winwin.title}}</h2>
-        <div layout="col" layout-align="center start">
-          <div flex="83">
-            <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
-            </p>
-            <p><strong>te sumarías?</strong></p>
-            <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
-            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
-          </div>
-          <div flex="15" layout="column" class="content-social-media">
-            <div
-              socialshare
-              socialshare-provider="facebook" 
-              socialshare-text="{{winwin.winwin.title}}" 
-              socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
-              socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-              socialshare-via="{{winwin.facebookId}}">
-              <md-button class="md-icon-button" ng-href aria-label="facebook">
-                <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-              </md-button>
-            </div>
-            <div
-              socialshare  
-              socialshare-text="{{winwin.winwin.title}}" 
-              socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
-              socialshare-provider="twitter">
-              <md-button class="md-icon-button" ng-href aria-label="twitter">
-                <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
-              </md-button>
-            </div>
-            <div
-              socialshare 
-              socialshare-provider="google" 
-              socialshare-text="{{winwin.winwin.title}}" 
-              socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-              socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
-              <md-button class="md-icon-button" ng-href aria-label="google">
-                <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
-              </md-button>
-            </div>
-<!--             <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
->>>>>>> master
-              <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
-            </md-button></div> -->
-            <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
-              <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
-            </md-button></div>
-          </div>
-        </div>
-        <div class="creadores" layout="row">
-          <div hide show-xs flex>
-            <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
-            <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
-            <strong>CREADOR</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
-      <div class="sponsors">
-        <h3 class="title">
-          <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
-        </h3>
-        <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
-          <div ng-repeat="sponsor in winwin.sponsors">
-            <img ng-src="{{winwin.imageServer}}/250x120/{{sponsor.photo}}" alt="" class="sponsors-img">
-          </div>
-        </div>
-      </div>
-      <div class="comments">
-        <div ng-repeat="item_post in winwin.posts">
-          <md-card class="md-whiteframe-7dp" >
-            <div class="card-labels">
-              <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
-              <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
-            </div>
-            <md-card-header>
-              <md-card-avatar>
-                <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}"/>
-              </md-card-avatar>
-              <md-card-header-text>
-                {{item_post.user.username}}
-              </md-card-header-text>
-            </md-card-header>
-            <md-card-content>
-              <p>{{item_post.content}}</p>
-              <div ng-show="item_post.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
-                <img ng-src="{{winwin.imageServer}}/400x/smart/{{item_post.media.name}}" class="img-responsive">
+          <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
+            <div class="sponsors" hide show-gt-sm>
+              <h3 class="title">
+                <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
+              </h3>
+              <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
+                <div ng-repeat="sponsor in winwin.sponsors">
+                  <img ng-src="{{winwin.imageServer}}/250x120/{{sponsor.photo}}" alt="" class="sponsors-img">
+                </div>
               </div>
-              <div ng-show="item_post.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
-               <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(item_post.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
-              </div>
-            </md-card-content>
-              <md-card-actions layout="row" layout-margin>
-                <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
-                <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-                <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
-                <div><md-icon class="icon share">sharet</md-icon></div>
-                <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
-            </md-card-actions>
-          </md-card>
+            </div>
+            <div class="comments">
+              <div ng-repeat="item_post in winwin.posts">
+                <md-card class="md-whiteframe-7dp" >
+                  <div class="card-labels">
+                    <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                    <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+                  </div>
+                  <md-card-header>
+                    <md-card-avatar>
+                      <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}"/>
+                    </md-card-avatar>
+                    <md-card-header-text>
+                      {{item_post.user.username}}
+                    </md-card-header-text>
+                  </md-card-header>
+                  <md-card-content>
+                    <p>{{item_post.content}}</p>
+                    <div ng-show="item_post.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
+                      <img ng-src="{{winwin.imageServer}}/400x/smart/{{item_post.media.name}}" class="img-responsive">
+                    </div>
+                    <div ng-show="item_post.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
+                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(item_post.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
+                    </div>
+                  </md-card-content>
+                    <md-card-actions layout="row" layout-margin>
+                      <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
+                      <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
+                      <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+                      <div><md-icon class="icon share">sharet</md-icon></div>
+                      <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
+                  </md-card-actions>
+                </md-card>
 
-          <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
-            <div layout="row" layout-align="space-between center">
-              <div layout-padding>
-                <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
+                  <div layout="row" layout-align="space-between center">
+                    <div layout-padding>
+                      <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                    </div>
+                    <div>
+                      <md-card-header>
+                        <md-card-header-text>
+                          {{comment.user.username}}
+                        </md-card-header-text>
+                        <md-card-avatar>
+                          <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{comment.user.photo}}" />
+                        </md-card-avatar>
+                      </md-card-header>
+                    </div>
+                  </div>
+                  <md-card-content>
+                    <p>
+                      {{comment.content}}
+                    </p>
+                  </md-card-content>
+                  <md-card-actions layout="row" layout-margin>
+                    <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }}</div>
+                    <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
+                    <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+                  </md-card-actions>
+                </md-card>
+              </div>  
+            </div>
+            <div class="aside" hide show-gt-sm>
+              <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
+                <div class="content-bg">
+                  <h3 class="title-notificaction">
+                    <md-icon>notifications</md-icon>
+                    <span class="badge">1</span>
+                    CAMPANADA ACTIVA</h3>
+                </div>
+                <div class="content-bg">
+                  <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>
+                </div>
+                <div class="content-bg">
+                  <h4><md-icon md-svg-src="assets/images/icon-world.svg"></md-icon>Escala: <strong>{{winwin.winwin.scope}}</strong></h4>
+                  <p>{{winwin.winwin.location.formatted_address}}</p>
+                </div>
+                <div class="content-bg" ng-if="winwin.winwin.interests.length > 0">
+                  <h4>Categorías: </h4>
+                  {{winwin.formattedCategories(winwin.winwin.interests)}}
+                  <ul>
+                    <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
+                  </ul>
+                </div>
+                <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
+                  <p>
+                    <md-button ng-href ng-click="winwin.left()" class="no-padding">
+                      <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+                    </md-button>
+                  </p>
+                </div>
+                <div class="content-bg">
+                  <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
+                </div>
               </div>
-              <div>
-                <md-card-header>
-                  <md-card-header-text>
-                    {{comment.user.username}}
-                  </md-card-header-text>
-                  <md-card-avatar>
-                    <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{comment.user.photo}}" />
-                  </md-card-avatar>
-                </md-card-header>
+              <md-list ng-cloak>
+                <h3 class="title">
+                  <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'PARTICIPANTES' | translate }}
+                </h3>
+                <md-list-item ng-repeat="participante in winwin.winwin.users | limitTo: 5">
+                  <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar">
+                  <p>{{participante.username}}</p>
+                </md-list-item>
+                <md-list-item class="md-no-proxy" ng-if="winwin.winwin.users.length > 5">
+                 <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Ver todos los participantes</md-button>
+                </md-list-item>
+              </md-list>
+            </div>
+          </div>
+          <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
+          <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
+            <div ng-if="winwin.post.media_type" class="content-img-video">
+              <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
+              </img>
+              <img ng-if="winwin.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{winwin.post.media_path}}/hqdefault.jpg" style="height:190px;">
+              </img>
+            </div>
+            <div class="caja-mensaje">
+              <div layout="row" layout-align="center center">
+              </div>
+              <div layout="row" layout-align="center center" layout-padding>
+                <div>
+                    <img ng-src="{{winwin.imageServer}}/48x48/{{winwin.account.photo}}" class="caja-mensaje-img" alt="">
+                </div>
+                <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
+                  <md-input-container class="md-block">
+                    <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>
+                  <div layout="column" layout-align="center center" class="social-media">
+                    <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
+                      <md-icon md-svg-src="assets/images/icon-youtubesmall.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-fab camera" aria-label="" ng-click="winwin.showCropPostImageDialog()">
+                      <md-icon>photo_camera</md-icon>
+                    </md-button>
+                  </div>
+                  <md-button type="submit" name="action" class="md-fab send" aria-label="">
+                    <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
+                  </md-button>
+                </form>
               </div>
             </div>
-            <md-card-content>
-              <p>
-                {{comment.content}}
-              </p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }}</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
-            </md-card-actions>
-          </md-card>
-        </div>  
-      </div>
-      <div class="aside">
-        <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
-          <div class="content-bg">
-            <h3 class="title-notificaction">
-              <md-icon>notifications</md-icon>
-              <span class="badge">1</span>
-              CAMPANADA ACTIVA</h3>
           </div>
-          <div class="content-bg">
-            <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>
-          </div>
-          <div class="content-bg">
-            <h4><md-icon md-svg-src="assets/images/icon-world.svg"></md-icon>Escala: <strong>{{winwin.winwin.scope}}</strong></h4>
-            <p>{{winwin.winwin.location.formatted_address}}</p>
-          </div>
-          <div class="content-bg" ng-if="winwin.winwin.interests.length > 0">
-            <h4>Categorías: </h4>
-            {{winwin.formattedCategories(winwin.winwin.interests)}}
-            <ul>
-              <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
-            </ul>
-          </div>
-          <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
-            <p>
-              <md-button ng-href ng-click="winwin.left()" class="no-padding">
-                <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
-              </md-button>
-            </p>
-          </div>
-          <div class="content-bg">
-            <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
-          </div>
-        </div>
-        <md-list ng-cloak>
-          <h3 class="title">
-            <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'PARTICIPANTES' | translate }}
-          </h3>
-          <md-list-item ng-repeat="participante in winwin.winwin.users | limitTo: 5">
-            <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar">
-            <p>{{participante.username}}</p>
-          </md-list-item>
-          <md-list-item class="md-no-proxy" ng-if="winwin.winwin.users.length > 5">
-           <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Ver todos los participantes</md-button>
-          </md-list-item>
-        </md-list>
-      </div>
-    </div>
-    <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
-      <div ng-if="winwin.post.media_type" class="content-img-video">
-        <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
-        </img>
-        <img ng-if="winwin.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{winwin.post.media_path}}/hqdefault.jpg" style="height:190px;">
-        </img>
-      </div>
-      <div class="caja-mensaje">
-        <div layout="row" layout-align="center center">
-        </div>
-        <div layout="row" layout-align="center center" layout-padding>
-          <div>
-              <img ng-src="{{winwin.imageServer}}/48x48/{{winwin.account.photo}}" class="caja-mensaje-img" alt="">
-          </div>
-          <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
-            <md-input-container class="md-block">
-              <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-            </md-input-container>
-            <div layout="column" layout-align="center center" class="social-media">
-              <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
-                <md-icon md-svg-src="assets/images/icon-youtubesmall.svg"></md-icon>
-              </md-button>
-              <md-button class="md-fab camera" aria-label="" ng-click="winwin.showCropPostImageDialog()">
-                <md-icon>photo_camera</md-icon>
-              </md-button>
+        </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+          </md-tab-label>
+          <md-tab-body>
+            <div class="notice-star">
+              <md-icon>star_rate</md-icon>
+              <p transalte>AÚN NO HAY SPOSNSORS!</p>
             </div>
-            <md-button type="submit" name="action" class="md-fab send" aria-label="">
-              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
-            </md-button>
-          </form>
-        </div>
-      </div>
-    </div>
+            <md-card class="mobile">
+              <md-card-content>
+                <img ng-src="assets/images/bg-video.jpg" class="md-card-image" alt="">
+                <md-card-title>
+                  <md-card-title-text>
+                    <img ng-src="http://images.dev-winwins.net/85x60/smart/sponsor_9d83c2ef2129b23a653277f57cfd9a1d_142.jpeg" class="md-title-image" alt="">
+                    <span class="md-headline">Coca Cola</span>
+                  </md-card-title-text>
+                </md-card-title>
+              </md-card-content>
+              <md-card-actions layout="row" layout-align="space-between center">
+                <div class="md-card-actions-ww"><h3 translate>Winwins</h3>
+                  <p>1</p>
+                </div>
+                <div class="md-card-actions-seguidores"><h3 translate>Seguidores</h3>
+                  <p>0</p>
+                </div>
+                <div><md-button class="bt-green">Seguir</md-button></div>
+              </md-card-actions>
+            </md-card>
+          </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-svg-icon="assets/images/icon-miembros.svg"></md-icon>
+          </md-tab-label>
+          <md-tab-body>
+            <md-card class="mobile mobile-members">
+              <md-card-content>
+                <img ng-src="assets/images/bg-video.jpg" class="md-card-image" alt="">
+                <md-card-title>
+                  </md-card-title-text>
+                </md-card-title>
+              </md-card-content>
+            </md-card>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+    </md-content>
   </div>
 </md-content>
