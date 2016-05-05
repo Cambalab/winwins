@@ -192,6 +192,29 @@
         vm.cover_post_image = image;
       });
     };
+
+    vm.showSharePost = function(post) {
+      $mdDialog.show({
+        controller: ModalSharePostController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-share-post.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_post: post
+        }
+      });
+    }
+  }
+
+  /** @ngInject */
+  function ModalSharePostController(current_post, ENV) {
+    var vm = this;
+
+    vm.base = ENV.base;
+    vm.imageServer = ENV.imageServer;
+    vm.facebookId = ENV.satellizer.facebook.clientId;
+    vm.post = current_post;
   }
 
   /** @ngInject */

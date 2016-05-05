@@ -150,7 +150,11 @@
                 <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
                 <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
                 <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
-                <div><md-icon class="icon share">sharet</md-icon></div>
+                <div>
+                  <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
                 <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
             </md-card-actions>
           </md-card>
