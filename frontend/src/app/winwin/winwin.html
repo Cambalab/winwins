@@ -68,7 +68,7 @@
             </p>
             <p><strong>te sumarías?</strong></p>
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
-            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()" ng-disabled="loadingFlag">SI, ME SUMO!</md-button>
           </div>
           <div flex="15" layout="column">
             <div
@@ -284,7 +284,7 @@
                 <md-icon>photo_camera</md-icon>
               </md-button>
             </div>
-            <md-button type="submit" name="action" class="md-fab send" aria-label="">
+            <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </form>

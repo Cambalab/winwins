@@ -134,6 +134,6 @@
 </md-sidenav>
 <md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" ng-if="vm.isAuthenticated()">
   <p>
-    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
+    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail" ng-disabled="loadingFlag">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
   </p>
 </md-toolbar>

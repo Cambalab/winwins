@@ -3,7 +3,7 @@
 	<div flex><h2 translate>Atención!</h2></div>
 	<div flex><p translate>Está seguro que desea eliminar el post?</p></div>
 	<div flex>
-		<md-button class="md-raised md-primary md-green" ng-click="vm.remove()">{{ 'Eliminar' | translate }}</md-button>
+		<md-button class="md-raised md-primary md-green" ng-click="vm.remove()" ng-disabled="loadingFlag">{{ 'Eliminar' | translate }}</md-button>
 		<md-button class="md-raised md-primary md-gray" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</md-button>
 	</div>
 </div>
