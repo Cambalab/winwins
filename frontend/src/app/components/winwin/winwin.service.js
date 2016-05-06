@@ -75,6 +75,15 @@
       return Restangular.all('posts').post(post);
     }
 
+    _winwin.createComment = function(id, content, media_id, media_type, media_path) {
+      return Restangular.one('posts', id).customPOST({
+        content: content,
+        media_id: media_id,
+        media_type: media_type,
+        media_path: media_path
+      }, 'comment', undefined, undefined);
+    }
+
     _winwin.votePost = function(id, positive) {
       return Restangular.one('posts', id).customPOST({positive: positive}, 'vote', undefined, undefined);
     }
