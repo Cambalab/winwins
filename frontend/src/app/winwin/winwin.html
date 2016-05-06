@@ -70,7 +70,7 @@
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
             <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()" ng-disabled="loadingFlag">SI, ME SUMO!</md-button>
           </div>
-          <div flex="15" layout="column">
+          <div flex="15" layout="column" class="social-share">
             <div
               socialshare
               socialshare-provider="facebook" 
@@ -130,7 +130,7 @@
                 <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
               </md-button>
               <md-button ng-if="winwin.winwin.is_moderator || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator"  ng-click="winwin.setSticky(item_post, item_post.sticky==0)" class="md-icon-button">
-                <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+                <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
               </md-button>
             </div>
             <md-card-header>
@@ -150,7 +150,7 @@
                <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(item_post.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
               </div>
             </md-card-content>
-              <md-card-actions layout="row" layout-margin>
+              <md-card-actions layout="row" layout-margin layout-align="start end">
                 <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
                 <div class="green">
                   <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, true)" class="md-icon-button">
