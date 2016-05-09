@@ -244,12 +244,14 @@
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
         controller: ParticipantesController,
+        controllerAs: 'vm',
         templateUrl: 'app/winwin/participantes.tmpl.html',
         parent: angular.element($document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
         locals: {
-          users: vm.winwin.users
+          users: vm.winwin.users,
+          winwin_id: vm.winwin.id
         }
       });
     };
@@ -298,9 +300,39 @@
   }
   
   /** @ngInject */
-  function ParticipantesController($scope, users, ENV){
-    $scope.imageServer = ENV.imageServer;
-    $scope.users = users;
+  function ParticipantesController(users, winwin_id, ENV, winwin){
+    var vm = this;
+
+    vm.imageServer = ENV.imageServer;
+    vm.users = users;
+
+    vm.makeNormal = function(participante) {
+      vm.activated_name = participante.username;
+      winwin.setUserNormal(winwin_id, participante.id);
+        // $http.post(api_host+'/api/winwins/'+$scope.winwin.id+'/state/normal/'+participante.id).success(function(data) {
+        //     $scope.in_message = true;
+        //     $scope.normal_success = true;
+        //     $timeout(function() {
+        //         $state.go('winwin-view', {
+        //             winwinId: $scope.winwin.id
+        //         }, {reload: true}); 
+        //     }, 1000);
+        // });
+    };
+
+    vm.makeActivator = function(participante) {
+      vm.activated_name = participante.username;
+      winwin.setUserActivator(winwin_id, participante.id);
+        // $http.post(api_host+'/api/winwins/'+$scope.winwin.id+'/state/activator/'+participante.id).success(function(data) {
+        //     $scope.in_message = true;
+        //     $scope.activator_success = true;
+        //     $timeout(function() {
+        //         $state.go('winwin-view', {
+        //             winwinId: $scope.winwin.id
+        //         }, {reload: true}); 
+        //     }, 1000);
+        // });
+    };
   }
 
   /** @ngInject */

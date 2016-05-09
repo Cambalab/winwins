@@ -108,6 +108,14 @@
      return Restangular.one('winwins/left', id).get(); 
     }
 
+    _winwin.setUserNormal = function(winwin_id, user_id) {
+      return Restangular.one('winwins', winwin_id).one('state/normal', user_id).post();
+    }
+
+    _winwin.setUserActivator = function(winwin_id, user_id) {
+      return Restangular.one('winwins', winwin_id).one('state/activator', user_id).post();
+    }
+
     _winwin.shareMails = function(id, mails) {
       return Restangular.one('winwins', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
     }

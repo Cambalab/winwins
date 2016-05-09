@@ -5,10 +5,11 @@
       {{ 'PARTICIPANTES' | translate }}
     </h3>
     <md-list>
-      <md-list-item ng-repeat="participante in users">
-        <img alt="" ng-src="{{imageServer}}/smart/{{participante.photo}}" alt=""class="md-avatar" />
+      <md-list-item ng-repeat="participante in vm.users">
+        <img alt="" ng-src="{{vm.imageServer}}/smart/{{participante.photo}}" alt=""class="md-avatar" />
         <p>{{participante.username}}</p>
-        <md-button class="md-raised md-warn md-caption">Nombrar activador</md-button>
+        <md-button ng-show="participante.pivot.moderator == 0" class="md-raised md-warn md-caption" ng-click="vm.makeActivator(participante)">Nombrar activador</md-button>
+        <md-button ng-show="participante.pivot.moderator == 1" class="md-raised md-warn md-caption" ng-click="vm.makeNormal(participante)">Nombrar usuario regular</md-button>
       </md-list-item>
     </md-list>
   </div>
