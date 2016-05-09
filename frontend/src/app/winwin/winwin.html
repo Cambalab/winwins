@@ -164,7 +164,11 @@
                   </md-button>
                   {{item_post.down_votes}}
                 </div>
-                <div><md-icon class="icon share">sharet</md-icon></div>
+                <div>
+                  <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
                 <div>
                   <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
                     <md-icon class="icon insert_comment">insert_comment</md-icon>
