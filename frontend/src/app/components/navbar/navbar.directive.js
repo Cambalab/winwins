@@ -41,7 +41,7 @@
             vm.isActive = data.active;
 
             vm.notifications = $window._.sortBy(data.user.notifications, function(notification) {
-              return notification.id; 
+              return -notification.id; 
             });
           });
         }
