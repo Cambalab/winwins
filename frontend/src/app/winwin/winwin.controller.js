@@ -320,7 +320,7 @@
     };
 
     vm.submitComment = function() {
-      if (vm.comment.content == '' && !vm.comment.media_path && !vm.cover_post_image) {
+      if (vm.comment.content == '' && !vm.comment.media_path && !vm.cover_comment_image) {
         return;
       }
 
@@ -330,15 +330,15 @@
 
       var promises = [];
 
-      if (vm.comment.media_type == 'IMAGE' && vm.cover_post_image) {
-        promises.push(winwin.uploadPostImage(dataURItoBlob(vm.cover_post_image.file), vm.cover_post_image.name));
+      if (vm.comment.media_type == 'IMAGE' && vm.cover_comment_image) {
+        promises.push(winwin.uploadPostImage(dataURItoBlob(vm.cover_comment_image.file), vm.cover_comment_image.name));
       }
 
       $q.all(promises).then(function(data) {
-        if (vm.cover_post_image) {
+        if (vm.cover_comment_image) {
           vm.comment.media_id = data[0].media_id;
           vm.comment.media_path = data[0].filename;
-          vm.cover_post_image = null;
+          vm.cover_comment_image = null;
         }
 
         winwin.createComment(vm.post.id, vm.comment.content, vm.comment.media_id, vm.comment.media_type, vm.comment.media_path)
