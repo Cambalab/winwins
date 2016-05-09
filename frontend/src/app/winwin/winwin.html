@@ -226,11 +226,16 @@
       </div>
       <div class="aside">
         <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
-          <div class="content-bg">
-            <h3 class="title-notificaction">
+          <div class="content-bg" ng-if="winwin.winwin.already_joined">
+            <h3 class="title-notificaction">             
               <md-icon>notifications</md-icon>
-              <span class="badge">1</span>
-              CAMPANADA ACTIVA</h3>
+              <span class="badge" ng-show="(winwin.campanadas | filter:{is_read:0}).length > 0">
+                {{(winwin.campanadas | filter:{is_read:0}).length }}
+              </span> 
+              <md-button ng-click="winwin.showCampanadasDialog()" >
+                CAMPANADA ACTIVA
+              </md-button>
+            </h3>
           </div>
           <div class="content-bg">
             <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>

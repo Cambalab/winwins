@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -18,7 +18,11 @@
     vm.post = {};
 
     account.getProfile().then(function(data) {
-       vm.account = data.profile;
+      vm.account = data.profile;
+
+      vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
+        return notification.type == "CAMPANADA" && notification.object_id == vm.winwinId; 
+      });
     });
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
@@ -172,6 +176,18 @@
       });
     };
 
+    vm.showCampanadasDialog = function() {
+      $mdDialog.show({
+        controller: CampanadasController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-campanadas.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          campanadas: vm.campanadas
+        }
+      });
+    }
     
     vm.showReplyDialog = function(post) {
       vm.modalReply = {
@@ -285,6 +301,13 @@
   function ParticipantesController($scope, users, ENV){
     $scope.imageServer = ENV.imageServer;
     $scope.users = users;
+  }
+
+  /** @ngInject */
+  function CampanadasController(campanadas){
+    var vm = this;
+
+    vm.campanadas = campanadas;
   }
 
   angular
