@@ -21,7 +21,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user) {
+    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user, $window) {
       var vm = this;
 
       vm.imageServer = ENV.imageServer;
@@ -36,9 +36,13 @@
         if (vm.isAuthenticated) {
           account.getProfile()
           .then(function(data) {
-             vm.account = data.profile;
-             vm.account.email = data.user.email;
-             vm.isActive = data.active;
+            vm.account = data.profile;
+            vm.account.email = data.user.email;
+            vm.isActive = data.active;
+
+            vm.notifications = $window._.sortBy(data.user.notifications, function(notification) {
+              return notification.id; 
+            });
           });
         }
       });
@@ -75,6 +79,19 @@
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
           clickOutsideToClose:true
+        });
+      };
+
+      vm.showNotificationsDialog = function() {
+        $mdDialog.show({
+          controller: 'NotificationController',
+          controllerAs: 'vm',
+          templateUrl: 'app/components/notification/notifications.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true,
+          locals: {
+            notifications: vm.notifications
+          }
         });
       };
 
