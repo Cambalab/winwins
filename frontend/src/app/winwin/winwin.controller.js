@@ -253,6 +253,11 @@
           users: vm.winwin.users,
           winwin_id: vm.winwin.id
         }
+      })
+      .then(null, function(){
+        winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+          vm.winwin = winwin_data;
+        });
       });
     };
 
@@ -305,33 +310,23 @@
 
     vm.imageServer = ENV.imageServer;
     vm.users = users;
+    vm.normal_success = false;
+    vm.activator_success = false;
 
-    vm.makeNormal = function(participante) {
+    vm.makeNormal = function(participante, index) {
       vm.activated_name = participante.username;
-      winwin.setUserNormal(winwin_id, participante.id);
-        // $http.post(api_host+'/api/winwins/'+$scope.winwin.id+'/state/normal/'+participante.id).success(function(data) {
-        //     $scope.in_message = true;
-        //     $scope.normal_success = true;
-        //     $timeout(function() {
-        //         $state.go('winwin-view', {
-        //             winwinId: $scope.winwin.id
-        //         }, {reload: true}); 
-        //     }, 1000);
-        // });
+      winwin.setUserNormal(winwin_id, participante.id).then(function(data){
+        vm.normal_success = true;
+        vm.users[index].pivot.moderator = false;
+      });
     };
 
-    vm.makeActivator = function(participante) {
+    vm.makeActivator = function(participante, index) {
       vm.activated_name = participante.username;
-      winwin.setUserActivator(winwin_id, participante.id);
-        // $http.post(api_host+'/api/winwins/'+$scope.winwin.id+'/state/activator/'+participante.id).success(function(data) {
-        //     $scope.in_message = true;
-        //     $scope.activator_success = true;
-        //     $timeout(function() {
-        //         $state.go('winwin-view', {
-        //             winwinId: $scope.winwin.id
-        //         }, {reload: true}); 
-        //     }, 1000);
-        // });
+      winwin.setUserActivator(winwin_id, participante.id).then(function(data){
+        vm.activator_success = true;
+        vm.users[index].pivot.moderator = true;
+      });
     };
   }
 
