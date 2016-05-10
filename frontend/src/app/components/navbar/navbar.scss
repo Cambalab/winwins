@@ -20,16 +20,16 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   	position: relative;
 	  .badge {
 	  	position: absolute;
-	  	width: 15px;
-	  	height: 15px;
+	  	width: 16px;
+	  	height: 16px;
 	  	border-radius: 100px;
 	  	color: #fff;
 	  	text-align: center;
 	  	background: #e5452e;
-			right: 3px;
+			right: 4px;
 			top: 7px;
-			font-weight: 700;
 			font-size: 11px;
+	    line-height: 16px;
 	  }
   }
   .md-primary.menu-toggle {
