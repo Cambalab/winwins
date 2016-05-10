@@ -491,3 +491,56 @@
     }
   }
 }
+.acme-listado {
+  .ver-todos.md-button {
+    display: none;
+  }
+  md-tab-content {
+    padding-bottom: 50px;
+  }
+}
+.wrap-search {
+  position: fixed;
+  background: #0c46a0;
+  bottom: 0;
+  max-width: 960px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  md-input-container {
+    padding-left: 0;
+    margin: 10px 0;
+  }
+  .md-errors-spacer {
+    display: none;
+  }
+  label {
+    display: none;
+  }
+  .md-input {
+    background: #fff;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 12px;
+    height: 38px;
+    width: 90%;
+    margin: 0 20px;
+    @media (max-width: 960px) {
+      width: 85%;
+    }
+    @media (max-width: 640px) {
+      width: 75%;
+    }
+  }
+  .md-button.md-ink-ripple {
+    width: 43px;
+    height: 38px;
+    background: #ea712f;
+    min-width: 43px;
+    border-radius: 0;
+    margin: 0;
+    md-icon {
+      color: #fff;
+    }
+  }
+}
