@@ -49,7 +49,7 @@
 			</div>
 		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
 			<div layout="row" layout-align="space-around center center">
-	  			<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ng-click="vm.showNotificationsDialog()">
+	  			<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
 					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
 						{{(vm.notifications | filter:{is_read:0}).length }}
@@ -75,7 +75,7 @@
   	<div layout="row" layout-align="space-between center">
 		  <div layout="row">
 		  	<md-icon>keyboard_arrow_left</md-icon>
-				<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ng-click="vm.showNotificationsDialog()">
+				<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
 					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
 						{{(vm.notifications | filter:{is_read:0}).length }}

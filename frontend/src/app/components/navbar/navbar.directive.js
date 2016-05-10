@@ -82,19 +82,6 @@
         });
       };
 
-      vm.showNotificationsDialog = function() {
-        $mdDialog.show({
-          controller: 'NotificationController',
-          controllerAs: 'vm',
-          templateUrl: 'app/components/notification/notifications.tmpl.html',
-          parent: angular.element($document.body),
-          clickOutsideToClose:true,
-          locals: {
-            notifications: vm.notifications
-          }
-        });
-      };
-
       vm.resendActivationMail = function() {
         user.resendActivationMail()
         .then(function() {
