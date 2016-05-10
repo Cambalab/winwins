@@ -45,8 +45,38 @@
       return Restangular.one('winwins', id).get();
     }
 
+    _winwin.saveWinwin = function(winwin) {
+      return Restangular.all('winwins').post(winwin);
+    };
+
+    _winwin.uploadImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('winwins')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
+    }
+
+    _winwin.uploadPostImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('posts')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
+    }
+
     _winwin.getPosts = function(id) {
       return Restangular.one('posts/winwin', id).one('posts').get();
+    }
+
+    _winwin.createPost = function(post) {
+      return Restangular.all('posts').post(post);
+    }
+
+    _winwin.activate = function(id) {
+      return Restangular.one('winwins/activate', id).get();
     }
     
     _winwin.join = function(id) {
