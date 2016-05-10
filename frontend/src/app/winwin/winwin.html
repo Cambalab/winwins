@@ -164,16 +164,12 @@
                   </md-button>
                   {{item_post.down_votes}}
                 </div>
-                <div>
-                  <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
-                    <md-icon>share</md-icon>
-                  </md-button>
-                </div>
-                <div>
-                  <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
-                    <md-icon class="icon insert_comment">insert_comment</md-icon>
-                  </md-button>
-                </div>
+                <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
+                  <md-icon>share</md-icon>
+                </md-button>
+                <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
+                  <md-icon class="icon insert_comment">insert_comment</md-icon>
+                </md-button>
             </md-card-actions>
           </md-card>
 
@@ -277,7 +273,7 @@
       </div>
     </div>
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
+    <div class="wrap-caja-mensaje">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>
