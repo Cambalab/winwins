@@ -272,9 +272,12 @@
       text-align: center;
       background: #e5452e;
       left: 20px;
-      top: 6px;
-      font-weight: 700;
+      top: 11px;
       font-size: 12px;
+    }
+    .md-button.md-ink-ripple {
+      font-size: 12px;
+      margin: 0;
     }
   }
   md-list {
@@ -455,6 +458,11 @@
         line-height: 23px;
         min-height: 23px;
       }
+    }
+  }
+  &.campanada {
+    h3, md-icon {
+      color: #000;
     }
   }
   .md-dialog-ok.md-dialog-content {
