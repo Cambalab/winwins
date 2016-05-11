@@ -96,6 +96,16 @@
             controllerAs: 'notifications'
           }
         }
+      })
+      .state('home.winwin-list',{
+        url: 'winwin-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/winwin/winwin-list.html',
+            controller: 'WinwinListController',
+            controllerAs: 'winwin'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
