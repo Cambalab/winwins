@@ -251,7 +251,8 @@
         clickOutsideToClose:true,
         locals: {
           users: vm.winwin.users,
-          winwin_id: vm.winwin.id
+          winwin_id: vm.winwin.id,
+          is_moderator: vm.winwin.is_moderator
         }
       })
       .then(null, function(){
@@ -305,13 +306,14 @@
   }
   
   /** @ngInject */
-  function ParticipantesController(users, winwin_id, ENV, winwin){
+  function ParticipantesController(users, winwin_id, ENV, winwin, is_moderator){
     var vm = this;
 
     vm.imageServer = ENV.imageServer;
     vm.users = users;
     vm.normal_success = false;
     vm.activator_success = false;
+    vm.is_moderator = is_moderator;
 
     vm.makeNormal = function(participante, index) {
       vm.activated_name = participante.username;
