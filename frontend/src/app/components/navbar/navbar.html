@@ -49,10 +49,12 @@
 			</div>
 		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
 			<div layout="row" layout-align="space-around center center">
-		  		<div class="menu-notifications" ng-if="vm.isAuthenticated()">
+	  			<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
-					<span class="badge">1</span>
-				</div>
+					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
+						{{(vm.notifications | filter:{is_read:0}).length }}
+					</span>
+				</md-button>
 				<md-card-header>
 					<md-button ui-sref="home.profile" aria-label="avatar">
 						<md-card-avatar ng-if="vm.isAuthenticated()">
@@ -73,10 +75,12 @@
   	<div layout="row" layout-align="space-between center">
 		  <div layout="row">
 		  	<md-icon>keyboard_arrow_left</md-icon>
-				<div class="menu-notifications" ng-if="vm.isAuthenticated()">
+				<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
-					<span class="badge">1</span>
-				</div>
+					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
+						{{(vm.notifications | filter:{is_read:0}).length }}
+					</span>
+				</md-button>
 			</div>
 		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
 		  <div layout="row">
@@ -134,6 +138,6 @@
 </md-sidenav>
 <md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" ng-if="vm.isAuthenticated()">
   <p>
-    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
+    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail" ng-disabled="loadingFlag">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
   </p>
 </md-toolbar>

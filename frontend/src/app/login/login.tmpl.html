@@ -24,7 +24,7 @@
                     </div>
                   </md-input-container>
                 </div>
-                <button type="submit" ng-disabled="loginForm.$invalid" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
+                <button type="submit" ng-disabled="loginForm.$invalid || loadingFlag" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
                 </button>
               </form>
               <div layout="row" layout-align="center center" class="section-login" ng-show="login.login_status == 'login'">
@@ -112,7 +112,7 @@
                     </div>
                   </md-input-container>
                 </div>
-                <button type="submit" name="action" ng-disabled="registerForm.$invalid" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
+                <button type="submit" name="action" ng-disabled="registerForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
                 </button>
               </form>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.register_status == 'success'">

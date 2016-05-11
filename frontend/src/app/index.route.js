@@ -76,6 +76,16 @@
             controllerAs: 'terms'
           }
         }
+      })
+      .state('home.notifications',{
+        url: 'notifications',
+        views: {
+          'content@home': {
+            templateUrl: 'app/notifications/notifications.html',
+            controller: 'NotificationsController',
+            controllerAs: 'notifications'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');

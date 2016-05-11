@@ -19,7 +19,7 @@
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@winwinsorg" />
 
-        <meta http-equiv="refresh" content="0;url='http://dev-winwins.net/#/winwin-view/{{ $winwin->id }}'">
+        <meta http-equiv="refresh" content="0;url='http://dev-winwins.net/#/winwin/{{ $winwin->id }}'">
 
     </head>
     <body>
