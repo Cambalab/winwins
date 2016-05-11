@@ -27,6 +27,10 @@
       return rSponsors.customGET(paginateUrl);
     };
 
+    _sponsor.getListByWinwin = function(winwin_id) {
+      return Restangular.one('winwins', winwin_id).one('sponsors').get();  
+    }
+
     return _sponsor;
   }
 

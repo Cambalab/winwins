@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user) {
+  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user, sponsor) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -28,8 +28,11 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
-      vm.sponsors = $window._.filter(vm.winwin.sponsors, function(model) {
-        return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
+
+      sponsor.getListByWinwin(vm.winwinId).then(function(sponsor_data) {
+        vm.sponsors = $window._.filter(sponsor_data, function(model) {
+          return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
+        });  
       });
 
       vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'}
