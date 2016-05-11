@@ -35,7 +35,7 @@
     });
 
     vm.saveProfile = function() {
-      vm.processing = true;
+      //vm.processing = true;
       vm.current_password_wrong_message = '';
 
       var promises = [];
@@ -81,7 +81,7 @@
         });
 
 
-        vm.processing = false;
+        //vm.processing = false;
       });
     };
 

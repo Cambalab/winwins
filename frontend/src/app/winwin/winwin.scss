@@ -24,6 +24,12 @@
     }
     .col-right {
       width: 375px;
+      .social-share {
+        md-icon {
+          width: 40px;
+          height: 40px;
+        }
+      }
     }
   }
   md-card {
@@ -161,10 +167,6 @@
       color: #144a9d;
     }
   }
-  .detalle {
-    max-height: 135px;
-    overflow: hidden;
-  }
   .ver-mas {
     background: #88888c;
     color: #fff;
@@ -200,10 +202,7 @@
   }
   .md-button.md-icon-button {
     padding: 0;
-    md-icon {
-      width: 40px;
-      height: 40px;
-    }
+    border-radius: 0;
   }
   h3.title {
     font-size:12px;
@@ -269,9 +268,12 @@
       text-align: center;
       background: #e5452e;
       left: 20px;
-      top: 6px;
-      font-weight: 700;
+      top: 11px;
       font-size: 12px;
+    }
+    .md-button.md-ink-ripple {
+      font-size: 12px;
+      margin: 0;
     }
   }
   md-list {
@@ -301,6 +303,11 @@
         position: absolute;
         top:0;
         right: 10px;
+        .icon-highlighted {
+          top: -9px;
+          position: relative;
+          cursor: default;
+        }
       }
     }
     md-card-actions {
@@ -322,9 +329,29 @@
       padding-left: 5px;
     }
     md-icon {
-      font-size: 16px;
+      font-size: 18px;
       color: #a9a9aa;
       margin-right: 5px;
+      cursor: pointer;
+      &:hover {
+        color: #666;
+      }
+      &.icon-access_time {
+        cursor: default;
+        &:hover {
+          color: #a9a9aa;
+        }
+      }
+    }
+    .green, .red {
+      margin-top: 0;
+      margin-bottom: 0;
+      .md-icon-button.md-button {
+        margin-right: 0;
+        .icon {
+          margin-right: 0;
+        }
+      }
     }
     .green {
       color: #4cae4e;
@@ -390,32 +417,97 @@
       border-radius: 100px;
       vertical-align: middle;
     }
-    form {
-      padding: 0;
-    }
-    md-input-container {
-      padding-left: 0;
-      margin: 0;
-      padding-right: 0;
-      .md-errors-spacer {
-        display: none;
-      }
-    }
-    .social-media {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
     textarea {
-      background: #fff;
-      height: 65px !important;
-      font-size: 12px;
-      color: #000;
       border:none;
-      font-family: 'Montserrat', serif;
-      line-height: inherit;
-      @media (min-width: 480px) {
-        width: 305px;
+    }
+  }
+}
+.dialog-primary {
+  border: solid 5px #e0e0e0;
+  max-width: 650px;
+  h2 {
+    font-size: 18px;
+    color: #5d5d5d;
+    span {
+      color: #2a6fb6;
+    }
+  }
+  h3 {
+    font-size: 12px;
+    color: #2a6fb6;
+  }
+  p {
+    font-size: 12px;
+    color: #5d5d5d;
+  }
+  md-list {
+    @media (min-width: 960px) {
+      min-width: 400px;
+    }
+    .md-raised.md-button {
+      font-size: 12px;
+    }
+    &.participantes-list {
+      .md-raised.md-button {
+        background: #ee8222;
+        text-transform: inherit;
+        line-height: 23px;
+        min-height: 23px;
       }
+    }
+  }
+  &.campanada {
+    h3, md-icon {
+      color: #000;
+    }
+  }
+  .md-dialog-ok.md-dialog-content {
+    padding: 50px;
+    md-icon {
+      width: 160px;
+      height: 160px;
+    }
+    h2 {
+      font-size: 42px;
+      margin: 0;
+    }
+    p {
+      font-size: 16px;
+      margin: 0;
+      text-align: center;
+      .blue {
+        display: block;
+        color: #0277bd;
+      }
+    }
+  }
+}
+.caja-mensaje {
+  form {
+    padding: 0;
+  }
+  md-input-container {
+    padding-left: 0;
+    margin: 0;
+    padding-right: 0;
+    .md-errors-spacer {
+      display: none;
+    }
+  }
+  .social-media {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  textarea {
+    background: #fff;
+    height: 65px !important;
+    font-size: 12px;
+    color: #000;
+    border:solid 1px #ccc;
+    font-family: 'Montserrat', serif;
+    line-height: inherit;
+    @media (min-width: 480px) {
+      width: 305px;
     }
   }
   .md-fab {
@@ -461,33 +553,6 @@
     height: 30px;
     md-icon {
       height: 20px;
-    }
-  }
-}
-.dialog-primary {
-  border: solid 5px #e0e0e0;
-  max-width: 650px;
-  h2 {
-    font-size: 18px;
-    color: #5d5d5d;
-    span {
-      color: #2a6fb6;
-    }
-  }
-  h3 {
-    font-size: 12px;
-    color: #2a6fb6;
-  }
-  p {
-    font-size: 12px;
-    color: #5d5d5d;
-  }
-  md-list {
-    @media (min-width: 960px) {
-      min-width: 400px;
-    }
-    .md-raised.md-button {
-      font-size: 12px;
     }
   }
 }

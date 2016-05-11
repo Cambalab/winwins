@@ -223,15 +223,6 @@
     }
   }
   .comparti-social-media {
-    .tw {
-      background: #60cbf0;
-    }
-    .fb {
-      background: #395a97;
-    }
-    .go {
-      background: #dc4e41;
-    }
     md-icon {
       width: 90px;
       height: 100px;
@@ -394,6 +385,12 @@ md-toolbar.md-tall.md-crear {
     @media (max-width: 480px) {
       padding: 0;
     }
+    &.acme-share-post {
+      padding: 20px 30px;
+      .comparti-social-media {
+        margin-top: 8px;
+      }
+    }
   }
   .icon-big {
     width: 140px;
@@ -443,5 +440,16 @@ md-toolbar.md-tall.md-crear {
         }
       }
     }
+  }
+}
+.comparti-social-media {
+  .tw {
+    background: #60cbf0;
+  }
+  .fb {
+    background: #395a97;
+  }
+  .go {
+    background: #dc4e41;
   }
 }

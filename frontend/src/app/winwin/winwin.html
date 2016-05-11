@@ -66,11 +66,11 @@
           <div flex="83">
             <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
             </p>
-            <p><strong>te sumarías?</strong></p>
+            <p class="detalle"><strong>te sumarías?</strong></p>
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
-            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+            <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()" ng-disabled="loadingFlag">SI, ME SUMO!</md-button>
           </div>
-          <div flex="15" layout="column">
+          <div flex="15" layout="column" class="social-share">
             <div
               socialshare
               socialshare-provider="facebook" 
@@ -114,7 +114,7 @@
     <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
       <div class="sponsors">
         <h3 class="title">
-          <md-icon md-svg-src="assets/images/icon-sponsors-title.svg"></md-icon>{{ 'SPONSORS' | translate }}
+          <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
         </h3>
         <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
           <div ng-repeat="sponsor in winwin.sponsors">
@@ -126,8 +126,12 @@
         <div ng-repeat="item_post in winwin.posts">
           <md-card class="md-whiteframe-7dp" >
             <div class="card-labels">
-              <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
-              <md-icon class="icon" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+              <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button">  
+                <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+              </md-button>
+              <md-button ng-if="winwin.winwin.is_moderator || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator"  ng-click="winwin.setSticky(item_post, item_post.sticky==0)" class="md-icon-button">
+                <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
+              </md-button>
             </div>
             <md-card-header>
               <md-card-avatar>
@@ -146,19 +150,35 @@
                <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(item_post.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
               </div>
             </md-card-content>
-              <md-card-actions layout="row" layout-margin>
+              <md-card-actions layout="row" layout-margin layout-align="start end">
                 <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
-                <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-                <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
-                <div><md-icon class="icon share">sharet</md-icon></div>
-                <div><md-icon class="icon insert_comment" ng-if="winwin.winwin.already_joined" ng-show="!item_post.isReplying">insert_comment</md-icon></div>
+                <div class="green">
+                  <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, true)" class="md-icon-button">
+                    <md-icon class="icon thumb_up">thumb_up</md-icon>
+                  </md-button>
+                  {{item_post.up_votes}}
+                </div>
+                <div class="red"> 
+                  <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, false)" class="md-icon-button">
+                    <md-icon class="icon thumb_down">thumb_down</md-icon>
+                  </md-button>
+                  {{item_post.down_votes}}
+                </div>
+                <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
+                  <md-icon>share</md-icon>
+                </md-button>
+                <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
+                  <md-icon class="icon insert_comment">insert_comment</md-icon>
+                </md-button>
             </md-card-actions>
           </md-card>
 
           <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
             <div layout="row" layout-align="space-between center">
               <div layout-padding>
-                <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button">  
+                  <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                </md-button>
               </div>
               <div>
                 <md-card-header>
@@ -174,23 +194,44 @@
             <md-card-content>
               <p>
                 {{comment.content}}
+                <div ng-show="comment.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
+                  <img ng-src="{{winwin.imageServer}}/400x/smart/{{comment.media.name}}" class="img-responsive">
+                </div>
+                <div ng-show="comment.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
+                 <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(comment.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
+                </div>
               </p>
             </md-card-content>
             <md-card-actions layout="row" layout-margin>
-              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }}</div>
-              <div class="green"><md-icon class="icon thumb_up">thumb_up</md-icon>{{item_post.up_votes}}</div>
-              <div class="red"><md-icon class="icon thumb_down">thumb_down</md-icon>{{item_post.down_votes}}</div>
+              <div><md-icon class="icon icon-access_time">access_time</md-icon>{{comment.created_at | moment:   'DD/MM/YYYY' }}</div>
+              <div class="green">
+                <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(comment, true)" class="md-icon-button">
+                  <md-icon class="icon thumb_up">thumb_up</md-icon>
+                </md-button>
+                {{comment.up_votes}}
+              </div>
+              <div class="red"> 
+                <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(comment, false)" class="md-icon-button">
+                  <md-icon class="icon thumb_down">thumb_down</md-icon>
+                </md-button>
+                {{comment.down_votes}}
+              </div>
             </md-card-actions>
           </md-card>
         </div>  
       </div>
       <div class="aside">
         <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
-          <div class="content-bg">
-            <h3 class="title-notificaction">
+          <div class="content-bg" ng-if="winwin.winwin.already_joined">
+            <h3 class="title-notificaction">             
               <md-icon>notifications</md-icon>
-              <span class="badge">1</span>
-              CAMPANADA ACTIVA</h3>
+              <span class="badge" ng-show="(winwin.campanadas | filter:{is_read:0}).length > 0">
+                {{(winwin.campanadas | filter:{is_read:0}).length }}
+              </span> 
+              <md-button ng-click="winwin.showCampanadasDialog()" >
+                CAMPANADA ACTIVA
+              </md-button>
+            </h3>
           </div>
           <div class="content-bg">
             <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>
@@ -258,7 +299,7 @@
                 <md-icon>photo_camera</md-icon>
               </md-button>
             </div>
-            <md-button type="submit" name="action" class="md-fab send" aria-label="">
+            <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </form>
