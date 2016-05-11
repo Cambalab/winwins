@@ -251,7 +251,7 @@
                       </div>
                     </p>
                   </md-card-content>
-                  <md-card-actions layout="row" layout-margin>
+                  <md-card-actions layout="row" layout-margin layout-align="start end">
                     <div><md-icon class="icon icon-access_time">access_time</md-icon>{{comment.created_at | moment:   'DD/MM/YYYY' }}</div>
                     <div class="green">
                       <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(comment, true)" class="md-icon-button">
@@ -321,40 +321,6 @@
               </md-list>
             </div>
           </div>
-          <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-          <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
-            <div ng-if="winwin.post.media_type" class="content-img-video">
-              <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
-              </img>
-              <img ng-if="winwin.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{winwin.post.media_path}}/hqdefault.jpg" style="height:190px;">
-              </img>
-            </div>
-            <div class="caja-mensaje">
-              <div layout="row" layout-align="center center">
-              </div>
-              <div layout="row" layout-align="center center" layout-padding>
-                <div>
-                    <img ng-src="{{winwin.imageServer}}/48x48/{{winwin.account.photo}}" class="caja-mensaje-img" alt="">
-                </div>
-                <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
-                  <md-input-container class="md-block">
-                    <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                  </md-input-container>
-                  <div layout="column" layout-align="center center" class="social-media">
-                    <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
-                      <md-icon md-svg-src="assets/images/icon-youtubesmall.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-fab camera" aria-label="" ng-click="winwin.showCropPostImageDialog()">
-                      <md-icon>photo_camera</md-icon>
-                    </md-button>
-                  </div>
-                  <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
-                    <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
-                  </md-button>
-                </form>
-              </div>
-            </div>
-          </div>
         </md-tab-body>
         </md-tab>
         <md-tab>
@@ -419,5 +385,39 @@
         </md-tab>
       </md-tabs>
     </md-content>
+  </div>
+  <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
+  <div class="wrap-caja-mensaje" ng-if="winwin.winwin.already_joined">
+    <div ng-if="winwin.post.media_type" class="content-img-video">
+      <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
+      </img>
+      <img ng-if="winwin.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{winwin.post.media_path}}/hqdefault.jpg" style="height:190px;">
+      </img>
+    </div>
+    <div class="caja-mensaje">
+      <div layout="row" layout-align="center center">
+      </div>
+      <div layout="row" layout-align="center center" layout-padding>
+        <div>
+            <img ng-src="{{winwin.imageServer}}/48x48/{{winwin.account.photo}}" class="caja-mensaje-img" alt="">
+        </div>
+        <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
+          <md-input-container class="md-block">
+            <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          </md-input-container>
+          <div layout="column" layout-align="center center" class="social-media">
+            <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
+              <md-icon md-svg-src="assets/images/icon-youtubesmall.svg"></md-icon>
+            </md-button>
+            <md-button class="md-fab camera" aria-label="" ng-click="winwin.showCropPostImageDialog()">
+              <md-icon>photo_camera</md-icon>
+            </md-button>
+          </div>
+          <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
+            <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
+          </md-button>
+        </form>
+      </div>
+    </div>
   </div>
 </md-content>
