@@ -98,14 +98,17 @@
                       Más detalles
                     </md-button>
                     <div class="toggle-content" ng-show="open">
+                      <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles" ng-show="winwin.winwin.description">
+                        <p>{{winwin.winwin.description}}</p>
+                      </div>
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
-                        <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon> Activo</p></div>
-                        <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> GLOBAL</p></div>
+                        <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
+                        <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>
                         <div><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>
                       </div>
                       <div class="slide-categorias content-bg" layout="column" layout-align="center center" layout-padding>
                         <h4>Categorías:</h4>
-                        <div>Test</div>
+                        <div ng-repeat="category in winwin.winwin.interests">{{category.description}}</div>
                       </div>
                     </div>
                   </div>
@@ -353,45 +356,23 @@
             <md-icon md-svg-icon="assets/images/icon-miembros.svg"></md-icon>
           </md-tab-label>
           <md-tab-body>
-            <md-card class="mobile mobile-members">
+            <md-card class="mobile mobile-members"  ng-repeat="participante in winwin.winwin.users">
               <md-card-content>
-                <img ng-src="assets/images/bg-video.jpg" class="md-card-image" alt="">
+                <img ng-src="{{winwin.imageServer}}/{{participante.cover_photo}}" class="md-card-image" alt="">
                 <md-card-title>
                   <div layout="row" layout-align="space-around end" class="md-card-members">
                     <div class="md-item-text bg-green">
                       <h3 translate>Winwins</h3>
-                      <p>0</p>
+                      <p>{{participante.winwins_amount}}</p>
                     </div>
                     <div layout="column" layout-align="center center">
-                      <img ng-src="assets/images/100-2.jpeg" class="md-card-avatar" alt="">
-                      <div class="email">alina@camba.coop</div>
-                      <md-button class="bt-green">Seguir</md-button>
+                      <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" class="md-card-avatar" alt="">
+                      <div class="email">{{participante.username}}</div>
+                      <md-button class="bt-green" ng-show="false">Seguir</md-button>
                     </div>
                     <div class="md-item-text bg-blue">
                       <h3 translate>Seguidores</h3>
-                      <p>0</p>
-                    </div>
-                  </div>
-                </md-card-title>
-              </md-card-content>
-            </md-card>
-            <md-card class="mobile mobile-members">
-              <md-card-content>
-                <img ng-src="assets/images/bg-video.jpg" class="md-card-image" alt="">
-                <md-card-title>
-                  <div layout="row" layout-align="space-around end" class="md-card-members">
-                    <div class="md-item-text bg-green">
-                      <h3 translate>Winwins</h3>
-                      <p>0</p>
-                    </div>
-                    <div layout="column" layout-align="center center">
-                      <img ng-src="assets/images/100-2.jpeg" class="md-card-avatar" alt="">
-                      <div class="email">alina@camba.coop</div>
-                      <md-button class="bt-green">Seguir</md-button>
-                    </div>
-                    <div class="md-item-text bg-blue">
-                      <h3 translate>Seguidores</h3>
-                      <p>0</p>
+                      <p>{{participante.followers_amount}}</p>
                     </div>
                   </div>
                 </md-card-title>
