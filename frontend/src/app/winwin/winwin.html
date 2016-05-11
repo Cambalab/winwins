@@ -66,7 +66,7 @@
           <div flex="83">
             <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
             </p>
-            <p><strong>te sumarías?</strong></p>
+            <p class="detalle"><strong>te sumarías?</strong></p>
             <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description">+ VER MAS DETALLES</md-button>
             <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()" ng-disabled="loadingFlag">SI, ME SUMO!</md-button>
           </div>
