@@ -161,6 +161,7 @@
         }
         display: block;
         margin: 0 auto;
+        max-width: 100%;
       }
     }
     .card-numbers {
@@ -432,6 +433,11 @@
       p {
         color: #666;
         font-size: 12px;
+        text-align: left;
+        padding: 0;
+      }
+      .img-responsive {
+        max-width: 100%;
       }
     }
     md-card-header-text {
@@ -503,18 +509,18 @@
       color: #A5A6A9;
       text-transform: capitalize;
       font-weight: normal;
-      margin: 5px 10px;
+      margin: 10px;
     }
     .md-card-actions-ww {
       p {
         color: #4caf50;
-        margin: 0;
+        margin-top: 0;
       }
     }
     .md-card-actions-seguidores {
       p {
         color: #3ca2f4;
-        margin: 0;
+        margin-top: 0;
       }
     }
     md-card-content {
@@ -548,6 +554,7 @@
       }
       .md-card-image {
         display: block;
+        max-width: 100%;
       }
     }
     md-card-actions {
