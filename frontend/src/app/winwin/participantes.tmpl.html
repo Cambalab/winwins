@@ -4,32 +4,32 @@
       <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>
       {{ 'PARTICIPANTES' | translate }}
     </h3>
-    <md-list>
+    <md-list class="participantes-list">
       <md-list-item ng-repeat="participante in vm.users">
         <img alt="" ng-src="{{vm.imageServer}}/smart/{{participante.photo}}" alt=""class="md-avatar" />
         <p>{{participante.username}}</p>
-        <md-button ng-show="participante.pivot.moderator == 0 && vm.is_moderator" class="md-raised md-warn md-caption" ng-click="vm.makeActivator(participante, $index)">Nombrar activador</md-button>
-        <md-button ng-show="participante.pivot.moderator == 1 && vm.is_moderator" class="md-raised md-warn md-caption" ng-click="vm.makeNormal(participante, $index)">Nombrar usuario regular</md-button>
+        <md-button ng-show="participante.pivot.moderator == 0" class="md-raised md-warn md-caption" ng-click="vm.makeActivator(participante, $index)">Nombrar activador</md-button>
+        <md-button ng-show="participante.pivot.moderator == 1" class="md-raised md-warn md-caption" ng-click="vm.makeNormal(participante, $index)">Nombrar usuario regular</md-button>
       </md-list-item>
     </md-list>
   </div>
 
-  <div class="md-dialog-content" ng-show="vm.activator_success" ng-click="vm.activator_success = false">
+  <div class="md-dialog-content md-dialog-ok" ng-show="vm.activator_success" ng-click="vm.activator_success = false">
     <div layout="column" layout-align="center center" >
       <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
-      <div flex><h2 class="gray" translate>Genial!</h2></div>
+      <div flex><h2 class="gray" translate>Buenísimo!</h2></div>
       <div flex>
-        <p class="gray font-16">Nombraste activador a {{vm.activated_name}}</p>
+        <p class="font-16">Nombraste activador a <span class="blue">{{vm.activated_name}}</span></p>
       </div>
     </div>
   </div>
 
-  <div class="md-dialog-content" ng-show="vm.normal_success" ng-click="vm.normal_success = false">
+  <div class="md-dialog-content md-dialog-ok" ng-show="vm.normal_success" ng-click="vm.normal_success = false">
     <div layout="column" layout-align="center center" >
       <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
-      <div flex><h2 class="gray" translate>Genial!</h2></div>
+      <div flex><h2 class="gray" translate>Buenísimo!</h2></div>
       <div flex>
-        <p class="gray font-16">Nombraste usuario regular a {{vm.activated_name}}</p>
+        <p class="font-16">Nombraste usuario regular a <span class="blue">{{vm.activated_name}}</span></p>
       </div>
     </div>
   </div>

@@ -448,6 +448,34 @@
     .md-raised.md-button {
       font-size: 12px;
     }
+    &.participantes-list {
+      .md-raised.md-button {
+        background: #ee8222;
+        text-transform: inherit;
+        line-height: 23px;
+        min-height: 23px;
+      }
+    }
+  }
+  .md-dialog-ok.md-dialog-content {
+    padding: 50px;
+    md-icon {
+      width: 160px;
+      height: 160px;
+    }
+    h2 {
+      font-size: 42px;
+      margin: 0;
+    }
+    p {
+      font-size: 16px;
+      margin: 0;
+      text-align: center;
+      .blue {
+        display: block;
+        color: #0277bd;
+      }
+    }
   }
 }
 .caja-mensaje {
