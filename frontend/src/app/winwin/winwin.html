@@ -322,28 +322,28 @@
             <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
           </md-tab-label>
           <md-tab-body>
-            <div class="notice-star">
+            <div class="notice-star" ng-if="!winwin.sponsors.length">
               <md-icon>star_rate</md-icon>
-              <p transalte>AÚN NO HAY SPOSNSORS!</p>
+              <p transalte>AÚN NO HAY SPONSORS!</p>
             </div>
-            <md-card class="mobile">
+            <md-card class="mobile" ng-repeat="sponsor in winwin.sponsors">
               <md-card-content>
-                <img ng-src="assets/images/bg-video.jpg" class="md-card-image" alt="">
+                <img ng-src="{{winwin.imageServer}}/smart/{{sponsor.cover_photo}}" class="md-card-image" alt="">
                 <md-card-title>
                   <md-card-title-text>
-                    <img ng-src="http://images.dev-winwins.net/85x60/smart/sponsor_9d83c2ef2129b23a653277f57cfd9a1d_142.jpeg" class="md-title-image" alt="">
-                    <span class="md-headline">Coca Cola</span>
+                    <img ng-src="{{winwin.imageServer}}/x60/{{sponsor.photo}}" class="md-title-image" alt="">
+                    <span class="md-headline">{{sponsor.name}}</span>
                   </md-card-title-text>
                 </md-card-title>
               </md-card-content>
               <md-card-actions layout="row" layout-align="space-between center">
                 <div class="md-card-actions-ww"><h3 translate>Winwins</h3>
-                  <p>1</p>
+                  <p>{{sponsor.winwins_count}}</p>
                 </div>
                 <div class="md-card-actions-seguidores"><h3 translate>Seguidores</h3>
-                  <p>0</p>
+                  <p>{{sponsor.followers_count}}</p>
                 </div>
-                <div><md-button class="bt-green">Seguir</md-button></div>
+                <div ng-show="false"><md-button class="bt-green">Seguir</md-button></div>
               </md-card-actions>
             </md-card>
           </md-tab-body>
