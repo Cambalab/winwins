@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\ActivityType;
+use Winwins\ActivityType;
 
 class ActivityTypesTableSeeder extends Seeder {
 

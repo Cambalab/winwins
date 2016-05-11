@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use Winwins\Model\MaritalStatus;
+use Winwins\MaritalStatus;
 
 class MaritalStatusTableSeeder extends Seeder {
 
