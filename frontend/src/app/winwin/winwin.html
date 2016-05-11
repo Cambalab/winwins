@@ -46,14 +46,14 @@
       <div class="col-central">
         <div layout="column" layout-align="center center">
           <div class="creadores">
-            <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
+            <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" ui-sref="home.public-profile({userId: winwin.winwin.user.id})" />
             <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
             <strong>CREADOR</strong>
           </div>
           <div class="activadores">
             <div layout="row" layout-align="center center" layout-margin layout-wrap>
               <div ng-repeat="activador in winwin.winwin.users | filter: {pivot :{ creator: 0, moderator: 1}} as filteredActivador" >
-                <img ng-src="{{winwin.imageServer}}/25x25/{{activador.photo}}" alt="{{activador.username}}" title="{{activador.username}}" class="profile-small style-rounded" />
+                <img ng-src="{{winwin.imageServer}}/25x25/{{activador.photo}}" alt="{{activador.username}}" title="{{activador.username}}" class="profile-small style-rounded" ui-sref="home.public-profile({userId: activador.id})"/>
               </div>
             </div>
             <strong ng-show="filteredActivador.length > 0">ACTIVADORES</strong>
@@ -135,7 +135,7 @@
             </div>
             <md-card-header>
               <md-card-avatar>
-                <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}"/>
+                <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{item_post.user.photo}}" ui-sref="home.public-profile({userId: item_post.user.id})"/>
               </md-card-avatar>
               <md-card-header-text>
                 {{item_post.user.username}}
@@ -186,7 +186,7 @@
                     {{comment.user.username}}
                   </md-card-header-text>
                   <md-card-avatar>
-                    <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{comment.user.photo}}" />
+                    <img class="md-user-avatar" ng-src="{{winwin.imageServer}}/38x38/{{comment.user.photo}}" ui-sref="home.public-profile({userId: comment.user.id})"/>
                   </md-card-avatar>
                 </md-card-header>
               </div>
@@ -263,7 +263,7 @@
             <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'PARTICIPANTES' | translate }}
           </h3>
           <md-list-item ng-repeat="participante in winwin.winwin.users | limitTo: 5">
-            <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar">
+            <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({userId: participante.id})">
             <p>{{participante.username}}</p>
           </md-list-item>
           <md-list-item class="md-no-proxy" ng-if="winwin.winwin.users.length > 5">

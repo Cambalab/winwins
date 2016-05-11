@@ -1,4 +1,4 @@
-<md-toolbar class="md-tall md-warn" layout="row" layout-align="center center">
+<md-toolbar class="md-tall md-warn" layout="row" layout-align="center center" ng-if="!profile.is_public">
   <h2><span translate ng-if="!profile.is_complete">COMPLETA TU PERFIL</span><span translate ng-if="profile.is_complete">EDITAR PERFIL</span></h2>
 </md-toolbar>
 <md-content class="acme-profile">
@@ -13,7 +13,7 @@
             </div>
             <div layout="column" class="profile-head" layout-align="space-between center">
               <div flex class="profile-head-image-content"><img ng-src="{{ profile.avatar_image.file }}" src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="profile-head-image" />
-                <a class="bt-gray middle" translate ng-click="profile.showCropAvatarDialog()">subir avatar</a></div>
+                <a class="bt-gray middle" translate ng-click="profile.showCropAvatarDialog()" ng-if="!profile.is_public">subir avatar</a></div>
               <div flex>
                 <md-card-title>
                   <md-card-title-text>
@@ -21,7 +21,7 @@
                   </md-card-title-text>
                 </md-card-title>
               </div>
-              <div flex>
+              <div flex ng-if="!profile.is_public">
                 <a class="bt-gray bottom" translate ng-click="profile.showCropCoverDialog()">subir portada</a>
               </div>
             </div>
@@ -30,21 +30,21 @@
         <div flex>        
           <md-input-container class="md-block">
             <label translate>Nombre</label>
-            <input required name="name" ng-model="profile.user.name">
+            <input required name="name" ng-model="profile.user.name" ng-disabled="profile.is_public">
             <div ng-messages="profileForm.name.$error">
               <div ng-message="required" translate>Campo requerido.</div>
             </div>
           </md-input-container>
           <md-input-container class="md-block">
             <label translate>Apellido</label>
-            <input required name="lastname" ng-model="profile.user.lastname">
+            <input required name="lastname" ng-model="profile.user.lastname" ng-disabled="profile.is_public">
             <div ng-messages="profileForm.lastname.$error">
               <div ng-message="required" translate>Campo requerido.</div>
             </div>
           </md-input-container>
           <md-input-container class="md-block">
             <label translate>Email</label>
-            <input required name="email" ng-model="profile.user.email">
+            <input required name="email" ng-model="profile.user.email" ng-disabled="profile.is_public">
             <div ng-messages="profileForm.email.$error">
               <div ng-message="required" translate>Campo requerido.</div>
             </div>
@@ -52,7 +52,7 @@
           <md-input-container class="md-block">
             <label translate>Intereses</label>
             <md-input-container class="intereses">
-              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple>
+              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple ng-disabled="profile.is_public">
                 <md-optgroup label="intereses">
                   <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>
                 </md-optgroup>
@@ -63,18 +63,18 @@
         <div flex>
           <md-input-container class="md-block">
             <label translate>Sobre vos</label>
-            <input md-maxlength="500" md-no-asterisk name="about" ng-model="profile.user.about">
+            <input md-maxlength="500" md-no-asterisk name="about" ng-model="profile.user.about" ng-disabled="profile.is_public">
             <div ng-messages="profileForm.about.$error">
               <div ng-message="required" translate>Campo requerido.</div>
               <div ng-message="md-maxlength" translate>The name has to be less than 500 characters long.</div>
             </div>
           </md-input-container>
           <div class="md-block wrap-input">
-            <md-datepicker ng-model="profile.user.birthdate" md-placeholder="Fecha de Nacimiento" ng-required></md-datepicker>
+            <md-datepicker ng-model="profile.user.birthdate" md-placeholder="Fecha de Nacimiento" ng-required ng-disabled="profile.is_public"></md-datepicker>
           </div>        
         </div>      
       </div>
-      <div layout="column" layout-padding class="profile-bottom" layout-align-gt-sm="center center" layout-gt-sm="row" ng-if="profile.is_complete">
+      <div layout="column" layout-padding class="profile-bottom" layout-align-gt-sm="center center" layout-gt-sm="row" ng-if="profile.is_complete && !profile.is_public">
         <div flex><h3 translate>Cambiar Contraseña</h3></div>
         <div flex>
           <md-input-container class="md-block">
@@ -101,7 +101,7 @@
           </md-input-container>
         </div>
       </div>
-      <div layout="column" layout-padding class="profile-bottom" layout-align-gt-sm="center center" layout-gt-sm="row">
+      <div layout="column" layout-padding class="profile-bottom" layout-align-gt-sm="center center" layout-gt-sm="row" flex ng-if="!profile.is_public">
         <div flex><h3 translate>Notificaciones</h3><p translate>te actualizamos por email 
   de lo importante</p></div>
         <div flex>
@@ -129,7 +129,7 @@
           </div>
         </div>
       </div>
-      <div layout="column" layout-align-gt-sm="center center" layout-gt-sm="row">
+      <div layout="column" layout-align-gt-sm="center center" layout-gt-sm="row" flex ng-if="!profile.is_public">
         <div flex="70" class="profile-bottom" layout-padding layout-gt-sm="row" layout-align-gt-sm="center center">  
           <div flex><h3 translate>Privacidad del perfil</h3></div>
           <div flex>

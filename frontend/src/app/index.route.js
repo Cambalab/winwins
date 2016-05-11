@@ -37,6 +37,16 @@
           }
         }
       })
+      .state('home.public-profile',{
+        url: 'profile/:userId',
+        views: {
+          'content@home': {
+            templateUrl: 'app/profile/profile.html',
+            controller: 'PublicProfileController',
+            controllerAs: 'profile'
+          }
+        }
+      })
       .state('home.winwin',{
         url: 'winwin/:winwinId',
         views: {
