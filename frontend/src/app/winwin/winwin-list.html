@@ -5,9 +5,9 @@
         {{'Ver winwins por categoria' | translate }} <md-icon md-menu-origin>arrow_drop_down</md-icon>
       </md-button>
       <md-menu-content width="7">
-        <md-menu-item ng-repeat="item in main.interests">
+        <md-menu-item ng-repeat="item in winwin.interests">
           <md-button>
-            <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="main.isChecked(item.id)" ng-click="main.doCategories(item.id)">
+            <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="winwin.isChecked(item.id)" ng-click="winwin.doCategories(item.id)">
               <span md-menu-align-target></span> {{item.description}}
             </md-checkbox>
           </md-button>
@@ -28,13 +28,13 @@
         <acme-highlighted items="winwin.destacados" title="winwin.tpopulares" icon="'icon-whatshot'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
-    <md-tab id="tab3" ng-click="winwin.doFilter('finishing')">
+    <md-tab id="tab3" ng-click="winwin.doFilter('last')">
       <md-tab-label><md-icon>access_time</md-icon>{{ 'Recientes' | translate }}</md-tab-label>
       <md-tab-body>
         <acme-highlighted items="winwin.destacados" title=" winwin.trecientes" icon="'icon-access_time'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
-    <md-tab id="tab4" ng-click="winwin.doFilter('last')">
+    <md-tab id="tab4" ng-click="winwin.doFilter('finishing')">
       <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-por-terminar.svg"></md-icon>{{' Por terminar' | translate }}</md-tab-label>
       <md-tab-body>
         <acme-highlighted items="winwin.destacados" title="winwin.tterminar" icon="'icon-por-terminar'"></acme-highlighted>
@@ -43,7 +43,7 @@
     <md-tab id="tab5" ng-click="winwin.doFilter('success')">
       <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-concretados.svg"></md-icon>{{'Concretados' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title="winwin.tconcretados" icon="'icon-concretados'"></acme-highlighted>
+        <acme-highlighted items="winwin.destacados" title="winwin.tconcretados" icon="'icon-concretados'" on-scroll="winwin.nextPage()" ></acme-highlighted>
       </md-tab-body>
     </md-tab>
   </md-tabs>
@@ -52,7 +52,7 @@
 <div class="wrap-search">
   <form role="form" name="postForm">
     <md-input-container class="md-block">
-      <input ng-model="user.address2" placeholder="{{ 'Busca Winwins, usuarios, grupos y sponsors. ' | translate }}">
+      <input ng-model="user.address2" placeholder="{{ 'Busca Winwins. ' | translate }}">
       <md-button type="submit" name="action" aria-label="">
         <md-icon>search</md-icon>
       </md-button>
