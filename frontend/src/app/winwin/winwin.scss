@@ -56,7 +56,7 @@
     }
     .col-right {
       width: 375px;
-      .social-share {
+      .content-social-media {
         md-icon {
           width: 40px;
           height: 40px;
@@ -498,6 +498,12 @@
     }
     .red {
       color: #c62829;
+    }
+    .md-icon-button.md-button, div {
+      @media (max-width: 480px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
   .sponsors {

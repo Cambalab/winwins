@@ -1,7 +1,7 @@
 <div layout="column" class="lightbox-crear">
   <md-dialog-content class="acme-crearwinwin">
     <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
-      <div
+      <div class="fb"
         socialshare
         socialshare-provider="facebook" 
         socialshare-text="{{vm.winwin.title}}" 
@@ -10,14 +10,14 @@
         socialshare-via="{{vm.facebookId}}">
         <md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
       </div>
-      <div
+      <div class="tw"
         socialshare  
         socialshare-text="{{vm.winwin.title}}" 
         socialshare-url="{{vm.base}}/ww/{{vm.winwin.id}}" 
         socialshare-provider="twitter">
         <md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
       </div>
-      <div
+      <div class="go"
         socialshare 
         socialshare-provider="google" 
         socialshare-text="{{vm.winwin.title}}" 
