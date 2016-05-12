@@ -127,8 +127,11 @@
           <md-icon>search</md-icon>
         </md-input-container></div>
 			<div><md-button class="md-primary" ui-sref="home.winwin-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Winwins</translate></md-button></div>
-			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-mis-winwins.svg"></md-icon><translate> Mis Winwins</translate></md-button></div>
-			<div><md-button class="md-primary" ui-sref="home.crear-winwin" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
+			<div ng-if="vm.isAuthenticated()" ng-show="false"><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-mis-winwins.svg"></md-icon><translate> Mis Winwins</translate></md-button></div>
+			<div>
+				<md-button class="md-primary" ui-sref="home.crear-winwin" ng-click="vm.openLeftMenu()" ng-if="vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button>
+				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
+			
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-sponsors.svg"></md-icon><translate> Sponsors</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate> Mi perfil</translate></md-button></div>

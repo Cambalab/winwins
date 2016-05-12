@@ -12,7 +12,7 @@
       </div>
     </div>
     <div layout="column" layout-align="center center">
-      <md-button class="md-raised md-primary md-right">{{'+ Ver todos los participantes' | translate }}</md-button>
+      <md-button class="md-raised md-primary md-right" ng-show="false">{{'+ Ver todos los participantes' | translate }}</md-button>
       <h3 ng-if="!vm.isAuthenticated()">{{ 'Sólo faltas vos,' | translate }} <span>{{ 'sumate!' | translate }}</span></h3>
       <md-button class="md-raised md-green" ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">{{'Comenzar' | translate }}</md-button>
     </div>
