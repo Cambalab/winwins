@@ -666,22 +666,6 @@
       }
     }
   }
-  .caja-mensaje {
-    background: #4a6dce;
-    @media (min-width: 960px) {
-      border-radius: 5px 5px 0 0;
-    }
-    .caja-mensaje-img {
-      width: 40px;
-      height: 40px;
-      border: solid 4px #6dccdd;
-      border-radius: 100px;
-      vertical-align: middle;
-    }
-    textarea {
-      border:none;
-    }
-  }
 }
 .dialog-primary {
   border: solid 5px #e0e0e0;
@@ -906,6 +890,22 @@
   width: 100%;
   @media (min-width: 960px) {
     width: 500px;
+  }
+  .caja-mensaje {
+    background: #4a6dce;
+    @media (min-width: 960px) {
+      border-radius: 5px 5px 0 0;
+    }
+    .caja-mensaje-img {
+      width: 40px;
+      height: 40px;
+      border: solid 4px #6dccdd;
+      border-radius: 100px;
+      vertical-align: middle;
+    }
+    textarea {
+      border:none;
+    }
   }
   .content-img-video {
     background: #000;
