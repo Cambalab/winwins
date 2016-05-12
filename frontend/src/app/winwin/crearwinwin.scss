@@ -385,7 +385,7 @@ md-toolbar.md-tall.md-crear {
     .comparti-social-media {
       margin-bottom: 0;
     }
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
       padding: 0;
     }
     &.acme-share-post {
@@ -454,5 +454,13 @@ md-toolbar.md-tall.md-crear {
   }
   .go {
     background: #dc4e41;
+  }
+}
+.lightbox-crear.lightbox-email {
+  .acme-crearwinwin {
+    min-width: 400px;
+    @media (max-width: 640px) {
+      min-width: 100px;
+    }
   }
 }

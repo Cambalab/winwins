@@ -21,10 +21,13 @@
         display: none;
       }
       .card-social-media {
-        display: block;
+        display: inherit;
         .md-icon-button.md-button.md-ink-ripple {
           margin-left: 0;
           margin-right: 0;
+        }
+        >div {
+          margin-right: 5px;
         }
       }
       .main-title {
