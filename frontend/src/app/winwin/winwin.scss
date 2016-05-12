@@ -533,97 +533,6 @@
       width: 210px;
     }
   }
-  .wrap-caja-mensaje.caja-flotante {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    width: 100%;
-    @media (min-width: 960px) {
-      width: 500px;
-    }
-    .content-img-video {
-      background: #000;
-      text-align: center;
-      img {
-        display: block;
-        margin: 0 auto;
-      }
-    }
-    form {
-      padding: 0;
-    }
-    md-input-container {
-      padding-left: 0;
-      margin: 0;
-      padding-right: 0;
-      .md-errors-spacer {
-        display: none;
-      }
-    }
-    .social-media {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    textarea {
-      background: #fff;
-      height: 65px !important;
-      font-size: 12px;
-      color: #000;
-      border:solid 1px #ccc;
-      font-family: 'Montserrat', serif;
-      line-height: inherit;
-      @media (min-width: 480px) {
-        width: 305px;
-      }
-    }
-    .md-fab {
-      border-radius: 0;
-      line-height: inherit;
-    }
-    .send {
-      background: #4cae4e;
-      margin: 0;
-      height: 63px;
-      &.md-button.md-fab:not([disabled]):hover {
-        background: #29972c;
-      }
-    }
-    .youtube {
-      background: #c62829;
-      color: #fff;
-      min-height: inherit;
-      &.md-button.md-fab:not([disabled]):hover {
-        background: #c62829;
-      }
-    }
-    .camera {
-      background: #ef8224;
-      color: #fff;
-      min-height: inherit;
-      margin: 0;
-      &.md-button.md-fab:not([disabled]):hover {
-        background: #ef8224;
-      }
-    }
-    .youtube {
-      width: 35px;
-      height: 30px;
-      margin: 0 0 4px 0;
-      md-icon {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .camera {
-      width: 35px;
-      height: 30px;
-      md-icon {
-        height: 20px;
-      }
-    }
-  }
   md-card.mobile {
     margin: 0 0 8px 0;
     h3 {
@@ -985,6 +894,97 @@
     margin: 0;
     md-icon {
       color: #fff;
+    }
+  }
+}
+.wrap-caja-mensaje.caja-flotante {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 100%;
+  @media (min-width: 960px) {
+    width: 500px;
+  }
+  .content-img-video {
+    background: #000;
+    text-align: center;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  form {
+    padding: 0;
+  }
+  md-input-container {
+    padding-left: 0;
+    margin: 0;
+    padding-right: 0;
+    .md-errors-spacer {
+      display: none;
+    }
+  }
+  .social-media {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  textarea {
+    background: #fff;
+    height: 65px !important;
+    font-size: 12px;
+    color: #000;
+    border:solid 1px #ccc;
+    font-family: 'Montserrat', serif;
+    line-height: inherit;
+    @media (min-width: 480px) {
+      width: 305px;
+    }
+  }
+  .md-fab {
+    border-radius: 0;
+    line-height: inherit;
+  }
+  .send {
+    background: #4cae4e;
+    margin: 0;
+    height: 63px;
+    &.md-button.md-fab:not([disabled]):hover {
+      background: #29972c;
+    }
+  }
+  .youtube {
+    background: #c62829;
+    color: #fff;
+    min-height: inherit;
+    &.md-button.md-fab:not([disabled]):hover {
+      background: #c62829;
+    }
+  }
+  .camera {
+    background: #ef8224;
+    color: #fff;
+    min-height: inherit;
+    margin: 0;
+    &.md-button.md-fab:not([disabled]):hover {
+      background: #ef8224;
+    }
+  }
+  .youtube {
+    width: 35px;
+    height: 30px;
+    margin: 0 0 4px 0;
+    md-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .camera {
+    width: 35px;
+    height: 30px;
+    md-icon {
+      height: 20px;
     }
   }
 }
