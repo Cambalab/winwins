@@ -1,0 +1,30 @@
+<div layout="column" layout-padding class="lightbox-crear">
+  <md-dialog-content class="acme-crearwinwin">
+	  <div class="container">
+	    <div layout="row" layout-align="center center">
+	      <div layout="column" class="comparti" flex-xs="100" flex="80" ng-show="!vm.emailsOK">
+	        <p class="enfasis" translate>Invitá amigos por email</p>
+	        <div class="wrap-md-input-container">
+	          <md-input-container class="md-icon-float md-icon-right md-block">
+	            <label>Ingresa mails para invitar</label>
+	            <md-chips ng-model="vm.mails" md-on-add="vm.validateMail($chip)">
+	            	<input type="email" length="30" class="validate">
+	          	</md-chips>
+	            <md-button class="md-fab send" aria-label="" ng-click="vm.sentInvitations()">
+	              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
+	            </md-button>
+	          </md-input-container>
+	        </div>
+	      </div>
+	      <div layout="column" layout-align="center center" ng-show="vm.emailsOK">
+	      	<div flex>
+	      		<md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
+	      	</div>
+	      	<div flex>
+	      		<p class="gray">Las invitaciones fueron enviadas!</p>
+	      	</div>
+    		</div>
+	    </div>
+	  </div>
+  </md-dialog-content>
+</div>

@@ -243,6 +243,19 @@
         vm.post.media_path = video;
       });
     };
+
+    vm.showModalShareEmailDialog = function() {
+      $mdDialog.show({
+        controller: ModalShareEmailController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-share-email.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_winwin: vm.winwin
+        }
+      });
+    }
     
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
@@ -453,6 +466,32 @@
     $timeout(function() {
       vm.status = 'share';
     }, 3000);
+
+    vm.validateMail = function(chip) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(chip))
+      {
+        var index = vm.mails.indexOf(chip);
+        vm.mails.splice(index, 1);
+      }
+    }
+
+    vm.sentInvitations = function() {
+      winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
+        vm.mails = [];
+        vm.emailsOK = true;
+      });
+    }
+  }
+
+  /** @ngInject */
+  function ModalShareEmailController(current_winwin, winwin) {
+    var vm = this;
+
+    vm.winwin = current_winwin;
+    vm.emailsOK = false;
+
+    vm.mails = [];
 
     vm.validateMail = function(chip) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

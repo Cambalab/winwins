@@ -35,21 +35,41 @@
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="space-between center">
                   <div flex layout="row" hide show-gt-xs class="card-social-media">
-                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="facebook">
-                      <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="google">
-                      <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="twitter">
-                      <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="share">
-                      <md-icon md-svg-src="assets/images/icon-share.svg"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
-                      <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
-                    </md-button>
+                    <div
+                    socialshare
+                    socialshare-provider="facebook" 
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-via="{{winwin.facebookId}}">
+                      <md-button class="md-icon-button" ng-href aria-label="facebook">
+                        <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                      </md-button>
+                    </div>
+                    <div
+                    socialshare  
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
+                    socialshare-provider="twitter">
+                      <md-button class="md-icon-button" ng-href aria-label="twitter">
+                        <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+                      </md-button>
+                    </div>
+                    <div
+                    socialshare 
+                    socialshare-provider="google" 
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
+                      <md-button class="md-icon-button" ng-href aria-label="google">
+                        <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+                      </md-button>
+                    </div>
+                    <div>
+                      <md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
+                        <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+                      </md-button>
+                    </div>
                   </div>
                   <div class="card-numbers">
                     <div layout="row" layout-wrap layout-align="center center">
@@ -146,7 +166,7 @@
                       <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
                     </md-button>
                   </div>
-                  <div><md-button class="md-icon-button" ng-href="/#/login" aria-label="email">
+                  <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
                     <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
                   </md-button></div>
                 </div>

@@ -662,12 +662,11 @@ class WinwinController extends Controller {
         $winwin = Winwin::find($winwinId);
         $detail = $user->detail;
 
-
         foreach($request->input('mails') as $recipient) {
             $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => 'http://dev-winwins.net',
-                    'winwin_link' => 'http://dev-winwins.net/#/winwin-view/'.$winwin->id,
+                    'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
                     'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
