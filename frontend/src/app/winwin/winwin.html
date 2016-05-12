@@ -11,7 +11,7 @@
   </md-toolbar>
   <div class="container">
     <md-tabs md-dynamic-height>
-      <md-tab>
+      <md-tab md-on-select="winwin.show_box_muro = true">
       <md-tab-label>
         <md-icon md-svg-icon="assets/images/icon-comments.svg"></md-icon>
       </md-tab-label>
@@ -323,7 +323,7 @@
           </div>
         </md-tab-body>
         </md-tab>
-        <md-tab>
+        <md-tab md-on-select="winwin.show_box_muro = false">
           <md-tab-label>
             <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
           </md-tab-label>
@@ -354,7 +354,7 @@
             </md-card>
           </md-tab-body>
         </md-tab>
-        <md-tab>
+        <md-tab md-on-select="winwin.show_box_muro = false">
           <md-tab-label>
             <md-icon md-svg-icon="assets/images/icon-miembros.svg"></md-icon>
           </md-tab-label>
@@ -387,7 +387,7 @@
     </md-content>
     
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje caja-flotante" ng-if="winwin.winwin.already_joined">
+    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>
