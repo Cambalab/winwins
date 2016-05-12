@@ -387,7 +387,7 @@
     </md-content>
     
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje">
+    <div class="wrap-caja-mensaje caja-flotante" ng-if="winwin.winwin.already_joined">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>
