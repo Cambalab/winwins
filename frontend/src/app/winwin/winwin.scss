@@ -506,6 +506,9 @@
       @media (max-width: 480px) {
         margin-left: 0;
         margin-right: 0;
+        .md-icon-button.md-button.md-ink-ripple {
+          margin-left: 0;
+        }
       }
     }
   }
