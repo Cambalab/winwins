@@ -338,7 +338,7 @@
                   <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({userId: participante.id})">
                   <p>{{participante.username}}</p>
                 </md-list-item>
-                <md-list-item class="md-no-proxy" ng-if="winwin.winwin.users.length > 5">
+                <md-list-item class="md-no-proxy">
                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Ver todos los participantes</md-button>
                 </md-list-item>
               </md-list>
