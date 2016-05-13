@@ -438,10 +438,14 @@
         position: absolute;
         top:0;
         right: 10px;
+        .md-icon-button.md-button {
+          width: 25px;
+          height: 20px;
+          cursor: pointer;
+        }
         .icon-highlighted {
-          top: -9px;
+          top: -7px;
           position: relative;
-          cursor: default;
         }
       }
       md-card-avatar {
@@ -506,6 +510,9 @@
       @media (max-width: 480px) {
         margin-left: 0;
         margin-right: 0;
+        .md-icon-button.md-button.md-ink-ripple {
+          margin-left: 0;
+        }
       }
     }
   }

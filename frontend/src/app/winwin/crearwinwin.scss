@@ -8,6 +8,11 @@
       }
       max-width: 440px;
       margin: 0 auto;
+      &.form-crear {
+        @media (max-width: 960px) {
+          padding-top:30px;
+        }
+      }
     }
     form>.layout-margin  {
       margin-top: 0;
