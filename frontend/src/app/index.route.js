@@ -106,6 +106,16 @@
             controllerAs: 'winwin'
           }
         }
+      })
+      .state('home.mis-winwin',{
+        url: 'mis-winwin',
+        views: {
+          'content@home': {
+            templateUrl: 'app/winwin/mis-winwin.html',
+            controller: 'MisWinwinController',
+            controllerAs: 'winwin'
+            }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
