@@ -184,6 +184,26 @@ md-tabs.acme-tabs {
       background: #1b3089;
     }
   }
+  &.tabs-mis-winwin {
+    md-pagination-wrapper {
+      width: 100% !important;
+      md-tab-item {
+        width: 33%;
+        @media (max-width: 960px) {
+          width: 50%;
+        }
+      }
+      .md-tab.md-active {
+        background: #ec6b25;
+      }
+      .md-tab:after, md-ink-bar {
+        display: none;
+      }
+    }
+    .md-raised.md-warn.ver-todos.md-button {
+      display: none;
+    }
+  }
 }
 md-menu-content {
   padding: 0;
