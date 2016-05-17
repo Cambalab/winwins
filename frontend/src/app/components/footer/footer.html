@@ -21,18 +21,10 @@
       <div layout-gt-sm="row" layout-padding layout-align="start center">
         <div flex>
           <ul>
-            <li><a href ui-sref="home.winwin-list" translate>Ver Winwins</a></li>
-            <li><a href="#" translate>Usuarios</a></li>
-            <li><a href="#" translate>Sponsors</a></li>
-          </ul>
-        </div>
-        <div flex>
-          <ul>
+            <li><a href="#" translate>Equipo</a></li>
+            <li><a href="#" translate>Valores</a></li>
+            <li><a href="#" translate>Propósito</a></li>
             <li><a href="#" translate>Sé sponsor</a></li>
-            <li>
-              <a ui-sref="home.crear-winwin" translate ng-if="vm.isAuthenticated()">Crea un winwin</a>
-              <a href translate ng-click="vm.showLoginDialog('home.crear-winwin')" ng-if="!vm.isAuthenticated()">Crea un winwin</a>
-            </li>
             <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
           </ul>
         </div>
