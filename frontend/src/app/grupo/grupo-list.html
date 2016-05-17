@@ -1,0 +1,14 @@
+<div layout="row" layout-wrap>
+  <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in grupo.grupos">
+    <md-card>
+      <md-card-content>
+          <div class="wrap-md-card-img">
+            <img ng-src="{{grupo.imageServer}}/315x200/{{item.photo}}" alt="" class="md-card-img"/>
+          </div>
+        <md-card-title-text layout-align="center center" layout="column">
+          <md-button class="md-headline">{{item.name}}</md-button>
+        </md-card-title-text>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

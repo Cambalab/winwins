@@ -107,6 +107,16 @@
           }
         }
       })
+      .state('home.grupo-list',{
+        url: 'grupo-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/grupo-list.html',
+            controller: 'GrupoListController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
       .state('home.mis-winwin',{
         url: 'mis-winwin',
         views: {
