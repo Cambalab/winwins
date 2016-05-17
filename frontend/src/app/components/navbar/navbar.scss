@@ -80,11 +80,13 @@ header {
 				}
 			}
 			&.logo {
+				text-align: center;
+				position: absolute;
 				right: 0;
 				left: 0;
 				margin: 0 auto;
 				top: 8px;
-				width: 200px;
+				width: 130px;
 				padding: 0;
 				a {
 					padding: 0;
