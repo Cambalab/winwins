@@ -348,7 +348,18 @@ md-card.public-profile {
   }
   .name {
     text-transform: capitalize;
-    margin: 10px 0 75px 0;
+    margin: 10px 0 30px 0;
+  }
+  .bt-green.md-button {
+    height: inherit;
+    padding: 5px 30px;
+    border-radius: 3px;
+    &:hover {
+      background:#34b436;
+    }
+    &:after {
+      display: none;
+    }
   }
   .md-item-text {
     h3 {
@@ -358,11 +369,13 @@ md-card.public-profile {
       text-transform: capitalize;
       margin: 0;
       padding: 5px;
+      border-radius: 3px 3px 0 0;
     }
     p {
       padding: 10px 0;
       margin: 0;
       font-weight: bold;
+      border-radius: 0 0 3px 3px;
     }
     &.bg-orange p {
       background: #ec8645;
@@ -409,6 +422,14 @@ md-card.public-profile {
   }
 }
 .acme-public-profile {
+  .mje-privacidad {
+    background:#2776c5;
+    p {
+      margin: 0 auto;
+      font-size: 12px;
+      color: #fff;
+    }
+  }
   .intereses {
     color: #666;
     background: #fff;
