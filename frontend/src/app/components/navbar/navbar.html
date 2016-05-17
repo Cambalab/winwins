@@ -1,6 +1,12 @@
 <md-toolbar md-scroll-shrink lg="true" layout="row" layout-align="center center">
 	<div ng-if="!vm.isAuthenticated()" flex layout-fill layout="row" layout-align="center center" class="menu hide show-gt-md">
-		<div layout="row" layout-align="center center">
+		<div style="margin-right: 15px;">
+			<md-input-container md-no-float class="md-block">
+		  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
+		  	<md-icon>search</md-icon>
+			</md-input-container>
+		</div>
+<!-- 		<div layout="row" layout-align="center center" ng-show="false">
 			<div>
 				<span>ES</span>
 			</div>
@@ -10,33 +16,27 @@
 			<div>
 				<span>ENG</span>
 			</div>
+		</div> -->
+<!-- 		<div class="seccion" ng-show="false"><md-button class="md-primary" ng-href="#"><translate>Cómo funciona</translate></md-button></div>
+		<div class="seccion" ng-show="false"><md-button class="md-primary" ui-sref="home.winwin-list"><translate>Winwins</translate></md-button></div>
+		<div class="seccion" ng-show="false"><md-button class="md-primary" ng-href="#"><translate>Miembros</translate></md-button></div> -->
+<!-- 		<div class="seccion space-right" ng-show="false"><md-button class="md-primary" ng-href="#"><translate>Sponsors</translate></md-button></div> -->
+		<div class="logo" layout-align="center center"><a href="#"><img src="../assets/images/logo.svg" alt="" /></a></div>
+		<div class="seccion" layout-align="end" style="margin-right: 15px;"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
 		</div>
-		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Cómo funciona</translate></md-button></div>
-		<div class="seccion"><md-button class="md-primary" ui-sref="home.winwin-list"><translate>Winwins</translate></md-button></div>
-		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Miembros</translate></md-button></div>
-		<div class="seccion space-right"><md-button class="md-primary" ng-href="#"><translate>Sponsors</translate></md-button></div>
-		<div class="logo"><a href="#"><img src="../assets/images/logo.svg" alt="" /></a></div>
-		<div class="seccion space-left"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
-		</div>
-		<div class="crear"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog('home.crear-winwin')"><translate>+ Crear Winwin</translate></md-button></div>
-		<div class="menu-search">
-			<md-input-container md-no-float class="md-block">
-		  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
-		  	<md-icon>search</md-icon>
-			</md-input-container>
-		</div>
+<!-- 		<div class="crear" ng-show="false"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog('home.crear-winwin')"><translate>+ Crear Winwin</translate></md-button></div> -->
   </div>
   <div class="menu hide {{ vm.isAuthenticated()?'show-gt-sm':'show-md' }}">
   	<div layout="row" layout-align="space-between center" layout-padding>
 		  <div>
 		  	<div layout="row" layout-align="center center">
-					<div>
+					<div ng-show="false">
 						<span>ES</span>
 					</div>
-					<div>
+					<div ng-show="false">
 						<md-switch ng-model="vm.langState" aria-label="Switch 1" ng-change="vm.onChange('changeLang', vm.langState)"></md-switch>
 					</div>
-					<div>
+					<div ng-show="false">
 						<span>ENG</span>
 					</div>
 					<div>
