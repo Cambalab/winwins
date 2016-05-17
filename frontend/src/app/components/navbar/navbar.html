@@ -12,10 +12,10 @@
 			</div>
 		</div>
 		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Cómo funciona</translate></md-button></div>
-		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Winwins</translate></md-button></div>
+		<div class="seccion"><md-button class="md-primary" ui-sref="home.winwin-list"><translate>Winwins</translate></md-button></div>
 		<div class="seccion"><md-button class="md-primary" ng-href="#"><translate>Miembros</translate></md-button></div>
 		<div class="seccion space-right"><md-button class="md-primary" ng-href="#"><translate>Sponsors</translate></md-button></div>
-		<div class="logo"><a href="#"><img src="../assets/images/logo.png" alt="" /></a></div>
+		<div class="logo"><a href="#"><img src="../assets/images/logo.svg" alt="" /></a></div>
 		<div class="seccion space-left"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
 		</div>
 		<div class="crear"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog('home.crear-winwin')"><translate>+ Crear Winwin</translate></md-button></div>
@@ -47,12 +47,14 @@
 					</div>
 				</div>
 			</div>
-		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
+		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.svg" alt="" /></a></div>
 			<div layout="row" layout-align="space-around center center">
-		  		<div class="menu-notifications" ng-if="vm.isAuthenticated()">
+	  			<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
-					<span class="badge">1</span>
-				</div>
+					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
+						{{(vm.notifications | filter:{is_read:0}).length }}
+					</span>
+				</md-button>
 				<md-card-header>
 					<md-button ui-sref="home.profile" aria-label="avatar">
 						<md-card-avatar ng-if="vm.isAuthenticated()">
@@ -73,12 +75,14 @@
   	<div layout="row" layout-align="space-between center">
 		  <div layout="row">
 		  	<md-icon>keyboard_arrow_left</md-icon>
-				<div class="menu-notifications" ng-if="vm.isAuthenticated()">
+				<md-button class="md-icon-button menu-notifications" aria-label="Login" ng-if="vm.isAuthenticated()" ui-sref="home.notifications">
 					<md-icon>notifications</md-icon>
-					<span class="badge">1</span>
-				</div>
+					<span class="badge" ng-show="(vm.notifications | filter:{is_read:0}).length > 0">
+						{{(vm.notifications | filter:{is_read:0}).length }}
+					</span>
+				</md-button>
 			</div>
-		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.png" alt="" /></a></div>
+		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.svg" alt="" /></a></div>
 		  <div layout="row">
 				<md-card-header>
 					<md-button ui-sref="home.profile" aria-label="avatar">
@@ -122,9 +126,12 @@
           <input ng-model="user.address2" placeholder="{{'Buscar' | translate}}">
           <md-icon>search</md-icon>
         </md-input-container></div>
-			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate> Ir a mi cuenta</translate></md-button></div>
-			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-mis-winwins.svg"></md-icon><translate> Mis Winwins</translate></md-button></div>
-			<div><md-button class="md-primary" ui-sref="home.crear-winwin" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
+			<div><md-button class="md-primary" ui-sref="home.winwin-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Winwins</translate></md-button></div>
+			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.mis-winwin" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-mis-winwins.svg"></md-icon><translate> Mis Winwins</translate></md-button></div>
+			<div>
+				<md-button class="md-primary" ui-sref="home.crear-winwin" ng-click="vm.openLeftMenu()" ng-if="vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button>
+				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
+			
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-sponsors.svg"></md-icon><translate> Sponsors</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate> Mi perfil</translate></md-button></div>
@@ -134,6 +141,6 @@
 </md-sidenav>
 <md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" ng-if="vm.isAuthenticated()">
   <p>
-    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
+    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail" ng-disabled="loadingFlag">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
   </p>
 </md-toolbar>

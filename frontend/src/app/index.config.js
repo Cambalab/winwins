@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider) {
+  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider) {
 
     // Enable log
     var debug = true;
@@ -36,6 +36,9 @@
     $authProvider.google(ENV.satellizer.google);
     $authProvider.yahoo(ENV.satellizer.yahoo);
     $authProvider.twitter(ENV.satellizer.twitter);
+
+    // angular-loading-bar
+    cfpLoadingBarProvider.includeSpinner = false;
 
   }
 

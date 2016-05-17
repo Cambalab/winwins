@@ -3,7 +3,7 @@
     <h2><span translate>CREA TU WINWIN, COMIENZA UNA ACCIÓN  POSITIVA</span></h2>
   </md-toolbar>
   <div class="container">
-    <form method="post" name="winwin.crearForm1" ng-submit="winwin.nexStage()">
+    <form method="post" name="winwin.crearForm1" ng-submit="winwin.nexStage()" class="form-crear">
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
           <div class="wrap-md-input-container">
@@ -177,7 +177,7 @@
               </md-input-container>
             </div>
           </div>
-          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
+          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" ng-disabled="loadingFlag" translate>{{ 'CONTINUAR' | translate }}</md-button>
         </div>
       </div>
     </form> 
@@ -229,7 +229,7 @@
             <md-chips ng-model="winwin.mails" md-on-add="winwin.validateMail($chip)">
               <input type="email" length="30" class="validate">
             </md-chips>
-            <md-button class="md-fab send" aria-label="" ng-click="winwin.sentInvitations()">
+            <md-button class="md-fab send" aria-label="" ng-click="winwin.sentInvitations()" ng-disabled="loadingFlag">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </md-input-container>

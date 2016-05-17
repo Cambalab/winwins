@@ -75,6 +75,27 @@
       return Restangular.all('posts').post(post);
     }
 
+    _winwin.createComment = function(id, content, media_id, media_type, media_path) {
+      return Restangular.one('posts', id).customPOST({
+        content: content,
+        media_id: media_id,
+        media_type: media_type,
+        media_path: media_path
+      }, 'comment', undefined, undefined);
+    }
+
+    _winwin.votePost = function(id, positive) {
+      return Restangular.one('posts', id).customPOST({positive: positive}, 'vote', undefined, undefined);
+    }
+
+    _winwin.stickyPost = function(id, sticky) {
+      return Restangular.one('posts', id).customPOST({sticky: sticky}, 'sticky', undefined, undefined);
+    }
+
+    _winwin.removePost = function(id) {
+      return Restangular.one('posts', id).customPOST(undefined, 'remove', undefined, undefined);
+    }
+
     _winwin.activate = function(id) {
       return Restangular.one('winwins/activate', id).get();
     }
@@ -85,6 +106,14 @@
 
     _winwin.left = function(id) {
      return Restangular.one('winwins/left', id).get(); 
+    }
+
+    _winwin.setUserNormal = function(winwin_id, user_id) {
+      return Restangular.one('winwins', winwin_id).one('state/normal', user_id).post();
+    }
+
+    _winwin.setUserActivator = function(winwin_id, user_id) {
+      return Restangular.one('winwins', winwin_id).one('state/activator', user_id).post();
     }
 
     _winwin.shareMails = function(id, mails) {

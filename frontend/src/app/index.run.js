@@ -26,6 +26,16 @@
     // On $rootCcope, so we can reference it on templates
     // without setting on controller
     $rootScope.imageServer = ENV.imageServer;
+
+    $rootScope.loadingFlag = false;
+    var event2 = $rootScope.$on('cfpLoadingBar:started', function () {
+        $rootScope.loadingFlag = true;
+    });
+    var event3 = $rootScope.$on('cfpLoadingBar:completed', function () {
+        if($rootScope.loadingFlag){
+            $rootScope.loadingFlag = false;
+        }
+    });
   }
 
 })();

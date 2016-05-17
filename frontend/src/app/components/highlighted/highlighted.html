@@ -1,4 +1,4 @@
-<md-content class="acme-highlighted">
+<md-content class="acme-highlighted" infinite-scroll='vm.nextPage()'>
   <div class="container">
     <h1 class="title" ng-if="vm.title">
       <span>
@@ -24,7 +24,7 @@
           <md-card-actions layout="row" layout-align="space-between center">
             <md-card-header>
               <md-card-avatar>
-                <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}">
+                <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
               </md-card-avatar>
               <md-card-content>
                 <img ng-repeat="sponsor in item.sponsors | limitTo: 1" class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div layout="row" layout-align="center center">
-      <md-button class="md-raised md-warn ver-todos">{{ '+ Ver todos los winwins' | translate }}</md-button>
+      <md-button ui-sref="home.winwin-list" class="md-raised md-warn ver-todos">{{ '+ Ver todos los winwins' | translate }}</md-button>
     </div>
   </div>
 </md-content>
