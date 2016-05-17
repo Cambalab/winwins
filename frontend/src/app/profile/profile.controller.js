@@ -61,6 +61,8 @@
           vm.user.cover_photo = data[indexCover].filename;
         }
 
+        vm.user.language_code = 'ES';
+
         user.saveProfile(vm.user)
         .then(function(){
           $rootScope.$broadcast('account_change');
