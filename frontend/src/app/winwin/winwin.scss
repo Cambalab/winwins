@@ -495,6 +495,7 @@
       margin-bottom: 0;
       .md-icon-button.md-button {
         margin-right: 0;
+        width: 20px;
         .icon {
           margin-right: 0;
         }
@@ -510,8 +511,14 @@
       @media (max-width: 480px) {
         margin-left: 0;
         margin-right: 0;
-        .md-icon-button.md-button.md-ink-ripple {
-          margin-left: 0;
+      }
+    }
+    .md-icon-button.md-button {
+      @media (max-width: 480px) {
+        width: 20px;
+        &.bt-comment {
+          margin-right: 0;
+          margin-left: 12px;
         }
       }
     }
