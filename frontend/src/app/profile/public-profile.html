@@ -1,175 +1,172 @@
 <md-content class="acme-public-profile">
   <div class="container">
-    <md-card class="public-profile">
-      <md-card-content>
-        <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
-        <md-card-title>
-          <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-            <div class="md-item-text bg-violet">
-              <h3 translate>Winwins</h3>
-              <p>{{profile.user.winwins.length}}</p>
-            </div>
-            <div layout="column" layout-align="center center">
-              <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-              <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-              <div><md-button class="bt-green">Seguir</md-button></div>
-            </div>
-            <div class="md-item-text bg-orange">
-              <h3 translate>Grupos</h3>
-              <p>{{profile.user.groups.length}}</p>
-            </div>
-          </div>
-        </md-card-title>
-      </md-card-content>
-    </md-card>
-    <div layout="row" layout-padding class="mje-privacidad" ng-show="false">
-      <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
-    </div>
-    <div layout="row" layout-padding layout-xs="column">
-      <div flex class="bio">
+    <div layout="row" layout-xs="column">
+      <div>
+        <md-card class="public-profile">
+          <md-card-content>
+            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+            <md-card-title>
+              <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                <div class="md-item-text bg-violet">
+                  <h3 translate>Winwins</h3>
+                  <p>{{profile.user.winwins.length}}</p>
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                  <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                  <div><md-button class="bt-green">Seguir</md-button></div>
+                </div>
+                <div class="md-item-text bg-orange">
+                  <h3 translate>Grupos</h3>
+                  <p>{{profile.user.groups.length}}</p>
+                </div>
+              </div>
+            </md-card-title>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="bio">
         <h3>BIO</h3>
         <p>
-          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/>
-                                             {{profile.user.about}}
+          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/>{{profile.user.about}}
         </p>
       </div>
+    </div>
+    <div layout="row" class="mje-privacidad" ng-show="false">
+      <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
+    </div>
+    <div layout="row" layout-xs="column">
       <div flex class="intereses">
         <h4 translate>Intereses</h4>
         <div ng-repeat="category in profile.user.interests_list">{{category.description}}</div>
       </div>
     </div>
-    <div layout="column" layout-padding>
-      <div flex>
-        <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
-        <md-content class="acme-highlighted">
-          <div layout="row" layout-wrap>
-            <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
-              <md-card>
-                <md-card-content>
-                    <div class="wrap-md-card-img">
-                      <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
-                    </div>
-                  <md-card-title-text layout-align="center center" layout="column">
-                    <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
-                  </md-card-title-text>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="space-between center">
-                  <md-card-header>
-                    <md-card-avatar>
-                      <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
-                    </md-card-avatar>
-                    <md-card-content>
-                      <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
-                    </md-card-content>
-                  </md-card-header>
-                  <div layout="row" layout-align="end center">
-                    <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
-                    <md-button class="md-icon-button" ng-click="vm.share(item)">
-                      <md-icon>share</md-icon>
-                    </md-button>
+    <div layout="column">
+      <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
+      <md-content class="acme-highlighted">
+        <div layout="row" layout-wrap>
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
+            <md-card>
+              <md-card-content>
+                  <div class="wrap-md-card-img">
+                    <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
                   </div>
-                </md-card-actions>
-              </md-card>
-            </div>
-            <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
-              <md-card>
-                <md-card-content>
-                    <div class="wrap-md-card-img">
-                      <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
-                    </div>
-                  <md-card-title-text layout-align="center center" layout="column">
-                    <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
-                  </md-card-title-text>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="space-between center">
-                  <md-card-header>
-                    <md-card-avatar>
-                      <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
-                    </md-card-avatar>
-                    <md-card-content>
-                      <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
-                    </md-card-content>
-                  </md-card-header>
-                  <div layout="row" layout-align="end center">
-                    <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
-                    <md-button class="md-icon-button" ng-click="vm.share(item)">
-                      <md-icon>share</md-icon>
-                    </md-button>
+                <md-card-title-text layout-align="center center" layout="column">
+                  <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
+                </md-card-title-text>
+              </md-card-content>
+              <md-card-actions layout="row" layout-align="space-between center">
+                <md-card-header>
+                  <md-card-avatar>
+                    <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
+                  </md-card-avatar>
+                  <md-card-content>
+                    <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
+                  </md-card-content>
+                </md-card-header>
+                <div layout="row" layout-align="end center">
+                  <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
+                  <md-button class="md-icon-button" ng-click="vm.share(item)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
+              </md-card-actions>
+            </md-card>
+          </div>
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
+            <md-card>
+              <md-card-content>
+                  <div class="wrap-md-card-img">
+                    <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
                   </div>
-                </md-card-actions>
-              </md-card>
-            </div>
-            <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
-              <md-card>
-                <md-card-content>
-                    <div class="wrap-md-card-img">
-                      <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
-                    </div>
-                  <md-card-title-text layout-align="center center" layout="column">
-                    <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
-                  </md-card-title-text>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="space-between center">
-                  <md-card-header>
-                    <md-card-avatar>
-                      <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
-                    </md-card-avatar>
-                    <md-card-content>
-                      <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
-                    </md-card-content>
-                  </md-card-header>
-                  <div layout="row" layout-align="end center">
-                    <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
-                    <md-button class="md-icon-button" ng-click="vm.share(item)">
-                      <md-icon>share</md-icon>
-                    </md-button>
+                <md-card-title-text layout-align="center center" layout="column">
+                  <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
+                </md-card-title-text>
+              </md-card-content>
+              <md-card-actions layout="row" layout-align="space-between center">
+                <md-card-header>
+                  <md-card-avatar>
+                    <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
+                  </md-card-avatar>
+                  <md-card-content>
+                    <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
+                  </md-card-content>
+                </md-card-header>
+                <div layout="row" layout-align="end center">
+                  <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
+                  <md-button class="md-icon-button" ng-click="vm.share(item)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
+              </md-card-actions>
+            </md-card>
+          </div>
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
+            <md-card>
+              <md-card-content>
+                  <div class="wrap-md-card-img">
+                    <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
                   </div>
-                </md-card-actions>
-              </md-card>
-            </div>
-            <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
-              <md-card>
-                <md-card-content>
-                    <div class="wrap-md-card-img">
-                      <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
-                    </div>
-                  <md-card-title-text layout-align="center center" layout="column">
-                    <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
-                  </md-card-title-text>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="space-between center">
-                  <md-card-header>
-                    <md-card-avatar>
-                      <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
-                    </md-card-avatar>
-                    <md-card-content>
-                      <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
-                    </md-card-content>
-                  </md-card-header>
-                  <div layout="row" layout-align="end center">
-                    <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
-                    <md-button class="md-icon-button" ng-click="vm.share(item)">
-                      <md-icon>share</md-icon>
-                    </md-button>
+                <md-card-title-text layout-align="center center" layout="column">
+                  <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
+                </md-card-title-text>
+              </md-card-content>
+              <md-card-actions layout="row" layout-align="space-between center">
+                <md-card-header>
+                  <md-card-avatar>
+                    <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
+                  </md-card-avatar>
+                  <md-card-content>
+                    <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
+                  </md-card-content>
+                </md-card-header>
+                <div layout="row" layout-align="end center">
+                  <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
+                  <md-button class="md-icon-button" ng-click="vm.share(item)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
+              </md-card-actions>
+            </md-card>
+          </div>
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="33">
+            <md-card>
+              <md-card-content>
+                  <div class="wrap-md-card-img">
+                    <img ng-src="http://images.dev-winwins.net/315x/velas.png" alt="" class="md-card-img"/>
                   </div>
-                </md-card-actions>
-              </md-card>
-            </div>
+                <md-card-title-text layout-align="center center" layout="column">
+                  <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">Titulo</md-button>
+                </md-card-title-text>
+              </md-card-content>
+              <md-card-actions layout="row" layout-align="space-between center">
+                <md-card-header>
+                  <md-card-avatar>
+                    <img class="md-user-avatar" ng-src="http://images.dev-winwins.net/40x40/placeholder-square.jpg" ui-sref="home.public-profile({userId: item.user.id})">
+                  </md-card-avatar>
+                  <md-card-content>
+                    <img class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
+                  </md-card-content>
+                </md-card-header>
+                <div layout="row" layout-align="end center">
+                  <div class="card-members"><translate>Somos</translate> <strong>2</strong></div>
+                  <md-button class="md-icon-button" ng-click="vm.share(item)">
+                    <md-icon>share</md-icon>
+                  </md-button>
+                </div>
+              </md-card-actions>
+            </md-card>
           </div>
         </md-content>
       </div>
     </div>
-    <div layout="column" layout-padding>
-      <div flex>
-        <h3 class="title-destacado dark" translate>WINWINS CREADOS POR MI</h3>
-        <p>jaskjaS JASDLKA SJDJAS JSADKL SAJDA asjdsalkdjsal dsajdlksajdlsad</p>
-      </div>
+    <div layout="column">
+      <h3 class="title-destacado dark" translate>WINWINS CREADOS POR MI</h3>
+      <p>jaskjaS JASDLKA SJDJAS JSADKL SAJDA asjdsalkdjsal dsajdlksajdlsad</p>
     </div>
-    <div layout="column" layout-padding>
-      <div flex>
-        <h3 class="title-destacado" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
-        <p>jaskjaS JASDLKA SJDJAS JSADKL SAJDA asjdsalkdjsal dsajdlksajdlsad</p>
-      </div>
+    <div layout="column">
+      <h3 class="title-destacado" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
+      <p>jaskjaS JASDLKA SJDJAS JSADKL SAJDA asjdsalkdjsal dsajdlksajdlsad</p>
     </div>
   </div>
 </md-content>
