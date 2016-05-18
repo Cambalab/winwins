@@ -1,5 +1,5 @@
 <md-toolbar class="md-tall md-warn" layout="row" layout-align="center center" ng-if="!profile.is_public">
-  <h2><span translate ng-if="!profile.is_complete">COMPLETA TU PERFIL</span><span translate ng-if="profile.is_complete">MI CUENTA</span></h2>
+  <h2><span translate ng-show="!profile.is_complete && !profile.loading">COMPLETA TU PERFIL</span><span translate ng-show="profile.is_complete && !profile.loading">MI CUENTA</span></h2>
 </md-toolbar>
 <md-content class="acme-profile">
   <div class="container">
