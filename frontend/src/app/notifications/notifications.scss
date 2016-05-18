@@ -28,6 +28,10 @@
       }
       .blue {
         color: #123fbf;
+        text-decoration: none;
+        &:hover {
+          color: #031380;
+        }
       }
       .red {
         color: #da0000;

@@ -20,6 +20,8 @@
             <div class="col-left">
                <md-card class="md-whiteframe-4dp no-padding">
                 <md-card-content>
+                  <div class="ribbon" ng-if="winwin.winwin.is_successful"><span>CONCRETADO</span></div>
+                  <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />    
                   <div class="wrap-card-img">              
                     <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
@@ -124,7 +126,7 @@
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
                         <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>
-                        <div><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>
+                        <div hide><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>
                       </div>
                       <div class="slide-categorias content-bg" layout="column" layout-align="center center" layout-padding>
                         <h4>Categorías:</h4>
@@ -294,7 +296,7 @@
             </div>
             <div class="aside" hide show-gt-sm>
               <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
-                <div class="content-bg" ng-if="winwin.winwin.already_joined">
+                <div class="content-bg" ng-if="winwin.winwin.already_joined" ng-show="false">
                   <h3 class="title-notificaction">             
                     <md-icon>notifications</md-icon>
                     <span class="badge" ng-show="(winwin.campanadas | filter:{is_read:0}).length > 0">
@@ -326,7 +328,7 @@
                     </md-button>
                   </p>
                 </div>
-                <div class="content-bg">
+                <div class="content-bg" ng-show="false">
                   <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
                 </div>
               </div>
@@ -339,7 +341,7 @@
                   <p>{{participante.username}}</p>
                 </md-list-item>
                 <md-list-item class="md-no-proxy">
-                 <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Ver todos los participantes</md-button>
+                 <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Organizar participantes</md-button>
                 </md-list-item>
               </md-list>
             </div>

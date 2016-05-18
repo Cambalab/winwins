@@ -14,6 +14,7 @@
     }
 
     vm.imageServer = ENV.imageServer;
+    vm.loading = true;
 
     vm.user = {interests_list:[]};
 
@@ -31,6 +32,8 @@
         winwin.getInterests().then(function(data) {
           vm.interests = data;
         });
+
+        vm.loading = false;
       });
     });
 
@@ -60,6 +63,8 @@
         if (vm.cover_image) {
           vm.user.cover_photo = data[indexCover].filename;
         }
+
+        vm.user.language_code = 'ES';
 
         user.saveProfile(vm.user)
         .then(function(){

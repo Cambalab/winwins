@@ -7,26 +7,26 @@
       <md-list class="notificaciones">
         <md-list-item  ng-switch on="notification.type" ng-repeat="notification in notifications.notifications">
           <div ng-switch-when="WW_SUCCESSFUL">
-            {{notification.object.title}} <span>se ha completado con éxito!</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span>se ha completado con éxito!</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="WW_CREATED">
-            <span class="orange">Felicitaciones!</span> Creaste el winwin <span class="blue">{{notification.object.title}}</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            <span class="orange">Felicitaciones!</span> Creaste el winwin <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="WW_JOIN">
-            <span class="green">Excelente!</span> Te uniste a <span class="blue">{{notification.object.title}}</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            <span class="green">Excelente!</span> Te uniste a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="WW_LEFT">
-            Abandonaste <span class="blue">{{notification.object.title}}</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            Abandonaste <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="SPONSOR_REQUEST">
-            Han solicitado patrocinar a <span class="blue">{{notification.object.title}}</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            Han solicitado patrocinar a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="WW_REQUEST_SPONSOR">
-            Han solicitado que patrocines a <span class="blue">{{notification.object.title}}</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            Han solicitado que patrocines a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="CAMPANADA">
             <span class="red">Campanada activa!</span>
-            Nueva campanada de <span class="blue">{{notification.object.title}}</span>: <span class="date">"{{notification.body}}" {{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            Nueva campanada de <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})">{{notification.object.title}}</a>: <span class="date">"{{notification.body}}" {{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
           </div>
           <div ng-switch-when="FOLLOWING">
             <span class="green">Nuevo seguidor!</span>

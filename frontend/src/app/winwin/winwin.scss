@@ -104,6 +104,34 @@
       md-card-content {
         padding: 0;
         position: relative;
+        .ribbon {
+          position: absolute;
+          left: 0; top: 0;
+          z-index: 1;
+          overflow: hidden;
+          width: 115px; height: 115px;
+          text-align: right;
+          span {
+            font-size: 15px;
+            color: #FFF;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 30px;
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            width: 170px;
+            display: block;
+            background: #4cae4e;
+            position: absolute;
+            top: 33px; left: -38px;
+          }
+        }
+        .icon-concretado {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+        }
         md-card-title-text {
           @media (max-width: 960px) {
             display: flex;
