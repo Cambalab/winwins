@@ -2,37 +2,40 @@
   <div class="container">
     <md-card class="public-profile">
       <md-card-content>
-        <img ng-src="http://en.es-static.us/upl/2012/08/Andromeda_galaxy_Ted_Van_August_2012.jpeg" class="md-card-image" alt="">
+        <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
         <md-card-title>
           <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
             <div class="md-item-text bg-violet">
               <h3 translate>Winwins</h3>
-              <p>1250</p>
+              <p>{{profile.user.winwins.length}}</p>
             </div>
             <div layout="column" layout-align="center center">
-              <img ng-src="http://images.dev-winwins.net/smart/user_150276528806523ab1d79ee7ad8762d9_74.png" class="md-card-avatar" alt="">
-              <div class="name">Alina Ryba</div>
+              <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+              <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
               <div><md-button class="bt-green">Seguir</md-button></div>
             </div>
             <div class="md-item-text bg-orange">
               <h3 translate>Grupos</h3>
-              <p>1250</p>
+              <p>{{profile.user.groups.length}}</p>
             </div>
           </div>
         </md-card-title>
       </md-card-content>
     </md-card>
-    <div layout="row" layout-padding class="mje-privacidad">
+    <div layout="row" layout-padding class="mje-privacidad" ng-show="false">
       <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
     </div>
     <div layout="row" layout-padding layout-xs="column">
       <div flex class="bio">
         <h3>BIO</h3>
-        <p translate>jaskjaS JASDLKA SJDJAS JSADKL SAJDA asjdsalkdjsal dsajdlksajdlsad</p>
+        <p>
+          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/>
+                                             {{profile.user.about}}
+        </p>
       </div>
       <div flex class="intereses">
         <h4 translate>Intereses</h4>
-        <p>dsmflk jsdfl dsf jdsflksd fjdsklf sdjfld sfjeiruewioruewio</p>
+        <div ng-repeat="category in profile.user.interests_list">{{category.description}}</div>
       </div>
     </div>
     <div layout="column" layout-padding>
