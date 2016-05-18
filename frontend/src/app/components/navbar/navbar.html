@@ -1,5 +1,5 @@
 <md-toolbar md-scroll-shrink lg="true" layout="row" layout-align="center center">
-	<div ng-if="!vm.isAuthenticated()" flex layout-fill layout="row" layout-align="center center" class="menu hide show-gt-md">
+<!-- 	<div ng-if="!vm.isAuthenticated()" flex layout-fill layout="row" layout-align="center center" class="menu hide show-gt-md">
 		<div layout="row" layout-align="center center">
 			<div>
 				<span>ES</span>
@@ -25,12 +25,31 @@
 		  	<md-icon>search</md-icon>
 			</md-input-container>
 		</div>
+  </div> -->
+  <div class="menu hide show-gt-md" ng-if="!vm.isAuthenticated()" style="min-width: 970px;">
+  	<div layout="row" layout-align="space-between center" layout-padding>
+		  <div>
+		  	<div layout="row" layout-align="center center">
+					<div>
+						<md-input-container md-no-float class="md-block">
+					  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
+					  	<md-icon>search</md-icon>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		  <div><a href="#" class="logo-md"><img src="../assets/images/logo.svg" alt="" /></a></div>
+			<div layout="row" layout-align="space-around center center">
+						<div class="seccion space-left"><md-button class="md-primary" ng-href ng-click="vm.showLoginDialog()"><translate>Ir a mi cuenta</translate></md-button>
+		</div>
+	    </div>
+		</div>
   </div>
   <div class="menu hide {{ vm.isAuthenticated()?'show-gt-sm':'show-md' }}">
   	<div layout="row" layout-align="space-between center" layout-padding>
 		  <div>
 		  	<div layout="row" layout-align="center center">
-					<div>
+<!-- 					<div>
 						<span>ES</span>
 					</div>
 					<div>
@@ -38,7 +57,7 @@
 					</div>
 					<div>
 						<span>ENG</span>
-					</div>
+					</div> -->
 					<div>
 						<md-input-container md-no-float class="md-block">
 					  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
@@ -132,9 +151,9 @@
 				<md-button class="md-primary" ui-sref="home.crear-winwin" ng-click="vm.openLeftMenu()" ng-if="vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button>
 				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button></div>
 			
-			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
+			<div><md-button class="md-primary" ui-sref="home.miembros" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
 			<div><md-button class="md-primary" ng-href="#"><md-icon md-svg-src="assets/images/icon-sponsors.svg"></md-icon><translate> Sponsors</translate></md-button></div>
-			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate> Mi perfil</translate></md-button></div>
+			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate>Mi cuenta</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href="#" ng-click="vm.openLeftMenu(); vm.logout();"><md-icon md-svg-src="assets/images/icon-salir.svg"></md-icon><translate> Salir</translate></md-button></div>
 	  </div>
   </md-content>
