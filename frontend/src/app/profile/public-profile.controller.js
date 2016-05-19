@@ -6,7 +6,7 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController(user, ENV, $document, winwin, $stateParams) {
+  function PublicProfileController(user, ENV, $document, $stateParams, $window, account) {
     var vm = this;
 
     vm.userId = $stateParams.userId;
@@ -22,20 +22,14 @@
       if (vm.user.birthdate) {
         vm.user.birthdate = new Date(vm.user.birthdate);
       }
-      winwin.getInterests().then(function(data) {
-        vm.interests = data;
+      vm.creadospormi = $window._.filter(vm.user.winwins, function(winwin) {
+        return winwin.user_id == vm.user.user_id; 
+      });
+
+      vm.enqueparticipo = $window._.filter(vm.user.winwins, function(winwin) {
+        return winwin.user_id != vm.user.user_id; 
       });
     });
-
-    var dataURItoBlob = function(dataURI) {
-      var binary = atob(dataURI.split(',')[1]);
-      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      var array = [];
-      for(var i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-      }
-      return new Blob([new Uint8Array(array)], {type: mimeString});
-    };
   }
 
 })();
