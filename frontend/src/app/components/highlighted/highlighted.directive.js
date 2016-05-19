@@ -15,7 +15,7 @@
         title: '=',
         icon: '=',
         scroll: '&onScroll',
-        viewmore: '=',
+        viewmore: '='
       },
       controller: HighlightedController,
       controllerAs: 'vm',
