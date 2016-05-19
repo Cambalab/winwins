@@ -1,6 +1,9 @@
 .acme-notifications {
   h2 {
     text-transform: capitalize;
+    span {
+      color: #fff !important;
+    }
   }
   .container {
     max-width: 500px;
