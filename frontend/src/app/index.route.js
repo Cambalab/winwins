@@ -107,6 +107,16 @@
           }
         }
       })
+      .state('home.miembros',{
+        url: 'miembros',
+        views: {
+          'content@home': {
+            templateUrl: 'app/miembros/miembros.html',
+            controller: 'MiembrosController',
+            controllerAs: 'miembros'
+          }
+        }
+      })
       .state('home.mis-winwin',{
         url: 'mis-winwin',
         views: {
