@@ -15,7 +15,7 @@
                   <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
                   <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                   <div>
-                    <md-button class="bt-green" ng-show="!profile.user.myself">Seguir</md-button>
+                    <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()">Seguir</md-button>
                     <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself">Editar</md-button>
                   </div>
                 </div>

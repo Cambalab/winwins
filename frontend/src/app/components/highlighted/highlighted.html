@@ -41,7 +41,7 @@
       </div>
     </div>
     <div layout="row" layout-align="center center">
-      <md-button ui-sref="home.winwin-list" class="md-raised md-warn ver-todos">{{ '+ Ver todos los winwins' | translate }}</md-button>
+      <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="md-raised md-warn ver-todos">{{ '+ Ver todos los winwins' | translate }}</md-button>
     </div>
   </div>
 </md-content>

@@ -6,7 +6,7 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController(user, ENV, $document, $stateParams, $window, account) {
+  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog) {
     var vm = this;
 
     vm.userId = $stateParams.userId;
@@ -30,6 +30,19 @@
         return winwin.user_id != vm.user.user_id; 
       });
     });
+
+    vm.showSeguirDialog = function() {
+      $mdDialog.show({
+        controller: SeguirController,
+        templateUrl: 'app/profile/modal-seguir.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true
+      });
+    }
+  }
+
+  function SeguirController() {
+
   }
 
 })();
