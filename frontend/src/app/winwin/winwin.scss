@@ -96,6 +96,19 @@
       color: #ff9800;
     }
   }
+  @media (max-width: 480px) {
+    .card-social-media {
+      .md-icon-button.md-button.md-ink-ripple {
+        width: 30px;
+        padding-top: 10px;
+        height: 40px;
+        md-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
   md-card {
     &.no-padding {
       @media (max-width: 960px) {
