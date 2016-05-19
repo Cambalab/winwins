@@ -54,7 +54,7 @@ class WinwinController extends Controller {
                 $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
                 break;
             case 'last':
-                $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
+                $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
                 break;
             case 'success':
                 $winwins = Winwin::where('published', '=', 1)->where('status', '=', 'SUCCESSFUL')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();

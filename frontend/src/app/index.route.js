@@ -41,7 +41,7 @@
         url: 'profile/:userId',
         views: {
           'content@home': {
-            templateUrl: 'app/profile/profile.html',
+            templateUrl: 'app/profile/public-profile.html',
             controller: 'PublicProfileController',
             controllerAs: 'profile'
           }
