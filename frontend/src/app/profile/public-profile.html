@@ -7,19 +7,19 @@
             <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
             <md-card-title>
               <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                <div class="md-item-text bg-violet" ng-if="!profile.user.private && !profile.user.myself">
+                <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                   <h3 translate>Winwins</h3>
                   <p>{{profile.user.winwins.length}}</p>
                 </div>
                 <div layout="column" layout-align="center center">
                   <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
                   <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                  <div ng-if="!profile.user.private && !profile.user.myself">
+                  <div ng-if="!profile.user.private || profile.user.myself">
                     <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()">Seguir</md-button>
                     <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself">Editar</md-button>
                   </div>
                 </div>
-                <div class="md-item-text bg-orange" ng-if="!profile.user.private && !profile.user.myself">
+                <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                   <h3 translate>Grupos</h3>
                   <p>{{profile.user.groups.length}}</p>
                 </div>
@@ -38,7 +38,7 @@
     <div layout="row" class="mje-privacidad" ng-if="profile.user.private && !profile.user.myself">
       <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
     </div>
-    <div layout="row" layout-xs="column" ng-if="!profile.user.private && !profile.user.myself">
+    <div layout="row" layout-xs="column" ng-if="!profile.user.private || profile.user.myself">
       <div flex class="intereses">
         <h4 translate>Intereses</h4>
         <md-chips>
@@ -46,15 +46,15 @@
         </md-chips>
       </div>
     </div>
-    <div layout="column" ng-if="!profile.user.private && !profile.user.myself">
+    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
       <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
       <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'"></acme-highlighted>
     </div>
-    <div layout="column" ng-if="!profile.user.private && !profile.user.myself">
+    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
       <h3 class="title-destacado dark" translate>WINWINS CREADOS POR MI</h3>
       <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
     </div>
-    <div layout="column" ng-if="!profile.user.private && !profile.user.myself">
+    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
       <h3 class="title-destacado" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
       <p></p>
     </div>
