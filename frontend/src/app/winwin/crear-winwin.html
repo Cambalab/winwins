@@ -48,7 +48,7 @@
               </div>
               <div layout="column">
                 <md-input-container class="md-block">
-                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required></textarea>
+                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required aria-label="what we do"></textarea>
                   <div ng-messages="winwin.crearForm1.what_we_do.$error">
                     <div ng-message="required" translate>Campo requerido.</div>
                   </div>
@@ -71,8 +71,7 @@
   y toda la información que te resulte relevante.
                 </div>
               </div>
-              </md-button>
-              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
+              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus aria-label="description"></textarea>
             </md-input-container>
           </div>
           <div class="wrap-md-input-container">
@@ -94,7 +93,7 @@
               <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
             </div>
           </md-input-container>
-          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="winwin.crearForm1.$invalid" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
+          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="winwin.crearForm1.$invalid" type="submit" name="action" translate aria-label="send">{{ 'CONTINUAR' | translate }}</md-button>
         </div>
       </div> 
     </form> 
@@ -112,7 +111,7 @@
           <md-card>
             <div class="md-card-wrap"><img ng-src="{{ winwin.preview_image }}"  class="md-card-image" alt=""></div>
             <md-card-title-text layout-align="center center" layout="column">
-              <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
+              <md-button class="md-headline" aria-label="title">{{winwin.winwin.title}}</md-button>
             </md-card-title-text>
           </md-card>
           <div layout="row" layout-align="center center">
@@ -142,7 +141,7 @@
             </div>
             <div layout="row" layout-align="center center">
               <md-input-container class="md-block">
-                <md-select ng-model="winwin.winwin.scope">
+                <md-select ng-model="winwin.winwin.scope" aria-label="global">
                   <md-option value="GLOBAL">
                     GLOBAL
                   </md-option>
@@ -153,7 +152,7 @@
               </md-input-container>
             </div>
             <div layout="row" layout-align="center center" ng-show="winwin.winwin.scope == 'LOCAL'">
-              <md-input-container class="md-block lugar">
+              <md-input-container class="md-block lugar" aria-label="lugar">
                 <input id="winwin_location" name="winwin_location" ng-model="winwin.location_formatted">
               </md-input-container>
             </div>
@@ -169,7 +168,7 @@
             </div>
             <div layout="row" layout-align="center center">
               <md-input-container>
-                <md-select ng-model="winwin.winwin.interests" multiple>
+                <md-select ng-model="winwin.winwin.interests" multiple aria-label="descripcion">
                   <md-optgroup label="vegetables">
                     <md-option ng-value="item" ng-repeat="item in winwin.interests">{{item.description}}</md-option>
                   </md-optgroup>
@@ -177,7 +176,7 @@
               </md-input-container>
             </div>
           </div>
-          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" ng-disabled="loadingFlag" translate>{{ 'CONTINUAR' | translate }}</md-button>
+          <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" ng-disabled="loadingFlag" translate aria-label="send">{{ 'CONTINUAR' | translate }}</md-button>
         </div>
       </div>
     </form> 
@@ -229,7 +228,7 @@
             <md-chips ng-model="winwin.mails" md-on-add="winwin.validateMail($chip)">
               <input type="email" length="30" class="validate">
             </md-chips>
-            <md-button class="md-fab send" aria-label="" ng-click="winwin.sentInvitations()" ng-disabled="loadingFlag">
+            <md-button class="md-fab send" aria-label="send" ng-click="winwin.sentInvitations()" ng-disabled="loadingFlag">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </md-input-container>
@@ -237,7 +236,7 @@
       </div>
       <div layout="column" layout-align="center center" ng-show="winwin.emailsOK">
         <div flex>
-          <md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
+          <md-button aria-label="send"><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
         </div>
         <div flex>
           <p class="gray">Las invitaciones fueron enviadas!</p>
@@ -246,7 +245,7 @@
     </div>
     <div layout="row" layout-align="center center">
       <div layout="column" class="comparti" flex-xs="80" flex="40">
-        <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})">IR AL WINWIN</md-button>
+        <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})" aria-label="send">IR AL WINWIN</md-button>
       </div>
     </div>
   </div>
@@ -269,8 +268,8 @@
     </div>
     <div>
       <md-card-actions layout="row" layout-align="center center">
-        <md-button class="md-raised md-primary" translate>LISTO</md-button>
-        <md-button class="md-raised md-grey" translate>CANCELAR</md-button>
+        <md-button class="md-raised md-primary" translate aria-label="send">LISTO</md-button>
+        <md-button class="md-raised md-grey" translate aria-label="send">CANCELAR</md-button>
       </md-card-actions>
     </div>
   </md-dialog-content>
@@ -298,7 +297,7 @@
               <div ng-messages="crearForm.name.$error">
                 <div ng-message="required" translate>Campo requerido.</div>
             </div>
-            <md-button class="md-fab send" aria-label="">
+            <md-button class="md-fab send" aria-label="send">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </md-input-container>

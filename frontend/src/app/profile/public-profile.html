@@ -1,7 +1,7 @@
 <md-content class="acme-public-profile">
   <div class="container">
     <div layout="row" layout-xs="column">
-      <div>
+      <div flex>
         <md-card class="public-profile">
           <md-card-content>
             <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
@@ -28,7 +28,7 @@
           </md-card-content>
         </md-card>
       </div>
-      <div class="bio">
+      <div flex class="bio">
         <h3>BIO</h3>
         <p>
           Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/>{{profile.user.about}}

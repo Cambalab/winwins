@@ -27,7 +27,7 @@
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
                   </div>
                   <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
-                    <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
+                    <md-button class="md-headline" aria-label="title">{{winwin.winwin.title}}</md-button>
                   </md-card-title-text>
                   <div class="card-labels">
                     <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
@@ -197,13 +197,13 @@
               <div ng-repeat="item_post in winwin.posts">
                 <md-card class="md-whiteframe-7dp" >
                   <div class="card-labels">
-                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button">  
+                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">  
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                     </md-button>
-                    <md-button ng-if="(winwin.winwin.is_moderator && item_post.sticky==1) || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator" ng-click="winwin.setSticky(item_post, false)" class="md-icon-button">
+                    <md-button ng-if="(winwin.winwin.is_moderator && item_post.sticky==1) || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator" ng-click="winwin.setSticky(item_post, false)" class="md-icon-button" aria-label="highlighted on">
                       <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
                     </md-button>
-                    <md-button ng-if="winwin.winwin.is_moderator && item_post.sticky==0" ng-click="winwin.setSticky(item_post, true)" class="md-icon-button">
+                    <md-button ng-if="winwin.winwin.is_moderator && item_post.sticky==0" ng-click="winwin.setSticky(item_post, true)" class="md-icon-button" aria-label="highlighted off">
                       <md-icon class="icon icon-highlighted icon-off" md-svg-src="assets/images/icon-highlighted-off.svg"></md-icon>
                     </md-button>
                   </div>
@@ -241,7 +241,7 @@
                       <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
                         <md-icon>share</md-icon>
                       </md-button>
-                      <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
+                      <md-button class="md-icon-button bt-comment"  ng-click="winwin.showReplyDialog(item_post)">
                         <md-icon class="icon insert_comment">insert_comment</md-icon>
                       </md-button>
                   </md-card-actions>
@@ -250,7 +250,7 @@
                 <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
                   <div layout="row" layout-align="space-between center">
                     <div layout-padding>
-                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button">  
+                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button" aria-label="eliminar">  
                         <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                       </md-button>
                     </div>
