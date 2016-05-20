@@ -153,7 +153,10 @@
             </div>
             <div layout="row" layout-align="center center" ng-show="winwin.winwin.scope == 'LOCAL'">
               <md-input-container class="md-block lugar" aria-label="lugar">
-                <input id="winwin_location" name="winwin_location" ng-model="winwin.location_formatted">
+                <input id="winwin_location" name="winwin_location" ng-model="winwin.location_formatted" ng-change="winwin.clearError()">
+                <div ng-messages="winwin.crearForm2.winwin_location.$error" class="help-block" ng-if="winwin.crearForm2.winwin_location.$error.notLocation">
+                  <p class="small" ng-message="notLocation" translate>Tenés que especificar una ubicación.</p>
+                </div>
               </md-input-container>
             </div>
           </div>
