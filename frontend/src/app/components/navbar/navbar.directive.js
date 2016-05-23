@@ -40,8 +40,11 @@
             vm.account.email = data.user.email;
             vm.isActive = data.active;
 
-            vm.notifications = $window._.sortBy(data.user.notifications, function(notification) {
-              return -notification.id; 
+            user.getUser(data.user.id)
+            .then(function(user_data) {
+              vm.notifications = $window._.sortBy(user_data.notifications, function(notification) {
+                return -notification.id; 
+              });
             });
           });
         }
@@ -79,6 +82,19 @@
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
           clickOutsideToClose:true
+        });
+      };
+
+      vm.showNotificationsDialog = function(redirect) {
+        $mdDialog.show({
+          controller: 'NotificationsController',
+          controllerAs: 'vm',
+          templateUrl: 'app/notifications/notifications.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true,
+          locals: {
+              notifications: vm.notifications
+            }
         });
       };
 

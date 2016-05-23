@@ -348,6 +348,7 @@ md-card.public-profile {
   .name {
     text-transform: capitalize;
     margin: 10px 0 30px 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
   }
   .bt-green.md-button {
     height: inherit;
@@ -490,7 +491,7 @@ md-card.public-profile {
       }
     }
     p {
-      font-size: 12px;
+      font-size: 14px;
       color: #666;
     }
     pre {

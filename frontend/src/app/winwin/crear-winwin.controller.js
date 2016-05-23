@@ -34,7 +34,7 @@
     vm.setup_geo_component = function () {
         var input = $element.find('#winwin_location'),
         options = {
-            types: ['address']
+            types: []
         };
         var searchBox = new $window.google.maps.places.Autocomplete(input[0], options);
 
@@ -47,6 +47,11 @@
     };
 
     vm.saveWinwin = function() {
+      if (!vm.winwin.location && vm.winwin.scope == 'LOCAL'){
+        vm.crearForm2.winwin_location.$setValidity("notLocation", false);
+        return;
+      }
+
       var promises = [];
 
       if (vm.cover_image) {
@@ -81,6 +86,10 @@
     vm.clearError = function() {
       if (vm.winwin.terms) {
         vm.crearForm1.terms.$setValidity("notTerms", true);
+      }
+      if (vm.crearForm2.winwin_location.$error.notLocation){
+        vm.winwin.location = null;
+        vm.crearForm2.winwin_location.$setValidity("notLocation", true);
       }
     }
 
