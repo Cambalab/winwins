@@ -497,7 +497,8 @@ md-card.public-profile {
       font-family: 'Montserrat', serif;
       font-size: 14px;
       color: #666;
-      white-space: inherit;
+      word-wrap: break-word;
+      white-space: pre-wrap;
     }
   }
   .title-destacado {
