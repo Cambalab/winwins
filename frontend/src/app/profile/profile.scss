@@ -336,7 +336,7 @@ md-toolbar.md-tall.md-warn.ng-scope {
   }
 }
 md-card.public-profile {
-  margin: 0;
+  margin: 0 0 10px 0;
   .md-card-members {
     width: 100%;
   }
@@ -450,7 +450,7 @@ md-card.public-profile {
     background: #fff;
     border-radius: 5px;
     padding: 15px;
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     h4 {
       text-transform: uppercase;
       font-size: 14px;
