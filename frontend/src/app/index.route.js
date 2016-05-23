@@ -111,9 +111,19 @@
         url: 'grupo-list',
         views: {
           'content@home': {
-            templateUrl: 'app/grupo/grupo-list.html',
+            templateUrl: 'app/grupo/group_list_index.html',
             controller: 'GrupoListController',
             controllerAs: 'grupo'
+          }
+        }
+      })
+      .state('home.grupo-profile',{
+        url: 'grupo/:groupId',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/grupo-profile.html',
+            controller: 'PublicGrupoProfileController',
+            controllerAs: 'grupo-profile'
           }
         }
       })
