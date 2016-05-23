@@ -121,7 +121,7 @@
                     </md-button>
                     <div class="toggle-content" ng-show="open">
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles" ng-show="winwin.winwin.description">
-                        <p>{{winwin.winwin.description}}</p>
+                        <p><pre>{{winwin.winwin.description}}</pre></p>
                       </div>
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
@@ -341,7 +341,8 @@
                   <p>{{participante.username}}</p>
                 </md-list-item>
                 <md-list-item class="md-no-proxy">
-                 <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Organizar participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="!winwin.winwin.already_joined"><strong>+</strong> Ver participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="winwin.winwin.already_joined"><strong>+</strong> Organizar participantes</md-button>
                 </md-list-item>
               </md-list>
             </div>

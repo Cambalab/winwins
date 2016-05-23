@@ -76,6 +76,10 @@
             parent: angular.element($document.body),
             clickOutsideToClose:true
           });
+
+          $state.go('home.public-profile', {
+            userId: vm.user.id
+          }); 
         })
         .catch(function(response) {
           if(response.data) {
