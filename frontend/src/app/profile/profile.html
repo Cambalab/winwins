@@ -63,7 +63,7 @@
         <div flex>
           <md-input-container class="md-block">
             <label translate>Sobre vos</label>
-            <input md-maxlength="500" md-no-asterisk name="about" ng-model="profile.user.about" ng-disabled="profile.is_public">
+            <textarea name="about" ng-model="profile.user.about"  md-no-asterisk md-maxlength="500" rows="3" md-select-on-focus ng-disabled="profile.is_public"></textarea>
             <div ng-messages="profileForm.about.$error">
               <div ng-message="required" translate>Campo requerido.</div>
               <div ng-message="md-maxlength" translate>The name has to be less than 500 characters long.</div>

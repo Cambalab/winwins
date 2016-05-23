@@ -336,7 +336,7 @@ md-toolbar.md-tall.md-warn.ng-scope {
   }
 }
 md-card.public-profile {
-  margin: 0;
+  margin: 0 0 10px 0;
   .md-card-members {
     width: 100%;
   }
@@ -418,36 +418,61 @@ md-card.public-profile {
     .md-card-image {
       display: block;
       max-width: 100%;
-      min-width: 400px;
+      min-width: 500px;
     }
   }
 }
 .acme-public-profile {
+  padding-top: 30px;
+  @media (max-width: 480px) {
+    padding-top: 0;
+  }
   .mje-privacidad {
     background:#2776c5;
     p {
       margin: 0 auto;
-      font-size: 12px;
       color: #fff;
+      font-size: 13px;
+      color: #fff;
+      padding: 10px;
+    }
+  }
+  .mensaje {
+    font-size: 14px;
+    margin: 0 0 30px 10px;
+    color: #5c5c5c;
+    a {
+      color: #0D47A1;
+      text-decoration: none;
     }
   }
   .intereses {
     color: #666;
     background: #fff;
     border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 15px;
+    margin: 0 0 10px 0;
     h4 {
       text-transform: uppercase;
       font-size: 14px;
       margin: 0;
     }
     p {
-      font-size: 12px;
+      font-size: 14px;
+      a {
+        color: #0D47A1;
+        text-decoration: none;
+      }
+    }
+    md-chips .md-chips {
+      box-shadow: none;
+      .md-chip {
+        font-size: 12px;
+      }
     }
   }
   .bio {
-    margin: 10px;
+    margin: 10px 20px;
     h3 {
       color: #666;
       text-transform: uppercase;
@@ -468,6 +493,13 @@ md-card.public-profile {
     p {
       font-size: 14px;
       color: #666;
+    }
+    pre {
+      font-family: 'Montserrat', serif;
+      font-size: 14px;
+      color: #666;
+      word-wrap: break-word;
+      white-space: pre-wrap;
     }
   }
   .title-destacado {

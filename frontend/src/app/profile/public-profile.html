@@ -1,3 +1,6 @@
+<md-toolbar class="md-tall md-warn" layout="row" layout-align="center center">
+  <h2><span translate>PERFIL DE USUARIO</span></h2>
+</md-toolbar>
 <md-content class="acme-public-profile">
   <div class="container">
     <div layout="row" layout-xs="column">
@@ -15,8 +18,8 @@
                   <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
                   <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                   <div ng-if="!profile.user.private || profile.user.myself">
-                    <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()">Seguir</md-button>
-                    <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself">Editar</md-button>
+                    <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir</md-button>
+                    <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                   </div>
                 </div>
                 <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
@@ -29,34 +32,37 @@
         </md-card>
       </div>
       <div flex class="bio">
-        <h3>BIO</h3>
+        <h3>SOBRE MI</h3>
         <p>
-          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/>{{profile.user.about}}
+          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/><pre>{{profile.user.about}}</pre>
         </p>
       </div>
     </div>
     <div layout="row" class="mje-privacidad" ng-if="profile.user.private && !profile.user.myself">
       <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
     </div>
-    <div layout="row" layout-xs="column" ng-if="!profile.user.private || profile.user.myself">
+    <div layout="row" layout-xs="column" ng-show="(!profile.user.private && profile.user.interests_list.length > 0) || profile.user.myself">
       <div flex class="intereses">
         <h4 translate>Intereses</h4>
         <md-chips>
           <md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip>
         </md-chips>
+        <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a></p>
       </div>
     </div>
-    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
+    <div layout="column" ng-show="(!profile.user.private && profile.enqueparticipo.length > 0) || profile.user.myself">
       <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
       <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'"></acme-highlighted>
+      <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
     </div>
-    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
+    <div layout="column" ng-show="(!profile.user.private && profile.creadospormi.length > 0) || profile.user.myself">
       <h3 class="title-destacado dark" translate>WINWINS CREADOS POR MI</h3>
       <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
+      <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
     </div>
-    <div layout="column" ng-if="!profile.user.private || profile.user.myself">
+    <div layout="column" ng-show="false">
       <h3 class="title-destacado" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
-      <p></p>
+      <p class="mensaje" ng-if="profile.user.myself">Aun no participás de ningún grupo. <a href="#">Ver grupos.</a> <a href="#">Crear grupo.</a></p>
     </div>
   </div>
 </md-content>
