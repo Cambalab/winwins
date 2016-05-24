@@ -21,7 +21,24 @@
                <md-card class="md-whiteframe-4dp no-padding">
                 <md-card-content>
                   <div class="ribbon" ng-if="winwin.winwin.is_successful"><span>CONCRETADO</span></div>
-                  <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />    
+                  <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />
+                  <div class="rate-box">
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                  </div>
                   <div class="wrap-card-img">              
                     <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
@@ -136,6 +153,24 @@
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
                   <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <div class="califica">
+                    <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                  </div>
                 </div>
                 <div flex="15" layout="column" class="content-social-media">
                   <div
