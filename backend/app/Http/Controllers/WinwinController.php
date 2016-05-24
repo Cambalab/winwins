@@ -54,7 +54,7 @@ class WinwinController extends Controller {
                 $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
                 break;
             case 'last':
-                $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
+                $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
                 break;
             case 'success':
                 $winwins = Winwin::where('published', '=', 1)->where('status', '=', 'SUCCESSFUL')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
@@ -662,12 +662,11 @@ class WinwinController extends Controller {
         $winwin = Winwin::find($winwinId);
         $detail = $user->detail;
 
-
         foreach($request->input('mails') as $recipient) {
             $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => 'http://dev-winwins.net',
-                    'winwin_link' => 'http://dev-winwins.net/#/winwin-view/'.$winwin->id,
+                    'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
                     'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(

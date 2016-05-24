@@ -1,0 +1,45 @@
+.acme-notifications {
+  h2 {
+    text-transform: capitalize;
+    span {
+      color: #fff !important;
+    }
+  }
+  .container {
+    max-width: 500px;
+  }
+  
+  md-list.notificaciones {
+    md-list-item {
+      font-size: 12px;
+      background: #fff;
+      margin-bottom: 5px;
+      color: #666;
+      padding: 20px 25px;
+      .date {
+        color: #999;
+        display: block;
+        font-size: 11px;
+      }
+      .green {
+        color: #62c399;
+        display: block;
+      }
+      .orange {
+        color: #e74c00;
+        display: block;
+      }
+      .blue {
+        color: #123fbf;
+        text-decoration: none;
+        &:hover {
+          color: #031380;
+        }
+      }
+      .red {
+        color: #da0000;
+        display: block;
+      }
+    }
+  }
+}

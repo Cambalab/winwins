@@ -37,6 +37,16 @@
           }
         }
       })
+      .state('home.public-profile',{
+        url: 'profile/:userId',
+        views: {
+          'content@home': {
+            templateUrl: 'app/profile/public-profile.html',
+            controller: 'PublicProfileController',
+            controllerAs: 'profile'
+          }
+        }
+      })
       .state('home.winwin',{
         url: 'winwin/:winwinId',
         views: {
@@ -75,6 +85,46 @@
             controller: 'TermsController',
             controllerAs: 'terms'
           }
+        }
+      })
+      .state('home.notifications',{
+        url: 'notifications',
+        views: {
+          'content@home': {
+            templateUrl: 'app/notifications/notifications.html',
+            controller: 'NotificationsController',
+            controllerAs: 'notifications'
+          }
+        }
+      })
+      .state('home.winwin-list',{
+        url: 'winwin-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/winwin/winwin-list.html',
+            controller: 'WinwinListController',
+            controllerAs: 'winwin'
+          }
+        }
+      })
+      .state('home.miembros',{
+        url: 'miembros',
+        views: {
+          'content@home': {
+            templateUrl: 'app/miembros/miembros.html',
+            controller: 'MiembrosController',
+            controllerAs: 'miembros'
+          }
+        }
+      })
+      .state('home.mis-winwin',{
+        url: 'mis-winwin',
+        views: {
+          'content@home': {
+            templateUrl: 'app/winwin/mis-winwin.html',
+            controller: 'MisWinwinController',
+            controllerAs: 'winwin'
+            }
         }
       });
 

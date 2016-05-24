@@ -20,16 +20,16 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   	position: relative;
 	  .badge {
 	  	position: absolute;
-	  	width: 15px;
-	  	height: 15px;
+	  	width: 17px;
+	  	height: 17px;
 	  	border-radius: 100px;
 	  	color: #fff;
 	  	text-align: center;
 	  	background: #e5452e;
-			right: -5px;
-			top: -2px;
-			font-weight: 700;
+			right: 3px;
+			top: 6px;
 			font-size: 11px;
+	    line-height: 17px;
 	  }
   }
   .md-primary.menu-toggle {
@@ -139,6 +139,7 @@ header {
 				border-bottom: solid 2px #eb6a24;
 				color: #99bce4;
 				font-family: 'Montserrat', serif;
+				width: 210px;
 			}
 			.md-input::-webkit-input-placeholder { color: #99bce4; }
 			.md-input:-moz-placeholder { color: #99bce4; }

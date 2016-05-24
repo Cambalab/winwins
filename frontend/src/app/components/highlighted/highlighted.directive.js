@@ -13,7 +13,9 @@
       scope: {
         items: '=',
         title: '=',
-        icon: '='
+        icon: '=',
+        scroll: '&onScroll',
+        viewmore: '='
       },
       controller: HighlightedController,
       controllerAs: 'vm',
@@ -38,6 +40,10 @@
             current_winwin: winwin
           }
         });
+      }
+
+      vm.nextPage = function() {
+        vm.scroll();
       }
     }
 

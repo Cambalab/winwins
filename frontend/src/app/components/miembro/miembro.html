@@ -1,18 +1,18 @@
-<md-content class="acme-miembro" class="hide show-gt-sm">
+<md-content class="acme-miembro" class="hide show-gt-sm" infinite-scroll='vm.nextPage()'>
   <div class="container">
     <h1 class="title">
       <md-icon md-svg-src="assets/images/icon-members.svg"></md-icon>{{ 'MIEMBROS' | translate }}
       <small>{{ 'Personas que crean y participan en acciones de consenso colectivo' | translate }}</small>
     </h1>
     <div layout="row" layout-align="center" layout-wrap>
-      <div ng-repeat="item in vm.items" flex-gt-md="15">
+      <div ng-repeat="item in vm.items" flex-gt-md="15" ui-sref="home.public-profile({userId: item.id})">
           <div class="acme-miembro-thumb">
             <img ng-src="{{vm.imageServer}}/smart/{{item.photo}}" alt="{{item.name}}" title="{{item.name}}">
           </div>
       </div>
     </div>
     <div layout="column" layout-align="center center">
-      <md-button class="md-raised md-primary md-right">{{'+ Ver todos los participantes' | translate }}</md-button>
+      <md-button class="md-raised md-primary md-right" ui-sref="home.miembros">{{'+ Ver todos los participantes' | translate }}</md-button>
       <h3 ng-if="!vm.isAuthenticated()">{{ 'Sólo faltas vos,' | translate }} <span>{{ 'sumate!' | translate }}</span></h3>
       <md-button class="md-raised md-green" ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">{{'Comenzar' | translate }}</md-button>
     </div>

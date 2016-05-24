@@ -3,7 +3,7 @@
     url('../assets/images/member-border-top.svg') repeat-x left top,
     url('../assets/images/member-border-bottom.svg') repeat-x left bottom;
   background-color: #fff;
-  padding: 70px 0;
+  padding: 70px 0 100px 0;
   margin-bottom: 30px;
   .container {
     position: relative;
@@ -53,11 +53,12 @@
     display: block;
     img {
       border-radius: 50%;
-      max-width: 100px;
-      width: 100%;
+      width: 100px;
+      height: 100px;
       border: 6px solid #D0DBEB;
       display: block;
       box-sizing: border-box;
+      cursor: pointer;
     }
   }
   .md-green {
@@ -71,5 +72,16 @@
     &:not([disabled]):hover {
       background: #4cae4e;
     }
+  }
+}
+.miembros-page {
+  .acme-miembro {
+    background: none;
+    background-color: #fff;
+    margin-bottom: 0;
+    padding: 30px 0;
+  }
+  .md-raised.md-primary.md-right.md-button {
+    display: none;
   }
 }

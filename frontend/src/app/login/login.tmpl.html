@@ -24,7 +24,7 @@
                     </div>
                   </md-input-container>
                 </div>
-                <button type="submit" ng-disabled="loginForm.$invalid" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
+                <button type="submit" ng-disabled="loginForm.$invalid || loadingFlag" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
                 </button>
               </form>
               <div layout="row" layout-align="center center" class="section-login" ng-show="login.login_status == 'login'">
@@ -44,7 +44,7 @@
                 </md-button></div> -->
               </div>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.login_status == 'success'">
-                <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
+                <div flex><md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="violet" translate>Vamos a tu cuenta.</p></div>
               </div>
@@ -112,11 +112,11 @@
                     </div>
                   </md-input-container>
                 </div>
-                <button type="submit" name="action" ng-disabled="registerForm.$invalid" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
+                <button type="submit" name="action" ng-disabled="registerForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
                 </button>
               </form>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.register_status == 'success'">
-                <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
+                <div flex><md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="gray font-16">{{ 'Te enviamos un correo a' | translate }}
                             <span class="violet">{{ login.register.email}}</span>
@@ -130,7 +130,7 @@
             </md-content>
           </md-tab-body>
         </md-tab>
-        <md-tab label="three">
+<!--         <md-tab label="three">
           <md-tab-label>
             <md-icon md-svg-src="assets/images/icon-lock.svg"></md-icon>
           </md-tab-label>
@@ -161,7 +161,7 @@
               </div>
             </md-content>
           </md-tab-body>
-        </md-tab>
+        </md-tab> -->
       </md-tabs>
     </md-dialog-content>
 </md-dialog>

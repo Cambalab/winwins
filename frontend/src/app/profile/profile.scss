@@ -259,7 +259,6 @@ md-toolbar.md-tall.md-warn.ng-scope {
         }
       }
       &.flex-30 {
-        margin-left: 5px;
         padding: 0;
         @media (max-width: 768px) { 
           margin: 0 15px;
@@ -334,5 +333,194 @@ md-toolbar.md-tall.md-warn.ng-scope {
     width: 40px;
     height: 40px;
     border-radius: 100px;
+  }
+}
+md-card.public-profile {
+  margin: 0 0 10px 0;
+  .md-card-members {
+    width: 100%;
+  }
+  .md-card-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+  }
+  .name {
+    text-transform: capitalize;
+    margin: 10px 0 30px 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+  }
+  .bt-green.md-button {
+    height: inherit;
+    padding: 5px 30px;
+    border-radius: 3px;
+    &:hover {
+      background:#34b436;
+    }
+    &:after {
+      display: none;
+    }
+  }
+  .md-item-text {
+    h3 {
+      color: #fff;
+      background: #38383a;
+      font-size: 14px;
+      text-transform: capitalize;
+      margin: 0;
+      padding: 5px;
+      border-radius: 3px 3px 0 0;
+    }
+    p {
+      padding: 10px 0;
+      margin: 0;
+      font-weight: bold;
+      border-radius: 0 0 3px 3px;
+    }
+    &.bg-orange p {
+      background: #ec8645;
+    }
+    &.bg-violet p {
+      background: #4a6dce;
+    }
+  }
+  md-card-content {
+    padding: 0;
+    position: relative;
+    max-height: 380px;
+    overflow: hidden;
+    md-card-title {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      padding: 10px;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(255,255,255,0.1));
+      position: absolute;
+      color: #fff;
+      text-transform: uppercase;
+      text-align: center;
+      md-card-title-text {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+        .md-title-image {
+          border: solid 3px #fff;
+          border-radius: 3px;
+          box-shadow: 1px 1px 2px rgba(255,255,255,.7);
+        }
+        .md-headline {
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+      }
+    }
+    .md-card-image {
+      display: block;
+      max-width: 100%;
+      min-width: 500px;
+    }
+  }
+}
+.acme-public-profile {
+  padding-top: 30px;
+  @media (max-width: 480px) {
+    padding-top: 0;
+  }
+  .mje-privacidad {
+    background:#2776c5;
+    p {
+      margin: 0 auto;
+      color: #fff;
+      font-size: 13px;
+      color: #fff;
+      padding: 10px;
+    }
+  }
+  .mensaje {
+    font-size: 14px;
+    margin: 0 0 30px 10px;
+    color: #5c5c5c;
+    a {
+      color: #0D47A1;
+      text-decoration: none;
+    }
+  }
+  .intereses {
+    color: #666;
+    background: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 0 10px 0;
+    h4 {
+      text-transform: uppercase;
+      font-size: 14px;
+      margin: 0;
+    }
+    p {
+      font-size: 14px;
+      a {
+        color: #0D47A1;
+        text-decoration: none;
+      }
+    }
+    md-chips .md-chips {
+      box-shadow: none;
+      .md-chip {
+        font-size: 12px;
+      }
+    }
+  }
+  .bio {
+    margin: 10px 20px;
+    h3 {
+      color: #666;
+      text-transform: uppercase;
+      font-size: 14px;
+      margin: 0;
+      &:before {
+        width: 0; 
+        height: 0; 
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 10px solid #666;
+        display: block;
+        content: '';
+        float: left;
+        margin-right: 5px;
+      }
+    }
+    p {
+      font-size: 14px;
+      color: #666;
+    }
+    pre {
+      font-family: 'Montserrat', serif;
+      font-size: 14px;
+      color: #666;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+  }
+  .title-destacado {
+    background: #7199f4;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    margin: 0;
+    &:before {
+      width: 0; 
+      height: 0; 
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 10px solid #fff;
+      display: block;
+      content: '';
+      float: left;
+      margin-right: 5px;
+    }
+    &.dark {
+      background: #4a6dcd;
+    }
   }
 }
