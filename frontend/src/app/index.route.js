@@ -97,6 +97,26 @@
           }
         }
       })
+      .state('home.about',{
+        url: 'about',
+        views: {
+          'content@home': {
+            templateUrl: 'app/about/about.html',
+            controller: 'AboutController',
+            controllerAs: 'about'
+          }
+        }
+      })
+      .state('home.weare',{
+        url: 'weare',
+        views: {
+          'content@home': {
+            templateUrl: 'app/weare/weare.html',
+            controller: 'WeareController',
+            controllerAs: 'weare'
+          }
+        }
+      })
       .state('home.winwin-list',{
         url: 'winwin-list',
         views: {

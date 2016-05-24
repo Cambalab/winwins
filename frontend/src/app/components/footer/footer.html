@@ -18,17 +18,15 @@
   </div>
   <div class="footer">
     <div class="container">
-      <div layout-gt-sm="row" layout-padding layout-align="start center">
+      <div layout-gt-sm="row" layout-padding layout-align="space-between center">
         <div flex>
           <ul>
-            <li><a href="#" translate>Equipo</a></li>
-            <li><a href="#" translate>Valores</a></li>
-            <li><a href="#" translate>Propósito</a></li>
-            <li><a href="#" translate>Sé sponsor</a></li>
+            <li><a ng-href="/#/about" translate>Qué es winwins</a></li>
+            <li><a ng-href="/#/weare" translate>Quiénes somos</a></li>
             <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
           </ul>
         </div>
-        <div flex class="social-media">
+        <div flex class="social-media" ng-if="!vm.isAuthenticated()">
           <p translate>INGRESAR</p>
           <md-button class="md-icon-button" ng-href ng-click="vm.showLoginDialog()" aria-label="facebook">
             <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
