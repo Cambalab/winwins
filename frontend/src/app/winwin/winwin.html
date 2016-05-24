@@ -22,7 +22,7 @@
                 <md-card-content>
                   <div class="ribbon" ng-if="winwin.winwin.is_successful"><span>CONCRETADO</span></div>
                   <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />
-                  <div class="rate-box">
+                  <div class="rate-box" ng-show="false">
                     <md-button class="md-star active" md-ink-ripple="false">
                       <md-icon>star_rate</md-icon>
                     </md-button>
@@ -153,7 +153,7 @@
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
                   <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
-                  <div class="califica">
+                  <div class="califica" ng-show="false">
                     <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
                     <md-button class="md-star active" md-ink-ripple="false">
                       <md-icon>star_rate</md-icon>

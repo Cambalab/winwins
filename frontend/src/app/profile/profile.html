@@ -70,7 +70,20 @@
             </div>
           </md-input-container>
           <div class="md-block wrap-input">
-            <md-datepicker ng-model="profile.user.birthdate" md-placeholder="Fecha de Nacimiento" ng-required ng-disabled="profile.is_public"></md-datepicker>
+            <am-date-picker ng-model="date"
+              am-cancel-button="Cancelar"
+              am-back-button-text="Volver"
+              am-input-label="Fecha de Nacimiento"
+              am-allow-clear="false"
+              am-input-date-format="L"
+              am-popup-date-format="D MMMM YYYY"
+              am-show-input-icon="true"
+              name="dateField">
+            </am-date-picker>
+
+
+
+            <!-- <md-datepicker ng-model="profile.user.birthdate" md-placeholder="Fecha de Nacimiento" ng-required ng-disabled="profile.is_public"></md-datepicker> -->
           </div>        
         </div>      
       </div>
