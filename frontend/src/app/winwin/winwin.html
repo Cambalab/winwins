@@ -376,8 +376,8 @@
                   <p>{{participante.username}}</p>
                 </md-list-item>
                 <md-list-item class="md-no-proxy">
-                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="!winwin.winwin.already_joined"><strong>+</strong> Ver participantes</md-button>
-                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="winwin.winwin.already_joined"><strong>+</strong> Organizar participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="!winwin.winwin.is_moderator"><strong>+</strong> Ver participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="winwin.winwin.is_moderator"><strong>+</strong> Organizar participantes</md-button>
                 </md-list-item>
               </md-list>
             </div>
