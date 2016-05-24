@@ -78,6 +78,9 @@
           a {
             color: #fff;
             text-decoration: none;
+            &:hover {
+              color: #8AACE2;
+            }
           }
         }
       }
@@ -90,6 +93,7 @@
       }
       &:last-child {
         border:none;
+        text-align: right;
       }
     }
     .crear {
@@ -102,7 +106,7 @@
       font-size: 14px;
       font-weight: 700;
       &:hover {
-        background: #fb3e22;
+        background: #F74209;
       }
     }
     .social-media {
@@ -138,6 +142,9 @@
       a {
         color: #fff;
         text-decoration: none;
+        &:hover {
+          color: #A6B4F3;
+        }
       }
     }
   }
