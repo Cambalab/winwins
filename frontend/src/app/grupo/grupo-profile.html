@@ -1,5 +1,124 @@
 <md-content class="group-profile">
     <div class="container">
-
+        <md-tabs md-dynamic-height>
+            <md-tab md-on-select="true">
+            <md-tab-label>
+                <md-icon md-svg-icon="assets/images/icon-comments.svg"></md-icon>
+            </md-tab-label>
+            <md-tab-body>
+                <div layout-gt-sm="row" layout-align="center start" layout-padding layout="column" class="primary-content">
+                    <div class="col-left">
+                        <md-card class="md-whiteframe-4dp no-padding">
+                            <md-card-content>
+                                <div class="wrap-card-img">
+                                    <img ng-src="{{ grupo.imageServer }}/390x266/{{ grupo.profile.photo }}" alt="" class="md-card-img"/>
+                                </div>
+                                <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
+                                    <md-button class="md-headline">{{ grupo.profile.title }}</md-button>
+                                </md-card-title-text>
+                                <div class="card-labels">
+                                    <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg">highlighted</md-icon>
+                                </div>
+                            </md-card-content>
+                            <md-card-actions layout="row" layout-align="space-between center">
+                                <div flex layout="row" hide show-gt-xs class="card-social-media">
+                                    <div
+                                            socialshare
+                                            socialshare-provider="facebook"
+                                            socialshare-text="{{grupo.profile.name}}"
+                                            socialshare-media="{{grupo.imageServer}}/{{grupo.profile.photo}}">
+                                        <md-button class="md-icon-button" ng-href aria-label="facebook">
+                                            <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div
+                                            socialshare
+                                            socialshare-text="{{ grupo.profile.name}}"
+                                            socialshare-provider="twitter">
+                                        <md-button class="md-icon-button" ng-href aria-label="twitter">
+                                            <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div
+                                            socialshare
+                                            socialshare-provider="google"
+                                            socialshare-text="{{ grupo.profile.name }}"
+                                            socialshare-media="{{winwin.imageServer}}/{{ grupo.profile.photo }}">
+                                        <md-button class="md-icon-button" ng-href aria-label="google">
+                                            <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                    <div>
+                                        <md-button class="md-icon-button" ng-href aria-label="email">
+                                            <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <div class="card-numbers">
+                                    <div layout="row" layout-wrap layout-align="center center">
+                                        <div class="md-item-text bg-green">
+                                            <h3 translate>Somos</h3>
+                                            <p>{{ grupo.profile.members_count }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-card-actions>
+                        </md-card>
+                    </div>
+                    <div class="col-central" hide show-gt-xs>
+                        <div layout="column" layout-align="center center">
+                            <div class="creadores">
+                                <img ng-src="{{ grupo.imageServer }}/{{ grupo.group_creator.photo }}" alt="" class="avatar-creador style-rounded"  ui-sref="home.public-profile({userId: grupo.profile.user_id})"/>
+                                <h3>{{ grupo.group_creator.name }} {{ grupo.group_creator.lastname }}</h3>
+                                <strong>CREADOR</strong>
+                            </div>
+                            <div class="miembros">
+                                <div layout="row" layout-align="center center" layout-margin layout-wrap>
+                                    <div ng-repeat="miembro in grupo.users" >
+                                        <img ng-src="{{ grupo.imageServer }}/25x25/{{ miembro.photo }}" alt="{{ miembro.name }}" title="{{ miembro.name }}" class="profile-small style-rounded" ui-sref="home.public-profile({userId: miembro.id})"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <h2 class="main-title">{{grupo.profile.name}}</h2>
+                        <div layout="col" layout-align="center start">
+                            <div flex="83">
+                                <!--<p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>-->
+                                <!--</p>-->
+                                <!--<p><strong>te sumarías?</strong></p>-->
+                                <div class="more-details">
+                                    <md-button aria-label="menu" class="md-raised" ng-click="open = !open">
+                                        Más detalles
+                                    </md-button>
+                                    <div class="toggle-content">
+                                        <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
+                                            <p>{{ grupo.profile.description }}</p>
+                                        </div>
+                                        <!--<div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">-->
+                                            <!--<div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>-->
+                                            <!--<div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>-->
+                                            <!--<div><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>-->
+                                        <!--</div>-->
+                                        <!--<div class="slide-categorias content-bg" layout="column" layout-align="center center" layout-padding>-->
+                                            <!--<h4>Categorías:</h4>-->
+                                            <!--<div ng-repeat="category in winwin.winwin.interests">{{category.description}}</div>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="creadores" layout="row">-->
+                            <!--<div hide show-xs flex>-->
+                                <!--<img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />-->
+                                <!--<h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>-->
+                                <!--<strong>CREADOR</strong>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </md-tab-body>
+        </md-tabs>
     </div>
 </md-content>

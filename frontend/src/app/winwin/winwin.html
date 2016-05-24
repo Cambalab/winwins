@@ -21,7 +21,7 @@
                <md-card class="md-whiteframe-4dp no-padding">
                 <md-card-content>
                   <div class="wrap-card-img">
-                    <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
+                    <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
                   </div>
                   <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>

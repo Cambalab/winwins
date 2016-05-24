@@ -123,7 +123,7 @@
           'content@home': {
             templateUrl: 'app/grupo/grupo-profile.html',
             controller: 'PublicGrupoProfileController',
-            controllerAs: 'grupo-profile'
+            controllerAs: 'grupo'
           }
         }
       })

@@ -130,15 +130,15 @@ class GroupController extends Controller {
         $group = Group::find($id);
 
         $user = false;
-        $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
-        if ( $token )  {
-            $token = $request->header('Authorization');
-            if(isset($token[1])) {
-                $token = explode(' ', $request->header('Authorization'))[1];
-                $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
-                $user = User::find($payload['sub']);
-            }
-        }
+//        $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
+//        if ( $token )  {
+//            $token = $request->header('Authorization');
+//            if(isset($token[1])) {
+//                $token = explode(' ', $request->header('Authorization'))[1];
+//                $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
+//                $user = User::find($payload['sub']);
+//            }
+//        }
 
         $group->members_count = count($group->users);
         $group->winwins;

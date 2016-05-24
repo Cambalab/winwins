@@ -91,6 +91,7 @@ Route::post('api/groups/{groupId}/conversation/{id}', ['middleware' => 'auth', '
 Route::get('api/group_thread/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@thread']);
 Route::post('api/groups/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@sponsorRequest']);
 Route::resource('api/groups', 'GroupController');
+Route::get('api/group/{id}', ['uses' => 'GroupController@show']);
 
 Route::get('api/sponsors/all', ['uses' => 'SponsorController@all']);
 Route::get('api/sponsors/paginate/{page}/{amount}', ['uses' => 'SponsorController@paginate']);

@@ -23,6 +23,10 @@
       return rGrupo.customGET(paginateUrl);
     };
 
+    _grupo.getGroup = function(id) {
+      return Restangular.one('group', id).get();
+    }
+
     return _grupo;
   }
 
