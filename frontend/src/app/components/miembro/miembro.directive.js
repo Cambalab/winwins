@@ -12,6 +12,7 @@
       templateUrl: 'app/components/miembro/miembro.html',
       scope: {
         items: '=',
+        hideExtra: '=',
         scroll: '&onScroll'
       },
       controller: MiembroController,

@@ -1,6 +1,6 @@
 <md-content class="acme-miembro" class="hide show-gt-sm" infinite-scroll='vm.nextPage()'>
   <div class="container">
-    <h1 class="title">
+    <h1 class="title" ng-show="!vm.hideExtra">
       <md-icon md-svg-src="assets/images/icon-members.svg"></md-icon>{{ 'MIEMBROS' | translate }}
       <small>{{ 'Personas que crean y participan en acciones de consenso colectivo' | translate }}</small>
     </h1>
@@ -13,8 +13,9 @@
     </div>
     <div layout="column" layout-align="center center">
       <md-button class="md-raised md-primary md-right" ui-sref="home.miembros">{{'+ Ver todos los participantes' | translate }}</md-button>
-      <h3 ng-if="!vm.isAuthenticated()">{{ 'Sólo faltas vos,' | translate }} <span>{{ 'sumate!' | translate }}</span></h3>
-      <md-button class="md-raised md-green" ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">{{'Comenzar' | translate }}</md-button>
+      <h3 ng-if="!vm.isAuthenticated() && !vm.hideExtra">{{ 'Sólo faltas vos,' | translate }} <span>{{ 'sumate!' | translate }}</span></h3>
+      <md-button class="md-raised md-green" ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated() && !vm.hideExtra">{{'Comenzar' | translate }}</md-button>
     </div>
   </div>
 </md-content>
+ 

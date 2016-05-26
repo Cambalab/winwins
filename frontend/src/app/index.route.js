@@ -146,6 +146,16 @@
             controllerAs: 'winwin'
             }
         }
+      })
+      .state('home.search',{
+        url: 'search/:query',
+        views: {
+          'content@home': {
+            templateUrl: 'app/search/search.html',
+            controller: 'SearchController',
+            controllerAs: 'search'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
