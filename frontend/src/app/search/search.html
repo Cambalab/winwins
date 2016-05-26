@@ -1,6 +1,6 @@
 <div class="acme-search">
 	<div class="container">
-		<h1 class="title"><md-icon>search</md-icon> Hay <span>30</span> resultados de búsqueda para <span>Marcha de las velas</span></h1>
+		<h1 class="title"><md-icon>search</md-icon> Hay <span>{{search.result_length}}</span> resultados de búsqueda para <span>{{search.query}}</span></h1>
 	</div>
 	<acme-miembro items="search.users" hide-extra="true" class="miembros-page" ng-show="search.users.length > 0"></acme-miembro>
 
