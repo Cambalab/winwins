@@ -282,7 +282,7 @@
                   </md-card-actions>
                 </md-card>
 
-                <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
+                <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments | orderBy:'id'">
                   <div layout="row" layout-align="space-between center">
                     <div layout-padding>
                       <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button" aria-label="eliminar">  
