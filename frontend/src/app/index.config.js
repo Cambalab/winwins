@@ -41,9 +41,9 @@
     cfpLoadingBarProvider.includeSpinner = false;
 
     amDatePickerConfigProvider.setOptions({
-        calendarIcon: '/static/images/icons/ic_today_24px.svg',
-        clearIcon: '/static/images/icons/ic_close_24px.svg',
-        nextIcon: '/static/images/icons/ic_chevron_right_18px.svg',
+        calendarIcon: '/assets/images/ic_today_black_24px.svg',
+        clearIcon: '/assets/images/ic_close_black_24px.svg',
+        nextIcon: '/assets/images/ic_keyboard_arrow_right_black_24px.svg',
         prevIcon: '/assets/images/ic_keyboard_arrow_left_black_24px.svg'
     })
 

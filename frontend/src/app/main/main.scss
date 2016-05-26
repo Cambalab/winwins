@@ -353,3 +353,22 @@ md-select-menu md-option .md-text {
 md-sidenav {
   position: fixed;
 }
+.am-date-picker__container {
+  md-toolbar:not(.md-menu-toolbar) {
+    position: inherit;
+    box-shadow: none;
+  }
+  .md-primary.am-date-picker__month-year.md-button.md-ink-ripple:hover {
+    background: #0d47a1;
+    color: #fff;
+  }
+  .md-button.md-primary.md-fab {
+    background-color: #0d47a1;
+  }
+  .am-date-picker__actions .md-button.md-primary {
+    color: #0d47a1;
+  }
+  .am-date-picker__month-year .md-primary.am-date-picker__month-year {
+    color: #0d47a1;
+  }
+}
