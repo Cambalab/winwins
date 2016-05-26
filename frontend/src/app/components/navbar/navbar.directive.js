@@ -101,7 +101,8 @@
           parent: angular.element($document.body),
           clickOutsideToClose:true,
           locals: {
-              notifications: vm.notifications
+              notifications: vm.notifications,
+              current_user: vm.account
             }
         });
       };
