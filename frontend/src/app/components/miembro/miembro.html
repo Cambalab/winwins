@@ -7,7 +7,8 @@
     <div layout="row" layout-align="center" layout-wrap>
       <div ng-repeat="item in vm.items" flex-gt-md="15" ui-sref="home.public-profile({userId: item.id})">
           <div class="acme-miembro-thumb">
-            <img ng-src="{{vm.imageServer}}/smart/{{item.photo}}" alt="{{item.name}}" title="{{item.name}}">
+            <img ng-src="{{vm.imageServer}}/smart/{{item.photo}}" alt="{{item.username}}">
+            <md-tooltip md-direction="bottom">{{item.username}}</md-tooltip>
           </div>
       </div>
     </div>

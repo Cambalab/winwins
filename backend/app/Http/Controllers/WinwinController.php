@@ -188,6 +188,7 @@ class WinwinController extends Controller {
         $winwin->already_joined = false;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
+            $winwin->is_creator = ( $winwin->user_id == $user->id );
 
             $mixFollowers = DB::table('winwins_users')
                 ->join('followers', 'followers.followed_id', '=', 'winwins_users.user_id')
@@ -835,6 +836,7 @@ class WinwinController extends Controller {
             DB::transaction(function() use ($winwin, $user, $request_body) {
                 $winwin->canceled = 1;
                 $winwin->published = 0;
+                $winwin->status = 'CANCELED';
                 $winwin->canceled_reason = $request_body;
                 $winwin->save();
             });
