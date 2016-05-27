@@ -152,7 +152,7 @@
                     </div>
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
-                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
                   <div class="califica" ng-show="false">
                     <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
                     <md-button class="md-star active" md-ink-ripple="false">
@@ -356,10 +356,17 @@
                     <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
                   </ul>
                 </div>
-                <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
+                <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined && !winwin.winwin.canceled && !winwin.winwin.is_creator">
                   <p>
                     <md-button ng-href ng-click="winwin.left()" class="no-padding">
                       <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+                    </md-button>
+                  </p>
+                </div>
+                <div class="content-bg" ng-if="winwin.winwin.is_creator && !winwin.winwin.canceled">
+                  <p>
+                    <md-button ng-href ng-click="winwin.close()" class="no-padding">
+                      <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Cerrar Winwin
                     </md-button>
                   </p>
                 </div>
@@ -448,7 +455,7 @@
     </md-content>
     
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined">
+    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>
