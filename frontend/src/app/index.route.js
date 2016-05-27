@@ -127,6 +127,16 @@
           }
         }
       })
+      .state('home.grupo-creacion',{
+        url: 'crear-grupo',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/crear-grupo.html',
+            controller: 'CrearGrupoController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
       .state('home.mis-winwin',{
         url: 'mis-winwin',
         views: {

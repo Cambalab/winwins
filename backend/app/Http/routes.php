@@ -87,6 +87,7 @@ Route::get('api/groups/left/{id}', ['middleware' => 'auth', 'uses' => 'GroupCont
 Route::get('api/groups/{id}/add_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@addWinwin']);
 Route::get('api/groups/{id}/remove_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@removeWinwin']);
 Route::post('api/groups/{id}/conversation', ['middleware' => 'auth', 'uses' => 'GroupController@conversation']);
+Route::post('api/groups/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@store']);
 Route::post('api/groups/{groupId}/conversation/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@conversation_reply']);
 Route::get('api/group_thread/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@thread']);
 Route::post('api/groups/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@sponsorRequest']);

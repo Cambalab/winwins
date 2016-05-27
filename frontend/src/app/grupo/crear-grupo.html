@@ -1,0 +1,53 @@
+<md-content class="crearGrupo">
+    <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
+        <h2><span translate>CREA TU GRUPO</span></h2>
+    </md-toolbar>
+    <div class="container">
+        <form method="post" name="grupo.crearForm" ng-submit="grupo.saveGrupo()" class="form-crear">
+            <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
+                <div flex>
+                    <div class="wrap-md-input-container">
+                        <md-input-container class="md-block">
+                            <label translate>Nombre para tu grupo</label>
+                            <div class="wrap-tooltip">
+                                <span class="icon-help">?</span>
+                                <div class="tooltip-text" translate>
+                                    Nombra tu grupo con  un título que lo represente.
+                                </div>
+                            </div>
+                            <input required name="name" ng-model="grupo.grupo.name">
+                            <div ng-messages="grupo.crearForm.name.$error">
+                                <div ng-message="required" translate>No se puede crear un Grupo sin nombre!</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex>
+                    <div class="wrap-md-input-container">
+                        <md-input-container class="md-block">
+                            <label translate>Descripcion del grupo</label>
+                            <div class="wrap-tooltip">
+                                <span class="icon-help">?</span>
+                                <div class="tooltip-text" translate>
+                                    Acá ingresa información detallada del grupo, datos e información importante. Lugares, fechas, acciones
+                                    y toda la información que te resulte relevante.
+                                </div>
+                            </div>
+                            </md-button>
+                            <textarea name="description" ng-model="grupo.grupo.description" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
+                        </md-input-container>
+                    </div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-checkbox class="green" ng-model="grupo.grupo.terms" name="terms" ng-change="grupo.clearError()">
+                            {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
+                        </md-checkbox>
+                        <div ng-messages="grupo.crearForm.terms.$error" class="help-block" ng-if="grupo.crearForm.terms.$error.notTerms">
+                            <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
+                        </div>
+                    </md-input-container>
+                    <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="grupo.crearForm.$invalid" type="submit" name="action" translate>{{ 'CONTINUAR' | translate }}</md-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</md-content>

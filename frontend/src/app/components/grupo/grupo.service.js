@@ -27,6 +27,19 @@
       return Restangular.one('group', id).get();
     }
 
+    _grupo.saveGrupo = function(grupo) {
+      return Restangular.all('groups').post(grupo);
+    };
+
+    _grupo.uploadImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('groups')
+          .withHttpConfig({transformRequest: angular.identity})
+          .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
+    }
+
     return _grupo;
   }
 
