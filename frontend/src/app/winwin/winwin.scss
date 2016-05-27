@@ -500,6 +500,9 @@
   }
   .comments {
     padding: 0;
+    .flex-offset-15 md-card-avatar {
+      margin-right: 0;
+    }
     @media (min-width: 960px) {
       width: 515px;
     }
