@@ -290,7 +290,9 @@ class PostController extends Controller {
             'winwin' => $winwin,
             'post' => $post,
             'media' => $post->media,
-            'facebook_app_id' => Config::get('facebook_app_id')
+            'facebook_app_id' => Config::get('app.facebook_app_id'),
+            'url_base' => Config::get('app.url'),
+            'url_images' => Config::get('app.url_images')
         ]);
 	}
 

@@ -922,8 +922,10 @@ class WinwinController extends Controller {
         $ww_user = $winwin->user;
         $ww_user->detail;
         return view('winwins.view', [
-		'winwin' => $winwin,
-                'facebook_app_id' => Config::get('facebook_app_id')
+    		'winwin' => $winwin,
+            'facebook_app_id' => Config::get('app.facebook_app_id'),
+            'url_base' => Config::get('app.url'),
+            'url_images' => Config::get('app.url_images')
 	]);
 	}
 
