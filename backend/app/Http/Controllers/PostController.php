@@ -332,15 +332,15 @@ class PostController extends Controller {
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
-                        'base_url' => 'http://dev-winwins.net',
-                        'winwin_link' => 'http://dev-winwins.net/#/winwin-view/'.$winwin->id,
+                        'base_url' => Config::get('app.url'),
+                        'winwin_link' => Config::get('app.url').'/#/winwin-view/'.$winwin->id,
                         'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'post_username' => $user->username,
                         'username' => $user->username,
                         'name' => $user->detail->name,
-                        'photo' => 'http://images.dev-winwins.net/72x72/smart/'.$user->photo,
+                        'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
                     ),
                     'winwin' => array(
                         'id' => $winwin->id,
