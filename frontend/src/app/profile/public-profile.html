@@ -34,7 +34,7 @@
       <div flex class="bio">
         <h3>SOBRE MI</h3>
         <p>
-          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/><pre>{{profile.user.about}}</pre>
+          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.birthdate |moment: 'DD/MM/YYYY'}}<br/><pre>{{profile.user.about}}</pre>
         </p>
       </div>
     </div>

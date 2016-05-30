@@ -1,0 +1,21 @@
+.acme-about {
+  h1 {
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 900px;
+    padding-bottom: 50px;
+    @media (max-width: 480px) {
+      padding: 0 20px;
+    }
+    h2 {
+      font-size: 21px;
+      color: #ec6b25;
+      position: relative;
+      margin: 20px 0;
+    }
+    p {
+      line-height: 130%;
+    }
+  }
+}

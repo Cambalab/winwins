@@ -32,8 +32,8 @@
 		  	<div layout="row" layout-align="center center">
 					<div>
 						<md-input-container md-no-float class="md-block">
-					  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
-					  	<md-icon>search</md-icon>
+					  		<input ng-model="vm.search_query" enter="vm.search()" placeholder="{{ 'Buscar' | translate }}">
+					  		<md-icon ng-click="vm.search()">search</md-icon>
 						</md-input-container>
 					</div>
 				</div>
@@ -60,8 +60,8 @@
 					</div> -->
 					<div>
 						<md-input-container md-no-float class="md-block">
-					  	<input ng-model="user.address2" placeholder="{{ 'Buscar' | translate }}">
-					  	<md-icon>search</md-icon>
+					  	<input ng-model="vm.search_query" enter="vm.search()" placeholder="{{ 'Buscar' | translate }}">
+					  	<md-icon ng-click="vm.search()">search</md-icon>
 						</md-input-container>
 					</div>
 				</div>
@@ -144,8 +144,8 @@
   <md-content layout-padding>
     <div layout="column" class="menu">
     	<div class="hide-gt-sm"><md-input-container md-no-float>
-          <input ng-model="user.address2" placeholder="{{'Buscar' | translate}}">
-          <md-icon>search</md-icon>
+          <input ng-model="vm.search_query" enter="vm.openLeftMenu(); vm.search();" placeholder="{{'Buscar' | translate}}">
+          <md-icon ng-click="vm.search()">search</md-icon>
         </md-input-container></div>
 			<div>
 				<md-button class="md-primary" ui-sref="home.winwin-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Winwins</translate></md-button>

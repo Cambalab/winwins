@@ -21,12 +21,14 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user, $window) {
+    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user, $window, search, $state) {
       var vm = this;
 
       vm.imageServer = ENV.imageServer;
       
       vm.sentActivationMail = false;
+
+      vm.search_query = "";
 
       vm.isAuthenticated = function() {
         return $auth.isAuthenticated();
@@ -70,6 +72,12 @@
         $auth.logout();
       };
 
+      vm.search = function() {
+        $state.go('home.search', {
+          query: vm.search_query
+        }); 
+      }
+
       vm.showLoginDialog = function(redirect) {
         if (redirect) {
           $rootScope.returnState = {
@@ -93,7 +101,8 @@
           parent: angular.element($document.body),
           clickOutsideToClose:true,
           locals: {
-              notifications: vm.notifications
+              notifications: vm.notifications,
+              current_user: vm.account
             }
         });
       };
@@ -106,5 +115,21 @@
       };
     }
   }
+
+  angular
+    .module('winwins')
+    .directive('enter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.enter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+  })
 
 })();
