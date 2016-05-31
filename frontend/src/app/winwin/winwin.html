@@ -329,7 +329,10 @@
                 <div class="content-bg">
                   <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
                 </div>
-              </div>
+                <div class="content-bg">
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.already_joined" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
+                </div>
+                </div>
               <md-list ng-cloak>
                 <h3 class="title">
                   <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'PARTICIPANTES' | translate }}

@@ -1,0 +1,14 @@
+<md-dialog-content class="dialog-primary">
+    <div class="md-dialog-content">
+        <h3 class="title">
+            {{ 'GRUPOS' | translate }}
+        </h3>
+        <md-list class="participantes-list">
+            <md-list-item ng-repeat="grupo in vm.group_list">
+                <img alt="" ng-src="{{vm.imageServer}}/smart/{{grupo.photo}}" alt=""class="md-avatar" />
+                <p>{{ grupo.name }}</p>
+                <md-button ng-show="participante.pivot.moderator == 0 && vm.is_moderator" class="md-raised md-warn md-caption" ng-click="">Agregar grupo</md-button>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-dialog-content>

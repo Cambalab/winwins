@@ -89,10 +89,12 @@ Route::get('api/groups/{id}/remove_winwin/{winwin_id}', ['middleware' => 'auth',
 Route::post('api/groups/{id}/conversation', ['middleware' => 'auth', 'uses' => 'GroupController@conversation']);
 Route::post('api/groups/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@store']);
 Route::post('api/groups/{groupId}/conversation/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@conversation_reply']);
+Route::post('api/groups/upload', ['middleware' => 'auth', 'uses' => 'GroupController@storeImage']);
 Route::get('api/group_thread/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@thread']);
 Route::post('api/groups/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@sponsorRequest']);
 Route::resource('api/groups', 'GroupController');
-Route::get('api/group/{id}', ['uses' => 'GroupController@show']);
+Route::get('api/group/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@show']);
+Route::get('api/groups/creator', ['middleware' => 'auth', 'uses' => 'GroupController@getGroupsByUser']);
 
 Route::get('api/sponsors/all', ['uses' => 'SponsorController@all']);
 Route::get('api/sponsors/paginate/{page}/{amount}', ['uses' => 'SponsorController@paginate']);

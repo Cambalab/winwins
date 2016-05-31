@@ -21,6 +21,10 @@
     _user.resendActivationMail = function() {
       return Restangular.one('users/resend/activation').get();
     }
+    
+    _user.getGroups = function() {
+      return Restangular.one('groups/creator').get();
+    }
 
     return _user;
   }

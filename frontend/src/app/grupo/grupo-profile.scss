@@ -1,0 +1,21 @@
+.group-winwins-title {
+  .title {
+    color: #ed7932;
+    margin: 20px 8px;
+    font-size: 28px;
+    text-align: center;
+    md-icon {
+      position: relative;
+      top:-3px;
+      width: 60px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    small {
+      color: #a1a1a1;
+      font-size: 12px;
+      font-weight: normal;
+      display: block;
+    }
+  }
+}

@@ -85,9 +85,6 @@
                         <h2 class="main-title">{{grupo.profile.name}}</h2>
                         <div layout="col" layout-align="center start">
                             <div flex="83">
-                                <!--<p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>-->
-                                <!--</p>-->
-                                <!--<p><strong>te sumarías?</strong></p>-->
                                 <div class="more-details">
                                     <md-button aria-label="menu" class="md-raised" ng-click="open = !open">
                                         Más detalles
@@ -96,17 +93,9 @@
                                         <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                                             <p>{{ grupo.profile.description }}</p>
                                         </div>
-                                        <!--<div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">-->
-                                            <!--<div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>-->
-                                            <!--<div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>-->
-                                            <!--<div><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>-->
-                                        <!--</div>-->
-                                        <!--<div class="slide-categorias content-bg" layout="column" layout-align="center center" layout-padding>-->
-                                            <!--<h4>Categorías:</h4>-->
-                                            <!--<div ng-repeat="category in winwin.winwin.interests">{{category.description}}</div>-->
-                                        <!--</div>-->
                                     </div>
                                 </div>
+                                <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.join()">SUMARSE AL GRUPO</md-button>
                             </div>
                         </div>
                         <!--<div class="creadores" layout="row">-->
@@ -122,3 +111,9 @@
         </md-tabs>
     </div>
 </md-content>
+<div class="container group-winwins-title">
+    <h1 class="title">
+        <md-icon md-svg-src="assets/images/icon-recientes-title.svg"></md-icon>{{ 'WINWINS DEL GRUPO' }}
+    </h1>
+</div>
+<acme-highlighted items="grupo.profile.winwins"></acme-highlighted>

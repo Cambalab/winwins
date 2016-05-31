@@ -126,6 +126,23 @@
       }
     }
 
+    vm.showGroupsModal = function() {
+        $mdDialog.show({
+            controller: ModalBindWinwinToGroup,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-vincular-winwin-a-grupo.tmpl.html',
+            parent: angular.element($document.body),
+            locals: {
+                group_list: vm.grupos
+            }
+        })
+            .then(function(data){
+            user.getGroups().then(function(groups_data){
+                vm.grupos = groups_data;
+            })
+        })
+    }
+
     vm.left = function() {
       $mdDialog.show({
         controller: ModalAbandonarController,
@@ -539,6 +556,11 @@
       $mdDialog.cancel();
     }
   }
+
+    /** @ngInject */
+   function ModalBindWinwinToGroup($mdDialog) {
+        var vm = this;
+    }
 
   /** @ngInject */
   function ModalVideoPostController($mdDialog) {

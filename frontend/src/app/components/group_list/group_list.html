@@ -1,12 +1,12 @@
 <div layout="row" layout-wrap>
-    <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in vm.items">
+    <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in items">
         <md-card ui-sref="home.grupo-profile({groupId: item.id})">
             <md-card-content>
                 <div class="wrap-md-card-img">
-                    <img ng-src="{{vm.imageServer}}/315x200/{{item.photo}}" alt="" class="md-card-img"/>
+                    <img ng-src="{{ vm.imageServer }}/315x200/{{ item.photo }}" alt="" class="md-card-img"/>
                 </div>
                 <md-card-title-text layout-align="center center" layout="column">
-                    <md-button class="md-headline">{{item.name}}</md-button>
+                    <md-button class="md-headline">{{ item.name }}</md-button>
                 </md-card-title-text>
             </md-card-content>
             <md-card-header>

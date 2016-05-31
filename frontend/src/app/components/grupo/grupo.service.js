@@ -40,6 +40,10 @@
           .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
     }
 
+    _grupo.join = function(id){
+      return Restangular.one('groups/join', id).get();
+    }
+
     return _grupo;
   }
 

@@ -12,20 +12,17 @@
             templateUrl: 'app/components/group_list/group_list.html',
             scope: {
                 items: '=',
-                title: '=',
-                icon: '=',
                 scroll: '&onScroll'
             },
             controller: GroupListController,
-            controllerAs: 'vm',
-            bindToController: true
+            controllerAs: 'vm'
         };
 
         return directive;
     }
 
     /** @ngInject */
-    function GroupListController(ENV, $mdDialog, $document) {
+    function GroupListController(ENV, grupo) {
         var vm = this;
         vm.imageServer = ENV.imageServer;
     }

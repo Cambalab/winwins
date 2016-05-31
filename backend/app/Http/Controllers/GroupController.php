@@ -50,6 +50,19 @@ class GroupController extends Controller {
 
 	}
 
+    public function getGroupsByUser(Request $request) {
+
+        $user = User::find($request['user']['sub']);
+        
+        $groups = Group::where('user_id', '=', $user->getId());
+        $collection = Collection::make($groups);
+        $collection->each(function($group) {
+            $users_count = count($group->users);
+            $group->users_already_joined = $users_count;
+        });
+        return $collection;
+    }
+
 	public function updateGroup(Request $request, $id ) {
         $user = User::find($request['user']['sub']);
         $group = Group::find($id);
@@ -78,7 +91,46 @@ class GroupController extends Controller {
         return $group;
 	}
 
+    public function storeImage(Request $request, Media $media) {
 
+        $user = User::find($request['user']['sub']);
+
+        if(!$request->hasFile('file')) {
+            return Response::json(['error' => 'no_file_sent']);
+        }
+
+        if(!$request->file('file')->isValid()) {
+            return Response::json(['error' => 'file_not_valid']);
+        }
+
+        $file = $request->file('file');
+
+        $v = Validator::make(
+            $request->all(),
+            ['file' => 'required|mimes:jpeg,jpg,png|max:8000']
+        );
+
+        if($v->fails()) {
+            return Response::json(['error' => $v->errors()]);
+        }
+
+
+        $image = Media::create([
+            'name' => $request->file('file')->getClientOriginalName(),
+            'ext' => $request->file('file')->guessExtension(),
+            'user_id' => $user->id || 1,
+            'bucket' => 'S3',
+            'type' => 'IMAGE'
+        ]);
+
+        $filename = 'winwin_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
+
+        Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
+        $image->name = $filename;
+        $image->save();
+
+        return Response::json(['OK' => 1, 'filename' => $filename]);
+    }
 
 
 	public function store(Request $request) {
@@ -130,15 +182,15 @@ class GroupController extends Controller {
         $group = Group::find($id);
 
         $user = false;
-//        $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
-//        if ( $token )  {
-//            $token = $request->header('Authorization');
-//            if(isset($token[1])) {
-//                $token = explode(' ', $request->header('Authorization'))[1];
-//                $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
-//                $user = User::find($payload['sub']);
-//            }
-//        }
+        $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
+        if ( $token )  {
+            $token = $request->header('Authorization');
+            if(isset($token[1])) {
+                $token = explode(' ', $request->header('Authorization'))[1];
+                $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
+                $user = User::find($payload['sub']);
+            }
+        }
 
         $group->members_count = count($group->users);
         $group->winwins;

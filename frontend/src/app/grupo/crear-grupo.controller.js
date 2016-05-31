@@ -18,8 +18,18 @@
 
         vm.clearError = function () {
             if (vm.grupo.terms) {
-                vm.crearForm1.terms.$setValidity("notTerms", true);
+                vm.crearForm.terms.$setValidity("notTerms", true);
             }
+        }
+
+        vm.nextStage = function() {
+            if (!vm.grupo.terms){
+                vm.crearForm.terms.$setValidity("notTerms", false);
+                return;
+            }
+            vm.stage = 2;
+
+            vm.saveGrupo();
         }
 
         vm.saveGrupo = function () {
@@ -49,6 +59,22 @@
             });
         }
 
+        vm.showCropCoverDialog = function(ev) {
+            $mdDialog.show({
+                    controller: CropCoverController,
+                    templateUrl: 'app/winwin/cover_crop.tmpl.html',
+                    parent: angular.element($document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true
+                })
+                .then(function(image) {
+                    vm.cover_image = image;
+                    vm.preview_image = image.file;
+                    vm.grupo.video = null;
+                    vm.grupo.image = null;
+                });
+        };
+
         var dataURItoBlob = function(dataURI) {
             var binary = atob(dataURI.split(',')[1]);
             var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -58,6 +84,29 @@
             }
             return new Blob([new Uint8Array(array)], {type: mimeString});
         };
+    }
+
+    /** @ngInject */
+    function CropCoverController($scope, $mdDialog) {
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+        $scope.fileName='';
+
+        $scope.handleFileSelect = function(evt) {
+            var file=evt.files[0];
+            $scope.fileName = file.name;
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function($scope){
+                    $scope.myImage=evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+        };
+
+        $scope.cropImage = function() {
+            $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
+        }
     }
     
 })();
