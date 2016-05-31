@@ -21,13 +21,30 @@
                <md-card class="md-whiteframe-4dp no-padding">
                 <md-card-content>
                   <div class="ribbon" ng-if="winwin.winwin.is_successful"><span>CONCRETADO</span></div>
-                  <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />    
+                  <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="winwin.winwin.is_successful" />
+                  <div class="rate-box" ng-show="false">
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                  </div>
                   <div class="wrap-card-img">              
                     <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
                   </div>
                   <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
-                    <md-button class="md-headline">{{winwin.winwin.title}}</md-button>
+                    <md-button class="md-headline" aria-label="title">{{winwin.winwin.title}}</md-button>
                   </md-card-title-text>
                   <div class="card-labels">
                     <md-icon class="icon icon-access_time" ng-if="winwin.winwin.finishing">access_time</md-icon>
@@ -121,7 +138,7 @@
                     </md-button>
                     <div class="toggle-content" ng-show="open">
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles" ng-show="winwin.winwin.description">
-                        <p>{{winwin.winwin.description}}</p>
+                        <p><pre>{{winwin.winwin.description}}</pre></p>
                       </div>
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
@@ -135,7 +152,25 @@
                     </div>
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
-                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <div class="califica" ng-show="false">
+                    <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star active" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                    <md-button class="md-star" md-ink-ripple="false">
+                      <md-icon>star_rate</md-icon>
+                    </md-button>
+                  </div>
                 </div>
                 <div flex="15" layout="column" class="content-social-media">
                   <div
@@ -197,13 +232,13 @@
               <div ng-repeat="item_post in winwin.posts">
                 <md-card class="md-whiteframe-7dp" >
                   <div class="card-labels">
-                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button">  
+                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">  
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                     </md-button>
-                    <md-button ng-if="(winwin.winwin.is_moderator && item_post.sticky==1) || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator" ng-click="winwin.setSticky(item_post, false)" class="md-icon-button">
+                    <md-button ng-if="(winwin.winwin.is_moderator && item_post.sticky==1) || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator" ng-click="winwin.setSticky(item_post, false)" class="md-icon-button" aria-label="highlighted on">
                       <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg"></md-icon>
                     </md-button>
-                    <md-button ng-if="winwin.winwin.is_moderator && item_post.sticky==0" ng-click="winwin.setSticky(item_post, true)" class="md-icon-button">
+                    <md-button ng-if="winwin.winwin.is_moderator && item_post.sticky==0" ng-click="winwin.setSticky(item_post, true)" class="md-icon-button" aria-label="highlighted off">
                       <md-icon class="icon icon-highlighted icon-off" md-svg-src="assets/images/icon-highlighted-off.svg"></md-icon>
                     </md-button>
                   </div>
@@ -241,16 +276,16 @@
                       <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
                         <md-icon>share</md-icon>
                       </md-button>
-                      <md-button class="md-icon-button"  ng-click="winwin.showReplyDialog(item_post)">
+                      <md-button class="md-icon-button bt-comment"  ng-click="winwin.showReplyDialog(item_post)">
                         <md-icon class="icon insert_comment">insert_comment</md-icon>
                       </md-button>
                   </md-card-actions>
                 </md-card>
 
-                <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments">
+                <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments | orderBy:'id'">
                   <div layout="row" layout-align="space-between center">
                     <div layout-padding>
-                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button">  
+                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button" aria-label="eliminar">  
                         <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                       </md-button>
                     </div>
@@ -321,10 +356,17 @@
                     <li ng-repeat="category in winwin.winwin.interests">{{category.description}}</li>
                   </ul>
                 </div>
-                <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined">
+                <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined && !winwin.winwin.canceled && !winwin.winwin.is_creator">
                   <p>
                     <md-button ng-href ng-click="winwin.left()" class="no-padding">
                       <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+                    </md-button>
+                  </p>
+                </div>
+                <div class="content-bg" ng-if="winwin.winwin.is_creator && !winwin.winwin.canceled">
+                  <p>
+                    <md-button ng-href ng-click="winwin.close()" class="no-padding">
+                      <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Cerrar Winwin
                     </md-button>
                   </p>
                 </div>
@@ -341,7 +383,8 @@
                   <p>{{participante.username}}</p>
                 </md-list-item>
                 <md-list-item class="md-no-proxy">
-                 <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()"><strong>+</strong> Organizar participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="!winwin.winwin.is_moderator"><strong>+</strong> Ver participantes</md-button>
+                  <md-button ng-href class="ver-todos" ng-click="winwin.showParticipantesDialog()" ng-show="winwin.winwin.is_moderator"><strong>+</strong> Organizar participantes</md-button>
                 </md-list-item>
               </md-list>
             </div>
@@ -412,7 +455,7 @@
     </md-content>
     
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined">
+    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>

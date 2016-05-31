@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider) {
+  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider, amDatePickerConfigProvider) {
 
     // Enable log
     var debug = true;
@@ -39,6 +39,13 @@
 
     // angular-loading-bar
     cfpLoadingBarProvider.includeSpinner = false;
+
+    amDatePickerConfigProvider.setOptions({
+        calendarIcon: '/assets/images/ic_today_black_24px.svg',
+        clearIcon: '/assets/images/ic_close_black_24px.svg',
+        nextIcon: '/assets/images/ic_keyboard_arrow_right_black_24px.svg',
+        prevIcon: '/assets/images/ic_keyboard_arrow_left_black_24px.svg'
+    })
 
   }
 

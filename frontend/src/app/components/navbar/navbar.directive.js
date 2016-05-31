@@ -21,12 +21,14 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user, $window) {
+    function NavbarController(moment, $mdSidenav, $rootScope, ENV, $auth, account, $mdDialog, $document, user, $window, search, $state) {
       var vm = this;
 
       vm.imageServer = ENV.imageServer;
       
       vm.sentActivationMail = false;
+
+      vm.search_query = "";
 
       vm.isAuthenticated = function() {
         return $auth.isAuthenticated();
@@ -40,8 +42,11 @@
             vm.account.email = data.user.email;
             vm.isActive = data.active;
 
-            vm.notifications = $window._.sortBy(data.user.notifications, function(notification) {
-              return -notification.id; 
+            user.getUser(data.user.id)
+            .then(function(user_data) {
+              vm.notifications = $window._.sortBy(user_data.notifications, function(notification) {
+                return -notification.id; 
+              });
             });
           });
         }
@@ -67,6 +72,12 @@
         $auth.logout();
       };
 
+      vm.search = function() {
+        $state.go('home.search', {
+          query: vm.search_query
+        }); 
+      }
+
       vm.showLoginDialog = function(redirect) {
         if (redirect) {
           $rootScope.returnState = {
@@ -82,6 +93,20 @@
         });
       };
 
+      vm.showNotificationsDialog = function(redirect) {
+        $mdDialog.show({
+          controller: 'NotificationsController',
+          controllerAs: 'vm',
+          templateUrl: 'app/notifications/notifications.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true,
+          locals: {
+              notifications: vm.notifications,
+              current_user: vm.account
+            }
+        });
+      };
+
       vm.resendActivationMail = function() {
         user.resendActivationMail()
         .then(function() {
@@ -90,5 +115,21 @@
       };
     }
   }
+
+  angular
+    .module('winwins')
+    .directive('enter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.enter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+  })
 
 })();

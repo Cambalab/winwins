@@ -108,6 +108,10 @@
      return Restangular.one('winwins/left', id).get(); 
     }
 
+    _winwin.close = function(id, reason) {
+     return Restangular.one('winwins', id).customPOST({body: reason}, 'close', undefined, undefined);
+    }
+
     _winwin.setUserNormal = function(winwin_id, user_id) {
       return Restangular.one('winwins', winwin_id).one('state/normal', user_id).post();
     }

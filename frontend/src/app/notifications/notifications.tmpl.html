@@ -1,0 +1,40 @@
+<md-dialog-content class="dialog-primary">
+  <md-content class="acme-notifications">
+    <h2 translate>Notificaciones</h2>
+    <div class="container">
+      <div layout="column">
+        <md-list class="notificaciones">
+          <md-list-item  ng-switch on="notification.type" ng-repeat="notification in vm.notifications">
+            <div ng-switch-when="WW_SUCCESSFUL">
+              <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span>se ha completado con éxito!</span> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="WW_CREATED">
+              <span class="orange">Felicitaciones!</span> Creaste el winwin <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="WW_JOIN">
+              <span class="green">Excelente!</span> Te uniste a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="WW_LEFT">
+              Abandonaste <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="SPONSOR_REQUEST">
+              Han solicitado patrocinar a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="WW_REQUEST_SPONSOR">
+              Han solicitado que patrocines a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="CAMPANADA">
+              <span class="red">Campanada activa!</span>
+              Nueva campanada de <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a>: <span class="date">"{{notification.body}}" {{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="FOLLOWING">
+              <span class="green">Nuevo seguidor!</span>
+              <span class="blue">{{notification.object.username}}</span> comenzó a seguirte <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+          </md-list-item>
+        </md-list>
+      </div>
+    </div>
+  </md-content>
+</md-dialog-content>
+

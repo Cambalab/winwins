@@ -49,6 +49,11 @@
     .align-right {
       text-align: right;
     }
+    .sumate-img {
+      @media (max-width: 480px) {
+        max-width: 100%;
+      }
+    }
   }
   .footer {
     background: #0d47a1;
@@ -66,12 +71,16 @@
         }
         li {
           font-size: 14px;
+          margin-bottom: 5px;
           @media (min-width: 960px) {
             text-align: left;
           }
           a {
             color: #fff;
             text-decoration: none;
+            &:hover {
+              color: #8AACE2;
+            }
           }
         }
       }
@@ -84,6 +93,7 @@
       }
       &:last-child {
         border:none;
+        text-align: right;
       }
     }
     .crear {
@@ -96,7 +106,7 @@
       font-size: 14px;
       font-weight: 700;
       &:hover {
-        background: #fb3e22;
+        background: #F74209;
       }
     }
     .social-media {
@@ -132,6 +142,9 @@
       a {
         color: #fff;
         text-decoration: none;
+        &:hover {
+          color: #A6B4F3;
+        }
       }
     }
   }

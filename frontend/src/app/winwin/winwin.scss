@@ -96,6 +96,19 @@
       color: #ff9800;
     }
   }
+  @media (max-width: 480px) {
+    .card-social-media {
+      .md-icon-button.md-button.md-ink-ripple {
+        width: 30px;
+        padding-top: 10px;
+        height: 40px;
+        md-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
   md-card {
     &.no-padding {
       @media (max-width: 960px) {
@@ -320,10 +333,6 @@
   p strong {
     color: #144a9d;
   }
-  .detalle {
-    max-height: 135px;
-    overflow: hidden;
-  }
   @media (max-width: 960px) {
     p {
       text-align: center;
@@ -380,6 +389,40 @@
       font-size: 12px;
       margin: 0;
     }
+  }
+  .califica {
+    background:#f5f5f5;
+    padding: 10px;
+    margin-top: 20px;
+    p {
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+  .md-star {
+    min-width: 25px;
+    padding: 0;
+    margin: 0;
+    &:hover {
+      background: none;
+    }
+    md-icon {
+      color: #a7a8ac;
+      font-size: 28px;
+      &:hover {
+        color: #ffcc33;
+      }
+    }
+    &.active md-icon {
+      color: #ffcc33;
+    }
+  }
+  .rate-box {
+    position: absolute;
+    left: 0;
+    right:0;
+    bottom: 5%;
+    text-align: center;
   }
   .content-bg {
     background: #f5f5f5;
@@ -457,6 +500,9 @@
   }
   .comments {
     padding: 0;
+    .flex-offset-15 md-card-avatar {
+      margin-right: 0;
+    }
     @media (min-width: 960px) {
       width: 515px;
     }
@@ -523,6 +569,7 @@
       margin-bottom: 0;
       .md-icon-button.md-button {
         margin-right: 0;
+        width: 20px;
         .icon {
           margin-right: 0;
         }
@@ -538,8 +585,14 @@
       @media (max-width: 480px) {
         margin-left: 0;
         margin-right: 0;
-        .md-icon-button.md-button.md-ink-ripple {
-          margin-left: 0;
+      }
+    }
+    .md-icon-button.md-button {
+      @media (max-width: 480px) {
+        width: 20px;
+        &.bt-comment {
+          margin-right: 0;
+          margin-left: 12px;
         }
       }
     }
@@ -645,13 +698,17 @@
     .email {
       text-transform: lowercase;
       margin: 10px 0 45px 0;
+      text-shadow: 2px 1px 1px rgba(0,0,0,.8);
     }
     .bt-green {
       height: 39px;
     }
     .md-item-text {
       h3 {
-        color: #333;
+        color: #fff;
+        background: #333;
+        margin: 0;
+        padding: 5px;
       }
       p {
         padding: 10px 0;
@@ -684,6 +741,14 @@
     .escala md-icon {
       color: #1762c7;
       font-size: 16px;
+    }
+    pre {
+      font-family: 'Montserrat', serif;
+      font-size: 14px;
+      color: #666;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      text-align: left;
     }
   }
   .slide-categorias {
@@ -856,6 +921,13 @@
   p {
     font-size: 12px;
     color: #5d5d5d;
+  }
+  pre {
+    font-family: 'Montserrat', serif;
+    font-size: 12px;
+    color: #5d5d5d;
+    word-wrap: break-word;
+    white-space: pre-wrap;
   }
   md-list {
     @media (min-width: 960px) {
