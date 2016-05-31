@@ -40,7 +40,7 @@
         "satellizer": {
           "facebook": {
             "clientId": "238862259502342",
-            "scope": "email,public_profile,user_birthday"
+            "scope": "email,public_profile"
           },
           "google": {
             "clientId": "313110710680-p22p1s5brqn7tfaqj9v16u67bic5smqk.apps.googleusercontent.com"
