@@ -17,6 +17,8 @@ use Winwins\Model\Repository\UserRepository;
 use Winwins\Post;
 use Winwins\Media;
 use Winwins\InterestsInterested;
+use Winwins\Message\Mailer;
+use Winwins\Message\Message;
 
 class UserController extends Controller {
 
@@ -502,6 +504,27 @@ class UserController extends Controller {
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
 
         return Response::json(['OK' => 1, 'filename' => $filename]);
+    }
+
+    public function sentMailContact(Request $request, Mailer $mailer) {
+        $template_name = 'winwin_contact';
+        $users = DB::table('users')->where('active', '=', 1)->where('is_admin', '=', 1)->whereNotNull('email')->get();
+
+        foreach($users as $user) {
+            $message = new Message($template_name, array(
+                'meta' => array(
+                    'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif',
+                    'username' => $request->input('contact')['name'].' '.$request->input('contact')['lastname'],
+                    'email' => $request->input('contact')['email'],
+                    'message' => $request->input('contact')['message']
+                )
+            ));
+            $message->subject('WinWin - Contacto');
+            $message->to(null, $user->email);
+            $message_sent = $mailer->send($message);
+        }
+    
+        return response()->json(['message' => 'email_sent']);
     }
 
 

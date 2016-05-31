@@ -22,6 +22,10 @@
       return Restangular.one('users/resend/activation').get();
     }
 
+    _user.sendMailContact = function(contact) {
+      return Restangular.one('users').customPOST({contact:contact}, 'sent_mail_contact', undefined, undefined);
+    }
+
     return _user;
   }
 
