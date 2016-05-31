@@ -1,0 +1,38 @@
+<md-content class="acme-contact">
+  <div class="container">
+    <h1><span translate>Contáctanos</span></h1>
+    <form method="post" name="contact.FormContacto" ng-submit="contact.sendMailContact()">
+      <div layout="column" layout-padding>
+        <md-input-container class="md-block">
+          <label translate>Nombre</label>
+          <input required name="name" ng-model="contact.contact.name" class="md-input">
+          <div ng-messages="contact.FormContacto.name.$error">
+            <div ng-message="required" translate>Campo obligatorio</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Apellido</label>
+          <input required name="lastname" ng-model="contact.contact.lastname" class="md-input">
+          <div ng-messages="contact.FormContacto.lastname.$error">
+            <div ng-message="required" translate>Campo obligatorio</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Mail</label>
+          <input required name="email" ng-model="contact.contact.email" type="email" class="md-input">
+          <div ng-messages="contact.FormContacto.email.$error">
+            <div ng-message="required" translate>Campo obligatorio</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Mensaje</label>
+          <textarea ng-model="contact.contact.message" name="message" md-maxlength="150" rows="5" md-select-on-focus required class="md-input"></textarea>
+          <div ng-messages="contact.FormContacto.message.$error">
+            <div ng-message="required" translate>Campo obligatorio</div>
+          </div>
+        </md-input-container>
+        <md-button type="submit" name="action" class="md-raised md-primary bt-green">Enviar</md-button>
+      </div>
+    </form>
+  </div>
+</md-content>

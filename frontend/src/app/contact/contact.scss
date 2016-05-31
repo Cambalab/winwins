@@ -1,0 +1,58 @@
+.acme-contact {
+  h1 {
+    font-size: 21px;
+    color: #ec6b25;
+    position: relative;
+    margin: 20px 0;
+    text-transform: uppercase;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 13px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #ec6b25;
+      @media (max-width: 480px) {
+        display: none;
+      }
+    }
+    >span {
+      background: #f1f1f1;
+      padding: 0 25px;
+      margin-left: 20%;
+      position: relative;
+      z-index: 1;
+      @media (max-width: 480px) {
+        margin-left: 0;
+      }
+    }
+  }
+  .container {
+    max-width: 700px;
+  }
+  md-input-container {
+    background:#fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    label {
+      font-size: 14px;
+      color: #686868;
+      left: 10px;
+    }
+    input {
+      border:none;
+      border-bottom: solid 1px #3ca007;
+      font-size: 12px;
+      color: #686868;
+      font-family: 'Montserrat', serif;
+    }
+    textarea {
+      border-color: #3ca007;
+      font-size: 12px;
+      color: #686868;
+      font-family: 'Montserrat', serif;
+    }
+  }
+}
