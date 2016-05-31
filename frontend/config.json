@@ -39,7 +39,7 @@
         "availableLangs": ["es", "en"],
         "satellizer": {
           "facebook": {
-            "clientId": "1082199191794840",
+            "clientId": "238862259502342",
             "scope": "email,public_profile,user_birthday"
           },
           "google": {
