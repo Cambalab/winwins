@@ -23,7 +23,7 @@ use Winwins\Message\Message;
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'search', 'getUserTimeline']]);
+        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'search', 'getUserTimeline', 'sentMailContact']]);
     }
 
     public function paginate(Request $request, $page = 0, $amount = 15) {
