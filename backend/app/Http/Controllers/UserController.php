@@ -41,9 +41,11 @@ class UserController extends Controller {
             ->where('users.active', '=', 1)
             ->where('users.is_sponsor', '!=', 1)
             ->where('users.suspend', '=', 0)
-            ->select('user_details.photo', 'user_details.cover_photo', 'users.id', 'user_details.name') 
+            ->select('user_details.photo', 'user_details.cover_photo', 'users.id', 'user_details.name', 'user_details.lastname') 
             ->skip($page * $amount)
-            ->take($amount)->get();
+            ->take($amount)
+            ->orderBy('id', 'desc')
+            ->get();
 
         $collection = Collection::make($users);
         $collection->each(function($user) use($current_user){
@@ -51,6 +53,7 @@ class UserController extends Controller {
                 ->where('user_id', '=', $user->id)->count();
             $user->followers_count = DB::table('followers')
                 ->where('followed_id', '=', $user->id)->count();
+            $user->username = $user->name . ' ' . $user->lastname;
 
             if($current_user) {
                 $user->already_following = count($current_user->following->filter(function($model) use ($current_user, $user) {

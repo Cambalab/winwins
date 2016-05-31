@@ -54,7 +54,7 @@ class WinwinController extends Controller {
                 $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
                 break;
             case 'last':
-                $winwins = Winwin::where('published', '=', 1)->where('selected', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
+                $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->orderBy('created_at', 'desc')->get();
                 break;
             case 'success':
                 $winwins = Winwin::where('published', '=', 1)->where('status', '=', 'SUCCESSFUL')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
@@ -188,6 +188,7 @@ class WinwinController extends Controller {
         $winwin->already_joined = false;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
+            $winwin->is_creator = ( $winwin->user_id == $user->id );
 
             $mixFollowers = DB::table('winwins_users')
                 ->join('followers', 'followers.followed_id', '=', 'winwins_users.user_id')
@@ -835,6 +836,7 @@ class WinwinController extends Controller {
             DB::transaction(function() use ($winwin, $user, $request_body) {
                 $winwin->canceled = 1;
                 $winwin->published = 0;
+                $winwin->status = 'CANCELED';
                 $winwin->canceled_reason = $request_body;
                 $winwin->save();
             });
@@ -1006,7 +1008,7 @@ class WinwinController extends Controller {
                 $message = new Message($template_name, array(
                     'meta' => array(
                         'base_url' => 'http://dev-winwins.net',
-                        'winwin_link' => 'http://dev-winwins.net/#/winwin-view/'.$winwin->id,
+                        'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
                         'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
@@ -1040,7 +1042,7 @@ class WinwinController extends Controller {
                 $message = new Message($template_name, array(
                     'meta' => array(
                         'base_url' => 'http://dev-winwins.net',
-                        'winwin_link' => 'http://dev-winwins.net/#/winwin-view/'.$winwin->id,
+                        'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
                         'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(

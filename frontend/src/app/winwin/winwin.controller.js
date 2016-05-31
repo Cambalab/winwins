@@ -162,6 +162,25 @@
       });
     }
 
+    vm.close = function() {
+      $mdDialog.show({
+        controller: ModalCloseController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-close.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_winwin: vm.winwin
+        }
+      })
+      .then(function(data) {
+        winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+          vm.winwin = winwin_data;
+          vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+        });
+      });
+    }
+
     vm.vote = function(post, positive) {
       winwin.votePost(post.id, positive).then(function() {
         winwin.getPosts(vm.winwinId).then(function(posts_data) {
@@ -533,6 +552,21 @@
 
     vm.left = function() {
       winwin.left(current_winwin.id).then(function(data) {
+         $mdDialog.hide(data);
+      });
+    }
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+  }
+
+  /** @ngInject */
+  function ModalCloseController(current_winwin, $mdDialog, winwin) {
+    var vm = this;
+
+    vm.close = function() {
+      winwin.close(current_winwin.id, vm.reason).then(function(data) {
          $mdDialog.hide(data);
       });
     }

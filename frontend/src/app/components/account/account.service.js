@@ -29,6 +29,10 @@
       return $http.post(ENV.base + '/password/email', {"email": email});
     }
 
+    _account.notificactionsRed = function(user){
+      return rAccount.customGET('notificactions/read', {user: user});
+    }
+
     return _account;
   }
 

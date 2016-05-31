@@ -36,7 +36,12 @@
     margin: 10px 30px;
     padding: 0;
     li {
-      font-size: 12px;
+      font-size: 14px;
+      line-height: 150%;
+      word-wrap: break-word;
+      a {
+        color: #202020;
+      }
     }
   }
 }

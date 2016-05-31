@@ -13,7 +13,7 @@
                 <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/>
               </div>
             <md-card-title-text layout-align="center center" layout="column">
-              <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">{{item.title}}</md-button>
+              <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})" arial-label="title">{{item.title}}</md-button>
             </md-card-title-text>
             <div class="card-labels">
               <md-icon class="icon icon-access_time" ng-if="item.finishing">access_time</md-icon>
@@ -32,7 +32,7 @@
             </md-card-header>
             <div layout="row" layout-align="end center">
               <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
-              <md-button class="md-icon-button" ng-click="vm.share(item)">
+              <md-button class="md-icon-button" ng-click="vm.share(item)" arial-label="share">
                 <md-icon>share</md-icon>
               </md-button>
             </div>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div layout="row" layout-align="center center">
-      <md-button ui-sref="home.winwin-list" class="md-raised md-warn ver-todos">{{ '+ Ver todos los winwins' | translate }}</md-button>
+      <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="md-raised md-warn ver-todos" arial-label="see all">{{ '+ Ver todos los winwins' | translate }}</md-button>
     </div>
   </div>
 </md-content>

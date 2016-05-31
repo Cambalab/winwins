@@ -14,6 +14,7 @@
     }
 
     vm.imageServer = ENV.imageServer;
+    vm.loading = true;
 
     vm.user = {interests_list:[]};
 
@@ -31,6 +32,8 @@
         winwin.getInterests().then(function(data) {
           vm.interests = data;
         });
+
+        vm.loading = false;
       });
     });
 
@@ -61,6 +64,8 @@
           vm.user.cover_photo = data[indexCover].filename;
         }
 
+        vm.user.language_code = 'ES';
+
         user.saveProfile(vm.user)
         .then(function(){
           $rootScope.$broadcast('account_change');
@@ -71,6 +76,10 @@
             parent: angular.element($document.body),
             clickOutsideToClose:true
           });
+
+          $state.go('home.public-profile', {
+            userId: vm.user.id
+          }); 
         })
         .catch(function(response) {
           if(response.data) {

@@ -1,5 +1,5 @@
 <md-toolbar class="md-tall md-warn" layout="row" layout-align="center center" ng-if="!profile.is_public">
-  <h2><span translate ng-if="!profile.is_complete">COMPLETA TU PERFIL</span><span translate ng-if="profile.is_complete">EDITAR PERFIL</span></h2>
+  <h2><span translate ng-show="!profile.is_complete && !profile.loading">COMPLETA TU PERFIL</span><span translate ng-show="profile.is_complete && !profile.loading">MI CUENTA</span></h2>
 </md-toolbar>
 <md-content class="acme-profile">
   <div class="container">
@@ -17,7 +17,7 @@
               <div flex>
                 <md-card-title>
                   <md-card-title-text>
-                    <span class="md-headline" translate>{{profile.user.name}} {{profile.user.lastname}}</span>
+                    <span class="md-headline">{{profile.user.name}} {{profile.user.lastname}}</span>
                   </md-card-title-text>
                 </md-card-title>
               </div>
@@ -52,7 +52,7 @@
           <md-input-container class="md-block">
             <label translate>Intereses</label>
             <md-input-container class="intereses">
-              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple ng-disabled="profile.is_public">
+              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple ng-disabled="profile.is_public" aria-label="interests">
                 <md-optgroup label="intereses">
                   <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>
                 </md-optgroup>
@@ -63,14 +63,23 @@
         <div flex>
           <md-input-container class="md-block">
             <label translate>Sobre vos</label>
-            <input md-maxlength="500" md-no-asterisk name="about" ng-model="profile.user.about" ng-disabled="profile.is_public">
+            <textarea name="about" ng-model="profile.user.about"  md-no-asterisk md-maxlength="500" rows="3" md-select-on-focus ng-disabled="profile.is_public"></textarea>
             <div ng-messages="profileForm.about.$error">
               <div ng-message="required" translate>Campo requerido.</div>
               <div ng-message="md-maxlength" translate>The name has to be less than 500 characters long.</div>
             </div>
           </md-input-container>
           <div class="md-block wrap-input">
-            <md-datepicker ng-model="profile.user.birthdate" md-placeholder="Fecha de Nacimiento" ng-required ng-disabled="profile.is_public"></md-datepicker>
+            <am-date-picker ng-model="profile.user.birthdate"
+              am-cancel-button="Cancelar"
+              am-back-button-text="Volver"
+              am-input-label="Fecha de Nacimiento"
+              am-allow-clear="false"
+              am-input-date-format="L"
+              am-popup-date-format="D MMMM YYYY"
+              am-show-input-icon="true"
+              name="birthdate">
+            </am-date-picker>
           </div>        
         </div>      
       </div>
@@ -130,7 +139,7 @@
         </div>
       </div>
       <div layout="column" layout-align-gt-sm="center center" layout-gt-sm="row" flex ng-if="!profile.is_public">
-        <div flex="70" class="profile-bottom" layout-padding layout-gt-sm="row" layout-align-gt-sm="center center">  
+        <div flex="50" class="profile-bottom" layout-padding layout-gt-sm="row" layout-align-gt-sm="center center">  
           <div flex><h3 translate>Privacidad del perfil</h3></div>
           <div flex>
             <div layout="row" layout-align="center center" class="bg-white">
@@ -140,7 +149,7 @@
               </div>
             </div>
           </div>
-          <div><h3 translate>Idioma</h3></div>
+          <!-- <div><h3 translate>Idioma</h3></div>
           <div flex>
             <div layout="row" layout-align="center center" class="bg-white">
               <div><div layout="row" layout-align="center center" class="bg-white">
@@ -151,9 +160,9 @@
                   <div><span translate>English</span></div>
                 </div></div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div flex="30" layout-padding class="profile-bottom">
+        <div flex="30" flex-offset="20" layout-padding class="profile-bottom">
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" ng-disabled="loadingFlag" name="action" translate>Guardar</md-button>
         </div>      
       </div>

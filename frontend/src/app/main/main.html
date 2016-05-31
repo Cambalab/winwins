@@ -40,7 +40,7 @@
   </video>
 </section>
 
-<acme-highlighted items="main.destacados" hide-gt-sm></acme-highlighted>
+<acme-highlighted items="main.destacados" hide-gt-sm viewmore="true"></acme-highlighted>
 
 <div class="menu-caterogias">
   <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
@@ -63,31 +63,31 @@
   <md-tab id="tab1" ng-click="main.doFilter('select')">
     <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-highlighted.svg"></md-icon>{{'Destacados' | translate }}</md-tab-label>
     <md-tab-body>
-      <acme-highlighted items="main.destacados" title="main.tdestacados" icon="'icon-highlighted'"></acme-highlighted>
+      <acme-highlighted items="main.destacados" title="main.tdestacados" icon="'icon-highlighted'" viewmore="true"></acme-highlighted>
     </md-tab-body>
   </md-tab>
   <md-tab id="tab2" ng-click="main.doFilter('popular')">
     <md-tab-label><md-icon>whatshot</md-icon>{{'Populares' | translate }}</md-tab-label>
     <md-tab-body>
-      <acme-highlighted items="main.destacados" title="main.tpopulares" icon="'icon-whatshot'"></acme-highlighted>
+      <acme-highlighted items="main.destacados" title="main.tpopulares" icon="'icon-whatshot'" viewmore="true"></acme-highlighted>
     </md-tab-body>
   </md-tab>
   <md-tab id="tab3" ng-click="main.doFilter('last')">
     <md-tab-label><md-icon>access_time</md-icon>{{ 'Recientes' | translate }}</md-tab-label>
     <md-tab-body>
-      <acme-highlighted items="main.destacados" title=" main.trecientes" icon="'icon-access_time'"></acme-highlighted>
+      <acme-highlighted items="main.destacados" title=" main.trecientes" icon="'icon-access_time'" viewmore="true"></acme-highlighted>
     </md-tab-body>
   </md-tab>
   <md-tab id="tab4" ng-click="main.doFilter('finishing')">
     <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-por-terminar.svg"></md-icon>{{' Por terminar' | translate }}</md-tab-label>
     <md-tab-body>
-      <acme-highlighted items="main.destacados" title="main.tterminar" icon="'icon-por-terminar'"></acme-highlighted>
+      <acme-highlighted items="main.destacados" title="main.tterminar" icon="'icon-por-terminar'" viewmore="true"></acme-highlighted>
     </md-tab-body>
   </md-tab>
   <md-tab id="tab5" ng-click="main.doFilter('success')">
     <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-concretados.svg"></md-icon>{{'Concretados' | translate }}</md-tab-label>
     <md-tab-body>
-      <acme-highlighted items="main.destacados" title="main.tconcretados" icon="'icon-concretados'"></acme-highlighted>
+      <acme-highlighted items="main.destacados" title="main.tconcretados" icon="'icon-concretados'" viewmore="true"></acme-highlighted>
     </md-tab-body>
   </md-tab>
 </md-tabs>
@@ -96,13 +96,13 @@
 <acme-partner items="main.partners"></acme-partner>
 <acme-sponsor items="main.sponsors" url="{{imageServer}}"></acme-sponsor>
 
-<div class="container acme-recientes">
+<!-- <div class="container acme-recientes">
   <h1 class="title">
     <md-icon md-svg-src="assets/images/icon-recientes-title.svg"></md-icon>{{'WINWINS RECIENTES' | translate }}
     <small translate>Últimos winwins creados</small>
   </h1>
 </div>
-<acme-highlighted items="main.recientes"></acme-highlighted>
+<acme-highlighted items="main.recientes"></acme-highlighted> -->
 
 <acme-contador items="main.contador"></acme-contador>
 <acme-footer items="main.footer"></acme-footer>

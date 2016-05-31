@@ -6,18 +6,18 @@
     .controller('NotificationsController', NotificationsController);
 
   /** @ngInject */
-  function NotificationsController(account, user, $window) {
+  function NotificationsController(notifications, $mdDialog, current_user, account, $rootScope) {
     var vm = this;
 
-    account.getProfile()
-    .then(function(data) {
-      user.getUser(data.user.id)
-      .then(function(user_data) {
-        vm.notifications = $window._.sortBy(user_data.notifications, function(notification) {
-          return -notification.id; 
-        });
-      });
+    account.notificactionsRed(current_user).then(function() {
+      $rootScope.$broadcast('account_change');
     });
+
+    vm.notifications = notifications
+
+    vm.close = function() {
+      $mdDialog.cancel();
+    }
   }
 
 })();

@@ -11,7 +11,9 @@
       restrict: 'E',
       templateUrl: 'app/components/miembro/miembro.html',
       scope: {
-        items: '='
+        items: '=',
+        hideExtra: '=',
+        scroll: '&onScroll'
       },
       controller: MiembroController,
       controllerAs: 'vm',
@@ -39,6 +41,10 @@
           clickOutsideToClose:true
         });
       };
+
+      vm.nextPage = function() {
+        vm.scroll();
+      }
     }
   }
 
