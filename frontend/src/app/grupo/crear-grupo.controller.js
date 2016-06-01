@@ -52,7 +52,7 @@
                     .then(function (data) {
                         vm.grupo.id = data.id;
                             $state.go('home.grupo-profile', {
-                              groupId: vm.group.id
+                              groupId: vm.grupo.id
                             });
                     });
             });

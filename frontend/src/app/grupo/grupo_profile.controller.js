@@ -54,6 +54,19 @@
             }
         }
 
+        vm.showMasDetalleDialog = function(ev) {
+          $mdDialog.show({
+            controller: MasDetalleController,
+            templateUrl: 'app/grupo/ver-mas-detalle.tmpl.html',
+            parent: angular.element($document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+              grupo: vm.profile
+            }
+          });
+        };
+
         vm.showUserWinwinsModal = function() {
             if ($auth.isAuthenticated()) {
                 account.getProfile().then(function(profile_data) {
@@ -136,6 +149,11 @@
         vm.facebookId = ENV.satellizer.facebook.clientId;
         vm.status = 'success';
         vm.grupo = current_grupo;
+    }
+
+    /** @ngInject */
+    function MasDetalleController($scope, grupo) {
+        $scope.grupo = grupo;
     }
 
 })();
