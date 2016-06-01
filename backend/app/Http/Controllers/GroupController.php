@@ -5,6 +5,9 @@ use Auth;
 use Log;
 use DB;
 use Config;
+use Validator;
+use Storage;
+use Response;
 use Illuminate\Support\Collection;
 use Winwins\Http\Requests;
 use Winwins\Http\Controllers\Controller;
@@ -16,6 +19,7 @@ use Winwins\Model\Repository\GroupRepository;
 use Winwins\SponsorsGroup;
 use Winwins\Winwin;
 use Winwins\Post;
+use Winwins\Media;
 
 use Illuminate\Http\Request;
 
@@ -123,7 +127,7 @@ class GroupController extends Controller {
             'type' => 'IMAGE'
         ]);
 
-        $filename = 'winwin_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
+        $filename = 'group_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
         $image->name = $filename;
@@ -146,11 +150,9 @@ class GroupController extends Controller {
             $group->confirm_ww = $request->input('confirm_ww') ? 1 : 0;
 
             $group->photo = $request->input('photo');
+
             if( !isset($group->photo) ) {
-                $group->photo = $request->input('gallery_image');
-                if( !isset($group->photo) ) {
-                    $group->photo = 'group-default.gif';
-                }
+                $group->photo = 'group-default.gif';
             }
 
             $group->user_id = $user->id;

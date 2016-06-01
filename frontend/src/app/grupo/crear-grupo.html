@@ -1,4 +1,4 @@
-<md-content class="crearGrupo">
+<md-content class="crear-grupo" ng-show="grupo.stage==1">
     <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
         <h2><span translate>CREA TU GRUPO</span></h2>
     </md-toolbar>
@@ -52,12 +52,12 @@
     </div>
 </md-content>
 
-<md-content class="crearGrupo" ng-show="grupo.stage==2">
+<md-content class="crear-grupo" ng-show="grupo.stage==2">
     <md-toolbar class="md-tall md-crear md-violet" layout="row" layout-align="center center">
         <h2><md-icon md-svg-src="assets/images/icon-flag.svg"></md-icon><span translate>DALE IDENTIDAD A TU GRUPO</span></h2>
     </md-toolbar>
     <div class="container">
-        <form method="post" name="winwin.crearForm2" ng-submit="grupo.saveGrupo()">
+        <form method="post" name="grupo.crearForm2" ng-submit="grupo.saveGrupo()">
             <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
                 <div flex>
                     <md-card>
@@ -67,7 +67,7 @@
                         </md-card-title-text>
                     </md-card>
                     <div layout="row" layout-align="center center">
-                        <p class="legend">Subí una fotopara tu grupo.</p>
+                        <p class="legend">Subí una foto para tu grupo.</p>
                     </div>
                     <div layout="row" layout-align="center center" class="layout-icons">
                         <md-whiteframe class="md-whiteframe-5dp" layout layout-align="center center" flex ng-click="grupo.showCropCoverDialog()">

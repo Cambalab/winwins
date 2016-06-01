@@ -6,7 +6,7 @@
         .controller('CrearGrupoController', CrearGrupoController);
 
     /** @ngInject */
-    function CrearGrupoController($stateParams, grupo, winwin, ENV, $mdDialog, $document, $q, $window, $element) {
+    function CrearGrupoController($stateParams, grupo, winwin, ENV, $mdDialog, $document, $q, $window, $element, $state) {
         var vm = this;
         vm.base = ENV.base;
         vm.imageServer = ENV.imageServer;
@@ -28,8 +28,6 @@
                 return;
             }
             vm.stage = 2;
-
-            vm.saveGrupo();
         }
 
         vm.saveGrupo = function () {
@@ -47,15 +45,16 @@
 
             $q.all(promises).then(function (data) {
                 if (vm.cover_image) {
-                    vm.grupo.image = data[0].filename;
+                    vm.grupo.photo = data[0].filename;
                 }
 
                 grupo.saveGrupo(vm.grupo)
                     .then(function (data) {
                         vm.grupo.id = data.id;
+                            $state.go('home.grupo-profile', {
+                              groupId: vm.group.id
+                            });
                     });
-
-                vm.processing = false;
             });
         }
 

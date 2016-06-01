@@ -28,7 +28,7 @@
     }
 
     _grupo.saveGrupo = function(grupo) {
-      return Restangular.all('groups').post(grupo);
+       return Restangular.all('groups').post(grupo);
     };
 
     _grupo.uploadImage = function(data, name) {
