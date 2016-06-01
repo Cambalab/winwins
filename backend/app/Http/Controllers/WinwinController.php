@@ -668,7 +668,7 @@ class WinwinController extends Controller {
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
                     'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                    'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
                     'name' => $detail->name,
@@ -1011,7 +1011,7 @@ class WinwinController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
@@ -1045,7 +1045,7 @@ class WinwinController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
