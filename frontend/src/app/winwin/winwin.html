@@ -153,6 +153,7 @@
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
                   <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.already_joined" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
                   <div class="califica" ng-show="false">
                     <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
                     <md-button class="md-star active" md-ink-ripple="false">
@@ -372,9 +373,6 @@
                 </div>
                 <div class="content-bg" ng-show="false">
                   <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
-                </div>
-                <div class="content-bg">
-                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.already_joined" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
                 </div>
               </div>
               <md-list ng-cloak>

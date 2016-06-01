@@ -19,6 +19,8 @@
     .then(function(user_data) {
       vm.user = user_data;
       vm.is_complete = (user_data.name && user_data.lastname && user_data.email && user_data.birthdate);
+      vm.groups = user_data.groups;
+
       if (vm.user.birthdate) {
         vm.user.birthdate = new Date(vm.user.birthdate);
       }

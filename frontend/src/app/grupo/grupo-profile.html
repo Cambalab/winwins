@@ -96,6 +96,7 @@
                                     </div>
                                 </div>
                                 <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.join()">SUMARSE AL GRUPO</md-button>
+                                <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.showUserWinwinsModal()">AGREGAR WINWIN A GRUPO</md-button>
                             </div>
                         </div>
                         <!--<div class="creadores" layout="row">-->
@@ -111,7 +112,7 @@
         </md-tabs>
     </div>
 </md-content>
-<div class="container group-winwins-title">
+<div class="container group-winwins-title" ng-if="grupo.profile.winwins.length > 0">
     <h1 class="title">
         <md-icon md-svg-src="assets/images/icon-recientes-title.svg"></md-icon>{{ 'WINWINS DEL GRUPO' }}
     </h1>

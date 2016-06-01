@@ -44,6 +44,10 @@
       return Restangular.one('groups/join', id).get();
     }
 
+    _grupo.addWinwin = function(groupId, winwinId){
+      return Restangular.one('groups', groupId).one('add_winwin', winwinId).get();
+    }
+
     return _grupo;
   }
 
