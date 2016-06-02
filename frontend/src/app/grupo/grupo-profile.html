@@ -14,7 +14,7 @@
                                     <img ng-src="{{ grupo.imageServer }}/390x266/{{ grupo.profile.photo }}" alt="" class="md-card-img"/>
                                 </div>
                                 <md-card-title-text layout-align="center center" layout="column" hide-gt-sm>
-                                    <md-button class="md-headline">{{ grupo.profile.title }}</md-button>
+                                    <md-button class="md-headline" aria-label="title">{{ grupo.profile.title }}</md-button>
                                 </md-card-title-text>
                                 <div class="card-labels">
                                     <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg">highlighted</md-icon>
@@ -88,17 +88,13 @@
                         <div layout="col" layout-align="center start">
                             <div flex="83">
                                 <div class="more-details">
-                                    <md-button aria-label="menu" class="md-raised" ng-click="grupo.showMasDetalleDialog()">
+                                    <p>{{ grupo.profile.description }}</p>
+                                    <md-button aria-label="menu" class="ver-mas md-raised" ng-click="grupo.showMasDetalleDialog()" aria-label="more-detail">
                                         Más detalles
                                     </md-button>
-                                    <div class="toggle-content">
-                                        <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
-                                            <p>{{ grupo.profile.description }}</p>
-                                        </div>
-                                    </div>
                                 </div>
-                                <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.join()">SUMARSE AL GRUPO</md-button>
-                                <md-button class="bt-green md-whiteframe-17dp" ng-if="grupo.profile.already_joined" ng-click="grupo.showUserWinwinsModal()">AGREGAR WINWIN A GRUPO</md-button>
+                                <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.join()" aria-label="sumarse">SUMARSE AL GRUPO</md-button>
+                                <md-button class="bt-green md-whiteframe-17dp" ng-if="grupo.profile.already_joined" ng-click="grupo.showUserWinwinsModal()" aria-label="agregar">AGREGAR WINWIN A GRUPO</md-button>
                             </div>
                         </div>
                     </div>
