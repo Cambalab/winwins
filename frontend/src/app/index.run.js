@@ -27,6 +27,10 @@
     // without setting on controller
     $rootScope.imageServer = ENV.imageServer;
 
+    $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+        $rootScope.containerClass = toState.containerClass;
+    });
+
     $rootScope.loadingFlag = false;
     var event2 = $rootScope.$on('cfpLoadingBar:started', function () {
         $rootScope.loadingFlag = true;

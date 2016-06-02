@@ -79,6 +79,7 @@
       })
       .state('home.terms',{
         url: 'terms',
+        containerClass: 'terms-class',
         views: {
           'content@home': {
             templateUrl: 'app/terms/terms.html',
