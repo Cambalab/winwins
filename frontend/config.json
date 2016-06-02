@@ -31,8 +31,8 @@
     "prod": {
       "ENV": {
         "name": "prod",
-        "base": "http://winwins.org/",
-        "apiBase": "http://winwins.org/api",
+        "base": "http://dev-winwins.net/",
+        "apiBase": "http://dev-winwins.net/api",
         "imageServer": "http://images.winwins.org",
         "defaultLang": "es",
         "baseLang": "es",

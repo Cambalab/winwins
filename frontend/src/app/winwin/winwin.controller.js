@@ -29,10 +29,14 @@
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
 
-      sponsor.getListByWinwin(vm.winwinId).then(function(sponsor_data) {
-        vm.sponsors = $window._.filter(sponsor_data, function(model) {
-          return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
-        });  
+      // sponsor.getListByWinwin(vm.winwinId).then(function(sponsor_data) {
+      //   vm.sponsors = $window._.filter(sponsor_data, function(model) {
+      //     return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
+      //   });  
+      // });
+
+      sponsor.getList().then(function(sponsor_data) {
+        vm.sponsors = sponsor_data;
       });
 
       vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'}
