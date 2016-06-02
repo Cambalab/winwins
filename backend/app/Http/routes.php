@@ -42,6 +42,8 @@ Route::post('api/winwins/{id}/close', ['middleware' => 'auth', 'uses' => 'Winwin
 Route::post('api/winwins/{id}/notifications', ['middleware' => 'auth', 'uses' => 'WinwinController@updateNotifications']);
 Route::post('api/winwins/{winwinId}/share/mails', ['middleware' => 'auth', 'uses' => 'WinwinController@sentEmailInvitations']);
 
+Route::get('api/winwins/groups/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@winwinGroups']);
+
 Route::post('api/winwins/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@sponsorRequest']);
 Route::post('api/sponsor/cancel/winwin/{id}', ['middleware' => 'auth', 'uses' => 'SponsorController@sponsorCancel']);
 Route::post('api/winwin/{winwinId}/cancel/sponsor/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@sponsorCancel']);

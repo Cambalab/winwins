@@ -74,11 +74,13 @@
                             </div>
                             <div class="miembros">
                                 <div layout="row" layout-align="center center" layout-margin layout-wrap>
-                                    <div ng-repeat="miembro in grupo.users" >
+                                    <div ng-repeat="miembro in grupo.profile.users | filter: { id: '!' + grupo.profile.user_id } as filteredMiembro" >
                                         <img ng-src="{{ grupo.imageServer }}/25x25/{{ miembro.photo }}" alt="{{ miembro.name }}" title="{{ miembro.name }}" class="profile-small style-rounded" ui-sref="home.public-profile({userId: miembro.id})"/>
                                     </div>
                                 </div>
+                                <strong ng-show="filteredMiembro.length > 0">MIEMBROS</strong>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-right">
@@ -96,16 +98,9 @@
                                     </div>
                                 </div>
                                 <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.join()">SUMARSE AL GRUPO</md-button>
-                                <md-button class="bt-green md-whiteframe-17dp" ng-if="!grupo.profile.already_joined" ng-click="grupo.showUserWinwinsModal()">AGREGAR WINWIN A GRUPO</md-button>
+                                <md-button class="bt-green md-whiteframe-17dp" ng-if="grupo.profile.already_joined" ng-click="grupo.showUserWinwinsModal()">AGREGAR WINWIN A GRUPO</md-button>
                             </div>
                         </div>
-                        <!--<div class="creadores" layout="row">-->
-                            <!--<div hide show-xs flex>-->
-                                <!--<img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />-->
-                                <!--<h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>-->
-                                <!--<strong>CREADOR</strong>-->
-                            <!--</div>-->
-                        <!--</div>-->
                     </div>
                 </div>
             </md-tab-body>

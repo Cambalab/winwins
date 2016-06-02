@@ -127,20 +127,27 @@
     }
 
     vm.showGroupsModal = function() {
-        $mdDialog.show({
-            controller: ModalBindWinwinToGroup,
-            controllerAs: 'vm',
-            templateUrl: 'app/grupo/modal-vincular-winwin-a-grupo.tmpl.html',
-            parent: angular.element($document.body),
-            locals: {
-                group_list: vm.grupos
-            }
-        })
-            .then(function(data){
-            user.getGroups().then(function(groups_data){
-                vm.grupos = groups_data;
-            })
-        })
+      winwin.getGroups(vm.winwinId).then(function(groups_data){
+          vm.grupos = groups_data;
+          account.getProfile().then(function(data) {
+            vm.user_id = data.profile.id;                
+              user.getUser(data.user.id).then(function(user_data){
+                vm.user_groups = user_data.groups;
+                $mdDialog.show({
+                    controller: ModalBindWinwinToGroup,
+                    controllerAs: 'vm',
+                    templateUrl: 'app/grupo/modal-vincular-grupo-a-winwin.tmpl.html',
+                    parent: angular.element($document.body),
+                    clickOutsideToClose: true,
+                    locals: {
+                        group_list: vm.grupos,
+                        user_groups: vm. user_groups,
+                        winwin_id: vm.winwinId
+                    }
+                });
+              });
+          });              
+      });
     }
 
     vm.left = function() {
@@ -592,8 +599,29 @@
   }
 
     /** @ngInject */
-   function ModalBindWinwinToGroup($mdDialog) {
+   function ModalBindWinwinToGroup($mdDialog, group_list, user_groups, $window, winwin_id, grupo) {
         var vm = this;
+        vm.group_list = group_list;
+        vm.winwin_groups;
+        vm.user_groups = user_groups;
+        vm.groups_already_added = group_list;
+        vm.success = false;
+        vm.winwin_id = winwin_id;
+        vm.user_have_groups = vm.user_groups.length == 0 ? false : true;
+        vm.not_added_user_groups = $window._.filter(vm.user_groups, function(user_group){
+            
+            var isGroupInList = $window._.filter(vm.groups_already_added, function(group_already_added){
+                return user_group.id == group_already_added.id;
+            })
+
+            return isGroupInList.length == 0;
+        });
+
+        vm.addWinwinToGroup = function(grupoId) {
+            grupo.addWinwin(grupoId, vm.winwin_id).then(function(){
+                vm.success = true;
+            })
+        }        
     }
 
   /** @ngInject */
