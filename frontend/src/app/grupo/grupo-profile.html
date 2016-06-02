@@ -102,6 +102,41 @@
                             </div>
                         </div>
                     </div>
+                    <div flex="15" layout="column" class="content-social-media">
+                      <div
+                        socialshare
+                        socialshare-provider="facebook" 
+                        socialshare-text="{{winwin.winwin.title}}" 
+                        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
+                        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                        socialshare-via="{{winwin.facebookId}}">
+                        <md-button class="md-icon-button" ng-href aria-label="facebook">
+                          <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                        </md-button>
+                      </div>
+                      <div
+                        socialshare  
+                        socialshare-text="{{winwin.winwin.title}}" 
+                        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
+                        socialshare-provider="twitter">
+                        <md-button class="md-icon-button" ng-href aria-label="twitter">
+                          <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
+                        </md-button>
+                      </div>
+                      <div
+                        socialshare 
+                        socialshare-provider="google" 
+                        socialshare-text="{{winwin.winwin.title}}" 
+                        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
+                        <md-button class="md-icon-button" ng-href aria-label="google">
+                          <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
+                        </md-button>
+                      </div>
+                      <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
+                        <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
+                      </md-button></div>
+                    </div>
                 </div>
             </md-tab-body>
         </md-tabs>

@@ -337,6 +337,40 @@ class GroupController extends Controller {
 
 	}
 
+    public function sentEmailInvitations(Request $request, Mailer $mailer, $groupId) {
+
+        $template_name = 'winwin_ww_invitation';
+        $user = User::find($request['user']['sub']);
+        $winwin = Winwin::find($winwinId);
+        $detail = $user->detail;
+
+        foreach($request->input('mails') as $recipient) {
+            $message = new Message($template_name, array(
+                'meta' => array(
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                ),
+                'sender' => array(
+                    'name' => $detail->name,
+                    'lastname' => $detail->lastname,
+                    'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
+                ),
+                'winwin' => array(
+                    'id' => $winwin->id,
+                    'users_amount' => $winwin->users_amount,
+                    'what_we_do' => $winwin->what_we_do,
+                ),
+
+            ));
+            $message->subject('WW - '.$winwin->title);
+            $message->to(null, $recipient);
+            $message_sent = $mailer->send($message);
+        }
+
+        return response()->json(['message' => 'winwin_emails_sent'], 200);
+    }
+
 	public function create() {
 		//
 	}
