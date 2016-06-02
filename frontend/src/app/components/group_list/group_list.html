@@ -1,31 +1,26 @@
 <md-content class="group-list">
-    <h1 class="title">
-          <span>
-            <md-icon md-svg-src="assets/images/icon-highlighted.svg"></md-icon>GRUPOS DESTACADOS
-          </span>
-    </h1>
-    <div layout="row" layout-wrap>
-        <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in items">
-            <md-card ui-sref="home.grupo-profile({groupId: item.id})">
-                <md-card-content>
-                    <div class="wrap-md-card-img">
-                        <img ng-src="{{ vm.imageServer }}/315x/{{ item.photo }}" alt="" class="md-card-img"/>
-                    </div>
-                    <md-card-title-text layout-align="center center" layout="column">
-                        <md-button class="md-headline">{{ item.name }}</md-button>
-                    </md-card-title-text>
-                </md-card-content>
-                <md-card-header>
-                    <md-card-header-text >
-                        <md-title>
-                                <div>{{ item.users_already_joined }} Miembros</div>
-                        </md-title>
-                        <md-subhead>
-                            <div>{{ item.description }}</div>
-                        </md-subhead>
-                    </md-card-header-text>
-                </md-card-header>
-            </md-card>
-        </div>
+  <h1 class="title">
+    <span>
+      <md-icon md-svg-src="assets/images/icon-highlighted.svg"></md-icon>GRUPOS DESTACADOS
+    </span>
+  </h1>
+  <div layout="row" layout-wrap>
+    <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in items">
+      <md-card ui-sref="home.grupo-profile({groupId: item.id})">
+        <md-card-content>
+          <div class="wrap-md-card-img">
+            <img ng-src="{{ vm.imageServer }}/315x/{{ item.photo }}" alt="" class="md-card-img"/>
+          </div>
+          <md-card-title-text layout-align="center center" layout="column">
+            <md-button class="md-headline">{{ item.name }}</md-button>
+          </md-card-title-text>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="space-between center">
+          <div layout="row" layout-align="end center">
+            <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
+          </div>
+        </md-card-actions>
+      </md-card>
     </div>
+  </div>
 </md-content>

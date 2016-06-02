@@ -666,14 +666,14 @@ class WinwinController extends Controller {
         foreach($request->input('mails') as $recipient) {
             $message = new Message($template_name, array(
                 'meta' => array(
-                    'base_url' => 'http://dev-winwins.net',
-                    'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
-                    'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
                     'name' => $detail->name,
                     'lastname' => $detail->lastname,
-                    'photo' => 'http://images.dev-winwins.net/72x72/smart/'.$detail->photo,
+                    'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
                 ),
                 'winwin' => array(
                     'id' => $winwin->id,
@@ -922,8 +922,10 @@ class WinwinController extends Controller {
         $ww_user = $winwin->user;
         $ww_user->detail;
         return view('winwins.view', [
-		'winwin' => $winwin,
-                'facebook_app_id' => Config::get('facebook_app_id')
+    		'winwin' => $winwin,
+            'facebook_app_id' => Config::get('app.facebook_app_id'),
+            'url_base' => Config::get('app.url'),
+            'url_images' => Config::get('app.url_images')
 	]);
 	}
 
@@ -1007,14 +1009,14 @@ class WinwinController extends Controller {
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
-                        'base_url' => 'http://dev-winwins.net',
-                        'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                        'base_url' => Config::get('app.url'),
+                        'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
                         'name' => $user->detail->name,
-                        'photo' => 'http://images.dev-winwins.net/72x72/smart/'.$user->photo,
+                        'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
                     ),
                     'winwin' => array(
                         'id' => $winwin->id,
@@ -1041,14 +1043,14 @@ class WinwinController extends Controller {
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
-                        'base_url' => 'http://dev-winwins.net',
-                        'winwin_link' => 'http://dev-winwins.net/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/imgs/logo-winwins_es.gif'
+                        'base_url' => Config::get('app.url'),
+                        'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
                         'name' => $user->detail->name,
-                        'photo' => 'http://images.dev-winwins.net/72x72/smart/'.$user->photo,
+                        'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
                     ),
                     'winwin' => array(
                         'id' => $winwin->id,

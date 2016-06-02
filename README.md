@@ -62,7 +62,11 @@ composer install
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\JWTAuthServiceProvider"
 php artisan vendor:publish
 php artisan jwt:generate
+
+php artisan panel:install
 ```
+
+
 
 ## Database
 
@@ -71,6 +75,11 @@ First time do this to initialize the database:
 ```sh
 php artisan migrate
 php artisan db:seed
+```
+
+Option that reset structure and data and seeded:
+```sh
+php artisan migrate:refresh --seed
 ```
 
 ## Run backend server

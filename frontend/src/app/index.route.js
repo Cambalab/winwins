@@ -87,6 +87,16 @@
           }
         }
       })
+      .state('home.contact',{
+        url: 'contact',
+        views: {
+          'content@home': {
+            templateUrl: 'app/contact/contact.html',
+            controller: 'ContactController',
+            controllerAs: 'contact'
+          }
+        }
+      })
       .state('home.notifications',{
         url: 'notifications',
         views: {

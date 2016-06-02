@@ -11,10 +11,8 @@
     vm.query = $stateParams.query;
 
     search.search(vm.query).then(function(data) {
-      vm.result_length = data.length;
-
       vm.winwins = $window._.filter(data, function(result) {
-        return result._type == 'winwins'; 
+        return result._type == 'winwins' && result._source.canceled != 1; 
       }).map(function(obj){ 
         return obj._source;
       });
@@ -24,6 +22,8 @@
       }).map(function(obj){ 
         return obj._source;
       });
+
+      vm.result_length = vm.winwins.length + vm.users.length;
     });
   }
 
