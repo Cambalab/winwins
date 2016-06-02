@@ -8,6 +8,7 @@
     function PublicGrupoProfileController(ENV, grupo, $stateParams, user, $mdDialog, $auth, $rootScope, $document, account) {
         var vm = this;
 
+        vm.base = ENV.base;
         vm.imageServer = ENV.imageServer;
         vm.groupId = $stateParams.groupId;
         
