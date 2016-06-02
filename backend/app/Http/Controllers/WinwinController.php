@@ -695,10 +695,6 @@ class WinwinController extends Controller {
             $message_sent = $mailer->send($message);
         }
 
-
-
-
-
         return response()->json(['message' => 'winwin_emails_sent'], 200);
     }
 
