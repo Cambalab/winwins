@@ -31,16 +31,16 @@
     "prod": {
       "ENV": {
         "name": "prod",
-        "base": "http://dev-winwins.net",
-        "apiBase": "http://dev-winwins.net/api",
-        "imageServer": "http://images.dev-winwins.net",
+        "base": "http://winwins.org/",
+        "apiBase": "http://winwins.org/api",
+        "imageServer": "http://images.winwins.org",
         "defaultLang": "es",
         "baseLang": "es",
         "availableLangs": ["es", "en"],
         "satellizer": {
           "facebook": {
-            "clientId": "1082199191794840",
-            "scope": "email,public_profile,user_birthday"
+            "clientId": "238862259502342",
+            "scope": "email,public_profile"
           },
           "google": {
             "clientId": "313110710680-p22p1s5brqn7tfaqj9v16u67bic5smqk.apps.googleusercontent.com"

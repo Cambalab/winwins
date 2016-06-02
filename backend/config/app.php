@@ -37,7 +37,7 @@ return [
 	| your application so that it is used when running Artisan tasks.
 	|
 	*/
-
+	'url_images' => env('URL_IMAGES', 'http://images.localhost'),
 	'url' => env('URL_BASE', 'http://localhost'),
 
 	/*

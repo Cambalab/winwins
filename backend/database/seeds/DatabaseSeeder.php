@@ -24,22 +24,22 @@ class DatabaseSeeder extends Seeder {
         $this->command->info('Languages seeded!');
 
 		$this->call('MaritalStatusTableSeeder');
-        $this->command->info('Marital seeded!');
+    $this->command->info('Marital seeded!');
 
 		$this->call('UsersTableSeeder');
-        $this->command->info('Users seeded!');
+    $this->command->info('Users seeded!');
 
-		$this->call('WinwinsTableSeeder');
-        $this->command->info('Winwins seeded!');
+		//$this->call('WinwinsTableSeeder');
+    //$this->command->info('Winwins seeded!');
 
-		$this->call('WinwinsUsersTableSeeder');
-        $this->command->info('Winwins Users seeded!');
+		//$this->call('WinwinsUsersTableSeeder');
+    //$this->command->info('Winwins Users seeded!');
 
-		$this->call('GroupTableSeeder');
-        $this->command->info('Group seeded!');
+		//$this->call('GroupTableSeeder');
+    //$this->command->info('Group seeded!');
 
 		$this->call('SponsorsTableSeeder');
-        $this->command->info('Sponsors seeded!');
+    $this->command->info('Sponsors seeded!');
 
 	}
 
