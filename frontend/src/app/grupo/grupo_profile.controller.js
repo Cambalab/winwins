@@ -22,9 +22,6 @@
         vm.join = function() {
             if($auth.isAuthenticated()) {
                 grupo.join(vm.groupId).then(function(data) {
-                    grupo.getGroup(vm.groupId).then(function(group_data) {
-                        vm.grupo = group_data;
-                    });
 
                     $mdDialog.show({
                         controller: ModalConfirmacionSumarseController,
@@ -33,13 +30,13 @@
                         parent: angular.element($document.body),
                         clickOutsideToClose:true,
                         locals: {
-                            current_grupo: vm.grupo
+                            current_grupo: vm.profile
                         }
                     });
                 });
             } else {
                 $rootScope.returnState = {
-                    state: 'home.grupo',
+                    state: 'home.grupo-profile',
                     parameters: {
                         groupId: vm.groupId
                     }
@@ -52,6 +49,19 @@
                     clickOutsideToClose:true
                 });
             }
+        }
+
+        vm.showModalShareEmailDialog = function() {
+          $mdDialog.show({
+            controller: ModalShareEmailController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-share-email.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_group: vm.profile
+            }
+          });
         }
 
         vm.showMasDetalleDialog = function(ev) {
@@ -88,7 +98,7 @@
                 })
             } else {
                 $rootScope.returnState = {
-                    state: 'home.grupo',
+                    state: 'home.grupo-profile',
                     parameters: {
                         groupId: vm.groupId
                     }
@@ -125,19 +135,21 @@
             return isWinwinInList.length == 0;
         });
 
-
         vm.addWinwinToGroup = function(winwinId) {
             grupo.addWinwin(vm.grupoId, winwinId).then(function(){
                 vm.success = true;
             })
         }
 
-
-
         user.getUser(grupo.user_id).then(function(user_data){
             vm.group_creator = user_data;
         });
     }
+
+  /** @ngInject */
+  function ModalShareEmailController(current_group) {
+    var vm = this;
+  }
 
 
     /** @ngInject */

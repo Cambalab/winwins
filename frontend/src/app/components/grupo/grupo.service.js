@@ -48,6 +48,10 @@
       return Restangular.one('groups', groupId).one('add_winwin', winwinId).get();
     }
 
+    _grupo.shareMails = function(id, mails) {
+      return Restangular.one('groups', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
+    }
+
     return _grupo;
   }
 
