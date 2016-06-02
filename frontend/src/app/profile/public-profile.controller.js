@@ -22,6 +22,7 @@
       if (vm.user.birthdate) {
         vm.user.birthdate = new Date(vm.user.birthdate);
       }
+      
       vm.creadospormi = $window._.filter(vm.user.winwins, function(winwin) {
         return winwin.user_id == vm.user.user_id && winwin.canceled == 0; 
       });
@@ -29,6 +30,8 @@
       vm.enqueparticipo = $window._.filter(vm.user.winwins, function(winwin) {
         return winwin.user_id != vm.user.user_id && winwin.canceled == 0; 
       });
+
+      vm.winwins_length = vm.creadospormi.length + vm.enqueparticipo.length;
     });
 
     vm.showSeguirDialog = function() {
