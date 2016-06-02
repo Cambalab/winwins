@@ -68,6 +68,7 @@ class WinwinController extends CrudController{
         $this->edit->add('description', 'Description',  'textarea')->rule('required');
         $this->edit->add('what_we_do',  'What we do',   'textarea')->rule('required');
 
+        $this->edit->add('selected',    'selected',     'checkbox');
         $this->edit->add('is_video',    'is_video',     'checkbox');
         $this->edit->add('video',       'Video',        'text');
 
