@@ -26,8 +26,8 @@
     // On $rootCcope, so we can reference it on templates
     // without setting on controller
     $rootScope.imageServer = ENV.imageServer;
-
-    $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+    
+    var event4 = $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
         $rootScope.containerClass = toState.containerClass;
     });
 

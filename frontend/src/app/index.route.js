@@ -39,6 +39,7 @@
       })
       .state('home.public-profile',{
         url: 'profile/:userId',
+        containerClass: 'back-color',
         views: {
           'content@home': {
             templateUrl: 'app/profile/public-profile.html',
@@ -79,7 +80,6 @@
       })
       .state('home.terms',{
         url: 'terms',
-        containerClass: 'terms-class',
         views: {
           'content@home': {
             templateUrl: 'app/terms/terms.html',
@@ -110,6 +110,7 @@
       })
       .state('home.about',{
         url: 'about',
+        containerClass: 'back-color',
         views: {
           'content@home': {
             templateUrl: 'app/about/about.html',
@@ -120,6 +121,7 @@
       })
       .state('home.weare',{
         url: 'weare',
+        containerClass: 'back-color',
         views: {
           'content@home': {
             templateUrl: 'app/weare/weare.html',
@@ -130,6 +132,7 @@
       })
       .state('home.winwin-list',{
         url: 'winwin-list',
+        containerClass: 'back-color',
         views: {
           'content@home': {
             templateUrl: 'app/winwin/winwin-list.html',
