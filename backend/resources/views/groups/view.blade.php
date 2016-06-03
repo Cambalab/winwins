@@ -1,7 +1,7 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/Event">
     <head>
-        <meta name="author" content="{{ $group_user->detail->name }} {{ $group_user->detail->lastname }}"/>
+        <meta name="author" content="{{ $group->user->detail->name }} {{ $group->user->detail->lastname }}"/>
         <meta property="og:site_name" content="Winwins - Acuerdos en Accion"/>
 
         <meta property="fb:app_id" content="1082199191794840" />
