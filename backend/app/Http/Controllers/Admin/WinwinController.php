@@ -18,7 +18,6 @@ class WinwinController extends CrudController{
         $this->filter->add('status',      'Status',       'select')->options(\Winwins\Winwin::$WinwinStatus);
         $this->filter->add('scope',       'Scope',        'select')->options(\Winwins\Winwin::$WinwinScope);
         $this->filter->add('title',       'Title',        'text');
-        $this->filter->add('what_happen', 'What Happens', 'text');
         $this->filter->add('description', 'Description',  'text');
         $this->filter->add('what_we_do',  'What we do',   'text');
 
@@ -31,7 +30,6 @@ class WinwinController extends CrudController{
         $this->grid->add('status',      'Status');
         $this->grid->add('scope',       'Scope');
         $this->grid->add('title',       'Title');
-        $this->grid->add('what_happen', 'What Happens');
         // $this->grid->add('description', 'Description');
         $this->grid->add('what_we_do',  'What we do');
 
@@ -64,7 +62,6 @@ class WinwinController extends CrudController{
         $this->edit->add('interests',     'Interests',     'checkboxgroup')
             ->options(\Winwins\Interest::lists("name", "id")->all());
 
-        $this->edit->add('what_happen', 'What happens', 'textarea')->rule('required');
         $this->edit->add('description', 'Description',  'textarea')->rule('required');
         $this->edit->add('what_we_do',  'What we do',   'textarea')->rule('required');
 
