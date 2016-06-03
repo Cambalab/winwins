@@ -64,6 +64,7 @@ class GroupController extends Controller {
             $users_count = count($group->users);
             $group->users_already_joined = $users_count;
         });
+        
         return $collection;
     }
 

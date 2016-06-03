@@ -128,13 +128,15 @@
         vm.success = false;
         vm.user_have_winwins = vm.user_winwins.length == 0 ? false : true;
         vm.not_added_winwins = $window._.filter(vm.user_winwins, function(user_winwin){
-            
+
             var isWinwinInList = $window._.filter(vm.winwins_already_add, function(winwin_already_add){
                 return user_winwin.id == winwin_already_add.id;
             })
 
             return isWinwinInList.length == 0;
         });
+
+        vm.all_user_winwins_added = vm.user_have_winwins && vm.not_added_winwins.length == 0;
 
         vm.addWinwinToGroup = function(winwinId) {
             grupo.addWinwin(vm.grupoId, winwinId).then(function(){

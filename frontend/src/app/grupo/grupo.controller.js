@@ -13,6 +13,7 @@
     grupo.getList(0, 15).then(function(data) {
       vm.grupos = data;
     });
+
   }
 
 })();

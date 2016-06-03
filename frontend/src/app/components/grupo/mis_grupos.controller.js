@@ -3,21 +3,17 @@
 
     angular
         .module('winwins')
-        .controller('MisGruposController', MisGruposController);
+        .controller('MisGruposListController', MisGruposListController);
 
-    /** @ngInject */
-    function MisGruposController(ENV, user, account) {
-        var vm = this;
+  /** @ngInject */
+  function MisGruposListController(ENV, user) {
+    var vm = this;
 
+    vm.imageServer = ENV.imageServer;
 
-        // account.getProfile()
-        //     .then(function(data) {
-        //         vm.isActive = data.active;
-        //
-        //         user.getUser(data.user.id).then(function(user_data){
-        //             vm.user = user_data;
-        //         })
-        //     })
-    }
+    user.getGroups().then(function(data) {
+      vm.grupos = data;
+    });
+  }
 
 })();

@@ -151,6 +151,16 @@
           }
         }
       })
+      .state('home.mis-grupo-list',{
+        url: 'mis-grupos-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/group_list_index.html',
+            controller: 'MisGruposListController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
       .state('home.grupo-profile',{
         url: 'grupo/:groupId',
         views: {
