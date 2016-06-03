@@ -151,7 +151,7 @@
           }
         }
       })
-      .state('home.mis-grupo-list',{
+      .state('home.mis-grupos-list',{
         url: 'mis-grupos-list',
         views: {
           'content@home': {

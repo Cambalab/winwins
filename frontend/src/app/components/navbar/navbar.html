@@ -158,9 +158,6 @@
 				<md-button class="md-primary" ui-sref="home.grupo-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Grupos</translate></md-button>
 			</div>
 			<div>
-				<md-button class="md-primary" ui-sref="home.mis-grupo-list" ng-click="vm.openLeftMenu()" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Mis Grupos</translate></md-button>
-			</div>
-			<div>
 				<md-button class="md-primary" ui-sref="home.grupo-creacion" ng-click="vm.openLeftMenu()" ng-if="vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Grupo</translate></md-button>
 
 				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Grupo</translate></md-button>

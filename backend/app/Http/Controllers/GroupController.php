@@ -197,6 +197,12 @@ class GroupController extends Controller {
 
         $group->members_count = count($group->users);
         $group->winwins;
+
+        $group->winwins->each(function($winwin) {
+            $users_count = count($winwin->users);
+            $winwin->users_already_joined = $users_count;
+        });
+
         $group->sponsors;
 
         $group->already_joined = false;
