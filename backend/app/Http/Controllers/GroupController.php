@@ -213,6 +213,18 @@ class GroupController extends Controller {
         return $group;
 	}
 
+    public function socialShow(Request $request, $id) {
+        $group = Group::find($id);
+        $group_user = $group->user;
+        $group_user->detail;
+        return view('group.view', [
+            'group' => $group,
+            'facebook_app_id' => Config::get('app.facebook_app_id'),
+            'url_base' => Config::get('app.url'),
+            'url_images' => Config::get('app.url_images')
+        ]);
+    }
+
 
 	public function update($id) {
         $group = Group::find($id);
