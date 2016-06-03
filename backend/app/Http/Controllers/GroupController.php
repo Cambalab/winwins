@@ -223,7 +223,7 @@ class GroupController extends Controller {
         $group = Group::find($id);
         $group_user = $group->user;
         $group_user->detail;
-        return view('group.view', [
+        return view('groups.view', [
             'group' => $group,
             'facebook_app_id' => Config::get('app.facebook_app_id'),
             'url_base' => Config::get('app.url'),
