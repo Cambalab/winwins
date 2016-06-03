@@ -11,6 +11,7 @@
         vm.base = ENV.base;
         vm.imageServer = ENV.imageServer;
         vm.groupId = $stateParams.groupId;
+        vm.facebookId = ENV.satellizer.facebook.clientId;
         
         grupo.getGroup(vm.groupId).then(function(group_data) {
             vm.profile = group_data;

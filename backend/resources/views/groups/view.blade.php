@@ -17,7 +17,7 @@
         <meta name="twitter:creator" content="@winwinsorg" />
 
 
-        <meta http-equiv="refresh" content="0;url='{{ $url_base }}/#/wwg/{{ $group->id }}'">
+        <meta http-equiv="refresh" content="0;url='{{ $url_base }}/#/grupo/{{ $group->id }}'">
 
     </head>
     <body>
