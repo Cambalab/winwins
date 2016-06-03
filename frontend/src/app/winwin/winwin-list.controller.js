@@ -36,7 +36,7 @@
 
       _categories = [];
       _filter = filter;
-      winwin.getList(vm.current_page, filter).then(function(data) {
+      winwin.getList(vm.current_page, filter, 50).then(function(data) {
         if (next) {
           vm.destacados.push.apply(vm.destacados, data);   
         } else {
