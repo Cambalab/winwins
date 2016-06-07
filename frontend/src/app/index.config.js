@@ -38,7 +38,7 @@
     $authProvider.twitter(ENV.satellizer.twitter);
 
     // angular-loading-bar
-    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeSpinner = true;
 
     amDatePickerConfigProvider.setOptions({
         calendarIcon: '/assets/images/ic_today_black_24px.svg',
