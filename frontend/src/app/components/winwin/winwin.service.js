@@ -75,6 +75,10 @@
       return Restangular.all('posts').post(post);
     }
 
+    _winwin.getGroups = function(id) {
+      return Restangular.one('winwins').one('groups', id).get();
+    }
+
     _winwin.createComment = function(id, content, media_id, media_type, media_path) {
       return Restangular.one('posts', id).customPOST({
         content: content,

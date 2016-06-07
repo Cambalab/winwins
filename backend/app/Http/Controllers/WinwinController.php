@@ -292,6 +292,14 @@ class WinwinController extends Controller {
 
     }
 
+    public function winwinGroups(Request $request, $id) {
+        $winwin = Winwin::find($id);
+        $groups = $winwin->groups;
+
+        return response()->json($groups, 200, [], JSON_NUMERIC_CHECK);
+
+    }
+
     
 	public function winwinSponsorsCandidates(Request $request, $id) {
         $winwin = Winwin::find($id);
@@ -686,10 +694,6 @@ class WinwinController extends Controller {
             $message->to(null, $recipient);
             $message_sent = $mailer->send($message);
         }
-
-
-
-
 
         return response()->json(['message' => 'winwin_emails_sent'], 200);
     }

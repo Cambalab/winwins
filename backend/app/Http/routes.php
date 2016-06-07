@@ -42,6 +42,8 @@ Route::post('api/winwins/{id}/close', ['middleware' => 'auth', 'uses' => 'Winwin
 Route::post('api/winwins/{id}/notifications', ['middleware' => 'auth', 'uses' => 'WinwinController@updateNotifications']);
 Route::post('api/winwins/{winwinId}/share/mails', ['middleware' => 'auth', 'uses' => 'WinwinController@sentEmailInvitations']);
 
+Route::get('api/winwins/groups/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@winwinGroups']);
+
 Route::post('api/winwins/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@sponsorRequest']);
 Route::post('api/sponsor/cancel/winwin/{id}', ['middleware' => 'auth', 'uses' => 'SponsorController@sponsorCancel']);
 Route::post('api/winwin/{winwinId}/cancel/sponsor/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@sponsorCancel']);
@@ -84,13 +86,17 @@ Route::get('api/groups/paginate/{page}/{amount}', ['uses' => 'GroupController@pa
 Route::get('api/groups/search', ['uses' => 'GroupController@search']);
 Route::get('api/groups/join/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@join']);
 Route::get('api/groups/left/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@left']);
+Route::post('api/groups/upload', ['middleware' => 'auth', 'uses' => 'GroupController@storeImage']);
 Route::get('api/groups/{id}/add_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@addWinwin']);
 Route::get('api/groups/{id}/remove_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@removeWinwin']);
 Route::post('api/groups/{id}/conversation', ['middleware' => 'auth', 'uses' => 'GroupController@conversation']);
+Route::post('api/groups/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@store']);
 Route::post('api/groups/{groupId}/conversation/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@conversation_reply']);
 Route::get('api/group_thread/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@thread']);
 Route::post('api/groups/sponsor_request/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@sponsorRequest']);
 Route::resource('api/groups', 'GroupController');
+Route::get('api/group/{id}', ['uses' => 'GroupController@show']);
+Route::get('api/groups/creator', ['middleware' => 'auth', 'uses' => 'GroupController@getGroupsByUser']);
 
 Route::get('api/sponsors/all', ['uses' => 'SponsorController@all']);
 Route::get('api/sponsors/paginate/{page}/{amount}', ['uses' => 'SponsorController@paginate']);
@@ -131,5 +137,6 @@ Route::get('api/translation', ['uses' => 'LanguageController@translation']);
 Route::get('/', 'HomeController@index');
 Route::get('/web/', 'HomeController@desktop');
 Route::get('/ww/{id}', 'WinwinController@socialShow');
+Route::get('/wwg/{id}', 'GroupController@socialShow');
 Route::get('/ww-post/{id}', 'PostController@socialShow');
 

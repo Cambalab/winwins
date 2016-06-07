@@ -39,7 +39,7 @@
                       <md-icon>star_rate</md-icon>
                     </md-button>
                   </div>
-                  <div class="wrap-card-img">              
+                  <div class="wrap-card-img">
                     <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.image}}" alt="" class="md-card-img" ng-if="!winwin.winwin.is_video"/>              
                     <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(winwin.winwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
                   </div>
@@ -153,6 +153,7 @@
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
                   <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
                   <div class="califica" ng-show="false">
                     <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
                     <md-button class="md-star active" md-ink-ripple="false">
@@ -232,7 +233,7 @@
               <div ng-repeat="item_post in winwin.posts">
                 <md-card class="md-whiteframe-7dp" >
                   <div class="card-labels">
-                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">  
+                    <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                     </md-button>
                     <md-button ng-if="(winwin.winwin.is_moderator && item_post.sticky==1) || item_post.sticky==1" ng-disabled="!winwin.winwin.is_moderator" ng-click="winwin.setSticky(item_post, false)" class="md-icon-button" aria-label="highlighted on">
@@ -285,7 +286,7 @@
                 <md-card class="md-whiteframe-7dp" flex-offset="15" ng-repeat="comment in item_post.comments | orderBy:'id'">
                   <div layout="row" layout-align="space-between center">
                     <div layout-padding>
-                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button" aria-label="eliminar">  
+                      <md-button ng-if="(winwin.winwin.is_moderator || comment.user.id == winwin.account.id)" ng-click="winwin.removePost(comment)" class="md-icon-button" aria-label="eliminar">
                         <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                       </md-button>
                     </div>

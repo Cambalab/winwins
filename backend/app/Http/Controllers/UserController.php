@@ -99,9 +99,19 @@ class UserController extends Controller {
 
             $userDetail = $user->detail;
             $userDetail->email = $user->email;
-            $userDetail->winwins = $winwins;
             $userDetail->groups = $user->groups;
+            $userDetail->winwins = $winwins;
             $userDetail->notifications = $user->notifications;
+
+            $userDetail->groups->each(function($group) {
+                $users_count = count($group->users);
+                $group->users_already_joined = $users_count;
+            });
+
+            $userDetail->winwins->each(function($winwin) {
+                $users_count = count($winwin->users);
+                $winwin->users_already_joined = $users_count;
+            });
 
             $user->notifications->each(function($notification) {
                 try {

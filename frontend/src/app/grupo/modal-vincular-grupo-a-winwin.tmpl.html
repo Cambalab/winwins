@@ -1,0 +1,32 @@
+<md-dialog-content class="dialog-primary">
+  
+  <div class="md-dialog-content" ng-if="vm.user_have_groups && !vm.success">
+    <h3 class="title">
+      {{ 'WINWINS' | translate }}
+    </h3>
+    <md-list>
+      <md-list-item ng-repeat="group in vm.not_added_user_groups">
+        <p> {{group.name}} </p>
+        <md-button class="md-raised md-warn md-caption" ng-click="vm.addWinwinToGroup(group.id)" aria-label="Vincular grupo">Vincular grupo</md-button>
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <div class="md-dialog-content md-dialog-ok" ng-show="!vm.user_have_groups && !vm.success" >
+    <div layout="column" layout-align="center center" >
+      <p> No formas parte de ningun grupo. <a ui-sref="home.grupo-creacion">Crea un grupo</a> o
+      <a ui-sref="home.grupo-list">participa de alguno</a></p>
+    </div>
+  </div>
+
+  <div class="md-dialog-content md-dialog-ok" ng-show="vm.success">
+    <div layout="column" layout-align="center center" >
+      <div flex><md-button><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
+      <div flex><h2 class="gray" translate>Buenísimo!</h2></div>
+      <div flex>
+        <p class="font-16">Agregaste el winwin al grupo <span class="blue">{{ vm.groupName }}</span></p>
+      </div>
+    </div>
+  </div>
+
+</md-dialog-content>  

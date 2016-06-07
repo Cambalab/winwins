@@ -60,9 +60,10 @@
       <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
       <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
     </div>
-    <div layout="column" ng-show="false">
-      <h3 class="title-destacado" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
-      <p class="mensaje" ng-if="profile.user.myself">Aun no participás de ningún grupo. <a href="#">Ver grupos.</a> <a href="#">Crear grupo.</a></p>
+    <div layout="column" ng-show="(!profile.user.private)">
+      <h3 class="title-destacado bg-orange" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
+      <group_list items="profile.groups"></group_list>
+      <p class="mensaje" ng-if="(profile.user.groups.length <= 0)">Aun no participás de ningún grupo. <a ui-sref="home.grupo-list">Ver grupos.</a> <a ui-sref="home.grupo-creacion">Crear grupo.</a></p>
     </div>
   </div>
 </md-content>

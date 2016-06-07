@@ -141,6 +141,46 @@
           }
         }
       })
+      .state('home.grupo-list',{
+        url: 'grupo-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/group_list_index.html',
+            controller: 'GrupoListController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
+      .state('home.mis-grupos-list',{
+        url: 'mis-grupos-list',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/group_list_index.html',
+            controller: 'MisGruposListController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
+      .state('home.grupo-profile',{
+        url: 'grupo/:groupId',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/grupo-profile.html',
+            controller: 'PublicGrupoProfileController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
+      .state('home.grupo-creacion',{
+        url: 'crear-grupo',
+        views: {
+          'content@home': {
+            templateUrl: 'app/grupo/crear-grupo.html',
+            controller: 'CrearGrupoController',
+            controllerAs: 'grupo'
+          }
+        }
+      })
       .state('home.miembros',{
         url: 'miembros',
         views: {

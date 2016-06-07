@@ -5,6 +5,9 @@ use Auth;
 use Log;
 use DB;
 use Config;
+use Validator;
+use Storage;
+use Response;
 use Illuminate\Support\Collection;
 use Winwins\Http\Requests;
 use Winwins\Http\Controllers\Controller;
@@ -16,13 +19,14 @@ use Winwins\Model\Repository\GroupRepository;
 use Winwins\SponsorsGroup;
 use Winwins\Winwin;
 use Winwins\Post;
+use Winwins\Media;
 
 use Illuminate\Http\Request;
 
 class GroupController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'search']]);
+        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'search', 'socialShow']]);
     }
 
     public function paginate(Request $request, $page = 0, $amount = 15) {
@@ -49,6 +53,20 @@ class GroupController extends Controller {
         return $collection;
 
 	}
+
+    public function getGroupsByUser(Request $request) {
+
+        $user = User::find($request['user']['sub']);
+        
+        $groups = Group::where('user_id', '=', $user->getId());
+        $collection = Collection::make($groups);
+        $collection->each(function($group) {
+            $users_count = count($group->users);
+            $group->users_already_joined = $users_count;
+        });
+        
+        return $collection;
+    }
 
 	public function updateGroup(Request $request, $id ) {
         $user = User::find($request['user']['sub']);
@@ -78,7 +96,46 @@ class GroupController extends Controller {
         return $group;
 	}
 
+    public function storeImage(Request $request, Media $media) {
 
+        $user = User::find($request['user']['sub']);
+
+        if(!$request->hasFile('file')) {
+            return Response::json(['error' => 'no_file_sent']);
+        }
+
+        if(!$request->file('file')->isValid()) {
+            return Response::json(['error' => 'file_not_valid']);
+        }
+
+        $file = $request->file('file');
+
+        $v = Validator::make(
+            $request->all(),
+            ['file' => 'required|mimes:jpeg,jpg,png|max:8000']
+        );
+
+        if($v->fails()) {
+            return Response::json(['error' => $v->errors()]);
+        }
+
+
+        $image = Media::create([
+            'name' => $request->file('file')->getClientOriginalName(),
+            'ext' => $request->file('file')->guessExtension(),
+            'user_id' => $user->id || 1,
+            'bucket' => 'S3',
+            'type' => 'IMAGE'
+        ]);
+
+        $filename = 'group_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
+
+        Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
+        $image->name = $filename;
+        $image->save();
+
+        return Response::json(['OK' => 1, 'filename' => $filename]);
+    }
 
 
 	public function store(Request $request) {
@@ -94,11 +151,9 @@ class GroupController extends Controller {
             $group->confirm_ww = $request->input('confirm_ww') ? 1 : 0;
 
             $group->photo = $request->input('photo');
+
             if( !isset($group->photo) ) {
-                $group->photo = $request->input('gallery_image');
-                if( !isset($group->photo) ) {
-                    $group->photo = 'group-default.gif';
-                }
+                $group->photo = 'group-default.gif';
             }
 
             $group->user_id = $user->id;
@@ -142,9 +197,19 @@ class GroupController extends Controller {
 
         $group->members_count = count($group->users);
         $group->winwins;
+
+        $group->winwins->each(function($winwin) {
+            $users_count = count($winwin->users);
+            $winwin->users_already_joined = $users_count;
+        });
+
         $group->sponsors;
 
         $group->already_joined = false;
+
+        $group->posts = DB::table('posts')
+            ->where('type', '=', 'GROUP')
+            ->where('reference_id', '=', $group->id)->get();
 
         if($user) {
             $group->already_joined = count($group->users->filter(function($model) use ($user) {
@@ -157,6 +222,18 @@ class GroupController extends Controller {
 
         return $group;
 	}
+
+    public function socialShow(Request $request, $id) {
+        $group = Group::find($id);
+        $group_user = $group->user;
+        $group_user->detail;
+        return view('groups.view', [
+            'group' => $group,
+            'facebook_app_id' => Config::get('app.facebook_app_id'),
+            'url_base' => Config::get('app.url'),
+            'url_images' => Config::get('app.url_images')
+        ]);
+    }
 
 
 	public function update($id) {
@@ -282,6 +359,40 @@ class GroupController extends Controller {
         }
 
 	}
+
+    public function sentEmailInvitations(Request $request, Mailer $mailer, $groupId) {
+
+        $template_name = 'winwin_ww_invitation';
+        $user = User::find($request['user']['sub']);
+        $winwin = Winwin::find($winwinId);
+        $detail = $user->detail;
+
+        foreach($request->input('mails') as $recipient) {
+            $message = new Message($template_name, array(
+                'meta' => array(
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                ),
+                'sender' => array(
+                    'name' => $detail->name,
+                    'lastname' => $detail->lastname,
+                    'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
+                ),
+                'winwin' => array(
+                    'id' => $winwin->id,
+                    'users_amount' => $winwin->users_amount,
+                    'what_we_do' => $winwin->what_we_do,
+                ),
+
+            ));
+            $message->subject('WW - '.$winwin->title);
+            $message->to(null, $recipient);
+            $message_sent = $mailer->send($message);
+        }
+
+        return response()->json(['message' => 'winwin_emails_sent'], 200);
+    }
 
 	public function create() {
 		//
