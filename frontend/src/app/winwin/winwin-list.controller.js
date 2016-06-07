@@ -13,8 +13,8 @@
 
     vm.current_page = 0
 
-    winwin.getList(vm.current_page, 'select').then(function(data) {
-      vm.destacados = data;
+    winwin.getList(vm.current_page, 'select', 6).then(function(data) {
+      vm.winwins = data;
     });
 
     winwin.getInterests().then(function(data) {
@@ -32,15 +32,19 @@
     vm.doFilter = function(filter, next) {
       if (!next) {
         vm.current_page = 0;
+        vm.stop_paged = false;
       }
 
       _categories = [];
       _filter = filter;
-      winwin.getList(vm.current_page, filter, 50).then(function(data) {
+      winwin.getList(vm.current_page, filter, 6).then(function(data) {
         if (next) {
-          vm.destacados.push.apply(vm.destacados, data);   
+          vm.winwins.push.apply(vm.winwins, data);   
         } else {
-          vm.destacados = data;
+          vm.winwins = data;
+        }
+        if (data.length < 6){
+          vm.stop_paged = true;
         }        
       });
     };
@@ -62,14 +66,16 @@
         vm.doFilter(_filter);
       } else {
         winwin.getListByCategory(vm.current_page, _categories.join(',')).then(function(data) {
-          vm.destacados = data;
+          vm.winwins = data;
         });
       }
     };
 
     vm.nextPage = function() {
-      vm.current_page = vm.current_page + 1;
-      vm.doFilter(_filter, true);
+      if (!vm.stop_paged){
+        vm.current_page = vm.current_page + 1;
+        vm.doFilter(_filter, true);
+      }
     }
 
     vm.isChecked = function(id) {

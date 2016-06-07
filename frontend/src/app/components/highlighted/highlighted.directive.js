@@ -14,7 +14,6 @@
         items: '=',
         title: '=',
         icon: '=',
-        scroll: '&onScroll',
         viewmore: '='
       },
       controller: HighlightedController,
@@ -40,10 +39,6 @@
             current_winwin: winwin
           }
         });
-      }
-
-      vm.nextPage = function() {
-        vm.scroll();
       }
     }
 
