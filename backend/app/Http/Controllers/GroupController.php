@@ -207,6 +207,10 @@ class GroupController extends Controller {
 
         $group->already_joined = false;
 
+        $group->posts = DB::table('posts')
+            ->where('type', '=', 'GROUP')
+            ->where('reference_id', '=', $group->id)->get();
+
         if($user) {
             $group->already_joined = count($group->users->filter(function($model) use ($user) {
                 $model->detail;
