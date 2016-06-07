@@ -33,6 +33,10 @@
       vm.interests = data;
     });
 
+    if (w.width()<769 && !$auth.isAuthenticated()){
+      vm.video = "assets/videos/winwins.m4v";
+    }
+
     vm.tdestacados = gettextCatalog.getString(gettext('Winwins Destacados'));
     vm.tpopulares = gettextCatalog.getString(gettext('Winwins Populares'));
     vm.trecientes = gettextCatalog.getString(gettext('Winwins Recientes'));
@@ -89,6 +93,7 @@
     vm.showVideoDialog = function(ev) {
       $mdDialog.show({
         controller: VideoController,
+        controllerAs: 'vm',
         templateUrl: 'app/main/video.tmpl.html',
         parent: angular.element($document.body),
         targetEvent: ev,
@@ -98,6 +103,10 @@
 
   }
 
-  function VideoController(){}
+  function VideoController(){
+    var vm = this;
+
+    vm.video = "assets/videos/winwins.m4v";
+  }
 
 })();
