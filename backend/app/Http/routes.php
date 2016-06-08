@@ -98,6 +98,8 @@ Route::resource('api/groups', 'GroupController');
 Route::get('api/group/{id}', ['uses' => 'GroupController@show']);
 Route::get('api/groups/creator', ['middleware' => 'auth', 'uses' => 'GroupController@getGroupsByUser']);
 
+Route::post('api/groups/{groupId}/share/mails', ['middleware' => 'auth', 'uses' => 'GroupController@sentEmailInvitations']);
+
 Route::get('api/sponsors/all', ['uses' => 'SponsorController@all']);
 Route::get('api/sponsors/paginate/{page}/{amount}', ['uses' => 'SponsorController@paginate']);
 Route::get('api/sponsors/search', ['uses' => 'SponsorController@search']);

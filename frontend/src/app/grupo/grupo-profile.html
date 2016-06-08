@@ -127,9 +127,32 @@
                                   <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
                                 </md-button>
                               </div>
-                              <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
+                              <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="grupo.showModalShareEmailDialog()">
                                 <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
                               </md-button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
+                    <div class="aside" hide show-gt-sm>
+                        <div class="sponsors" hide show-gt-sm>
+                          <h3 class="title">
+                            <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
+                          </h3>
+                          <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
+                            <div ng-repeat="sponsor in grupo.sponsors">
+                              <img ng-src="{{ grupo.imageServer }}/250x120/{{ sponsor.photo }}" alt="" class="sponsors-img">
+                            </div>
+                          </div>
+                        </div>
+                        <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
+                            <div class="content-bg" ng-if="grupo.profile.already_joined && !grupo.profile.is_creator">
+                              <p>
+                                <md-button ng-href ng-click="grupo.left()" class="no-padding">
+                                  <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Grupo
+                                </md-button>
+                              </p>
                             </div>
                         </div>
                     </div>

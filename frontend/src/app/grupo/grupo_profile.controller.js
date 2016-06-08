@@ -5,7 +5,7 @@
         .controller('PublicGrupoProfileController', PublicGrupoProfileController);
 
     /** @ngInject */
-    function PublicGrupoProfileController(ENV, grupo, $stateParams, user, $mdDialog, $auth, $rootScope, $document, account) {
+    function PublicGrupoProfileController(ENV, grupo, $stateParams, user, $mdDialog, $auth, $rootScope, $document, account, sponsor) {
         var vm = this;
 
         vm.base = ENV.base;
@@ -18,12 +18,15 @@
 
             user.getUser(group_data.user_id).then(function(user_data){
                 vm.group_creator = user_data;
+                sponsor.getList().then(function(sponsor_data) {
+                    vm.sponsors = sponsor_data;
+                });
             });
         });
 
         vm.join = function() {
             if($auth.isAuthenticated()) {
-                grupo.join(vm.groupId).then(function(data) {
+                grupo.join(vm.groupId).then(function(group_data) {
 
                     $mdDialog.show({
                         controller: ModalConfirmacionSumarseController,
@@ -35,6 +38,7 @@
                             current_grupo: vm.profile
                         }
                     });
+
                 });
             } else {
                 $rootScope.returnState = {
@@ -51,6 +55,22 @@
                     clickOutsideToClose:true
                 });
             }
+        }
+
+        vm.left = function() {
+          $mdDialog.show({
+            controller: ModalAbandonarGrupoController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-abandonar-grupo.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_group: vm.profile
+            }
+          })
+          .then(function(data) {
+            // TODO Ver que informacion actualizar una vez que uno abandono el grupo
+          });
         }
 
         vm.showModalShareEmailDialog = function() {
@@ -117,7 +137,7 @@
     }
 
     /** @ngInject */
-    function ModalVerWinwinsDeUsuario(ENV, grupo, user, user_winwins, winwins_already_add, groupId, $window, groupName) {
+    function ModalVerWinwinsDeUsuario(ENV, grupo, user, user_winwins, winwins_already_add, groupId, $window, groupName, $scope) {
         var vm = this;
 
         vm.base = ENV.base;
@@ -140,8 +160,9 @@
         vm.all_user_winwins_added = vm.user_have_winwins && vm.not_added_winwins.length == 0;
 
         vm.addWinwinToGroup = function(winwinId) {
-            grupo.addWinwin(vm.grupoId, winwinId).then(function(){
+            grupo.addWinwin(vm.grupoId, winwinId).then(function(group_data){
                 vm.success = true;
+                $scope.$parent.profile.winwins = group_data.winwins;
             })
         }
 
@@ -150,10 +171,30 @@
         });
     }
 
-  /** @ngInject */
-  function ModalShareEmailController(current_group) {
-    var vm = this;
-  }
+    /** @ngInject */
+    function ModalShareEmailController(current_group, grupo) {
+        var vm = this;
+
+        vm.grupo = current_group;
+        vm.emailsOK = false;
+        vm.mails = [];
+
+        vm.validateMail = function(chip) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(chip))
+            {
+                var index = vm.mails.indexOf(chip);
+                vm.mails.splice(index, 1);
+            }
+        }
+
+        vm.sentInvitations = function() {
+            grupo.shareMails(vm.grupo.id, vm.mails).then(function() {
+                vm.mails = [];
+                vm.emailsOK = true;
+            });
+        }
+    }
 
 
     /** @ngInject */
@@ -170,6 +211,21 @@
     /** @ngInject */
     function MasDetalleController($scope, grupo) {
         $scope.grupo = grupo;
+    }
+
+    /** @ngInject */
+    function ModalAbandonarGrupoController(current_group, $mdDialog, grupo) {
+        var vm = this;
+
+        vm.left = function() {
+          grupo.left(current_group.id).then(function(data) {
+             $mdDialog.hide(data);
+          });
+        }
+
+        vm.cancel = function() {
+          $mdDialog.cancel();
+        }
     }
 
 })();
