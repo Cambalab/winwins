@@ -16,6 +16,7 @@ use Winwins\Post;
 use Winwins\PostVote;
 use Winwins\Media;
 use Winwins\Winwin;
+use Winwins\Group;
 use Winwins\User;
 
 use Winwins\Message\Mailer;
@@ -46,20 +47,23 @@ class PostController extends Controller {
             }
         }
 
-
-
         $posts = Post::where('type', strtoupper($type))->where('canceled', '<>', 1)->where('reference_id', $reference)->orderBy('created_at', 'desc')->get();
         $collection = Collection::make($posts);
         $stickies = new Collection();
         $regulars = new Collection();
         $final = new Collection();
 
-        $collection->each(function($post) use($stickies, $regulars, $user) {
+        $collection->each(function($post) use($stickies, $regulars, $user, $type) {
             $userPost = $post->user;
             $userPost->detail;
             $post->media;
             $post->votes;
-            $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
+
+            if (strtoupper($type) == 'GROUP') {
+                $post->comments = Post::where('type', 'WWG_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get(); 
+            } elseif (strtoupper($type) == 'WINWINS') {
+                $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
+            }
 
             $post->comments->each(function($comment) {
                 $userComment = $comment->user;
@@ -133,6 +137,9 @@ class PostController extends Controller {
             if($post->type == 'WINWIN') {
                 $winwin = Winwin::find($post->reference_id);
                 $this->sentNewPost($request, $mailer, $winwin, $post);
+            } else if ($post->type == 'GROUP') {
+                // $group = Group::find($post->reference_id);
+                // $this->sentNewPost($request, $mailer, $group, $post); 
             }
 
            
@@ -148,7 +155,8 @@ class PostController extends Controller {
 
         DB::transaction(function() use ($request, $post, $user, $comment) {
             $comment->reference_id = $post->id;
-            $comment->type = 'WW_COMMENT';
+            $commentType = $request->input('type');
+            $comment->type = $commentType;
             $comment->user_id = $user->id;
             $comment->title = '';
             $comment->content = $request->input('content');

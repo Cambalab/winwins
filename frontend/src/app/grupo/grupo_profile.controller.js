@@ -5,7 +5,7 @@
         .controller('PublicGrupoProfileController', PublicGrupoProfileController);
 
     /** @ngInject */
-    function PublicGrupoProfileController(ENV, grupo, $stateParams, user, $mdDialog, $auth, $rootScope, $document, account, sponsor) {
+    function PublicGrupoProfileController(ENV, grupo, $stateParams, user, $mdDialog, $sce, $auth, $rootScope, $document, account, sponsor, $window, $q) {
         var vm = this;
 
         vm.base = ENV.base;
@@ -20,9 +20,92 @@
                 vm.group_creator = user_data;
                 sponsor.getList().then(function(sponsor_data) {
                     vm.sponsors = sponsor_data;
+                      grupo.getPosts(vm.groupId).then(function(posts_data) {
+                        vm.posts = posts_data.posts;
+
+                        vm.post = {content: '', reference_id: group_data.id, type: 'GROUP'}
+                      });
                 });
             });
         });
+
+      sponsor.getList().then(function(sponsor_data) {
+        vm.sponsors = sponsor_data;
+      });
+
+        account.getProfile().then(function(data) {
+          vm.account = data.profile;
+
+          vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
+            return notification.type == "CAMPANADA" && notification.object_id == vm.groupId; 
+          });
+        });
+
+        vm.submitPost = function() {
+          if (vm.post.content == '' && !vm.post.media_path && !vm.cover_post_image) {
+            return;
+          }
+
+          var promises = [];
+
+          if (vm.post.media_type == 'IMAGE' && vm.cover_post_image) {
+            promises.push(grupo.uploadPostImage(dataURItoBlob(vm.cover_post_image.file), vm.cover_post_image.name));
+          }
+
+          $q.all(promises).then(function(data) {
+            if (vm.cover_post_image) {
+              vm.post.media_id = data[0].media_id;
+              vm.post.media_path = data[0].filename;
+              vm.cover_post_image = null;
+            }
+
+            grupo.createPost(vm.post)
+            .then(function(data){
+              grupo.getPosts(vm.groupId).then(function(posts_data) {
+                vm.posts = posts_data.posts;
+              });
+              vm.post = {content: '', reference_id: vm.groupId, type: 'GROUP'}
+            });
+          });
+        }
+
+        var dataURItoBlob = function(dataURI) {
+          var binary = atob(dataURI.split(',')[1]);
+          var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+          var array = [];
+          for(var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+          }
+          return new Blob([new Uint8Array(array)], {type: mimeString});
+        };
+
+        vm.getIframeSrc = function (videoId) {
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+        };
+
+        vm.showReplyDialog = function(post) {
+          vm.modalReply = {
+            controller: ReplyController,
+            controllerAs: 'vm',
+            templateUrl: 'app/winwin/modal-comment.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            preserveScope:true,
+            locals: {
+              current_post: post,
+              current_account: vm.account,
+              current_scope: vm,
+              comment: {},
+              cover_comment_image: null
+            }
+          }
+
+          $mdDialog.show(vm.modalReply).then(function(data) {
+            grupo.getPosts(vm.groupId).then(function(posts_data) {
+              vm.posts = posts_data.posts;
+            });
+          });
+        };
 
         vm.join = function() {
             if($auth.isAuthenticated()) {
@@ -56,6 +139,54 @@
                 });
             }
         }
+
+        vm.setSticky = function(post, sticky) {
+          grupo.stickyPost(post.id, sticky).then(function() {
+            grupo.getPosts(vm.groupId).then(function(posts_data) {
+              vm.posts = posts_data.posts;
+            });
+          });
+        };
+
+        vm.removePost = function(post) {
+          $mdDialog.show({
+            controller: ModalRemoveController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-remove.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_post: post
+            }
+          })
+          .then(function(data) {
+            grupo.getPosts(vm.groupId).then(function(posts_data) {
+              vm.posts = posts_data.posts;
+            });
+          });
+        };
+
+        vm.showCropPostImageDialog = function(ev) {
+          $mdDialog.show({
+            controller: CropPostImageController,
+            templateUrl: 'app/grupo/cover-post-image.tmpl.html',
+            parent: angular.element($document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+          })
+          .then(function(image) {
+            vm.post.media_type = 'IMAGE';
+            vm.cover_post_image = image;
+          });
+        };
+
+        vm.vote = function(post, positive) {
+          grupo.votePost(post.id, positive).then(function() {
+            grupo.getPosts(vm.groupId).then(function(posts_data) {
+              vm.posts = posts_data.posts;
+            });
+          });
+        };
 
         vm.left = function() {
           $mdDialog.show({
@@ -134,6 +265,21 @@
                 });
             }
         }
+
+        vm.showModalVideoPostDialog = function(ev) {
+          $mdDialog.show({
+            controller: ModalVideoPostController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-video-post.tmpl.html',
+            parent: angular.element($document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+          })
+          .then(function(video) {
+            vm.post.media_type = 'VIDEO';
+            vm.post.media_path = video;
+          });
+        };
     }
 
     /** @ngInject */
@@ -227,6 +373,153 @@
           $mdDialog.cancel();
         }
     }
+
+    /** @ngInject */
+    function ModalVideoPostController($mdDialog) {
+        var vm = this;
+
+        vm.setVideo = function() {
+          $mdDialog.hide(vm.matchYoutubeUrl(vm.video));
+        }
+
+        vm.cancel = function() {
+          $mdDialog.cancel();
+        }
+
+        vm.previewVideo = function(e) {
+          vm.video_path = vm.matchYoutubeUrl(e.originalEvent.clipboardData.getData('text/plain'));
+        }
+
+        vm.matchYoutubeUrl = function(url){
+          var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+          return (url.match(p)) ? RegExp.$1 : false ;
+        }
+    }
+
+    /** @ngInject */
+    function ModalRemoveController(current_post, $mdDialog, grupo) {
+        var vm = this;
+
+        vm.remove = function() {
+          grupo.removePost(current_post.id).then(function(data) {
+             $mdDialog.hide(data);
+          });
+        }
+
+        vm.cancel = function() {
+          $mdDialog.cancel();
+        }
+    }
+
+    /** @ngInject */
+    function CropPostImageController($scope, $mdDialog) {
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+        $scope.fileName='';
+
+        $scope.handleFileSelect = function(evt) {
+          var file=evt.files[0];
+          $scope.fileName = file.name;
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            $scope.$apply(function($scope){
+              $scope.myImage=evt.target.result;
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+
+        $scope.cropImage = function() {
+          $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
+        }
+    }
+
+        /** @ngInject */
+        function ReplyController(current_post, current_account, $mdDialog, $document, current_scope, comment, cover_comment_image, grupo, $q) {
+            var vm = this;
+
+            vm.account = current_account;
+            vm.post = current_post;
+
+            vm.comment = comment;
+            vm.cover_comment_image = cover_comment_image;
+
+            vm.modal_reply = current_scope.modalReply;
+
+            vm.showModalVideoPostDialog = function() {
+              $mdDialog.show({
+                controller: ModalVideoPostController,
+                controllerAs: 'vm',
+                templateUrl: 'app/winwin/modal-video-post.tmpl.html',
+                clickOutsideToClose:true
+              })
+              .then(function(video) {
+                vm.comment.media_type = 'VIDEO';
+                vm.comment.media_path = video;
+                $mdDialog.show(vm.modal_reply);
+              }, 
+              function() {
+                $mdDialog.show(vm.modal_reply);
+              });
+            };
+
+            vm.showCropPostImageDialog = function(ev) {
+              $mdDialog.show({
+                controller: CropPostImageController,
+                templateUrl: 'app/grupo/cover-post-image.tmpl.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true
+              })
+              .then(function(image) {
+                vm.comment.media_type = 'IMAGE';
+                vm.modal_reply.locals.cover_comment_image = image
+                $mdDialog.show(vm.modal_reply);
+              }, 
+              function() {
+                $mdDialog.show(vm.modal_reply);
+              });
+            };
+
+            vm.submitComment = function() {
+              if (vm.comment.content == '' && !vm.comment.media_path && !vm.cover_comment_image) {
+                return;
+              }
+
+              if (!vm.comment.content) {
+                vm.comment.content = '';
+              }
+
+              var promises = [];
+
+              if (vm.comment.media_type == 'IMAGE' && vm.cover_comment_image) {
+                promises.push(grupo.uploadPostImage(dataURItoBlob(vm.cover_comment_image.file), vm.cover_comment_image.name));
+              }
+
+              $q.all(promises).then(function(data) {
+                if (vm.cover_comment_image) {
+                  vm.comment.media_id = data[0].media_id;
+                  vm.comment.media_path = data[0].filename;
+                  vm.cover_comment_image = null;
+                }
+
+                grupo.createComment(vm.post.id, vm.comment.content, vm.comment.media_id, vm.comment.media_type, vm.comment.media_path)
+                .then(function(data){
+                  $mdDialog.hide(data);
+                });
+              });
+            }
+
+            var dataURItoBlob = function(dataURI) {
+              var binary = atob(dataURI.split(',')[1]);
+              var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+              var array = [];
+              for(var i = 0; i < binary.length; i++) {
+                array.push(binary.charCodeAt(i));
+              }
+              return new Blob([new Uint8Array(array)], {type: mimeString});
+            };
+        }
 
 })();
 

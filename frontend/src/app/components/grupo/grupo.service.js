@@ -40,6 +40,36 @@
           .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
     }
 
+    _grupo.getPosts = function(id) {
+      return Restangular.one('posts/group', id).one('posts').get();
+    }
+
+    _grupo.createPost = function(post) {
+      return Restangular.all('posts').post(post);
+    }
+
+    _grupo.createComment = function(id, content, media_id, media_type, media_path) {
+      return Restangular.one('posts', id).customPOST({
+        content: content,
+        media_id: media_id,
+        media_type: media_type,
+        media_path: media_path,
+        type: 'WWG_COMMENT'
+      }, 'comment', undefined, undefined);
+    }
+
+    _grupo.votePost = function(id, positive) {
+      return Restangular.one('posts', id).customPOST({positive: positive}, 'vote', undefined, undefined);
+    }
+
+    _grupo.stickyPost = function(id, sticky) {
+      return Restangular.one('posts', id).customPOST({sticky: sticky}, 'sticky', undefined, undefined);
+    }
+
+    _grupo.removePost = function(id) {
+      return Restangular.one('posts', id).customPOST(undefined, 'remove', undefined, undefined);
+    }
+
     _grupo.join = function(id){
       return Restangular.one('groups/join', id).get();
     }
@@ -54,6 +84,15 @@
 
     _grupo.shareMails = function(id, mails) {
       return Restangular.one('groups', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
+    }
+
+    _grupo.uploadPostImage = function(data, name) {
+      var fd = new FormData();
+      fd.append('file', data, name);
+
+      return Restangular.one('posts')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
     }
 
     return _grupo;

@@ -33,6 +33,10 @@ class Post extends Model {
         return $query->where('type', 'WW_COMMENT');
     }
 
+    public function scopeGroupComments($query) {
+        return $query->where('type', 'WWG_COMMENT');
+    }
+
     public function votes() {
         return $this->hasMany('Winwins\PostVote');
     }
