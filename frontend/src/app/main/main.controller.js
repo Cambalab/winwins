@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document) {
+  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -99,6 +99,10 @@
         targetEvent: ev,
         clickOutsideToClose:true
       });
+    };
+
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
     };
 
   }
