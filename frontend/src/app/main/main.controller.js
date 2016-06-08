@@ -33,10 +33,6 @@
       vm.interests = data;
     });
 
-    if (w.width()<769 && !$auth.isAuthenticated()){
-      vm.video = "assets/videos/winwins.m4v";
-    }
-
     vm.tdestacados = gettextCatalog.getString(gettext('Winwins Destacados'));
     vm.tpopulares = gettextCatalog.getString(gettext('Winwins Populares'));
     vm.trecientes = gettextCatalog.getString(gettext('Winwins Recientes'));
@@ -104,13 +100,14 @@
     vm.getIframeSrc = function (videoId) {
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
     };
-
   }
 
-  function VideoController(){
+  function VideoController($sce){
     var vm = this;
 
-    vm.video = "assets/videos/winwins.m4v";
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+    };
   }
 
 })();
