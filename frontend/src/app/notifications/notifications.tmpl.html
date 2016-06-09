@@ -14,6 +14,12 @@
             <div ng-switch-when="WW_JOIN">
               <span class="green">Excelente!</span> Te uniste a <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
             </div>
+            <div ng-switch-when="GROUP_JOIN">
+              <span class="green">Excelente!</span> Te uniste a <a class="blue" ui-sref="home.grupo({groupId: notification.object.id})" ng-click="vm.close()">{{notification.object.name}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
+            <div ng-switch-when="GROUP_CREATED">
+              <span class="orange">Felicitaciones!</span> Creaste el grupo <a class="blue" ui-sref="home.grupo({groupId: notification.object.id})" ng-click="vm.close()">{{notification.object.name}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
+            </div>
             <div ng-switch-when="WW_LEFT">
               Abandonaste <a class="blue" ui-sref="home.winwin({winwinId: notification.object.id})" ng-click="vm.close()">{{notification.object.title}}</a> <span class="date">{{notification.created_at | moment: 'DD/MM/YYYY'}}</span>
             </div>

@@ -20,6 +20,8 @@ use Winwins\SponsorsGroup;
 use Winwins\Winwin;
 use Winwins\Post;
 use Winwins\Media;
+use Winwins\Message\Mailer;
+use Winwins\Message\Message;
 
 use Illuminate\Http\Request;
 
@@ -212,13 +214,13 @@ class GroupController extends Controller {
             ->where('reference_id', '=', $group->id)->get();
 
         if($user) {
+            $group->is_creator = ( $group->user_id == $user->id );
             $group->already_joined = count($group->users->filter(function($model) use ($user) {
                 $model->detail;
                 return $model->id == $user->id;
             })) > 0;
             $group->is_admin = ($user->id == $group->user_id);
         }
-
 
         return $group;
 	}
@@ -342,6 +344,11 @@ class GroupController extends Controller {
                 $groupsWinwins->save();
             });
         }
+
+        $group = Group::find($id);
+        $group->winwins;
+
+        return $group;
 	}
 
 	public function removeWinwin($id, $winwin_id) {
@@ -362,16 +369,16 @@ class GroupController extends Controller {
 
     public function sentEmailInvitations(Request $request, Mailer $mailer, $groupId) {
 
-        $template_name = 'winwin_ww_invitation';
+        $template_name = 'winwin_group_invitation';
         $user = User::find($request['user']['sub']);
-        $winwin = Winwin::find($winwinId);
+        $group = Winwin::find($groupId);
         $detail = $user->detail;
 
         foreach($request->input('mails') as $recipient) {
             $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
-                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'group_link' => Config::get('app.url').'/#/group/'.$group->id,
                     'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
@@ -379,14 +386,14 @@ class GroupController extends Controller {
                     'lastname' => $detail->lastname,
                     'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
                 ),
-                'winwin' => array(
-                    'id' => $winwin->id,
-                    'users_amount' => $winwin->users_amount,
-                    'what_we_do' => $winwin->what_we_do,
+                'group' => array(
+                    'id' => $group->id,
+                    'users_amount' => count($group->users),
+                    'what_we_do' => $group->description,
                 ),
 
             ));
-            $message->subject('WW - '.$winwin->title);
+            $message->subject('WW - '.$group->title);
             $message->to(null, $recipient);
             $message_sent = $mailer->send($message);
         }

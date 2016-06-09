@@ -84,7 +84,8 @@
         content: content,
         media_id: media_id,
         media_type: media_type,
-        media_path: media_path
+        media_path: media_path,
+        type: 'WW_COMMENT'
       }, 'comment', undefined, undefined);
     }
 
