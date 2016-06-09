@@ -12,9 +12,7 @@ class AddWwCommentToTypeEnum extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function ($table) {
-            $table->enum('type', ['WINWIN', 'GROUP', 'CONVERSATION', 'REPLY', 'WW_COMMENT', 'USER', 'USER_TESTIMONIAL', 'DASHBOARD', 'WWG_COMMENT'])->change();
-        });
+        DB::statement("ALTER TABLE posts CHANGE type type ENUM('WINWIN', 'GROUP', 'CONVERSATION', 'REPLY', 'WW_COMMENT', 'USER', 'USER_TESTIMONIAL', 'DASHBOARD', 'WWG_COMMENT') DEFAULT NULL;");
     }
 
     /**
