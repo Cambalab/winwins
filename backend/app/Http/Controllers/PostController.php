@@ -61,7 +61,7 @@ class PostController extends Controller {
 
             if (strtoupper($type) == 'GROUP') {
                 $post->comments = Post::where('type', 'WWG_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get(); 
-            } elseif (strtoupper($type) == 'WINWINS') {
+            } elseif (strtoupper($type) == 'WINWIN') {
                 $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
             }
 
@@ -138,8 +138,8 @@ class PostController extends Controller {
                 $winwin = Winwin::find($post->reference_id);
                 $this->sentNewPost($request, $mailer, $winwin, $post);
             } else if ($post->type == 'GROUP') {
-                // $group = Group::find($post->reference_id);
-                // $this->sentNewPost($request, $mailer, $group, $post); 
+                $group = Group::find($post->reference_id);
+                $this->sentNewPost($request, $mailer, $group, $post); 
             }
 
            
@@ -359,6 +359,40 @@ class PostController extends Controller {
 
                 ));
                 $message->subject('WW - '.$winwin->title);
+                $message->to(null, $recipient);
+                $message_sent = $mailer->send($message);
+                Log::info("Mail enviado");
+            }
+        }
+    }
+
+    public function sentNewGroupPost(Request $request, Mailer $mailer, $group, $post) {
+        Log::info("Enviando mails nuevo Post");
+        $template_name = 'group_ww_new_post';
+        foreach($winwin->users as $user) {
+            $recipient = $user->email;
+            Log::info("Mail: ".$recipient);
+            if(isset($recipient)) {
+                $message = new Message($template_name, array(
+                    'meta' => array(
+                        'base_url' => Config::get('app.url'),
+                        'group_link' => Config::get('app.url').'/#/grupo-view/'.$group->id,
+                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    ),
+                    'sender' => array(
+                        'post_username' => $user->username,
+                        'username' => $user->username,
+                        'name' => $user->detail->name,
+                        'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
+                    ),
+                    'winwin' => array(
+                        'id' => $group->id,
+                        'group_name' => $group->name,
+                        'what_we_do' => $group->description,
+                    ),
+
+                ));
+                $message->subject('WW - '.$group->name);
                 $message->to(null, $recipient);
                 $message_sent = $mailer->send($message);
                 Log::info("Mail enviado");

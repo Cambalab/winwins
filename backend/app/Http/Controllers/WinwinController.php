@@ -185,7 +185,7 @@ class WinwinController extends Controller {
             ->select('interests.name','interests.description', 'interests.id')
             ->get();
 
-        $winwin->already_joined = true;
+        $winwin->already_joined = false;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
             $winwin->is_creator = ( $winwin->user_id == $user->id );

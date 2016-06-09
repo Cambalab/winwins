@@ -207,7 +207,7 @@ class GroupController extends Controller {
 
         $group->sponsors;
 
-        $group->already_joined = true;
+        $group->already_joined = false;
 
         $group->posts = DB::table('posts')
             ->where('type', '=', 'GROUP')
