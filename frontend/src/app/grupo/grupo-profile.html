@@ -135,36 +135,36 @@
                     </div>
                 </div>
                 <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
-                    <div class="aside" hide show-gt-sm>
-                        <div class="sponsors" hide show-gt-sm>
-                          <h3 class="title">
-                            <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
-                          </h3>
-                          <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
-                            <div ng-repeat="sponsor in grupo.sponsors">
-                              <img ng-src="{{ grupo.imageServer }}/250x120/{{ sponsor.photo }}" alt="" class="sponsors-img">
-                            </div>
-                          </div>
-                        </div>
-                        <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">
-                            <div class="content-bg" ng-if="grupo.profile.already_joined && !grupo.profile.is_creator">
-                              <p>
-                                <md-button ng-href ng-click="grupo.left()" class="no-padding">
-                                  <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Grupo
-                                </md-button>
-                              </p>
-                            </div>
-                        </div>
+                  <div class="sponsors" hide show-gt-sm>
+                    <h3 class="title">
+                      <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
+                    </h3>
+                    <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
+                      <div ng-repeat="sponsor in grupo.sponsors">
+                        <img ng-src="{{ grupo.imageServer }}/250x120/{{ sponsor.photo }}" alt="" class="sponsors-img">
+                      </div>
                     </div>
+                  </div>
+                  <div>
+                    <div class="content-bg" ng-if="grupo.profile.already_joined && !grupo.profile.is_creator">
+                      <acme-highlighted items="grupo.profile.winwins"></acme-highlighted>
+                    </div>
+                  </div>
+                  <div class="aside" hide show-gt-sm>
+                    <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">               
+                      <div class="content-bg">
+                            <p>
+                              <md-button ng-href ng-click="grupo.left()" class="no-padding">
+                                <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Grupo
+                              </md-button>
+                            </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="container group-winwins-title" ng-if="grupo.profile.winwins.length > 0">
-                    <h1 class="title">
-                        <md-icon md-svg-src="assets/images/icon-recientes-title.svg"></md-icon>{{ 'WINWINS DEL GRUPO' }}
-                    </h1>
-                </div>
-                <acme-highlighted items="grupo.profile.winwins"></acme-highlighted>
                 <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
                     <div class="sponsors" hide show-gt-sm>
+                    
                     </div>
                     <div class="comments">
                       <div ng-repeat="item_post in grupo.posts">
@@ -242,10 +242,10 @@
                             <p>
                               {{comment.content}}
                               <div ng-show="comment.media.type == 'IMAGE'" class="materialboxed _embed-responsive _embed-responsive-16by9" style="width:100%; min-margin-top:30px; margin-bottom:10px; background:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));">
-                                <img ng-src="{{winwin.imageServer}}/400x/smart/{{comment.media.name}}" class="img-responsive">
+                                <img ng-src="{{grupo.imageServer}}/400x/smart/{{comment.media.name}}" class="img-responsive">
                               </div>
                               <div ng-show="comment.media.type == 'VIDEO'" class="embed-responsive embed-responsive-16by9" style="margin-top:30px;">
-                               <iframe class="embed-responsive-item" ng-src="{{winwin.getIframeSrc(comment.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
+                               <iframe class="embed-responsive-item" ng-src="{{grupo.getIframeSrc(comment.media.path)}}" allowfullscreen="" style="width: 100%;height: 225px;"></iframe>
                               </div>
                             </p>
                           </md-card-content>
@@ -258,7 +258,7 @@
                               {{comment.up_votes}}
                             </div>
                             <div class="red">
-                              <md-button ng-disabled="!grupo.profile.already_joined" ng-click="winwin.vote(comment, false)" class="md-icon-button">
+                              <md-button ng-disabled="!grupo.profile.already_joined" ng-click="grupo.vote(comment, false)" class="md-icon-button">
                                 <md-icon class="icon thumb_down">thumb_down</md-icon>
                               </md-button>
                               {{comment.down_votes}}
@@ -273,7 +273,7 @@
             </md-tab-body>
         </md-tabs>
         <div class="wrap-caja-mensaje caja-flotante" ng-if="grupo.profile.already_joined">
-          <div ng-if="winwin.post.media_type" class="content-img-video">
+          <div ng-if="grupo.post.media_type" class="content-img-video">
             <img ng-if="grupo.post.media_type == 'IMAGE'" ng-src="{{ grupo.photo.file }}"  style="height:190px;">
             </img>
             <img ng-if="grupo.post.media_type == 'VIDEO'" ng-src="http://img.youtube.com/vi/{{grupo.post.media_path}}/hqdefault.jpg" style="height:190px;">
