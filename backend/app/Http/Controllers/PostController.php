@@ -16,6 +16,7 @@ use Winwins\Post;
 use Winwins\PostVote;
 use Winwins\Media;
 use Winwins\Winwin;
+use Winwins\Group;
 use Winwins\User;
 
 use Winwins\Message\Mailer;
@@ -363,14 +364,14 @@ class PostController extends Controller {
     public function sentNewGroupPost(Request $request, Mailer $mailer, $group, $post) {
         Log::info("Enviando mails nuevo Post");
         $template_name = 'group_ww_new_post';
-        foreach($winwin->users as $user) {
+        foreach($group->users as $user) {
             $recipient = $user->email;
             Log::info("Mail: ".$recipient);
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
-                        'group_link' => Config::get('app.url').'/#/grupo-view/'.$group->id,
+                        'group_link' => Config::get('app.url').'/#/grupo/'.$group->id,
                         'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
@@ -379,7 +380,7 @@ class PostController extends Controller {
                         'name' => $user->detail->name,
                         'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
                     ),
-                    'winwin' => array(
+                    'grupo' => array(
                         'id' => $group->id,
                         'group_name' => $group->name,
                         'what_we_do' => $group->description,
