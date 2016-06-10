@@ -88,7 +88,7 @@
     };
 
     vm.nextPage = function() {
-      if (!vm.stop_paged){
+      if (!vm.stop_paged && !vm.loadingDestacados){
         vm.current_page = vm.current_page + 1;
         vm.doFilter(_filter, true);
       }
