@@ -371,7 +371,7 @@ class GroupController extends Controller {
 
         $template_name = 'winwin_group_invitation';
         $user = User::find($request['user']['sub']);
-        $group = Winwin::find($groupId);
+        $group = Group::find($groupId);
         $detail = $user->detail;
 
         foreach($request->input('mails') as $recipient) {
