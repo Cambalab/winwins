@@ -14,7 +14,8 @@
         items: '=',
         title: '=',
         icon: '=',
-        viewmore: '='
+        viewmore: '=',
+        loading: '='
       },
       controller: HighlightedController,
       controllerAs: 'vm',
