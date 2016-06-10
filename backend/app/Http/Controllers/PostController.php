@@ -16,7 +16,6 @@ use Winwins\Post;
 use Winwins\PostVote;
 use Winwins\Media;
 use Winwins\Winwin;
-use Winwins\Group;
 use Winwins\User;
 
 use Winwins\Message\Mailer;
@@ -47,23 +46,20 @@ class PostController extends Controller {
             }
         }
 
+
+
         $posts = Post::where('type', strtoupper($type))->where('canceled', '<>', 1)->where('reference_id', $reference)->orderBy('created_at', 'desc')->get();
         $collection = Collection::make($posts);
         $stickies = new Collection();
         $regulars = new Collection();
         $final = new Collection();
 
-        $collection->each(function($post) use($stickies, $regulars, $user, $type) {
+        $collection->each(function($post) use($stickies, $regulars, $user) {
             $userPost = $post->user;
             $userPost->detail;
             $post->media;
             $post->votes;
-
-            if (strtoupper($type) == 'GROUP') {
-                $post->comments = Post::where('type', 'WWG_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get(); 
-            } elseif (strtoupper($type) == 'WINWIN') {
-                $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
-            }
+            $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
 
             $post->comments->each(function($comment) {
                 $userComment = $comment->user;
@@ -104,9 +100,7 @@ class PostController extends Controller {
 	}
 
 	public function store(Request $request, Mailer $mailer) {
-        Log::info($request['user']);
         $user = User::find($request['user']['sub']);
-        Log::info($user);
 
         $post = new Post;
         DB::transaction(function() use ($request, $post, $user, $mailer) {
@@ -136,10 +130,10 @@ class PostController extends Controller {
 
             if($post->type == 'WINWIN') {
                 $winwin = Winwin::find($post->reference_id);
-                $this->sentNewPost($request, $mailer, $winwin, $post);
+                $this->sentNewPost($request, $mailer, $winwin, $post, $user->username);
             } else if ($post->type == 'GROUP') {
                 $group = Group::find($post->reference_id);
-                $this->sentNewPost($request, $mailer, $group, $post); 
+                $this->sentNewGroupPost($request, $mailer, $group, $post); 
             }
 
            
@@ -331,7 +325,7 @@ class PostController extends Controller {
         return response()->json(['message' => 'post_removed'], 200);
 	}
 
-	public function sentNewPost(Request $request, Mailer $mailer, $winwin, $post) {
+	public function sentNewPost(Request $request, Mailer $mailer, $winwin, $post, $username) {
         Log::info("Enviando mails nuevo Post");
         $template_name = 'winwin_ww_new_post';
         foreach($winwin->users as $user) {
@@ -341,11 +335,11 @@ class PostController extends Controller {
                 $message = new Message($template_name, array(
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
-                        'winwin_link' => Config::get('app.url').'/#/winwin-view/'.$winwin->id,
+                        'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
                         'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
-                        'post_username' => $user->username,
+                        'post_username' => $username,
                         'username' => $user->username,
                         'name' => $user->detail->name,
                         'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,

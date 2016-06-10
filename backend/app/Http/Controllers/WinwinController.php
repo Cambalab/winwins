@@ -386,6 +386,10 @@ class WinwinController extends Controller {
                 $winwin->image = $request->input('gallery_image')[0];
             }
 
+            if( !isset($winwin->image) ) {
+                $winwin->image = 'ww-main-default.jpg';
+            }
+
             $winwin->user_id = $user->id;
 
             if($request->has('interests')) {

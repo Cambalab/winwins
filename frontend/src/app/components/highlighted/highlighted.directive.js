@@ -14,8 +14,8 @@
         items: '=',
         title: '=',
         icon: '=',
-        scroll: '&onScroll',
-        viewmore: '='
+        viewmore: '=',
+        loading: '='
       },
       controller: HighlightedController,
       controllerAs: 'vm',
@@ -40,10 +40,6 @@
             current_winwin: winwin
           }
         });
-      }
-
-      vm.nextPage = function() {
-        vm.scroll();
       }
     }
 

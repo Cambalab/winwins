@@ -11,16 +11,21 @@
 
     vm.current_page = 0
 
-    miembro.getList(vm.current_page, 24).then(function(data) {
+    miembro.getList(vm.current_page, 18).then(function(data) {
       vm.miembros = data;
     });
 
     vm.nextPage = function() {
-      vm.current_page = vm.current_page + 1;
+      if (!vm.stop_paged){
+        vm.current_page = vm.current_page + 1;
       
-      miembro.getList(vm.current_page, 24).then(function(data) {
-        vm.miembros.push.apply(vm.miembros, data);
-      });
+        miembro.getList(vm.current_page, 18).then(function(data) {
+          vm.miembros.push.apply(vm.miembros, data);
+          if (data.length < 18){
+            vm.stop_paged = true;
+          }    
+        });
+      }
     }
   }
 

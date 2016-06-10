@@ -4,8 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Winwin extends Model {
 
-    public static $WinwinStatus = [ 'PUBLISHED', 'PENDING', 'BANNED', 'CANCELLED' ];
-    public static $WinwinScope  = [ 'GLOBAL', 'REGION', 'COUNTRY', 'STATE', 'CITY'];
+    public static $WinwinStatus = [ 'PUBLISHED'=>'PUBLISHED', 'PENDING'=>'PENDING', 'BANNED'=>'BANNED', 'CANCELLED'=>'CANCELLED' ];
+    public static $WinwinScope  = [ 'GLOBAL'=>'GLOBAL', 'REGION'=>'REGION', 'COUNTRY'=>'COUNTRY', 'STATE'=>'STATE', 'STATE'=>'CITY'];
 
     protected $fillable = [ 'closing_date', 'description', 'title', 'users_amount', 'what_we_do', 'created_date', 'scope', 'image'];
     //protected $visible = [ 'id', 'user_id', 'user', 'users', 'title', 'what_happen', 'description', 'what_we_do', 'users_amount', 'closing_date', 'scope', 'region', 'country', 'state', 'city', 'image', 'published', 'already_joined', 'score'];

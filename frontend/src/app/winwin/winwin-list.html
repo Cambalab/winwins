@@ -1,4 +1,4 @@
-<section class="acme-listado">
+<section class="acme-listado" infinite-scroll='winwin.nextPage()'>
   <div class="menu-caterogias" hide show-gt-sm>
     <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
       <md-button aria-label="Open demo menu" ng-click="$mdOpenMenu($event)">
@@ -19,34 +19,30 @@
     <md-tab id="tab1" ng-click="winwin.doFilter('select')">
       <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-highlighted.svg"></md-icon>{{'Destacados' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title="winwin.tdestacados" icon="'icon-highlighted'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
     <md-tab id="tab2" ng-click="winwin.doFilter('popular')">
       <md-tab-label><md-icon>whatshot</md-icon>{{'Populares' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title="winwin.tpopulares" icon="'icon-whatshot'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
     <md-tab id="tab3" ng-click="winwin.doFilter('last')">
       <md-tab-label><md-icon>access_time</md-icon>{{ 'Recientes' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title=" winwin.trecientes" icon="'icon-access_time'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
     <md-tab id="tab4" ng-click="winwin.doFilter('finishing')">
       <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-por-terminar.svg"></md-icon>{{' Por terminar' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title="winwin.tterminar" icon="'icon-por-terminar'"></acme-highlighted>
       </md-tab-body>
     </md-tab>
     <md-tab id="tab5" ng-click="winwin.doFilter('success')">
       <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-concretados.svg"></md-icon>{{'Concretados' | translate }}</md-tab-label>
       <md-tab-body>
-        <acme-highlighted items="winwin.destacados" title="winwin.tconcretados" icon="'icon-concretados'" on-scroll="winwin.nextPage()" ></acme-highlighted>
       </md-tab-body>
     </md-tab>
   </md-tabs>
+  <acme-highlighted items="winwin.winwins" title="winwin.destacadosTitle" icon="'icon-concretados'" loading="winwin.loadingDestacados"></acme-highlighted>
 </section>
 
 <div class="wrap-search" ng-if="false">
