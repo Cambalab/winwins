@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document) {
+  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -20,9 +20,6 @@
     sponsor.getMainList().then(function(data) {
       vm.partners = data;
     });
-    winwin.getList(0, 'last', (w.width()<481) ? 2 : 6).then(function(data) {
-      vm.recientes = data;
-    });
     winwin.getList(0, 'select', (w.width()<481) ? 4 : 6).then(function(data) {
       vm.destacados = data;
     });
@@ -33,23 +30,38 @@
       vm.interests = data;
     });
 
-    vm.tdestacados = gettextCatalog.getString(gettext('Winwins Destacados'));
-    vm.tpopulares = gettextCatalog.getString(gettext('Winwins Populares'));
-    vm.trecientes = gettextCatalog.getString(gettext('Winwins Recientes'));
-    vm.tterminar = gettextCatalog.getString(gettext('Winwins por terminar'));
-    vm.tconcretados = gettextCatalog.getString(gettext('Winwins concretados'));
-
     vm.isAuthenticated = function() {
       return $auth.isAuthenticated();
     };
 
+    vm.loadingDestacados = false;
+    vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
     var _filter = 'select'
     var _categories = [];
     vm.doFilter = function(filter) {
       _categories = [];
       _filter = filter;
+      vm.loadingDestacados = true;
       winwin.getList(0, filter, 6).then(function(data) {
+        switch(filter) {
+          case 'select':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
+            break;
+          case 'popular':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Populares'));
+            break;
+          case 'last':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Recientes'));
+            break;
+          case 'finishing':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins por terminar'));
+            break;
+          case 'success':
+            vm.destacadosTitle  = gettextCatalog.getString(gettext('Winwins concretados'));
+            break;
+        }
         vm.destacados = data;
+        vm.loadingDestacados = false;
       });
     };
     
@@ -89,6 +101,7 @@
     vm.showVideoDialog = function(ev) {
       $mdDialog.show({
         controller: VideoController,
+        controllerAs: 'vm',
         templateUrl: 'app/main/video.tmpl.html',
         parent: angular.element($document.body),
         targetEvent: ev,
@@ -96,8 +109,17 @@
       });
     };
 
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+    };
   }
 
-  function VideoController(){}
+  function VideoController($sce){
+    var vm = this;
+
+    vm.getIframeSrc = function (videoId) {
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+    };
+  }
 
 })();
