@@ -16,7 +16,6 @@ use Winwins\Post;
 use Winwins\PostVote;
 use Winwins\Media;
 use Winwins\Winwin;
-use Winwins\Group;
 use Winwins\User;
 
 use Winwins\Message\Mailer;
@@ -47,23 +46,20 @@ class PostController extends Controller {
             }
         }
 
+
+
         $posts = Post::where('type', strtoupper($type))->where('canceled', '<>', 1)->where('reference_id', $reference)->orderBy('created_at', 'desc')->get();
         $collection = Collection::make($posts);
         $stickies = new Collection();
         $regulars = new Collection();
         $final = new Collection();
 
-        $collection->each(function($post) use($stickies, $regulars, $user, $type) {
+        $collection->each(function($post) use($stickies, $regulars, $user) {
             $userPost = $post->user;
             $userPost->detail;
             $post->media;
             $post->votes;
-
-            if (strtoupper($type) == 'GROUP') {
-                $post->comments = Post::where('type', 'WWG_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get(); 
-            } elseif (strtoupper($type) == 'WINWIN') {
-                $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
-            }
+            $post->comments = Post::where('type', 'WW_COMMENT')->where('canceled', '<>', 1)->where('reference_id', $post->id)->orderBy('created_at', 'desc')->get();
 
             $post->comments->each(function($comment) {
                 $userComment = $comment->user;
@@ -134,10 +130,10 @@ class PostController extends Controller {
 
             if($post->type == 'WINWIN') {
                 $winwin = Winwin::find($post->reference_id);
-                $this->sentNewPost($request, $mailer, $winwin, $post);
+                $this->sentNewPost($request, $mailer, $winwin, $post, $user->username);
             } else if ($post->type == 'GROUP') {
                 $group = Group::find($post->reference_id);
-                $this->sentNewPost($request, $mailer, $winwin, $post, $user->username);
+                $this->sentNewGroupPost($request, $mailer, $group, $post); 
             }
 
            
