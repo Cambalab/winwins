@@ -13,7 +13,7 @@
 
     vm.current_page = 0
 
-    winwin.getList(vm.current_page, 'select', 6).then(function(data) {
+    winwin.getList(vm.current_page, 'select', 9).then(function(data) {
       vm.winwins = data;
     });
 
@@ -29,20 +29,22 @@
       if (!next) {
         vm.current_page = 0;
         vm.stop_paged = false;
+        vm.loadingDestacados = true;
       }
 
       _categories = [];
       _filter = filter;
-      vm.loadingDestacados = true;
-      winwin.getList(vm.current_page, filter, 6).then(function(data) {
+      winwin.getList(vm.current_page, filter, 9).then(function(data) {
         if (next) {
           vm.winwins.push.apply(vm.winwins, data);   
         } else {
           vm.winwins = data;
+          vm.loadingDestacados = false;
         }
-        if (data.length < 6){
+        if (data.length < 9){
           vm.stop_paged = true;
         }
+
         switch(filter) {
           case 'select':
             vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
@@ -60,7 +62,6 @@
             vm.destacadosTitle  = gettextCatalog.getString(gettext('Winwins concretados'));
             break;
         }
-        vm.loadingDestacados = false;
       });
     };
     
