@@ -21,12 +21,8 @@
       vm.interests = data;
     });
 
-    vm.tdestacados = gettextCatalog.getString(gettext('Winwins Destacados'));
-    vm.tpopulares = gettextCatalog.getString(gettext('Winwins Populares'));
-    vm.trecientes = gettextCatalog.getString(gettext('Winwins Recientes'));
-    vm.tterminar = gettextCatalog.getString(gettext('Winwins por terminar'));
-    vm.tconcretados = gettextCatalog.getString(gettext('Winwins concretados'));
-
+    vm.loadingDestacados = false;
+    vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
     var _filter = 'select'
     var _categories = [];
     vm.doFilter = function(filter, next) {
@@ -37,6 +33,7 @@
 
       _categories = [];
       _filter = filter;
+      vm.loadingDestacados = true;
       winwin.getList(vm.current_page, filter, 6).then(function(data) {
         if (next) {
           vm.winwins.push.apply(vm.winwins, data);   
@@ -45,7 +42,25 @@
         }
         if (data.length < 6){
           vm.stop_paged = true;
-        }        
+        }
+        switch(filter) {
+          case 'select':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
+            break;
+          case 'popular':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Populares'));
+            break;
+          case 'last':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Recientes'));
+            break;
+          case 'finishing':
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins por terminar'));
+            break;
+          case 'success':
+            vm.destacadosTitle  = gettextCatalog.getString(gettext('Winwins concretados'));
+            break;
+        }
+        vm.loadingDestacados = false;
       });
     };
     
