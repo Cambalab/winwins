@@ -68,6 +68,62 @@
     padding-right: 30px;
   }
 
+  .title-destacado {
+    background: #7199f4;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    margin: 0;
+    &:before {
+      width: 0; 
+      height: 0; 
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 10px solid #fff;
+      display: block;
+      content: '';
+      float: left;
+      margin-right: 5px;
+    }
+    &.dark {
+      background: #4a6dcd;
+    }
+  }
+
+  md-card-actions {
+    margin: 5px 15px;
+    md-card-header {
+      padding: 0;
+      md-card-avatar {
+        width: 35px;
+        height: 35px;
+        margin-right: 0;
+      }
+    }
+    .md-button.md-icon-button:last-of-type.md-icon-button {
+      margin-right: 0;
+      margin-left: 0;
+    }
+    .card-members {
+      text-align: center;
+      .ng-scope {
+        color: #6e6e6e;
+        font-size: 10px;
+        text-transform: uppercase;
+      }
+      strong {
+        display: block;
+        color: #47a69a;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .winwin-list-card -action {
+    height: 20px;
+    margin-bottom:20px;
+  }
+
   @media (min-width: 960px) {
     .wrap-group-profile {
       padding-left:0;
@@ -893,7 +949,6 @@
   .md-input {
     background: #fff;
     border-radius: 5px;
-    background: #fff;
     font-size: 12px;
     height: 38px;
     width: 90%;
@@ -1084,9 +1139,61 @@
       }
     }
   }
+
+  md-card {
+    margin: 5px 3px;
+    md-card-content {
+      position: relative;
+      padding: 0;
+      .md-card-sponsor {
+        max-height: 35px;
+        margin-left: 10px;
+      }
+      md-card-title-text {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 10px;
+        background: rgba(43, 43, 43, 0.7);
+        position: absolute;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        .md-headline {
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 20px;
+          white-space: inherit;
+          &:hover {
+            background: none;
+          }
+          .md-ripple-container {
+            display: none;
+          }
+        }
+      }
+      .wrap-md-card-img {
+        background: #fff;
+        height: 150px;
+        overflow: hidden;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      .card-labels {
+        position: absolute;
+        top: 0;
+        right: 8px;
+      }
+    }
+  }
+
 }
 .crear-grupo .wrap-crear-grupo {
    @media (min-width: 960px) {
      width: 400px;
    }
 }
+
