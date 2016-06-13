@@ -11,6 +11,7 @@
     var _grupo = {};
 
     var rGrupo = Restangular.all('groups');
+    var rParametric = Restangular.all('parametric');
 
     _grupo.getList = function(page, offset) {
       var default_offset = 15;
@@ -21,6 +22,10 @@
 
       var paginateUrl = 'paginate' + '/' + page + '/' + offset;
       return rGrupo.customGET(paginateUrl);
+    };
+
+    _grupo.getInterests = function() {
+      return rParametric.customGET('interests');
     };
 
     _grupo.getGroup = function(id) {

@@ -20,18 +20,26 @@
                         </div>
                     </md-input-container>
                 </div>
-<!--                 <div layout="column" layout-align-gt-sm="center center" layout-gt-sm="row">
-                    <div flex="50" class="profile-bottom" layout-padding layout-gt-sm="row" layout-align-gt-sm="center center">  
-                      <div flex><h3 translate>Privacidad del grupo</h3></div>
-                      <div flex>
-                        <div layout="row" layout-align="center center" class="bg-white">
-                          <div><span translate>Mostrar actividad de grupo solo a miembros</span></div>
-                          <div>
-                            <md-switch name="private" ng-model="grupo.grupo.private" ng-true-value="0" ng-false-value="1" aria-label="Mostrar grupo"></md-switch>
-                          </div>
+            </div>
+            <div flex>
+                <div class="wrap-md-input-container" layout-align="space-between">
+                    <div layout="row" layout-align="start">
+                      <label translate>Elegí categorías. (Podes elegir más de una.)</label>
+                      <div class="wrap-tooltip">
+                        <span class="icon-help">?</span>
+                        <div class="tooltip-text" translate>Clasifica tu Grupo en las categorías disponibles. Puedes elegir más de una.
                         </div>
                       </div>
-                </div> -->
+                    <div layout="row" layout-align="center center">
+                      <md-input-container>
+                        <md-select ng-model="grupo.grupo.interests" multiple aria-label="descripcion">
+                          <md-optgroup label="vegetables">
+                            <md-option ng-value="item" ng-repeat="item in grupo.interests">{{item.description}}</md-option>
+                          </md-optgroup>
+                        </md-select>
+                      </md-input-container>
+                    </div>
+                </div>
             </div>
             <div flex layout="column">
                 <div class="wrap-md-input-container">
