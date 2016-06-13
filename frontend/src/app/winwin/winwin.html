@@ -471,7 +471,7 @@
           </div>
           <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
             <md-input-container class="md-block">
-              <textarea name="content" ng-model="winwin.post.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              <textarea name="content" ng-model="winwin.post.content" md-maxlength="500" rows="5" md-select-on-focus></textarea>
             </md-input-container>
             <div layout="column" layout-align="center center" class="social-media">
               <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">
@@ -481,7 +481,7 @@
                 <md-icon>photo_camera</md-icon>
               </md-button>
             </div>
-            <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
+            <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="postForm.$invalid || loadingFlag">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
             </md-button>
           </form>

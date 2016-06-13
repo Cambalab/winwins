@@ -14,7 +14,7 @@
       </div>
       <form role="form" ng-submit="vm.submitComment()" name="commentForm" layout="row" layout-align="center center" layout-padding>
         <md-input-container class="md-block">
-          <textarea name="content" ng-model="vm.comment.content" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea name="content" ng-model="vm.comment.content" md-maxlength="500" rows="5" md-select-on-focus></textarea>
         </md-input-container>
         <div layout="column" layout-align="center center" class="social-media">
           <md-button class="md-fab youtube" aria-label="" ng-click="vm.showModalVideoPostDialog()">
@@ -24,7 +24,7 @@
             <md-icon>photo_camera</md-icon>
           </md-button>
         </div>
-        <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="loadingFlag">
+        <md-button type="submit" name="action" class="md-fab send" aria-label="" ng-disabled="commentForm.$invalid || loadingFlag">
           <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
         </md-button>
       </form>
