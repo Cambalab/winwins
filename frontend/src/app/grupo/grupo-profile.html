@@ -255,6 +255,13 @@
                                 </md-button>
                               </p>
                         </div>
+                        <div class="content-bg" ng-if="grupo.profile.interests.length > 0">
+                          <h4>Categorías: </h4>
+                          {{grupo.formattedCategories(grupo.profile.interests)}}
+                          <ul>
+                            <li ng-repeat="category in grupo.profile.interests">{{category.description}}</li>
+                          </ul>
+                        </div>
                         <div>
                           <div class="content-bg" ng-if="grupo.profile.already_joined">
 

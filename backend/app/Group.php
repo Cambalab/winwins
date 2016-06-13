@@ -21,4 +21,8 @@ class Group extends Model {
     public function sponsors() {
         return $this->belongsToMany('Winwins\Sponsor', 'sponsors_groups');
     }
+
+    public function interests() {
+        return $this->belongsToMany('Winwins\Interest', 'interests_interested','interested_id', 'interest_id');
+    }
 }

@@ -13,7 +13,13 @@
         vm.facebookId = ENV.satellizer.facebook.clientId;
         vm.stage = 1;
         vm.emailsOK = false;
-        vm.grupo = {};
+        vm.grupo = {
+            interests:[]
+        };
+    
+        grupo.getInterests().then(function(data) {
+          vm.interests = data;
+        });
 
 
         vm.clearError = function () {

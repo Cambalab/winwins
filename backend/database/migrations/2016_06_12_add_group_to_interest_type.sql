@@ -1,0 +1,1 @@
+ALTER TABLE interests_interested CHANGE type type ENUM('WINWIN','USER','SPONSOR', 'GROUP') DEFAULT NULL;

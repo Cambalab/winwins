@@ -22,6 +22,7 @@ use Winwins\Post;
 use Winwins\Media;
 use Winwins\Message\Mailer;
 use Winwins\Message\Message;
+use Winwins\InterestsInterested;
 
 use Illuminate\Http\Request;
 
@@ -151,7 +152,6 @@ class GroupController extends Controller {
             $group->private = $request->input('private') ? 1 : 0;
             $group->control_ww = $request->input('control_ww') ? 1 : 0;
             $group->confirm_ww = $request->input('confirm_ww') ? 1 : 0;
-
             $group->photo = $request->input('photo');
 
             if( !isset($group->photo) ) {
@@ -165,6 +165,24 @@ class GroupController extends Controller {
             $groupsUsers->user_id = $user->id;
             $groupsUsers->group_id = $group->id;
             $groupsUsers->moderator = true;
+
+            if($request->has('interests')) {
+                $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
+                $group->categories_text = implode(" ",$text_interest);
+            }
+
+            if($request->has('interests')) {
+                $interests = $request->input('interests');
+                foreach($interests as $interest) {
+
+                    $interestsInterested = InterestsInterested::firstOrCreate([
+                        'interest_id' => $interest['id'],
+                        'interested_id' => $group->id,
+                        'type' => 'GROUP'
+                    ]);
+                }
+            }
+
             $groupsUsers->save();
 
             $user->newActivity()
@@ -207,7 +225,14 @@ class GroupController extends Controller {
 
         $group->sponsors;
 
-        $group->already_joined = true;
+        $group->interests = DB::table('interests')
+            ->join('interests_interested', 'interests.id', '=', 'interests_interested.interest_id')
+            ->where('type', '=', 'GROUP')
+            ->where('interested_id', '=', $group->id)
+            ->select('interests.name','interests.description', 'interests.id')
+            ->get();
+
+        $group->already_joined = false;
 
         $group->posts = DB::table('posts')
             ->where('type', '=', 'GROUP')
