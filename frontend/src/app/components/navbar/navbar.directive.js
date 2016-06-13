@@ -25,7 +25,7 @@
       var vm = this;
 
       vm.imageServer = ENV.imageServer;
-      
+      vm.isActive = true;
       vm.sentActivationMail = false;
 
       vm.search_query = "";
