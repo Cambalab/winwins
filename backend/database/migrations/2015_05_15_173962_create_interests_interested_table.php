@@ -11,7 +11,7 @@ class CreateInterestsInterestedTable extends Migration {
 		Schema::create('interests_interested', function(Blueprint $table) {
             $table->integer('interest_id')->unsigned();
             $table->integer('interested_id')->unsigned();
-            $table->enum('type', ['WINWIN', 'USER', 'SPONSOR']);
+            $table->enum('type', ['WINWIN', 'USER', 'SPONSOR', 'GROUP']);
 
 			$table->timestamps();
 		});
