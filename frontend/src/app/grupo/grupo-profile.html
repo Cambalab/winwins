@@ -262,15 +262,15 @@
                             <li ng-repeat="category in grupo.profile.interests">{{category.description}}</li>
                           </ul>
                         </div>
+                        
                         <div layout="column" ng-if="grupo.profile.already_joined" class="no-padding">
                           <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
                           <div ng-repeat="item in grupo.profile.winwins" ng-show="true">
-
                             <md-card>
                               <img ng-src="{{grupo.imageServer}}/130x/{{item.image}}" alt="" class="md-card-img"/>
                               <md-card-content>
-                                <md-card-title-text layout-align="center center" layout="column" layout-wrap>
-                                  <a class="md-headline" ui-sref="home.winwin({winwinId: item.id})" arial-label="title">{{item.title}}</a>
+                                <md-card-title-text ui-sref="home.winwin({winwinId: item.id})" layout-align="center center" layout="column" layout-wrap>
+                                  {{item.title}}
                                 </md-card-title-text>
                               </md-card-content>
                               <md-card-actions class="winwin-list-card-actions" layout="row" layout-align="space-between center">
@@ -284,9 +284,18 @@
                             </md-card>
                           </div>
                         </div>
-                        <md-list-item class="no-padding">
-                          <md-button ng-href class="ver-todos">Ver todos los miembros</md-button>
-                        </md-list-item>
+                        <md-list ng-cloak class="no-padding">
+                          <h3 class="title">
+                            <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'MIEMBROS' | translate }}
+                          </h3>
+                          <md-list-item ng-repeat="miembro in grupo.profile.users | limitTo: 5">
+                            <img ng-src="{{grupo.imageServer}}/smart/{{miembro.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({userId: miembro.id})">
+                            <p>{{miembro.username}}</p>
+                          </md-list-item>
+                          <md-list-item class="md-no-proxy">
+                            <md-button ng-href class="ver-todos" ng-click="grupo.showParticipantesDialog()"><strong>+</strong>Ver miembros</md-button>
+                          </md-list-item>
+                        </md-list>
                       </div>
                     </div>
                   </div>

@@ -1,0 +1,14 @@
+<md-dialog-content class="dialog-primary">
+  <div class="md-dialog-content">
+    <h3 class="title">
+      <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>
+      {{ 'MIEMBROS' | translate }}
+    </h3>
+    <md-list class="participantes-list">
+      <md-list-item ng-repeat="participante in vm.users">
+        <img alt="" ng-src="{{vm.imageServer}}/smart/{{participante.photo}}" alt=""class="md-avatar" />
+        <p>{{participante.username}}</p>
+      </md-list-item>
+    </md-list>
+  </div>
+</md-dialog-content>    

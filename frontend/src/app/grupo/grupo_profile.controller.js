@@ -107,6 +107,20 @@
           });
         };
 
+        vm.showParticipantesDialog = function(ev) {
+          $mdDialog.show({
+            controller: ParticipantesController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/participantes.tmpl.html',
+            parent: angular.element($document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+              users: vm.profile.users,
+            }
+          })
+        };
+
         vm.join = function() {
             if($auth.isAuthenticated()) {
                 grupo.join(vm.groupId).then(function(group_data) {
@@ -409,6 +423,14 @@
         vm.cancel = function() {
           $mdDialog.cancel();
         }
+    }
+
+    /** @ngInject */
+    function ParticipantesController(users, ENV){
+      var vm = this;
+
+      vm.imageServer = ENV.imageServer;
+      vm.users = users;
     }
 
     /** @ngInject */
