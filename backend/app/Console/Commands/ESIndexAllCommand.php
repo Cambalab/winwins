@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Winwins\Winwin;
 use Winwins\Group;
 use Winwins\UserDetail;
+use Winwins\User;
 use Elasticsearch\Client;
 
 class ESIndexAllCommand extends Command {
@@ -22,6 +23,7 @@ class ESIndexAllCommand extends Command {
 
         $models = Winwin::all();
         foreach ($models as $model) {
+            $model->user;
             $es->index([
                 'index' => 'winwins',
                 'type' => 'winwins',
@@ -42,8 +44,9 @@ class ESIndexAllCommand extends Command {
         }
         Log::info('Groups indexed');
 
-        $models = UserDetail::all();
+        $models = User::all();
         foreach ($models as $model) {
+            $model->detail;
             $es->index([
                 'index' => 'winwins',
                 'type' => 'users',
