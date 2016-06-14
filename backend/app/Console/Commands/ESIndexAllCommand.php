@@ -1,6 +1,7 @@
 <?php namespace Winwins\Console\Commands;
 
 use Log;
+use Config;
 use Illuminate\Console\Command;
 
 use Winwins\Winwin;
@@ -16,7 +17,7 @@ class ESIndexAllCommand extends Command {
 
     public function handle() {
         $params = array();
-        $params['hosts'] = array('http://10.0.2.2:9200');
+        $params['hosts'] = array(Config::get('app.es_hosts'));
         $es = new Client($params);
 
         $models = Winwin::all();
