@@ -133,6 +133,10 @@
      return Restangular.one('winwins', id).customPOST(poll, 'poll', undefined, undefined);
     }
 
+    _winwin.getPoll = function(id) {
+      return Restangular.one('polls', id).get();
+    }
+
     return _winwin;
   }
 

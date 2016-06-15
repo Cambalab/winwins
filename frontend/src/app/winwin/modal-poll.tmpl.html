@@ -3,7 +3,7 @@
   	<h3 class="title">
       {{ 'ENCUESTA' | translate }}
     </h3>
-    <div layout="column">
+    <div layout="column" ng-show="!vm.pollOk">
       <form id="create-poll" role="form" ng-submit="vm.submitPoll()" name="pollForm">
       	<div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
@@ -62,8 +62,14 @@
         <button type="submit" name="action" ng-disabled="pollForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default">{{ 'CREAR ENCUESTA' | translate }}</button>
     	</form>
     </div>
-    <div layout="column" layout-align="center center" >
-
+    <div layout="column" layout-align="center center" ng-show="vm.pollOk">
+  		<div flex>
+  			<md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
+  		</div>
+      <div flex><h2 class="gray" translate>Genial!</h2></div>
+      <div flex>
+      	<p class="gray font-16">{{ 'Se creó la encuesta correctamente' | translate }}</p>
+      </div>
   	</div>
   </md-dialog-content>
 </div>

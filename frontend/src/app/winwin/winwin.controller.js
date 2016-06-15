@@ -28,7 +28,14 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+      vm.polls = vm.winwin.polls;
 
+      $window._.each(vm.polls, function(poll) {
+        winwin.getPoll(poll.id).then(function(data) {
+          poll.data = data;
+        });
+      });
+      
       // sponsor.getListByWinwin(vm.winwinId).then(function(sponsor_data) {
       //   vm.sponsors = $window._.filter(sponsor_data, function(model) {
       //     return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
@@ -664,11 +671,17 @@
   }
 
   /** @ngInject */
-  function ModalPollController(winwin, current_winwin) {
+  function ModalPollController(winwin, current_winwin, $mdDialog, $timeout) {
     var vm = this;
+    vm.pollOk = false
 
     vm.submitPoll = function() {
-      winwin.createPoll(current_winwin.id, vm.poll);
+      winwin.createPoll(current_winwin.id, vm.poll).then(function(data) {
+        vm.pollOk = true;
+        $timeout(function() {
+          $mdDialog.hide(data);  
+        }, 3000);
+      });
     }
   }
 
