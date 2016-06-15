@@ -129,6 +129,10 @@
       return Restangular.one('winwins', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
     }
 
+    _winwin.createPoll = function(id, poll) {
+     return Restangular.one('winwins', id).customPOST(poll, 'poll', undefined, undefined);
+    }
+
     return _winwin;
   }
 

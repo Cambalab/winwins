@@ -303,6 +303,19 @@
         }
       });
     }
+
+    vm.showModalPollDialog = function() {
+      $mdDialog.show({
+        controller: ModalPollController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-poll.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_winwin: vm.winwin
+        }
+      }) 
+    }
     
     vm.showParticipantesDialog = function(ev) {
       $mdDialog.show({
@@ -647,6 +660,15 @@
     vm.matchYoutubeUrl = function(url){
       var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
       return (url.match(p)) ? RegExp.$1 : false ;
+    }
+  }
+
+  /** @ngInject */
+  function ModalPollController(winwin, current_winwin) {
+    var vm = this;
+
+    vm.submitPoll = function() {
+      winwin.createPoll(current_winwin.id, vm.poll);
     }
   }
 
