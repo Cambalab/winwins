@@ -1,7 +1,7 @@
-<div layout="column" layout-padding >
+<div layout="column" layout-padding class="modal-encuesta">
   <md-dialog-content style="min-width: 450px;">
   	<h3 class="title">
-      {{ 'ENCUESTA' | translate }}
+      + {{ 'NUEVA ENCUESTA' | translate }}
     </h3>
     <div layout="column" ng-show="!vm.pollOk">
       <form id="create-poll" role="form" ng-submit="vm.submitPoll()" name="pollForm">
@@ -55,14 +55,14 @@
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Publicar en el muro</label>
-             <md-switch name="selected" ng-model="vm.poll.selected" ng-true-value="1" ng-false-value="0" aria-label="Publicar en el muro"></md-switch>
+             <md-switch name="selected" ng-model="vm.poll.selected" ng-true-value="1" ng-false-value="0" aria-label="Publicar en el muro">
+             {{ 'Publicar en el muro' | translate }}</md-switch>
           </md-input-container>
         </div>
-        <button type="submit" name="action" ng-disabled="pollForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default">{{ 'CREAR ENCUESTA' | translate }}</button>
+        <button type="submit" name="action" ng-disabled="pollForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default bt-green">{{ 'CREAR ENCUESTA' | translate }}</button>
     	</form>
     </div>
-    <div layout="column" layout-align="center center" ng-show="vm.pollOk">
+    <div layout="column" layout-align="center center" class="gracias" ng-show="vm.pollOk">
   		<div flex>
   			<md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
   		</div>
