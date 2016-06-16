@@ -231,7 +231,7 @@
             </div>
             <div class="comments">
 
-              <div class="row" ng-repeat="poll in winwin.polls" style="margin-top:50px;">
+              <div class="row" ng-repeat="poll in winwin.polls">
                 
                 <md-card class="md-whiteframe-7dp" ng-show="!poll.data.has_answered">
                   <div class="card-labels">
@@ -241,7 +241,7 @@
                   </div>
                   <md-card-content>
                     <span class="card-title center">
-                        <h6>{{poll.question}}</h6>
+                        <h4>{{poll.question}}</h4>
                     </span>
                     <ul class="collection">
                       <li class="collection-item dismissable black-text" ng-repeat="answer in poll.data.answers">
@@ -250,66 +250,42 @@
                           <span class="h7 grey-text"> {{answer.content}}</span>
                           <span class="secondary-content">
                             <input class="with-gap" name="poll_{{poll.id}}" type="radio" ng-value="answer.id" ng-checked="poll.selected_answer" ng-model="poll.selected_answer" ng-checked="true"/>
-                            <label for="test5" ng-click="selectAnswer(poll, answer)"></label>
                           </span>
                         </div>
                       </li>
                     </ul>
                   </md-card-content>
-                  <button class="btn-large green col-xs-12" ng-click="votePoll(poll)" >Votar</button>
-                  <md-card-actions layout="row" layout-margin layout-align="start end">
-                    <div class="green">
-                      <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, true)" class="md-icon-button">
-                        <md-icon class="icon thumb_up">thumb_up</md-icon>
-                      </md-button>
-                      {{item_post.up_votes}}
-                    </div>
-                    <div class="red"> 
-                      <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, false)" class="md-icon-button">
-                        <md-icon class="icon thumb_down">thumb_down</md-icon>
-                      </md-button>
-                      {{item_post.down_votes}}
-                    </div>
-                    <md-button class="md-icon-button" ng-click="winwin.showSharePost(item_post)">
-                      <md-icon>share</md-icon>
-                    </md-button>
-                  </md-card-actions>
+                  <button class="btn-large green col-xs-12" ng-click="winwin.votePoll(poll)" >Votar</button>
                 </md-card>
 
-                <div class="col s12 m6" ng-show="poll.data.has_answered">
-                    <div class="card white ">
-                        <div class="card-content black-text">
-                            <span class="card-title center">
-                                <h6>{{poll.question}}</h6>
-                            </span>
-                            <ul class="collection">
-                                <div ng-repeat="answer in poll.data.answers">
-                                    <div class="progress">
-                                        <div class="determinate" style="width: {{percentage_votes(poll, answer)}}%"></div>
-                                    </div>
-                                    <li class="collection-item dismissable black-text">
-                                        <div>
-                                            <span class="h7 grey-text"> {{answer.content}}</span>
-                                            <a href="#!" class="secondary-content">  
-                                                <span class="badge green white-text">{{answer.vote_count}}</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <md-card class="md-whiteframe-7dp" ng-show="poll.data.has_answered">
+                  <div class="card-labels">
+                    <md-button ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
+                      <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                    </md-button>
+                  </div>
+                  <md-card-content>
+                    <span class="card-title center">
+                        <h4>{{poll.question}}</h4>
+                    </span>
+                    <ul class="collection">
+                      <div ng-repeat="answer in poll.data.answers">
+                          <div class="progress">
+                              <div class="determinate" style="width: {{percentage_votes(poll, answer)}}%"></div>
+                          </div>
+                          <li class="collection-item dismissable black-text">
+                              <div>
+                                  <span class="h7 grey-text"> {{answer.content}}</span>
+                                  <a href="#!" class="secondary-content">  
+                                      <span class="badge green white-text">{{answer.vote_count}}</span>
+                                  </a>
+                              </div>
+                          </li>
+                      </div>
+                    </ul>
+                  </md-card-content>
+                </md-card>
               </div>
-
-
-
-              
-
-
-
-
-
 
 
 

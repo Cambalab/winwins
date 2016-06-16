@@ -137,6 +137,10 @@
       return Restangular.one('polls', id).get();
     }
 
+    _winwin.votePoll = function(poll) {
+      return Restangular.one('poll', poll.id).one('vote', poll.selected_answer).customPOST({positive: true}, undefined, undefined, undefined);
+    }
+
     return _winwin;
   }
 

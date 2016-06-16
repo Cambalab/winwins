@@ -233,6 +233,16 @@
       });
     };
 
+    vm.votePoll = function(poll) {
+      winwin.votePoll(poll).then(function() {
+        $window._.each(vm.polls, function(poll) {
+          winwin.getPoll(poll.id).then(function(data) {
+            poll.data = data;
+          });
+        });
+      });
+    }
+
     vm.showCampanadasDialog = function() {
       $mdDialog.show({
         controller: CampanadasController,
@@ -321,7 +331,15 @@
         locals: {
           current_winwin: vm.winwin
         }
-      }) 
+      })
+      .then(function(data) {
+        vm.polls.push(data);
+        $window._.each(vm.polls, function(poll) {
+          winwin.getPoll(poll.id).then(function(data) {
+            poll.data = data;
+          });
+        });
+      });
     }
     
     vm.showParticipantesDialog = function(ev) {
