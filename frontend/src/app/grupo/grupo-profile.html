@@ -262,30 +262,29 @@
                             <li ng-repeat="category in grupo.profile.interests">{{category.description}}</li>
                           </ul>
                         </div>
-                        <div class="content-bg" ng-if="grupo.profile.already_joined">
-                          <div layout="column">
-                            <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
-                            <div ng-repeat="item in grupo.profile.winwins" ng-show="true">
-                              <md-card>
-                                <img ng-src="{{grupo.imageServer}}/130x/{{item.image}}" alt="" class="md-card-img"/>
-                                <md-card-content>
-                                  <md-card-title-text ui-sref="home.winwin({winwinId: item.id})" layout-align="center center" layout="column" layout-wrap>
-                                    {{item.title}}
-                                  </md-card-title-text>
-                                </md-card-content>
-                                <md-card-actions class="winwin-list-card-actions" layout="row" layout-align="space-between center">
-                                  <div layout="row" layout-align="start start">
-                                    <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
-                                    <md-button class="md-icon-button" ng-click="" arial-label="share">
-                                      <md-icon>share</md-icon>
-                                    </md-button>
-                                  </div>
-                                </md-card-actions>
-                              </md-card>
-                            </div>
+                        
+                        <div layout="column" ng-if="grupo.profile.already_joined" class="no-padding">
+                          <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
+                          <div ng-repeat="item in grupo.profile.winwins" ng-show="true">
+                            <md-card>
+                              <img ng-src="{{grupo.imageServer}}/130x/{{item.image}}" alt="" class="md-card-img"/>
+                              <md-card-content>
+                                <md-card-title-text ui-sref="home.winwin({winwinId: item.id})" layout-align="center center" layout="column" layout-wrap>
+                                  {{item.title}}
+                                </md-card-title-text>
+                              </md-card-content>
+                              <md-card-actions class="winwin-list-card-actions" layout="row" layout-align="space-between center">
+                                <div layout="row" layout-align="start start">
+                                  <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
+                                  <md-button class="md-icon-button" ng-click="" arial-label="share">
+                                    <md-icon>share</md-icon>
+                                  </md-button>
+                                </div>
+                              </md-card-actions>
+                            </md-card>
                           </div>
                         </div>
-                        <md-list ng-cloak>
+                        <md-list ng-cloak class="no-padding">
                           <h3 class="title">
                             <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'MIEMBROS' | translate }}
                           </h3>
