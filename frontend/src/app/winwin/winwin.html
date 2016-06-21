@@ -239,7 +239,7 @@
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                     </md-button>
                   </div>
-                  <md-card-content>
+                  <md-card-content class="encuesta">
                     <span class="card-title center">
                         <h4>{{poll.question}}</h4>
                     </span>
@@ -255,7 +255,7 @@
                       </li>
                     </ul>
                   </md-card-content>
-                  <button class="btn-large green col-xs-12" ng-click="winwin.votePoll(poll)" >Votar</button>
+                  <button class="btn-large bt-green col-xs-12" ng-click="winwin.votePoll(poll)" >Votar</button>
                 </md-card>
 
                 <md-card class="md-whiteframe-7dp" ng-show="poll.data.has_answered">
@@ -264,7 +264,7 @@
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
                     </md-button>
                   </div>
-                  <md-card-content>
+                  <md-card-content class="encuesta">
                     <span class="card-title center">
                         <h4>{{poll.question}}</h4>
                     </span>
@@ -276,9 +276,7 @@
                           <li class="collection-item dismissable black-text">
                               <div>
                                   <span class="h7 grey-text"> {{answer.content}}</span>
-                                  <a href="#!" class="secondary-content">  
-                                      <span class="badge green white-text">{{answer.vote_count}}</span>
-                                  </a>
+                                  <strong class="badge green white-text">{{answer.vote_count}}</strong>
                               </div>
                           </li>
                       </div>
