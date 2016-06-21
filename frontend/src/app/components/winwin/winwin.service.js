@@ -141,6 +141,10 @@
       return Restangular.one('poll', poll.id).one('vote', poll.selected_answer).customPOST({positive: true}, undefined, undefined, undefined);
     }
 
+    _winwin.removePoll = function(id) {
+      return Restangular.one('polls', id).remove();
+    }
+
     return _winwin;
   }
 
