@@ -232,7 +232,7 @@
             <div class="comments">
               
               <div class="row" ng-repeat="poll in winwin.polls"> 
-                <md-card class="md-whiteframe-7dp" ng-show="!poll.data.has_answered">
+                <md-card class="md-whiteframe-7dp" ng-show="!poll.data.has_answered && winwin.winwin.already_joined">
                   <div class="card-labels">
                     <md-button ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
@@ -254,10 +254,10 @@
                       </li>
                     </ul>
                   </md-card-content>
-                  <button class="btn-large bt-green col-xs-12" ng-click="winwin.votePoll(poll)" >Votar</button>
+                  <button class="btn-large bt-green col-xs-12" ng-click="winwin.votePoll(poll)">Votar</button>
                 </md-card>
 
-                <md-card class="md-whiteframe-7dp" ng-show="poll.data.has_answered">
+                <md-card class="md-whiteframe-7dp" ng-show="poll.data.has_answered || !winwin.winwin.already_joined">
                   <div class="card-labels">
                     <md-button ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
