@@ -5,60 +5,46 @@
     </h3>
     <div layout="column" ng-show="!vm.pollOk">
       <form id="create-poll" role="form" ng-submit="vm.submitPoll()" name="pollForm">
-      	<div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Nombre para tu encuesta</label>
-            <input id="name" required ng-model="vm.poll.name" name="name">
-            <div ng-messages="pollForm.name.$error" ng-if="pollForm.name.$touched" class="help-block">
-              <p class="small" ng-message="required" translate>Ingresa nombre de la encuesta.</p>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Pregunta/Consigna</label>
-            <input id="question" required ng-model="vm.poll.question" name="question">
-            <div ng-messages="pollForm.question.$error" ng-if="pollForm.question.$touched" class="help-block">
-              <p class="small" ng-message="required" translate>Ingresa una Pregunta/Consigna</p>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Opción/Respuesta 1</label>
-            <input id="option_1" required ng-model="vm.poll.option_1" name="option_1">
-            <div ng-messages="pollForm.option_1.$error" ng-if="pollForm.option_1.$touched" class="help-block">
-              <p class="small" ng-message="required" translate>Ingresa al menos dos Opciones/Respuestas</p>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Opción/Respuesta 2</label>
-            <input id="option_2" required ng-model="vm.poll.option_2" name="option_2">
-            <div ng-messages="pollForm.option_2.$error" ng-if="pollForm.option_2.$touched" class="help-block">
-              <p class="small" ng-message="required" translate>Ingresa al menos dos Opciones/Respuestas</p>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Opción/Respuesta 3</label>
-            <input id="option_3" ng-model="vm.poll.option_3" name="option_3">
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label translate>Opción/Respuesta 4</label>
-            <input id="option_4" ng-model="vm.poll.option_4" name="option_4">
-          </md-input-container>
-        </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-             <md-switch name="selected" ng-model="vm.poll.selected" ng-true-value="1" ng-false-value="0" aria-label="Publicar en el muro">
-             {{ 'Publicar en el muro' | translate }}</md-switch>
-          </md-input-container>
-        </div>
+        <md-input-container class="md-block">
+          <label translate>Nombre para tu encuesta</label>
+          <input id="name" required ng-model="vm.poll.name" name="name">
+          <div ng-messages="pollForm.name.$error" ng-if="pollForm.name.$touched" class="help-block">
+            <p class="small" ng-message="required" translate>Ingresa nombre de la encuesta.</p>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Pregunta/Consigna</label>
+          <input id="question" required ng-model="vm.poll.question" name="question">
+          <div ng-messages="pollForm.question.$error" ng-if="pollForm.question.$touched" class="help-block">
+            <p class="small" ng-message="required" translate>Ingresa una Pregunta/Consigna</p>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Opción/Respuesta 1</label>
+          <input id="option_1" required ng-model="vm.poll.option_1" name="option_1">
+          <div ng-messages="pollForm.option_1.$error" ng-if="pollForm.option_1.$touched" class="help-block">
+            <p class="small" ng-message="required" translate>Ingresa al menos dos Opciones/Respuestas</p>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Opción/Respuesta 2</label>
+          <input id="option_2" required ng-model="vm.poll.option_2" name="option_2">
+          <div ng-messages="pollForm.option_2.$error" ng-if="pollForm.option_2.$touched" class="help-block">
+            <p class="small" ng-message="required" translate>Ingresa al menos dos Opciones/Respuestas</p>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Opción/Respuesta 3</label>
+          <input id="option_3" ng-model="vm.poll.option_3" name="option_3">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Opción/Respuesta 4</label>
+          <input id="option_4" ng-model="vm.poll.option_4" name="option_4">
+        </md-input-container>
+        <md-input-container class="md-block">
+           <md-switch name="selected" ng-model="vm.poll.selected" ng-true-value="1" ng-false-value="0" aria-label="Publicar en el muro">
+           {{ 'Publicar en el muro' | translate }}</md-switch>
+        </md-input-container>
         <button type="submit" name="action" ng-disabled="pollForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default bt-green">{{ 'CREAR ENCUESTA' | translate }}</button>
     	</form>
     </div>

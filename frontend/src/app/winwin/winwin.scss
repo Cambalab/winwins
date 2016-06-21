@@ -624,6 +624,10 @@
         li {
           font-size: 12px;
           color: #666;
+          margin-bottom: 15px;
+          md-progress-linear {
+            margin-bottom: 5px !important;
+          }
         }
       }
     }
@@ -632,6 +636,7 @@
       height: 40px;
       font-size: 14px;
       text-transform: uppercase;
+      outline: none;
       &:before {
         display: none;
       }
