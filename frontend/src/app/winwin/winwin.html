@@ -230,9 +230,8 @@
               </div>
             </div>
             <div class="comments">
-
-              <div class="row" ng-repeat="poll in winwin.polls">
-                
+              
+              <div class="row" ng-repeat="poll in winwin.polls"> 
                 <md-card class="md-whiteframe-7dp" ng-show="!poll.data.has_answered">
                   <div class="card-labels">
                     <md-button ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
@@ -246,7 +245,7 @@
                     <ul class="collection">
                       <li class="collection-item dismissable black-text" ng-repeat="answer in poll.data.answers">
                         <div>
-                          <div class="determinate" style="width: {{percentage_votes(poll, answer)}}%"></div>
+                          <md-progress-linear md-mode="determinate" value="{{winwin.percentage_votes(poll, answer)}}"></md-progress-linear>
                           <span class="h7 grey-text"> {{answer.content}}</span>
                           <span class="secondary-content">
                             <input class="with-gap" name="poll_{{poll.id}}" type="radio" ng-value="answer.id" ng-checked="poll.selected_answer" ng-model="poll.selected_answer" ng-checked="true"/>
@@ -271,7 +270,7 @@
                     <ul class="collection">
                       <div ng-repeat="answer in poll.data.answers">
                           <div class="progress">
-                              <div class="determinate" style="width: {{percentage_votes(poll, answer)}}%"></div>
+                            <md-progress-linear md-mode="determinate" value="{{winwin.percentage_votes(poll, answer)}}"></md-progress-linear>
                           </div>
                           <li class="collection-item dismissable black-text">
                               <div>
@@ -286,8 +285,6 @@
                   </md-card-content>
                 </md-card>
               </div>
-
-
 
               <div ng-repeat="item_post in winwin.posts">
                 <md-card class="md-whiteframe-7dp" >

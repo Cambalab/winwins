@@ -243,6 +243,14 @@
       });
     }
 
+    vm.percentage_votes = function(poll, answer) {
+      if(!poll.data.total_votes) {
+        return 0;
+      }
+      var result = (answer.vote_count * 100 / poll.data.total_votes);
+      return result;
+    };
+
     vm.showCampanadasDialog = function() {
       $mdDialog.show({
         controller: CampanadasController,
