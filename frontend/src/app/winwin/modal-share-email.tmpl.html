@@ -8,7 +8,7 @@
 	          <md-input-container class="md-icon-float md-icon-right md-block">
 	            <label>Ingresa mails para invitar</label>
 	            <md-chips ng-model="vm.mails" md-on-add="vm.validateMail($chip)">
-	            	<input type="email" length="30" class="validate">
+	            	<input type="email" ng-model="vm.mail" length="30" class="validate">
 	          	</md-chips>
 	            <md-button class="md-fab send" aria-label="" ng-click="vm.sentInvitations()">
 	              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>

@@ -877,14 +877,16 @@
 }
 .wrap-caja-mensaje.lightbox-mensaje {
   form {
-    padding: 0;
+    padding: 4px;
   }
   md-input-container {
     padding-left: 0;
     margin: 0;
     padding-right: 0;
+    top: 10px;
     .md-errors-spacer {
-      display: none;
+      float: none;
+      color: #000;
     }
   }
   .social-media {
@@ -1074,8 +1076,10 @@
     padding-left: 0;
     margin: 0;
     padding-right: 0;
+    top: 10px;
     .md-errors-spacer {
-      display: none;
+      color: #fff;
+      float: none;
     }
   }
   .social-media {

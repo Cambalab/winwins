@@ -1,11 +1,13 @@
 <?php namespace Winwins\Console\Commands;
 
 use Log;
+use Config;
 use Illuminate\Console\Command;
 
 use Winwins\Winwin;
 use Winwins\Group;
 use Winwins\UserDetail;
+use Winwins\User;
 use Elasticsearch\Client;
 
 class ESIndexAllCommand extends Command {
@@ -16,11 +18,12 @@ class ESIndexAllCommand extends Command {
 
     public function handle() {
         $params = array();
-        $params['hosts'] = array('http://10.0.2.2:9200');
+        $params['hosts'] = array(Config::get('app.es_hosts'));
         $es = new Client($params);
 
         $models = Winwin::all();
         foreach ($models as $model) {
+            $model->user;
             $es->index([
                 'index' => 'winwins',
                 'type' => 'winwins',
@@ -41,8 +44,9 @@ class ESIndexAllCommand extends Command {
         }
         Log::info('Groups indexed');
 
-        $models = UserDetail::all();
+        $models = User::all();
         foreach ($models as $model) {
+            $model->detail;
             $es->index([
                 'index' => 'winwins',
                 'type' => 'users',

@@ -602,6 +602,11 @@
     }
 
     vm.sentInvitations = function() {
+      if (vm.mails.length==0 && vm.mail) {
+        vm.mails.push(vm.mail);
+        vm.validateMail(vm.mail)
+        vm.mail = '';
+      }
       winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
         vm.mails = [];
         vm.emailsOK = true;
@@ -739,5 +744,5 @@
       $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
     }
   }
-
+  
 })();
