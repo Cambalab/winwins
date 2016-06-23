@@ -258,7 +258,8 @@
                                 user_winwins: user_data.winwins,
                                 winwins_already_add: vm.profile.winwins, 
                                 groupId: vm.groupId,
-                                groupName: vm.profile.name
+                                groupName: vm.profile.name,
+                                currentScope : vm
                             }
                         });                        
                     })
@@ -297,7 +298,7 @@
     }
 
     /** @ngInject */
-    function ModalVerWinwinsDeUsuario(ENV, grupo, user, user_winwins, winwins_already_add, groupId, $window, groupName, $scope) {
+    function ModalVerWinwinsDeUsuario(ENV, grupo, user, user_winwins, winwins_already_add, groupId, $window, groupName, currentScope) {
         var vm = this;
 
         vm.base = ENV.base;
@@ -322,7 +323,7 @@
         vm.addWinwinToGroup = function(winwinId) {
             grupo.addWinwin(vm.grupoId, winwinId).then(function(group_data){
                 vm.success = true;
-                $scope.$parent.profile.winwins = group_data.winwins;
+                currentScope.profile.winwins = group_data.winwins;
             })
         }
 
