@@ -28,7 +28,14 @@
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
+      vm.polls = vm.winwin.polls;
 
+      $window._.each(vm.polls, function(poll) {
+        winwin.getPoll(poll.id).then(function(data) {
+          poll.data = data;
+        });
+      });
+      
       // sponsor.getListByWinwin(vm.winwinId).then(function(sponsor_data) {
       //   vm.sponsors = $window._.filter(sponsor_data, function(model) {
       //     return model.pivot.ww_accept == 1 && model.pivot.sponsor_accept == 1;
@@ -226,6 +233,30 @@
       });
     };
 
+    vm.votePoll = function(poll) {
+      winwin.votePoll(poll).then(function() {
+        $window._.each(vm.polls, function(poll) {
+          winwin.getPoll(poll.id).then(function(data) {
+            poll.data = data;
+          });
+        });
+      });
+    }
+
+    vm.removePoll = function(poll, index) {
+      winwin.removePoll(poll.id).then(function() {
+        vm.polls.splice(index, 1);
+      });
+    }
+
+    vm.percentage_votes = function(poll, answer) {
+      if(!poll.data.total_votes) {
+        return 0;
+      }
+      var result = (answer.vote_count * 100 / poll.data.total_votes);
+      return result;
+    };
+
     vm.showCampanadasDialog = function() {
       $mdDialog.show({
         controller: CampanadasController,
@@ -301,6 +332,27 @@
         locals: {
           current_winwin: vm.winwin
         }
+      });
+    }
+
+    vm.showModalPollDialog = function() {
+      $mdDialog.show({
+        controller: ModalPollController,
+        controllerAs: 'vm',
+        templateUrl: 'app/winwin/modal-poll.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true,
+        locals: {
+          current_winwin: vm.winwin
+        }
+      })
+      .then(function(data) {
+        vm.polls.push(data);
+        $window._.each(vm.polls, function(poll) {
+          winwin.getPoll(poll.id).then(function(data) {
+            poll.data = data;
+          });
+        });
       });
     }
     
@@ -647,6 +699,21 @@
     vm.matchYoutubeUrl = function(url){
       var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
       return (url.match(p)) ? RegExp.$1 : false ;
+    }
+  }
+
+  /** @ngInject */
+  function ModalPollController(winwin, current_winwin, $mdDialog, $timeout) {
+    var vm = this;
+    vm.pollOk = false
+
+    vm.submitPoll = function() {
+      winwin.createPoll(current_winwin.id, vm.poll).then(function(data) {
+        vm.pollOk = true;
+        $timeout(function() {
+          $mdDialog.hide(data);  
+        }, 3000);
+      });
     }
   }
 

@@ -446,6 +446,9 @@
       color: #8d8d8d;
       font-size: 12px;
       margin: 0;
+      a {
+        cursor: pointer;
+      }
     }
     .no-padding {
       margin: 0;
@@ -455,6 +458,15 @@
       &:hover {
         background: none;
         color: #353535;
+      }
+    }
+    .crear-encuesta {
+      a {
+        display: block;
+        text-align: left;
+        md-icon {
+          margin-right: 2px;
+        }
       }
     }
   }
@@ -594,6 +606,39 @@
           margin-right: 0;
           margin-left: 12px;
         }
+      }
+    }
+    .encuesta {
+      h4 {
+        color: #5d5d5d;
+        text-transform: uppercase;
+        font-weight: 300;
+        border-bottom: solid 1px #bebebe;
+        padding-bottom: 10px;
+        margin-top: 12px;
+        font-size: 14px;
+      }
+      .collection {
+        padding: 0;
+        list-style: none;
+        li {
+          font-size: 12px;
+          color: #666;
+          margin-bottom: 15px;
+          md-progress-linear {
+            margin-bottom: 5px !important;
+          }
+        }
+      }
+    }
+    button.bt-green {
+      border: none;
+      height: 40px;
+      font-size: 14px;
+      text-transform: uppercase;
+      outline: none;
+      &:before {
+        display: none;
       }
     }
   }
@@ -1092,6 +1137,61 @@
     height: 30px;
     md-icon {
       height: 20px;
+    }
+  }
+}
+.modal-encuesta {
+  h3.title {
+    color: #5d5d5d;
+    border-bottom: solid 1px #bebebe;
+    border-top: solid 6px #ea6a24;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-weight: 300;
+  }
+  md-input-container {
+    &.md-block {
+      margin: 0;
+    }
+    label {
+      font-size: 14px;
+    }
+    .md-input {
+      border-bottom: solid 1px #ea6a24;
+      font-size: 14px;
+    }
+    md-switch {
+      font-size: 14px;
+      color: #5d5d5d;
+      .md-bar {
+        background: #838790;
+      }
+      .md-thumb {
+        background: #d9dadb;
+      }
+      &.md-checked {
+        .md-thumb {
+          background: #37bb37;
+        }
+      }
+    }
+  }
+  .bt-green {
+    border:none;
+    border-radius: 3px;
+    cursor: pointer;
+    &:after {
+      display: none;
+    }
+  }
+  .gracias {
+    md-icon {
+      width: 120px;
+      height: 120px;
+    }
+    h2 {
+      font-size: 40px;
+      margin-bottom: 0;
     }
   }
 }

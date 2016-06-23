@@ -129,6 +129,22 @@
       return Restangular.one('winwins', id).customPOST({mails: mails}, 'share/mails', undefined, undefined);
     }
 
+    _winwin.createPoll = function(id, poll) {
+     return Restangular.one('winwins', id).customPOST(poll, 'poll', undefined, undefined);
+    }
+
+    _winwin.getPoll = function(id) {
+      return Restangular.one('polls', id).get();
+    }
+
+    _winwin.votePoll = function(poll) {
+      return Restangular.one('poll', poll.id).one('vote', poll.selected_answer).customPOST({positive: true}, undefined, undefined, undefined);
+    }
+
+    _winwin.removePoll = function(id) {
+      return Restangular.one('polls', id).remove();
+    }
+
     return _winwin;
   }
 

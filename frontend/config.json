@@ -59,13 +59,13 @@
         "name": "staging",
         "base": "http://dev-winwins.net/",
         "apiBase": "http://dev-winwins.net/api",
-        "imageServer": "http://images.winwins.org",
+        "imageServer": "http://thumbor.dev-winwins.net",
         "defaultLang": "es",
         "baseLang": "es",
         "availableLangs": ["es", "en"],
         "satellizer": {
           "facebook": {
-            "clientId": "238862259502342",
+            "clientId": "1082199191794840",
             "scope": "email,public_profile"
           },
           "google": {
