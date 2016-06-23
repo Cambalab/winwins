@@ -116,7 +116,7 @@
             targetEvent: ev,
             clickOutsideToClose:true,
             locals: {
-              users: vm.profile.users,
+              users: vm.profile.users
             }
           })
         };
@@ -528,6 +528,7 @@
                 grupo.createComment(vm.post.id, vm.comment.content, vm.comment.media_id, vm.comment.media_type, vm.comment.media_path)
                 .then(function(data){
                   $mdDialog.hide(data);
+                  vm.post.comments.push(vm.comment);
                 });
               });
             }

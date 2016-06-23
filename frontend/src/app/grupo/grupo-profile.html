@@ -264,7 +264,7 @@
                         </div>
                         
                         <div layout="column" ng-if="grupo.profile.already_joined" class="no-padding">
-                          <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
+                          <h3 class="title-destacado" ng-show="grupo.profile.winwins.length > 0" translate>WINWINS VINCULADOS AL GRUPO</h3>
                           <div ng-repeat="item in grupo.profile.winwins" ng-show="true">
                             <md-card>
                               <img ng-src="{{grupo.imageServer}}/130x/{{item.image}}" alt="" class="md-card-img"/>
@@ -285,7 +285,7 @@
                           </div>
                         </div>
                         <md-list ng-cloak class="no-padding">
-                          <h3 class="title">
+                          <h3 class="title" ng-if="grupo.profile.users.length > 0">
                             <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'MIEMBROS' | translate }}
                           </h3>
                           <md-list-item ng-repeat="miembro in grupo.profile.users | limitTo: 5">
@@ -309,7 +309,7 @@
               </md-tab-body>
             </md-tab>
 
-            <md-tab md-on-select="grupo.show_box_muro = false">
+            <md-tab md-on-select="grupo.show_box_muro = false" ng-if="grupo.profile.winwins.length > 0">
               <md-tab-label>
                 <md-icon md-svg-icon="assets/images/icon-mis-winwins.svg"></md-icon>
               </md-tab-label>
