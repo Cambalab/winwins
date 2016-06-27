@@ -38,10 +38,10 @@
     $authProvider.twitter(ENV.satellizer.twitter);
 
     // Google Analytics
-    AnalyticsProvider.setAccount([
-       { tracker: 'UA-79951335-2', name: "tracker1" }
-    ]);
+    AnalyticsProvider.setAccount('UA-79951335-2');
     AnalyticsProvider.trackPages(true);
+    AnalyticsProvider.useAnalytics(false);
+    AnalyticsProvider.setDomainName('http://dev-winwins.net');
 
     // angular-loading-bar
     cfpLoadingBarProvider.includeSpinner = true;

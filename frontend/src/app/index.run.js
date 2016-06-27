@@ -6,7 +6,7 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, $rootScope, gettextCatalog, ENV) {
+  function runBlock($log, $rootScope, gettextCatalog, ENV, Analytics) {
 
     var changeLang = function(event, lang) {
       gettextCatalog.setCurrentLanguage(lang);
