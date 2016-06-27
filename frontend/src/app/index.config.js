@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider, amDatePickerConfigProvider) {
+  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider, amDatePickerConfigProvider, AnalyticsProvider) {
 
     // Enable log
     var debug = true;
@@ -36,6 +36,12 @@
     $authProvider.google(ENV.satellizer.google);
     $authProvider.yahoo(ENV.satellizer.yahoo);
     $authProvider.twitter(ENV.satellizer.twitter);
+
+    // Google Analytics
+    AnalyticsProvider.setAccount([
+       { tracker: 'UA-79951335-2', name: "tracker1" }
+    ]);
+    AnalyticsProvider.trackPages(true);
 
     // angular-loading-bar
     cfpLoadingBarProvider.includeSpinner = true;
