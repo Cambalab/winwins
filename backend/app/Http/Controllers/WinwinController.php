@@ -832,8 +832,6 @@ class WinwinController extends Controller {
 
 	}
 
-
-
 	public function closeWinwin(Request $request, $id) {
         $user = User::find($request['user']['sub']);
         $winwin = Winwin::find($id);
@@ -855,7 +853,6 @@ class WinwinController extends Controller {
         }
 
 	}
-
 
 	public function create() {
 		//

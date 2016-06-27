@@ -295,6 +295,21 @@
             vm.post.media_path = video;
           });
         };
+
+        vm.close = function() {
+          $mdDialog.show({
+            controller: ModalCloseController,
+            controllerAs: 'vm',
+            templateUrl: 'app/grupo/modal-close.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_group: vm.grupo
+            }
+          })
+          .then(function(data) {
+          });
+        }
     }
 
     /** @ngInject */
@@ -390,6 +405,21 @@
     }
 
     /** @ngInject */
+    function ModalCloseController(current_group, $mdDialog, grupo) {
+      var vm = this;
+
+      vm.close = function() {
+        grupo.close(current_group.id, vm.reason).then(function(data) {
+           $mdDialog.hide(data);
+        });
+      }
+
+      vm.cancel = function() {
+        $mdDialog.cancel();
+      }
+    }
+
+    /** @ngInject */
     function ModalVideoPostController($mdDialog) {
         var vm = this;
 
@@ -439,6 +469,11 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
         $scope.fileName='';
+        var vm = this;
+
+        $scope.resizeImageContainer = function() {
+          $scope.imageDirective = "hola";
+        }
 
         $scope.handleFileSelect = function(evt) {
           var file=evt.files[0];

@@ -87,6 +87,7 @@ Route::get('api/groups/search', ['uses' => 'GroupController@search']);
 Route::get('api/groups/join/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@join']);
 Route::get('api/groups/left/{id}', ['middleware' => 'auth', 'uses' => 'GroupController@left']);
 Route::post('api/groups/upload', ['middleware' => 'auth', 'uses' => 'GroupController@storeImage']);
+Route::post('api/groups/{id}/close', ['middleware' => 'auth', 'uses' => 'GroupController@closeGroup']);
 Route::get('api/groups/{id}/add_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@addWinwin']);
 Route::get('api/groups/{id}/remove_winwin/{winwin_id}', ['middleware' => 'auth', 'uses' => 'GroupController@removeWinwin']);
 Route::post('api/groups/{id}/conversation', ['middleware' => 'auth', 'uses' => 'GroupController@conversation']);

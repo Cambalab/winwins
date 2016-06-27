@@ -561,6 +561,23 @@ class GroupController extends Controller {
         }
 	}
 
+    public function closeGroup(Request $request, $id) {
+        $user = User::find($request['user']['sub']);
+        $group = Group::find($id);
 
+        $request_body = $request->input('body');
+
+        if($user->id == $group->user_id) {
+            DB::transaction(function() use ($group, $user, $request_body) {
+                $group->canceled = 1;
+                $group->save();
+            });
+
+            return response()->json(['message' => 'group_closed'], 200);
+        } else {
+            return response()->json(['message' => 'only_group_owner_can_close'], 400);
+        }
+
+    }
 
 }

@@ -36,6 +36,10 @@
        return Restangular.all('groups').post(grupo);
     };
 
+    _grupo.close = function(id, reason) {
+     return Restangular.one('group', id).customPOST({body: reason}, 'close', undefined, undefined);
+    }
+
     _grupo.uploadImage = function(data, name) {
       var fd = new FormData();
       fd.append('file', data, name);

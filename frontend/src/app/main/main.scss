@@ -229,8 +229,7 @@ md-menu-content {
   .cropArea {
     background: #E4E4E4;
     overflow: hidden;
-    width:500px;
-    height:350px;
+
     @media (max-width: 960px) {
       max-width: 500px;
       width: auto;

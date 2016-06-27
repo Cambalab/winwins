@@ -255,9 +255,16 @@
                                 </md-button>
                               </p>
                         </div>
+                        <div class="content-bg" ng-if="grupo.profile.is_creator">
+                          <p>
+                            <md-button ng-href ng-click="grupo.close()" class="no-padding">
+                              <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Cancelar Grupo
+                            </md-button>
+                          </p>
+                        </div>
                         <div class="content-bg" ng-if="grupo.profile.interests.length > 0">
                           <h4>Categorías: </h4>
-                          {{grupo.formattedCategories(grupo.profile.interests)}}
+                            {{grupo.formattedCategories(grupo.profile.interests)}}
                           <ul>
                             <li ng-repeat="category in grupo.profile.interests">{{category.description}}</li>
                           </ul>
@@ -309,14 +316,17 @@
               </md-tab-body>
             </md-tab>
 
-            <md-tab md-on-select="grupo.show_box_muro = false" ng-if="grupo.profile.winwins.length > 0">
+            <md-tab md-on-select="grupo.show_box_muro = false">
               <md-tab-label>
                 <md-icon md-svg-icon="assets/images/icon-mis-winwins.svg"></md-icon>
               </md-tab-label>
               <md-tab-body>
-                <div layout="column" ng-show="grupo.profile.already_joined">
+                <div layout="column" ng-if="grupo.profile.winwins.length > 0">
                   <h3 class="title-destacado" translate>WINWINS DEL GRUPO</h3>
                   <acme-highlighted items="grupo.profile.winwins" icon="'icon-highlighted'"></acme-highlighted>
+                </div layout="column" ng-if="grupo.profile.winwins.length == 0">
+                  <h3 class="title-destacado" translate>AUN NO HAY WINWINS VINCULADOS AL GRUPO</h3>
+                <div>
                 </div>
               </md-tab-body>
             </md-tab>
