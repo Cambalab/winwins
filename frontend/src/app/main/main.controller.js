@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce) {
+  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -31,7 +31,11 @@
     });
 
     vm.isAuthenticated = function() {
-      return $auth.isAuthenticated();
+      var userIsAuthenticated = $auth.isAuthenticated();
+      //TODO acceso global a id de usuario if (userIsAuthenticated) {
+      //   Analytics.set('&uid', "test");
+      // }
+      return userIsAuthenticated;
     };
 
     vm.loadingDestacados = false;
