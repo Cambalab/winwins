@@ -43,7 +43,7 @@
                                     trackEvent: true 
                                 });
     AnalyticsProvider.trackPages(true);
-    AnalyticsProvider.setDomainName('http://dev-winwins.net/#/');
+    AnalyticsProvider.setDomainName('http://dev-winwins.net');
 
     // angular-loading-bar
     cfpLoadingBarProvider.includeSpinner = true;
