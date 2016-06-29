@@ -1,4 +1,4 @@
-<section class="acme-video" layout ng-if="!main.isAuthenticated()">
+f<section class="acme-video" layout ng-if="!main.isAuthenticated()">
   <div class="pic"></div>
   <div class="signup" flex="30" layout="column" layout-align="center center" hide show-gt-sm>
     <img src="assets/images/home-video-login.svg" alt="" />
@@ -42,53 +42,8 @@
 
 <acme-highlighted items="main.destacados" hide-gt-sm viewmore="true"></acme-highlighted>
 
-<div class="menu-caterogias">
-  <md-menu md-offset="0 0" md-position-mode="target-right target" class="menu-caterogias-btn">
-    <md-button aria-label="Open demo menu" ng-click="$mdOpenMenu($event)">
-      {{'Ver winwins por categoria' | translate }} <md-icon md-menu-origin>arrow_drop_down</md-icon>
-    </md-button>
-    <md-menu-content width="7">
-      <md-menu-item ng-repeat="item in main.interests">
-        <md-button>
-          <md-checkbox md-no-ink aria-label="Checkbox No Ink" class="md-primary" ng-checked="main.isChecked(item.id)" ng-click="main.doCategories(item.id)">
-            <span md-menu-align-target></span> {{item.description}}
-          </md-checkbox>
-        </md-button>
-      </md-menu-item>
-    </md-menu-content>
-  </md-menu>
-</div>
-<md-tabs md-dynamic-height class="acme-tabs hide show-gt-sm">
-  <md-tab id="tab1" ng-click="main.doFilter('select')">
-    <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-highlighted.svg"></md-icon>{{'Destacados' | translate }}</md-tab-label>
-    <md-tab-body>
-    </md-tab-body>
-  </md-tab>
-  <md-tab id="tab2" ng-click="main.doFilter('popular')">
-    <md-tab-label><md-icon>whatshot</md-icon>{{'Populares' | translate }}</md-tab-label>
-    <md-tab-body>
-    </md-tab-body>
-  </md-tab>
-  <md-tab id="tab3" ng-click="main.doFilter('last')">
-    <md-tab-label><md-icon>access_time</md-icon>{{ 'Recientes' | translate }}</md-tab-label>
-    <md-tab-body>
-    </md-tab-body>
-  </md-tab>
-  <md-tab id="tab4" ng-click="main.doFilter('finishing')">
-    <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-por-terminar.svg"></md-icon>{{' Por terminar' | translate }}</md-tab-label>
-    <md-tab-body>
-    </md-tab-body>
-  </md-tab>
-  <md-tab id="tab5" ng-click="main.doFilter('success')">
-    <md-tab-label><md-icon md-svg-src="assets/images/icon-tab-concretados.svg"></md-icon>{{'Concretados' | translate }}</md-tab-label>
-    <md-tab-body>
-    </md-tab-body>
-  </md-tab>
-</md-tabs>
-
 <acme-highlighted items="main.destacados" title="main.destacadosTitle" icon="'icon-concretados'" viewmore="true" loading="main.loadingDestacados" class="acme-tabs hide show-gt-sm"></acme-highlighted>
 
-<acme-miembro items="main.miembros"></acme-miembro>
 <acme-partner items="main.partners"></acme-partner>
 <acme-sponsor items="main.sponsors" url="{{imageServer}}"></acme-sponsor>
 <acme-contador items="main.contador"></acme-contador>
