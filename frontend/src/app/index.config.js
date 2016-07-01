@@ -38,13 +38,21 @@
     $authProvider.twitter(ENV.satellizer.twitter);
 
     // Google Analytics
-    AnalyticsProvider.setAccount({  
-                                    tracker: 'UA-79951335-2', 
-                                    trackEvent: true 
-                                });
-    AnalyticsProvider.trackPages(true);
-    AnalyticsProvider.enterDebugMode(true);
-    AnalyticsProvider.setDomainName('dev-winwins.net');
+    if(ENV.name === 'prod') {
+        AnalyticsProvider.setAccount({  
+                                        tracker: 'UA-79951335-1', 
+                                        trackEvent: true 
+                                    });
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.setDomainName('winwins.org');
+    } else {
+        AnalyticsProvider.setAccount({  
+                                        tracker: 'UA-79951335-2', 
+                                        trackEvent: true 
+                                    });
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.setDomainName('dev-winwins.net');
+    }
 
     // angular-loading-bar
     cfpLoadingBarProvider.includeSpinner = true;
