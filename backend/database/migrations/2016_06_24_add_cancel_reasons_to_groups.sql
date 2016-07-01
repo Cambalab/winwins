@@ -1,1 +1,0 @@
-ALTER TABLE groups ADD COLUMN `canceled_reason` mediumtext COLLATE utf8_unicode_ci
