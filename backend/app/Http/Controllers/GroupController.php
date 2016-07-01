@@ -570,6 +570,7 @@ class GroupController extends Controller {
         if($user->id == $group->user_id) {
             DB::transaction(function() use ($group, $user, $request_body) {
                 $group->canceled = 1;
+                $group->canceled_reason = $request_body;
                 $group->save();
             });
 
