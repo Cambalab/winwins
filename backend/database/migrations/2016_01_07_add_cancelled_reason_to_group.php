@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class addCanceledReasonToGroup extends Migration
+class AddCanceledReasonToGroup extends Migration
 {
     /**
      * Run the migrations.
