@@ -146,7 +146,7 @@ class PostController extends Controller {
 	public function comment(Request $request, $id) {
         $user = User::find($request['user']['sub']);
         $post = Post::find($id);
-        $comment = new Post;
+        $comment = new Post();
 
         DB::transaction(function() use ($request, $post, $user, $comment) {
             $comment->reference_id = $post->id;
@@ -286,7 +286,7 @@ class PostController extends Controller {
         $post = Post::find($id);
         $winwin = Winwin::find($post->reference_id);
         $post_user = $post->user;
-	$post->media;
+	    $post->media;
         $post_user->detail;
         Log::info($post);
         return view('posts.view', [

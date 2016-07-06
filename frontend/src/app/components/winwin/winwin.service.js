@@ -145,6 +145,14 @@
       return Restangular.one('polls', id).remove();
     }
 
+    _winwin.reportWinwin = function(report) {
+       return Restangular.one('report/create').customPOST({ 
+        reference_id: report.winwinId,
+        type: report.type,
+        reason: report.report_reason  
+      }, undefined, undefined, undefined);
+    }
+
     return _winwin;
   }
 

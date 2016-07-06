@@ -143,7 +143,7 @@
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
                         <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>
-                        <div hide><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>
+                        <div ng-click="winwin.reportWinwin()"><h3>Reportar:</h3> <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></p></div>
                       </div>
                       <div class="slide-categorias content-bg" layout="column" layout-align="center center" layout-padding>
                         <h4>Categorías:</h4>
@@ -432,7 +432,7 @@
                     </md-button>
                   </p>
                 </div>
-                <div class="content-bg" ng-show="false">
+                <div class="content-bg" ng-click="winwin.reportWinwin()">
                   <p><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin</p>
                 </div>
               </div>

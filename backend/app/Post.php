@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model {
 
-//
     public function user() {
         return $this->belongsTo('Winwins\User');
     }
@@ -40,6 +39,5 @@ class Post extends Model {
     public function votes() {
         return $this->hasMany('Winwins\PostVote');
     }
-
 
 }
