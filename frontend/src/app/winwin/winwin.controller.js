@@ -27,7 +27,6 @@
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
       vm.winwin = winwin_data;
-      vm.winwin.closing_date = new Date(vm.winwin.closing_date);
       vm.polls = vm.winwin.polls;
 
       $window._.each(vm.polls, function(poll) {
