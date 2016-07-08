@@ -711,6 +711,7 @@
   function ModalPollController(winwin, current_winwin, $mdDialog, $timeout) {
     var vm = this;
     vm.pollOk = false
+    vm.poll.selected = false;
 
     vm.submitPoll = function() {
       winwin.createPoll(current_winwin.id, vm.poll).then(function(data) {
