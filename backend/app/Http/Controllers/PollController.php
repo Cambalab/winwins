@@ -23,6 +23,9 @@ use Illuminate\Http\Request;
 
 class PollController extends Controller {
 
+    const WINWIN_TYPE = "WINWIN";
+    const GROUP_TYPE = "GROUP";
+
     public function __construct() {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
@@ -33,7 +36,10 @@ class PollController extends Controller {
 	}
 
 	public function show(Request $request, $id) {
-        $poll = Poll::find($id);
+
+        $type = $request->input('type');
+        $queryArray = ['id' => $id, 'type' => $type];
+        $poll = Poll::where($queryArray)->first();
 
         $user = false;
 		$token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
@@ -71,10 +77,10 @@ class PollController extends Controller {
 
 	public function createPoll(Request $request, $id) {
         $user = User::find($request['user']['sub']);
-        $winwin = Winwin::find($id);
+        $type = $request->input('type');
 
         $poll = new Poll;
-        DB::transaction(function() use ($request, $poll, $user, $winwin) {
+        DB::transaction(function() use ($request, $poll, $user, $id, $type) {
 
             if($request->has('closedate')) {
                 $arr = explode(".", $request->input('closedate'), 2);
@@ -83,7 +89,8 @@ class PollController extends Controller {
             }
 
             $poll->user_id = $user->id;
-            $poll->winwin_id = $winwin->id;
+            $poll->reference_id = $id;
+            $poll->type = $type;
             $poll->name = $request->input('name');
             $poll->question = $request->input('question');
             $poll->selected = $request->input('selected');
@@ -115,9 +122,7 @@ class PollController extends Controller {
                 $answer->poll_id = $poll->id;
                 $answer->content = $request->input('option_4');
                 $answer->save();
-            }
-
-                 
+            }                 
            
         });
 
@@ -242,10 +247,6 @@ class PollController extends Controller {
         });
 
 	}
-
-
-
-
 }
 
 

@@ -104,6 +104,26 @@
       .customPOST(fd, 'upload', undefined, {'Content-Type': undefined})
     }
 
+    _grupo.createPoll = function(id, poll) {
+     poll.type = "GROUP";
+     return Restangular.one('winwins', id).customPOST(poll, 'poll', undefined, undefined);
+    }
+
+    _grupo.getPoll = function(id) {
+      return Restangular.one('polls', id).customGET("poll", {
+        type: "GROUP"
+      });
+    }
+
+    _grupo.votePoll = function(poll) {
+      return Restangular.one('poll', poll.id).one('vote', poll.selected_answer).customPOST({positive: true}, undefined, undefined, undefined);
+    }
+
+    _grupo.removePoll = function(id) {
+      return Restangular.one('polls', id).remove();
+    }
+
+
     return _grupo;
   }
 

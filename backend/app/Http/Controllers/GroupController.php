@@ -223,6 +223,10 @@ class GroupController extends Controller {
             $winwin->users_already_joined = $users_count;
         });
 
+        $group->polls = DB::table('polls')
+            ->where('type', '=', 'GROUP')
+            ->where('reference_id', '=', $group->id)->get();
+
         $group->sponsors;
 
         $group->interests = DB::table('interests')

@@ -22,6 +22,10 @@ class Group extends Model {
         return $this->belongsToMany('Winwins\Sponsor', 'sponsors_groups');
     }
 
+    public function polls() {
+        return $this->hasMany('Winwins\Poll');
+    }
+
     public function interests() {
         return $this->belongsToMany('Winwins\Interest', 'interests_interested','interested_id', 'interest_id');
     }

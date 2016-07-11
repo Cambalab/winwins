@@ -130,11 +130,14 @@
     }
 
     _winwin.createPoll = function(id, poll) {
+     poll.type = "WINWIN";
      return Restangular.one('winwins', id).customPOST(poll, 'poll', undefined, undefined);
     }
 
     _winwin.getPoll = function(id) {
-      return Restangular.one('polls', id).get();
+      return Restangular.one('polls', id).customGET("poll", {
+        type: "WINWIN"
+      });
     }
 
     _winwin.votePoll = function(poll) {

@@ -146,6 +146,60 @@
                       </div>
                     </div>                  
                     <div class="comments">
+
+                      <div class="row" ng-repeat="poll in grupo.polls"> 
+                        <md-card class="md-whiteframe-7dp" ng-show="!poll.data.has_answered && grupo.profile.already_joined">
+                          <div class="card-labels">
+                            <md-button ng-if="grupo.profile.is_creator" ng-click="grupo.removePoll(poll, $index)" class="md-icon-button" aria-label="eliminar">
+                              <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                            </md-button>
+                          </div>
+                          <md-card-content class="encuesta">
+                            <span class="card-title center">
+                                <h4>{{poll.question}}</h4>
+                            </span>
+                            <ul class="collection">
+                              <li class="collection-item dismissable black-text" ng-repeat="answer in poll.data.answers">
+                                <div>
+                                  <md-progress-linear md-mode="determinate" value="{{grupo.percentage_votes(poll, answer)}}"></md-progress-linear>
+                                  <span class="h7 grey-text"> {{answer.content}}</span>
+                                  <span class="secondary-content">
+                                    <input class="with-gap" name="poll_{{poll.id}}" type="radio" ng-value="answer.id" ng-checked="poll.selected_answer" ng-model="poll.selected_answer" ng-checked="true"/>
+                                  </span>
+                                </div>
+                              </li>
+                            </ul>
+                          </md-card-content>
+                          <button class="btn-large bt-green col-xs-12" ng-click="grupo.votePoll(poll)">Votar</button>
+                        </md-card>
+
+                        <md-card class="md-whiteframe-7dp" ng-show="poll.data.has_answered">
+                          <div class="card-labels">
+                            <md-button  ng-click="grupo.removePoll(poll, $index)" class="md-icon-button" aria-label="eliminar">
+                              <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
+                            </md-button>
+                          </div>
+                          <md-card-content class="encuesta">
+                            <span class="card-title center">
+                                <h4>{{poll.question}}</h4>
+                            </span>
+                            <ul class="collection">
+                              <div ng-repeat="answer in poll.data.answers">
+                                  <div class="progress">
+                                    <md-progress-linear md-mode="determinate" value="{{ grupo.percentage_votes(poll, answer) }}"></md-progress-linear>
+                                  </div>
+                                  <li class="collection-item dismissable black-text">
+                                      <div>
+                                          <span class="h7 grey-text"> {{answer.content}}</span>
+                                          <strong class="badge green white-text">{{answer.vote_count}}</strong>
+                                      </div>
+                                  </li>
+                              </div>
+                            </ul>
+                          </md-card-content>
+                        </md-card>
+                      </div>
+
                       <div ng-repeat="item_post in grupo.posts">
                         <md-card class="md-whiteframe-7dp" >
                           <div class="card-labels">
@@ -255,6 +309,13 @@
                                 </md-button>
                               </p>
                         </div>
+                        <div class="content-bg" ng-if="grupo.profile.is_creator">
+                          <p class="crear-encuesta">
+                            <md-button ng-href ng-click="grupo.showModalPollDialog()" class="no-padding">
+                              <md-icon md-svg-src="assets/images/icon-poll.svg"></md-icon>Crear Encuesta
+                            </md-button>
+                          </p>
+                        </div>                        
                         <div class="content-bg" ng-if="grupo.profile.is_creator">
                           <p>
                             <md-button ng-href ng-click="grupo.close()" class="no-padding">

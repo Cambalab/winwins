@@ -69,6 +69,8 @@ Route::post('api/winwins/{id}', ['middleware' => 'auth', 'uses' => 'WinwinContro
 
 Route::post('api/poll/{id}/vote/{answerId}', ['middleware' => 'auth', 'uses' => 'PollController@votePoll']);
 
+Route::get('api/polls/{id}/poll', ['middleware' => 'auth', 'uses' => 'PollController@show']);
+
 
 Route::resource('api/posts', 'PostController');
 Route::resource('api/stories', 'StoryController');

@@ -710,6 +710,7 @@
   /** @ngInject */
   function ModalPollController(winwin, current_winwin, $mdDialog, $timeout) {
     var vm = this;
+    vm.poll = {};
     vm.pollOk = false
     vm.poll.selected = false;
 

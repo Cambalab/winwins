@@ -27,19 +27,72 @@
                       });
                 });
             });
+
+            vm.polls = vm.profile.polls;
+
+            $window._.each(vm.polls, function(poll) {
+              grupo.getPoll(poll.id).then(function(data) {
+                poll.data = data;
+              });
+            });
         });
 
       sponsor.getList().then(function(sponsor_data) {
         vm.sponsors = sponsor_data;
       });
 
-        account.getProfile().then(function(data) {
-          vm.account = data.profile;
+      account.getProfile().then(function(data) {
+        vm.account = data.profile;
 
-          vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
-            return notification.type == "CAMPANADA" && notification.object_id == vm.groupId; 
-          });
+        vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
+          return notification.type == "CAMPANADA" && notification.object_id == vm.groupId; 
         });
+      });
+
+        vm.votePoll = function(poll) {
+          grupo.votePoll(poll).then(function() {
+            $window._.each(vm.polls, function(poll) {
+              grupo.getPoll(poll.id).then(function(data) {
+                poll.data = data;
+              });
+            });
+          });
+        }
+
+        vm.removePoll = function(poll, index) {
+          grupo.removePoll(poll.id).then(function() {
+            vm.polls.splice(index, 1);
+          });
+        }
+
+        vm.percentage_votes = function(poll, answer) {
+          if(!poll.data.total_votes) {
+            return 0;
+          }
+          var result = (answer.vote_count * 100 / poll.data.total_votes);
+          return result;
+        };
+
+        vm.showModalPollDialog = function() {
+          $mdDialog.show({
+            controller: ModalPollController,
+            controllerAs: 'vm',
+            templateUrl: 'app/winwin/modal-poll.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true,
+            locals: {
+              current_group: vm.profile
+            }
+          })
+          .then(function(data) {
+            vm.polls.push(data);
+            $window._.each(vm.polls, function(poll) {
+              grupo.getPoll(poll.id).then(function(data) {
+                poll.data = data;
+              });
+            });
+          });
+        }
 
         vm.submitPost = function() {
           if (vm.post.content == '' && !vm.post.media_path && !vm.cover_post_image) {
@@ -387,6 +440,23 @@
     /** @ngInject */
     function MasDetalleController($scope, grupo) {
         $scope.grupo = grupo;
+    }
+
+    /** @ngInject */
+    function ModalPollController(grupo, current_group, $mdDialog, $timeout) {
+      var vm = this;
+      vm.pollOk = false;
+      vm.poll = {};
+      vm.poll.selected = false;
+
+      vm.submitPoll = function() {
+        grupo.createPoll(current_group.id, vm.poll).then(function(data) {
+          vm.pollOk = true;
+          $timeout(function() {
+            $mdDialog.hide(data);  
+          }, 3000);
+        });
+      }
     }
 
     /** @ngInject */

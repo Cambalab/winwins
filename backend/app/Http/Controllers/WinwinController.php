@@ -243,8 +243,9 @@ class WinwinController extends Controller {
             $winwin->active_sponsors = $active_sponsors;
         }
 
-        $winwin->polls;
-
+        $winwin->polls = DB::table('polls')
+            ->where('type', '=', 'WINWIN')
+            ->where('reference_id', '=', $winwin->id)->get();
 
         $winwin->previous_id = Winwin::where('id', '<', $winwin->id)->max('id');
         $winwin->next_id = Winwin::where('id', '>', $winwin->id)->min('id');

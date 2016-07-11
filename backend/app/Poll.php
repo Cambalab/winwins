@@ -10,4 +10,12 @@ class Poll extends Model {
         return $this->hasMany('Winwins\PollAnswer');
     }
 
+    public function scopeWinwins($query) {
+        return $query->where('type', 'WINWIN');
+    }
+
+    public function scopeGroups($query) {
+        return $query->where('type', 'GROUP');
+    }
+
 }
