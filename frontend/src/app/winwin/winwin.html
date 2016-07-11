@@ -212,7 +212,7 @@
               </div>
               <div class="creadores" layout="row">
                 <div hide show-xs flex>
-                  <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" />
+                  <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded" ui-sref="home.public-profile({userId: winwin.winwin.user.id})"/>
                   <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
                   <strong>CREADOR</strong>
                 </div>
