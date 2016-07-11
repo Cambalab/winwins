@@ -267,7 +267,7 @@
             }
           })
           .then(function(data) {
-            // TODO Ver que informacion actualizar una vez que uno abandono el grupo
+            vm.profile.already_joined = false;
           });
         }
 
@@ -357,7 +357,7 @@
             parent: angular.element($document.body),
             clickOutsideToClose:true,
             locals: {
-              current_group: vm.grupo
+              current_group: vm.profile
             }
           })
           .then(function(data) {

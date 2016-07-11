@@ -302,7 +302,7 @@
                     </div>
                     <div class="aside" hide show-gt-sm>
                       <div layout-align-gt-sm="start stretch" layout-align="center stretch" layout-padding layout="column">               
-                        <div class="content-bg">
+                        <div class="content-bg" ng-if="!grupo.profile.is_creator && grupo.profile.already_joined">
                               <p>
                                 <md-button ng-href ng-click="grupo.left()" class="no-padding">
                                   <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Grupo
