@@ -1,4 +1,4 @@
-f<section class="acme-video" layout ng-if="!main.isAuthenticated()">
+<section class="acme-video" layout ng-if="!main.isAuthenticated()">
   <div class="pic"></div>
   <div class="signup" flex="30" layout="column" layout-align="center center" hide show-gt-sm>
     <img src="assets/images/home-video-login.svg" alt="" />
@@ -26,6 +26,12 @@ f<section class="acme-video" layout ng-if="!main.isAuthenticated()">
       </md-button>
     </div>
   </div>
+  <!-- Facebook share main url with video -->
+  <meta property="og:url" content="http://winwins.org/#/"/>
+  <meta property="og:title" content="Winwins"/>
+  <meta property="og:description" content="Convenios con fines sociales"/>
+  <meta property="og:video" content="https://www.youtube.com/embed/gyyTDPe8TwY?autoplay=0"/>
+
   <div class="share" flex="30" layout="column" layout-align="start end" hide show-gt-sm>
     <h1 translate>compartir es sumar</h1>
     <div class="share-social-media">
