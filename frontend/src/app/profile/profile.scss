@@ -150,6 +150,12 @@ md-toolbar.md-tall.md-warn.ng-scope {
           padding-bottom: 10px;
         }
       }
+      &.habilidades {
+        padding-left: 2px;
+        width: 95%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
     }
     md-input-container.md-has-icon {
       padding-left: 36px;
@@ -488,6 +494,13 @@ md-card.public-profile {
       }
     }
   }
+
+  .habilidades {
+    padding: 15px;
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
   .bio {
     margin: 10px 20px;
     h3 {

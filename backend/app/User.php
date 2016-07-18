@@ -32,6 +32,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('Winwins\Winwin', 'winwins_users')->withPivot('creator', 'moderator');
     }
 
+    public function skills() {
+        return $this->belongsToMany('Winwins\Skill', 'user_skills');
+    }
+
     public function groups() {
         return $this->belongsToMany('Winwins\Group', 'groups_users')->withPivot('moderator');
     }

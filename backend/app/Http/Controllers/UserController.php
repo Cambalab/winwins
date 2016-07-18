@@ -16,6 +16,8 @@ use Winwins\UserDetail;
 use Winwins\Model\Repository\UserRepository;
 use Winwins\Post;
 use Winwins\Media;
+use Winwins\UserSkills;
+use Winwins\Skill;
 use Winwins\InterestsInterested;
 use Winwins\Message\Mailer;
 use Winwins\Message\Message;
@@ -126,6 +128,12 @@ class UserController extends Controller {
             ->where('type', '=', 'USER')
             ->where('interested_id', '=', $user->id)
             ->select('interests.name','interests.description', 'interests.id')
+            ->get();
+
+            $userDetail->skills = DB::table('skills')
+            ->join('user_skills', 'skills.id', '=', 'user_skills.skill_id')
+            ->where('user_id', '=', $user->id)
+            ->select('skills.id', 'skills.name as text')
             ->get();
 
             //$userDetail->followers = $user->followers;
@@ -286,22 +294,28 @@ class UserController extends Controller {
             $userDetail->photo = $request->input('photo');
             $user->photo = $request->input('photo');
         }
+
 		if($request->has('cover_photo')) {
             $userDetail->cover_photo = $request->input('cover_photo');
             $user->cover_photo = $request->input('cover_photo');
         }
+
 		if($request->has('lastname')) {
             $userDetail->lastname = $request->input('lastname');
         }
+
 		if($request->has('birthdate')) {
             $userDetail->birthdate = $request->input('birthdate');
         }
+
 		if($request->has('about')) {
             $userDetail->about = $request->input('about');
         }
+
 		if($request->has('interests')) {
             $userDetail->interests = $request->input('interests');
         }
+
         if($request->has('interests_list')){
 
             DB::table('interests_interested')->where('type', 'USER')->where('interested_id', $user->id)->delete();
@@ -314,24 +328,57 @@ class UserController extends Controller {
                 ]);
             }
         }
+
+        if($request->has('skills_list')) {
+            $skills = $request->input('skills_list');
+
+            DB::table('user_skills')->where('user_id', $user->id)->delete();
+
+            foreach ($skills as $skill) {
+                if(!isset($skill["id"])){
+                    $newSkill = new Skill();
+                    $newSkill->name = $skill["text"];
+                    $newSkill->save();
+                    $userSkills = UserSkills::firstOrCreate([
+                        'skill_id' => $newSkill->id,
+                        'user_id' => $user->id
+                    ]);
+
+                } else {
+                    $userSkills = UserSkills::firstOrCreate([
+                        'skill_id' => $skill['id'],
+                        'user_id' => $user->id
+                    ]);
+                }
+
+                $userSkills->save();
+            }
+        }
+
 		if($request->has('language_code')) {
             $userDetail->language_code = $request->input('language_code');
         }
+
 		if($request->has('invite_ww')) {
             $userDetail->invite_ww = $request->input('invite_ww');
         }
+
 		if($request->has('ww_to_finish')) {
             $userDetail->ww_to_finish = $request->input('ww_to_finish');
         }
+
 		if($request->has('invite_group')) {
             $userDetail->invite_group = $request->input('invite_group');
         }
+
 		if($request->has('not_message')) {
             $userDetail->not_message = $request->input('not_message');
         }
+
 		if($request->has('email_notification')) {
             $userDetail->email_notification = $request->input('email_notification');
         }
+
 		if($request->has('private')) {
             $userDetail->private = $request->input('private');
         }

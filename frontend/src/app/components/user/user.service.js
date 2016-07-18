@@ -30,6 +30,10 @@
       return Restangular.one('users').customPOST({contact:contact}, 'sent_mail_contact', undefined, undefined);
     }
 
+    _user.getSkills = function(queryText) {
+      return Restangular.all('skills').customPOST({ q: queryText }, "search", undefined, undefined);
+    }
+
     return _user;
   }
 

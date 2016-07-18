@@ -50,6 +50,16 @@
         <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a></p>
       </div>
     </div>
+    
+    <div layout="row" layout-xs="column" ng-show="(!profile.user.private && profile.user.skills.length > 0) || profile.user.myself">
+      <div flex class="intereses">
+        <h4 translate>Habilidades</h4>
+        <md-chips>
+          <md-chip ng-repeat="skill in profile.user.skills">{{skill.text}}</md-chip>
+        </md-chips>
+      </div>
+    </div>
+
     <div layout="column" ng-show="(!profile.user.private && profile.enqueparticipo.length > 0) || profile.user.myself">
       <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
       <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'"></acme-highlighted>

@@ -6,7 +6,7 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController(account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document, winwin) {
+  function ProfileController(account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document, winwin, $log) {
     var vm = this;
 
     if (!$auth.isAuthenticated()) {
@@ -16,7 +16,27 @@
     vm.imageServer = ENV.imageServer;
     vm.loading = true;
 
-    vm.user = {interests_list:[]};
+    vm.loadSkills = function(queryText){
+
+      vm.skills = [];
+
+      return user.getSkills(queryText).then(function(skills_data){
+        angular.forEach(skills_data, function(skill){
+          vm.skills.push({
+            id: skill.id,
+            text: skill.name
+          });
+        });
+
+        return vm.skills;
+      });
+
+    }
+
+    vm.user = {
+      interests_list:[],
+      skills_list:[]
+    };
 
     account.getProfile()
     .then(function(data) {
@@ -29,9 +49,12 @@
         if (vm.user.birthdate) {
           vm.user.birthdate = new Date(vm.user.birthdate);
         }
+        
         winwin.getInterests().then(function(data) {
           vm.interests = data;
         });
+
+        vm.user.skills_list = user_data.skills;
 
         vm.loading = false;
       });
