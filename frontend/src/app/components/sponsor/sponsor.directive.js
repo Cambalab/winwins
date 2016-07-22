@@ -15,7 +15,7 @@
         title: '=',
         viewmore: '='
       },
-      controller: ['ENV', SponsorController],
+      controller: SponsorController,
       controllerAs: 'vm',
       bindToController: true
     };
