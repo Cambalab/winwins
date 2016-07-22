@@ -712,10 +712,10 @@ md-menu-content {
     text-align: center;
     margin-bottom: 30px;
     font: 100% $mainHomeFont;
-    font-size: 28px;
+    font-size: 17px;
     color: #fefefe;
     .orange-highlight {
-      font-size: 35px;
+      font-size: 24px;
       color: #da6e23;
     }
   }
@@ -736,6 +736,11 @@ md-menu-content {
     .title {
       margin-left: auto;
       margin-right: auto;
+      font-size: 28px;
+      .orange-highlight {
+        font-size: 35px;
+        color: #da6e23;
+      }
     }
   }
 }

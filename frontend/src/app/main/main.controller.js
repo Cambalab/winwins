@@ -17,6 +17,7 @@
 
     sponsor.getList(0, (w.width() < 481) ? 3 : 3).then(function(data) {
       vm.sponsors = data;
+      vm.sponsorsDestacadosTitle = "SPONSORS DESTACADOS";
     });
     
     sponsor.getMainList().then(function(data) {

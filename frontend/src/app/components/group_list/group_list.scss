@@ -90,8 +90,8 @@
         }
       }
 
-
       .wrap-md-card-img {
+        width: 315px;
         background: #fff;
         height: 150px;
         overflow: hidden;
@@ -102,9 +102,6 @@
       }
       
       @media (min-width: 600px) {
-        .wrap-md-card-img {
-          width: 310px;
-        }
       }
       .card-labels {
         position: absolute;
