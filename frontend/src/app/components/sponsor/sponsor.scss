@@ -1,36 +1,60 @@
 .acme-sponsor {
 
-  height: 332px;
 
+  .sponsors-box {
+    padding-top: 60px;
+    padding-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    img {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  
   .title {
-    margin: auto;
+    margin-left: 40px;
+    margin-right: 40px;
     font: 100% Montserrat,serif;
-    font-size: 35px;
+    font-size: 28px;
     font-weight: bold;
-    color: #e15d48;
+    color: #e45c42;
     background-color: #ffffff;
-    margin-top: 46px;
+    margin-top: 15px;
     text-transform: uppercase;
 
     .orange-highlight {
-      color: #f98224;
-    } 
+      color: #e45c42;
+    }
   }
 
   .subtitle {
+    display: none;
     margin: auto;
     margin-top: 19px;
     margin-bottom: 18px;
     font: 100% Abel,serif;
-    font-size: 18px;
+    font-size: 15px;
     color: #333333;
   }
 
-  .acme-sponsor-body {
-    margin-top: 63px;
-    background: #ffffff;
+  @media (min-width: 600px) {
+    .sponsors-box {
+      padding-top: 60px;
+      padding-bottom: 15px;
+    }
+
+    .title {
+      font-size: 35px;
+      margin-top: 46px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .subtitle {
+      display: inline-block;
+    }
   }
-
-
 
 }

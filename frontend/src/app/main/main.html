@@ -170,12 +170,12 @@
 
 <acme-highlighted items="main.destacados" title="main.destacadosTitle" icon="'icon-concretados'" viewmore="true" loading="main.loadingDestacados" class="acme-tabs"></acme-highlighted>
 <group-list items="main.gruposDestacados" title="main.gruposDestacadosTitle" viewmore="true"></group-list>
-<acme-sponsor items="main.sponsors" url="{{imageServer}}" title="" viewmore="false"></acme-sponsor>
+<acme-sponsor items="main.sponsors" url="{{imageServer}}" title="SPONSORS DESTACADOS" viewmore="false"></acme-sponsor>
 <section class="partners" layout="column" layout-align="center center">
     <span class="title">ALGUNAS DE LAS <span class="orange-highlight">ORGANIZACIONES</span><br>QUE <span class="orange-highlight">CONSTRUYEN</span> JUNTO A WINWINS
     </span>
-    <div class="partners-list" ng-repeat="item in vm.sponsors" layout="row" layout-xs="column" layout-align="space-around center">
-      <img class="partners-image" ng-src="{{vm.imageServer}}/140x67/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
+    <div class="partners-list" ng-repeat="item in main.sponsors" layout="row" layout-xs="column" layout-align="space-around center">
+      <img class="partners-image" ng-src="{{vm.imageServer}}/200x110/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
     </div>
 </section>
 <acme-footer items="main.footer"></acme-footer>

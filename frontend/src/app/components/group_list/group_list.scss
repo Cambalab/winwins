@@ -38,6 +38,7 @@
       margin-top: 46px;
       margin-left: auto;
       margin-right: auto;
+      padding: 20px;
     }
 
     .subtitle {
@@ -88,6 +89,8 @@
           }
         }
       }
+
+
       .wrap-md-card-img {
         background: #fff;
         height: 150px;
@@ -95,6 +98,12 @@
         img {
           display: block;
           margin: 0 auto;
+        }
+      }
+      
+      @media (min-width: 600px) {
+        .wrap-md-card-img {
+          width: 310px;
         }
       }
       .card-labels {
