@@ -14,7 +14,7 @@
                 items: '=',
                 title: '=',
                 viewmore: '=',
-                scroll: '&onScroll',
+                scroll: '&onScroll'
             },
             controller: GroupListController,
             controllerAs: 'vm',
