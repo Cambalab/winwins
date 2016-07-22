@@ -62,9 +62,6 @@ class SponsorController extends Controller {
                 })) > 0;
             }
 
-
-
-
         });
         return $collection;
     }

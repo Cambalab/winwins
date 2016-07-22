@@ -1,15 +1,18 @@
 <md-content class="acme-highlighted">
-  <div class="container">
-    <h1 class="title" ng-if="vm.title">
-      <span>
-        <md-icon md-svg-src="assets/images/{{vm.icon}}.svg"></md-icon>{{vm.title}}
+  <div class="container" layout="column"></div>
+    <div layout="column" class="title-container" layout-align"center center" layout-margin>
+      <span class="title" ng-if="vm.title">
+        {{ vm.title }}
       </span>
-    </h1>
+      <span class="subtitle" ng-if="vm.title">
+        Propuestas para buscar personas y recursos para materializar una idea
+      </span>
+    </div>
     <div layout="row" layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="100px"></md-progress-circular>
     </div>
-    <div layout="row" layout-wrap>
-      <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in vm.items" ng-show="!vm.loading">
+    <div layout="row" class="winwins-container" layout-wrap layout-margin layout-align="space-around center" layout-xs="column">
+      <div ng-repeat="item in vm.items" ng-show="!vm.loading">
         <md-card>
           <md-card-content>
               <div class="wrap-md-card-img">
@@ -40,11 +43,13 @@
               </md-button>
             </div>
           </md-card-actions>
+          <md-card-content class="what-we-do" ng-if="item.what_we_do">
+            {{ item.what_we_do }}
+          </md-card-content>
         </md-card>
       </div>
     </div>
     <div layout="row" layout-align="center center">
-      <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="md-raised md-warn ver-todos" arial-label="see all">{{ '+ Ver todos los winwins' | translate }}</md-button>
+      <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
     </div>
-  </div>
 </md-content>

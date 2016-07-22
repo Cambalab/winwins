@@ -6,26 +6,38 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics) {
+  function MainController($timeout, sponsor, ENV,winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics, grupo) {
     var vm = this;
 
     vm.awesomeThings = [];
     vm.classAnimation = '';
+    vm.imageServer = ENV.imageServer;
 
     var w = angular.element($window);
 
-    sponsor.getList(0, (w.width()<481) ? 3 : 6).then(function(data) {
+    sponsor.getList(0, (w.width() < 481) ? 3 : 3).then(function(data) {
       vm.sponsors = data;
     });
+    
     sponsor.getMainList().then(function(data) {
       vm.partners = data;
     });
-    winwin.getList(0, 'select', (w.width()<481) ? 4 : 6).then(function(data) {
-      vm.destacados = data;
+    
+    winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
+      vm.monthWinwin = data[0];
+      data.shift();
+      vm.destacados = data; 
     });
+
+    grupo.getList(0, 3).then(function(data){
+      vm.gruposDestacados = data;
+      vm.gruposDestacadosTitle = "GRUPOS DESTACADOS";
+    });
+
     miembro.getList(0, (w.width()<481) ? 6 : 12).then(function(data) {
       vm.miembros = data;
     });
+    
     winwin.getInterests().then(function(data) {
       vm.interests = data;
     });
@@ -114,7 +126,7 @@
     };
 
     vm.getIframeSrc = function (videoId) {
-        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
+        return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0&controls=0');
     };
   }
 

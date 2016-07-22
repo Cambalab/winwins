@@ -1,11 +1,15 @@
 <md-content class="group-list">
-  <h1 class="title">
-    <span>
-      <md-icon md-svg-src="assets/images/icon-highlighted.svg"></md-icon>GRUPOS DESTACADOS
+  <div class="container" layout="column"></div>
+  <div layout="column" class="title-container" layout-align"center center" layout-margin>
+    <span class="title" ng-if="vm.title">
+      {{ vm.title }}
     </span>
-  </h1>
-  <div layout="row" layout-wrap>
-    <div flex="100" flex-gt-xs="50" flex-gt-sm="33" ng-repeat="item in items">
+    <span class="subtitle" ng-if="vm.title">
+      <translate>Usuarios unidos para buscar personas y recursos en pos de nuevos winwins</translate>
+    </span>
+  </div>
+  <div layout="row" layout-wrap layout-margin layout-xs="column" layout-align="space-around center" class="groups-container">
+    <div ng-repeat="item in vm.items">
       <md-card ui-sref="home.grupo-profile({groupId: item.id})">
         <md-card-content>
           <div class="wrap-md-card-img">
@@ -22,5 +26,8 @@
         </md-card-actions>
       </md-card>
     </div>
+  </div>
+  <div layout="row" layout-align="center center">
+    <md-button ng-show="vm.viewmore" ui-sref="home.grupo-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
   </div>
 </md-content>

@@ -11,7 +11,9 @@
       restrict: 'E',
       templateUrl: 'app/components/sponsor/sponsor.html',
       scope: {
-        items: '='
+        items: '=',
+        title: '=',
+        viewmore: '='
       },
       controller: ['ENV', SponsorController],
       controllerAs: 'vm',

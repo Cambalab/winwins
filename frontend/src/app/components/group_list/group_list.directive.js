@@ -12,10 +12,13 @@
             templateUrl: 'app/components/group_list/group_list.html',
             scope: {
                 items: '=',
-                scroll: '&onScroll'
+                title: '=',
+                viewmore: '=',
+                scroll: '&onScroll',
             },
             controller: GroupListController,
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            bindToController: true
         };
 
         return directive;
