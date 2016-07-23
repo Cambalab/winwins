@@ -65,7 +65,7 @@
   <div class="quorum-rules-content" layout="column" layout-align="center center" >
     <span class="quorum-rules-subtitle"><translate>ALGUNAS <span class="black-highlight">REGLAS </span> DE WINWINS</translate></span>
     <div layout="row" class="quorum-rules-state" layout-align="space-around center" layout-xs="column" layout-margin>
-      <div class="needed-quorum quorum-box" layout="column">
+      <div class="needed-quorum quorum-box" layout="column" layout-align="center center">
         <md-icon class="quorum-icon" md-svg-src="assets/images/quorum_ico.svg"></md-icon>
         <div class="quorum-box-title">
           Quorum necesario
@@ -78,7 +78,7 @@
           (Cuando se logra, le avisamos a todos)
         </span>
       </div>
-      <div class="unreached-quorum quorum-box" layout="column" layout-align="space-between center">
+      <div class="unreached-quorum quorum-box" layout="column" layout-align="center center">
         <md-icon class="quorum-icon" md-svg-src="assets/images/sin_quorum_ico.svg"></md-icon>
         <span class="quorum-box-title">
           Quorum no alcanzado
@@ -91,7 +91,7 @@
           (Asi, nadie queda pagando)
         </span>
       </div>
-      <div class="reached-quorum quorum-box" layout="column">
+      <div class="reached-quorum quorum-box" layout="column" layout-align="center center">
         <md-icon class="quorum-icon" md-svg-src="assets/images/con_quorum_ico.svg"></md-icon>
         <span class="quorum-box-title">
           Quorum alcanzado
@@ -160,8 +160,8 @@
           {{ main.monthWinwin.what_we_do }}
         </div>
         <div class="month-winwin-buttons" layout="row" layout-align="space-between" layout-wrap>
-          <md-button class="month-winwin-more-details">MAS DETALLES</md-button>
-          <md-button class="month-winwin-go">IR AL WINWIN</md-button>
+          <md-button class="month-winwin-more-details" ng-click="main.showMoreDetailMonthWinwin()">MAS DETALLES</md-button>
+          <md-button class="month-winwin-go" ui-sref="home.winwin({winwinId: main.monthWinwin.id})">IR AL WINWIN</md-button>
         </div>
       </div>  
     </div>

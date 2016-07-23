@@ -129,6 +129,24 @@
     vm.getIframeSrc = function (videoId) {
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0&controls=0');
     };
+
+    vm.showMoreDetailMonthWinwin = function() {
+      $mdDialog.show({
+        controller: MonthWinwinMoreDetailController,
+        templateUrl: 'app/winwin/ver-mas-detalle.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        locals: {
+          winwin: vm.monthWinwin
+        }
+      });
+    }
+  }
+
+  /** @ngInject */
+  function MonthWinwinMoreDetailController($scope, winwin) {
+    $scope.winwin = winwin;
   }
 
   function VideoController($sce){

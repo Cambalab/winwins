@@ -287,7 +287,7 @@ section.acme-video {
     }
 
     .month-winwin-subtitle {
-      margin-top: auto;
+      margin-top: 15px;
       margin-left: auto;
       margin-right: auto;
       font-size: 18px;
@@ -824,6 +824,10 @@ md-sidenav {
     color: #fefefe;
     background-color: #ea6923;
     line-height: 36px;
+    md-icon {
+      margin-left: 10px;
+      margin-top: -2px;
+    }
   }
 
   .main-header-create-winwin-button {
