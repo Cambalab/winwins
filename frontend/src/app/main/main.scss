@@ -110,6 +110,7 @@ section.acme-video {
     @include filter-gradient(#c7c7c7, #ffffff, vertical); // IE6-9
     @include background(linear-gradient(to bottom, #c7c7c7 0%, #e0e0e0 5%,#ffffff 10%));
     text-align: center;
+
     
     p {
       margin-left: 30px;
@@ -131,6 +132,18 @@ section.acme-video {
     }
   }
 
+  @media (min-width: 600px) {
+    .quorum-rules-header {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .quorum-rules-header {
+      margin-bottom: auto;
+    }
+  }
+  
   .quorum-rules-content {
     width: 100%;
     background-color: #e0e0e0; // Old browsers
@@ -213,6 +226,18 @@ section.acme-video {
           text-align: center;
         }
 
+      }
+
+      @media (min-width: 600px) {
+        .quorum-box {
+          width: 220px;
+        }
+      }
+
+      @media (min-width: 960px) {
+        .quorum-box {
+          width: 300px;
+        }
       }
 
     }
@@ -311,7 +336,7 @@ section.acme-video {
   }
 
   .wrap-card-img {
-    @media (min-width: 960px) {
+    @media (min-width: 600px) {
       max-width: 430px;
       max-height: 220px;
       overflow: hidden;
@@ -319,7 +344,7 @@ section.acme-video {
   }
 
   .md-card-img {
-    @media (min-width: 960px) {
+    @media (min-width: 600px) {
       width: 100%;
     }
     display: block;
