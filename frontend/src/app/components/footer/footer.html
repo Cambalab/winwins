@@ -26,27 +26,11 @@
             <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
           </ul>
         </div>
-        <div flex class="social-media" ng-if="!vm.isAuthenticated()">
-          <p translate>INGRESAR</p>
-          <md-button class="md-icon-button" ng-href ng-click="vm.showLoginDialog()" aria-label="facebook">
-            <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-          </md-button>
-<!--           <md-button class="md-icon-button" ng-href="/#/login" aria-label="twitter">
-            <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" ng-href="/#/login" aria-label="google">
-            <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" ng-href="/#/login" aria-label="yahoo">
-            <md-icon md-svg-src="assets/images/icon-yahoo.svg"></md-icon>
-          </md-button> -->
-          <md-button class="md-icon-button" ng-href ng-click="vm.showLoginDialog()" aria-label="wiwin">
-            <md-icon md-svg-src="assets/images/icon-ww.svg"></md-icon>
-          </md-button>
-        </div>
         <div flex>
-          <a ui-sref="home.crear-winwin" class="crear" translate ng-if="vm.isAuthenticated()">+ Crear Winwin</a>
-          <a href class="crear" translate ng-click="vm.showLoginDialog('home.crear-winwin')" ng-if="!vm.isAuthenticated()">+ Crear Winwin</a>
+          <md-button class="md-primary create-winwin-button" ui-sref="home.crear-winwin()">
+            <md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
+            <translate>CREAR UN WINWIN</translate>
+          </md-button>
         </div>
       </div>
     </div>

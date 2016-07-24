@@ -8,7 +8,7 @@
       <translate>Usuarios unidos para buscar personas y recursos en pos de nuevos winwins</translate>
     </span>
   </div>
-  <div layout="row" layout-wrap layout-margin layout-xs="column" layout-align="space-around center" class="groups-container">
+  <div layout="row" layout-wrap layout-margin layout-xs="column" layout-align="center center" class="groups-container">
     <div ng-repeat="item in vm.items">
       <md-card ui-sref="home.grupo-profile({groupId: item.id})">
         <md-card-content>
@@ -27,7 +27,8 @@
       </md-card>
     </div>
   </div>
-  <div layout="row" layout-align="center center">
+  <div layout="row" class="view-more-container" layout-align="center center">
+    <div class="view-more-background-line"></div>
     <md-button ng-show="vm.viewmore" ui-sref="home.grupo-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
   </div>
 </md-content>

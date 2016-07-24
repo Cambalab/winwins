@@ -130,7 +130,7 @@
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0&controls=0');
     };
 
-    vm.showMoreDetailMonthWinwin = function() {
+    vm.showMoreDetailMonthWinwin = function(ev) {
       $mdDialog.show({
         controller: MonthWinwinMoreDetailController,
         templateUrl: 'app/winwin/ver-mas-detalle.tmpl.html',

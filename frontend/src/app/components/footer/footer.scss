@@ -50,6 +50,7 @@
       text-align: right;
     }
     .sumate-img {
+      width: 270px;
       @media (max-width: 480px) {
         max-width: 100%;
       }
@@ -104,19 +105,15 @@
         }
       }
     }
-    .crear {
-      background: #e5452e;
-      border-radius: 3px;
-      display: inline-block;
-      padding: 5px 8px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      &:hover {
-        background: #F74209;
-      }
+    
+    .create-winwin-button {
+        font: 100% $mainHomeFont;
+        font-size: 13px;
+        color: #fefefe;
+        line-height: 36px;
+        background-color: #00b285;
     }
+
     .social-media {
       p {
         font-size: 14px;

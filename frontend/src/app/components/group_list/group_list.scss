@@ -94,7 +94,7 @@
       }
 
       .wrap-md-card-img {
-        width: 315px;
+        width: 298px;
         background: #fff;
         height: 150px;
         overflow: hidden;
@@ -105,6 +105,9 @@
       }
       
       @media (min-width: 600px) {
+        .wrap-md-card-img {
+          width: initial;
+        }
       }
       .card-labels {
         position: absolute;
@@ -162,16 +165,30 @@
     }
   }
 
+  .view-more-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .view-more-background-line {
+    position: absolute;
+    width: 100%;
+    height: 9px;
+    left: 0px;
+    top: 42%;
+    background-color: #c4c4c4;
+  }
+
   .md-button.ver-todos {
     text-transform: initial;
-    margin-bottom: 20px;
+    margin: 0px;
     font: 100% Montserrat;
     font-size: 14px;
+    line-height: 36px;
     font-weight: bold;
+    border-radius: 0px;
     background-color: #c4c4c4;
     color: #ffffff;
-    padding: 15px;
-    margin: 10px 0 5px 0;
   }
 
   @media (min-width: 600px) {
@@ -181,11 +198,10 @@
       font-size: 14px;
       font-weight: bold;
       width: 165px;
+      line-height: 36px;
+      padding: 0px;
       background-color: #c4c4c4;
       color: #ffffff;
-      line-height: 36px;
-      padding: 10px 45px;
-      margin: 20px 0 5px 0;
     }
   }
   

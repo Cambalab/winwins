@@ -11,8 +11,8 @@
     <div layout="row" layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="100px"></md-progress-circular>
     </div>
-    <div layout="row" layout-wrap  layout-xs="column">
-      <div ng-repeat="item in vm.items" class="winwins-container" layout-margin layout-align="space-around center" ng-show="!vm.loading">
+    <div layout="row" layout-wrap  layout-xs="column" layout-margin layout-align="center center">
+      <div ng-repeat="item in vm.items" class="winwins-container" ng-show="!vm.loading">
         <md-card>
           <md-card-content>
               <div class="wrap-md-card-img">
@@ -49,7 +49,8 @@
         </md-card>
       </div>
     </div>
-    <div layout="row" layout-align="center center">
+    <div layout="row" class="view-more-container" layout-align="center center">
+      <div class="view-more-background-line"></div>
       <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
     </div>
 </md-content>
