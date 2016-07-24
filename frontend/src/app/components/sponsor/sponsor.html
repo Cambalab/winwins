@@ -1,5 +1,5 @@
 <md-content class="acme-sponsor">
-  <div class="container" layout="column">
+  <div class="container" layout="column" layout-align="center center">
     <div layout="column" layout-align"center center">
       <span class="title" ng-if="vm.title">
         {{ vm.title }}
@@ -8,7 +8,7 @@
         Organizaciones que ofrecen recursos para concretar winwins
       </span>
     </div>
-    <div layout="row" layout-align-xs="center center" layout-wrap>
+    <div layout="row" layout-align="center center" layout-wrap>
       <div ng-repeat="item in vm.items" class="sponsors-box">
         <img ng-src="{{vm.imageServer}}/200x110/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
       </div>
