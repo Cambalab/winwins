@@ -57,7 +57,7 @@
           parent: angular.element($document.body),
           clickOutsideToClose: true,
           locals: {
-            winwinName: winwin_data.name
+            winwinName: winwin_data.title
           }            
         }).then(function(){
           vm.postInputFocus = true;
