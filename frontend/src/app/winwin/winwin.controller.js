@@ -60,7 +60,10 @@
             winwinName: winwin_data.title
           }            
         }).then(function(){
-          vm.postInputFocus = true;
+          var postInput = $window.document.getElementById("post-input-focus");
+          if (postInput) {
+            postInput.focus();
+          }
         });
       }
     });

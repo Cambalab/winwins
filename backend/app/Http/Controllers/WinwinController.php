@@ -397,6 +397,10 @@ class WinwinController extends Controller {
                 $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
                 $winwin->categories_text = implode(" ",$text_interest);
             }
+            
+            $winwin->published = 1;
+            $winwin->status = 'PUBLISHED';
+
 
             $winwin->save();
                  
@@ -405,8 +409,6 @@ class WinwinController extends Controller {
             $winwinsUsers->winwin_id = $winwin->id;
             $winwinsUsers->creator = true;
             $winwinsUsers->moderator = true;
-            $winwin->published = 1;
-            $winwin->status = 'PUBLISHED';
             $winwinsUsers->save();
 
             if($request->input('video')) {
