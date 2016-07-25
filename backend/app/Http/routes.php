@@ -83,6 +83,7 @@ Route::post('api/stories/{id}/comment', ['middleware' => 'auth', 'uses' => 'Stor
 Route::post('api/posts/{id}/sticky', ['middleware' => 'auth', 'uses' => 'PostController@sticky']);
 Route::post('api/posts/{id}/remove', ['middleware' => 'auth', 'uses' => 'PostController@remove']);
 
+Route::post('api/report/create', ['middleware' => 'auth', 'uses' => 'ReportController@sendReport']);
 
 Route::get('api/groups/paginate/{page}/{amount}', ['uses' => 'GroupController@paginate']);
 Route::get('api/groups/search', ['uses' => 'GroupController@search']);

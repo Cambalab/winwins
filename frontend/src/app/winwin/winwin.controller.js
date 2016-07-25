@@ -85,6 +85,19 @@
           vm.post = {content: '', reference_id: vm.winwinId, type: 'WINWIN'}
         });
       });
+    };
+
+    vm.reportWinwin = function() {
+      $mdDialog.show({
+        controller: ReportController,
+        controllerAs: 'vm',
+        templateUrl: 'app/reports/modal_confirm_send_report.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose: true,
+        locals: {
+          winwinId: vm.winwinId
+        }            
+      });
     }
 
     var dataURItoBlob = function(dataURI) {
@@ -723,6 +736,22 @@
         }, 3000);
       });
     }
+  }
+
+  /** @ngInject */
+  function ReportController(winwin, winwinId) {
+    var vm = this;
+
+    vm.report = {};
+    vm.report.winwinId = winwinId;
+    vm.report.type = "WINWIN";
+    vm.reportSuccess = false;
+
+    vm.sendReport = function(){
+      winwin.reportWinwin(vm.report).then(function(){
+        vm.reportSuccess = true;
+      })
+    };
   }
 
   /** @ngInject */
