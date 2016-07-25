@@ -14,8 +14,10 @@
     vm.facebookId = ENV.satellizer.facebook.clientId;
 
     vm.winwinId = $stateParams.winwinId;
+    vm.showFirstPostModal = $stateParams.showFirstPostModal;
 
     vm.post = {};
+    vm.postInputFocus = false;
 
     account.getProfile().then(function(data) {
       vm.account = data.profile;
@@ -46,7 +48,21 @@
         vm.sponsors = sponsor_data;
       });
 
-      vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'}
+      vm.post = {content: '', reference_id: winwin_data.id, type: 'WINWIN'};
+      if (vm.showFirstPostModal) {
+        $mdDialog.show({
+          controller: FirstPostModalController,
+          controllerAs: 'vm',
+          templateUrl: 'app/winwin/modal-first-post.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose: true,
+          locals: {
+            winwinName: winwin_data.name
+          }            
+        }).then(function(){
+          vm.postInputFocus = true;
+        });
+      }
     });
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
@@ -641,6 +657,12 @@
     vm.cancel = function() {
       $mdDialog.cancel();
     }
+  }
+
+  /** @ngInject */
+  function FirstPostModalController($mdDialog, winwinName) {
+    var vm = this;
+    vm.winwinName = winwinName;
   }
 
   /** @ngInject */

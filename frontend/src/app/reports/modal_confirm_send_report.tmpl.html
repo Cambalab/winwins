@@ -1,26 +1,29 @@
 <div layout="column" layout-padding>
-  <md-dialog-content class="send-report">
-	  <div class="container">
-	    <div layout="row" layout-align="center center">
-	      <div layout="column" class="comparti" flex-xs="100" flex="80" ng-show="!vm.reportSuccess">
-	        <p class="enfasis" translate>Reportar Winwin</p>
-	        <div class="wrap-md-input-container">
-	            <label>Ingresa la razon del reporte</label>
-	            <textarea rows="4" cols="50" ng-model="vm.report.report_reason"></textarea>
-	            <md-button class="md-fab send" aria-label="" ng-click="vm.sendReport()">
-	              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
-	            </md-button>
-	        </div>
-	      </div>
-	      <div layout="column" layout-align="center center" ng-show="vm.reportSuccess">
-	      	<div flex>
-	      		<md-button><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
-	      	</div>
-	      	<div flex>
-	      		<p class="gray">El reporte ha sido enviado</p>
-	      	</div>
-    		</div>
-	    </div>
-	  </div>
-  </md-dialog-content>
+    <md-dialog-content>
+        <div>
+            <div layout="column" layout-align="center center" class="lightbox-abandonar" ng-show="!vm.reportSuccess">
+                <div flex><md-button class="report"><md-icon md-svg-src="assets/images/icon-report.svg"></md-icon></md-button></div>
+                <div flex><p translate>Ingresa la razon del reporte</p></div>
+                <div class="wrap-md-input-container">
+                    <textarea rows="4" cols="50" ng-model="vm.report.report_reason"></textarea>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button class="md-raised md-primary md-green" ng-click="vm.sendReport()" ng-disabled="loadingFlag">{{ 'Reportar' | translate }}</md-button>
+                    <md-button class="md-raised md-primary md-gray" ng-click="vm.cancel()">{{ 'Cancelar' | translate }}</md-button>
+                </div>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-show="vm.reportSuccess">
+                <div flex>
+                    <md-button>
+                        <md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon>
+                    </md-button>
+                </div>
+                <div flex>
+                    <p class="gray">El reporte ha sido enviado</p>
+                </div>
+            </div>
+
+        </div>
+    </md-dialog-content>
 </div>

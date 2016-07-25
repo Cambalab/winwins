@@ -405,6 +405,8 @@ class WinwinController extends Controller {
             $winwinsUsers->winwin_id = $winwin->id;
             $winwinsUsers->creator = true;
             $winwinsUsers->moderator = true;
+            $winwin->published = 1;
+            $winwin->status = 'PUBLISHED';
             $winwinsUsers->save();
 
             if($request->input('video')) {

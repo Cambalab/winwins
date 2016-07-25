@@ -50,6 +50,9 @@
       })
       .state('home.winwin',{
         url: 'winwin/:winwinId',
+        params: {
+          showFirstPostModal: false
+        },
         views: {
           'content@home': {
             templateUrl: 'app/winwin/winwin.html',

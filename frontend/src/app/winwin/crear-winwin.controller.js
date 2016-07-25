@@ -6,7 +6,7 @@
     .controller('CrearWinwinController', CrearWinwinController);
 
   /** @ngInject */
-  function CrearWinwinController($stateParams, winwin, ENV, $mdDialog, $document, $q, $window, $element) {
+  function CrearWinwinController($stateParams, $state, winwin, ENV, $location, $mdDialog, $document, $q, $window, $element) {
     var vm = this;
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
@@ -65,8 +65,12 @@
 
         winwin.saveWinwin(vm.winwin)
         .then(function(data){
-          vm.stage = 3;
           vm.winwin.id = data.id;
+          // $location.path('winwin/' + vm.winwin.id + '/true');
+          $state.go('home.winwin', {
+            showFirstPostModal: true,
+            winwinId: vm.winwin.id
+          });
         });
 
         vm.processing = false;
