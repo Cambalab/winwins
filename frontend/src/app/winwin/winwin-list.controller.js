@@ -13,7 +13,7 @@
 
     vm.current_page = 0
 
-    winwin.getList(vm.current_page, 'select', 9).then(function(data) {
+    winwin.getList(vm.current_page, 'last', 9).then(function(data) {
       vm.winwins = data;
     });
 
@@ -23,7 +23,7 @@
 
     vm.loadingDestacados = false;
     vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Destacados'));
-    var _filter = 'select'
+    var _filter = 'last';
     var _categories = [];
     vm.doFilter = function(filter, next) {
       if (!next) {
@@ -53,7 +53,7 @@
             vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Populares'));
             break;
           case 'last':
-            vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins Recientes'));
+            vm.destacadosTitle = gettextCatalog.getString(gettext('Todos los Winwins'));
             break;
           case 'finishing':
             vm.destacadosTitle = gettextCatalog.getString(gettext('Winwins por terminar'));
