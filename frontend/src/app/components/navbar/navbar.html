@@ -93,9 +93,10 @@
   </md-toolbar>
   <md-content layout-padding>
     <div layout="column" class="menu">
-    	<div class="hide-gt-sm"><md-input-container md-no-float>
+    	<div class="hide-gt-sm">
+    	<md-input-container md-no-float>
           <input ng-model="vm.search_query" enter="vm.openLeftMenu(); vm.search();" placeholder="{{'Buscar' | translate}}">
-          <md-icon ng-click="vm.search()">search</md-icon>
+          <md-icon class="search-icon" ng-click="vm.search()">search</md-icon>
         </md-input-container></div>
 			<div>
 				<md-button class="md-primary" ui-sref="home.winwin-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Winwins</translate></md-button>

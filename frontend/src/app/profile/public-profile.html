@@ -57,6 +57,7 @@
         <md-chips>
           <md-chip ng-repeat="skill in profile.user.skills">{{skill.text}}</md-chip>
         </md-chips>
+        <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no cargaste habilidad, <a ui-sref="home.profile">completalas!</a></p>
       </div>
     </div>
 

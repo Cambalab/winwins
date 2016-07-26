@@ -246,6 +246,7 @@ header {
 						margin: -3px 20px 0 0;
 					}
 					a {
+						display: block;
 						text-align: left;
 						color: #fff;
 						padding: 17px 25px;
@@ -254,6 +255,12 @@ header {
 						&:hover {
 							background: #eb6a24;
 						}
+					}
+					md-input-container {
+						margin-left: 25px;
+					}
+					.search-icon {
+						margin: 0;
 					}
 				}
 			}

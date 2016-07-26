@@ -62,7 +62,7 @@
           <md-input-container class="md-block">
             <label translate>Habilidades</label>
             <md-input-container class="habilidades">
-              <tags-input placeholder="Agrega tus habilidades" ng-model="profile.user.skills_list">
+              <tags-input ng-model="profile.user.skills_list">
                 <auto-complete source="profile.loadSkills($query)"></auto-complete>
               </tags-input>
             </md-input-container>
