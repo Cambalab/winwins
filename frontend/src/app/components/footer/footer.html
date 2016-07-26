@@ -26,6 +26,11 @@
             <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
           </ul>
         </div>
+        <div class="share" layout="row" layout-align="space-around center">
+            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon></div>
+            <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon></div>
+            <div><md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon></div>
+        </div>
         <div flex>
           <md-button class="md-primary create-winwin-button" ui-sref="home.crear-winwin()">
             <md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
