@@ -641,6 +641,14 @@ class WinwinController extends Controller {
         }
 	}
 
+    /**
+     * Send a notification to winwin members
+     * @deprecated 
+     *
+     * @param Request $request
+     * @param $id
+     * @return json
+     */
 	public function campanada(Request $request, $id) {
         $user = User::find($request['user']['sub']);
         $winwin = Winwin::find($id);
@@ -649,7 +657,6 @@ class WinwinController extends Controller {
         if($user->id == $winwin->user->id) {
             $users = $winwin->users;
             foreach($users as $member) {
-                //if($member->id != $user->id)
 
                 $member->newNotification()
                     ->from($user)
