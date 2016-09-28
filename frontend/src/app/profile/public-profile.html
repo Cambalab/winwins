@@ -1,80 +1,174 @@
-<md-toolbar class="md-tall md-warn" layout="row" layout-align="center center">
-  <h2><span translate>PERFIL DE USUARIO</span></h2>
-</md-toolbar>
-<md-content class="acme-public-profile">
-  <div class="container">
-    <div layout="row" layout-xs="column">
-      <div flex>
-        <md-card class="public-profile">
-          <md-card-content>
-            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
-            <md-card-title>
-              <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
-                  <h3 translate>Winwins</h3>
-                  <p>{{profile.winwins_length}}</p>
+<div class="acme-public-profile" layout="column" layout-align="center center">
+    <md-tabs class="responsiveTabs" md-dynamic-height>
+        <md-tab>
+          <md-tab-body>
+            <div layout="row" layout-xs="column">
+                <div flex>
+                    <md-card class="public-profile">
+                        <md-card-content>
+                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                            <md-card-title>
+                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Winwins</h3>
+                                        <p>{{profile.winwins_length}}</p>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                                        <div ng-if="!profile.user.private || profile.user.myself">
+                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                                        </div>
+                                    </div>
+                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Seguidores</h3>
+                                        <p>{{profile.seguidores.length}}</p>
+                                    </div>
+                                </div>
+                            </md-card-title>
+                        </md-card-content>
+                    </md-card>
                 </div>
-                <div layout="column" layout-align="center center">
-                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                  <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                  <div ng-if="!profile.user.private || profile.user.myself">
-                    <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir</md-button>
-                    <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
-                  </div>
+            </div>
+            <div class="buttons-xs-sm" layout="row" hide-gt-sm>
+                <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                <md-button class="bt-blue" ng-if="!profile.user.myself">Manda un mensaje<br>a {{profile.user.name}}</md-button>
+            </div>
+            <div class="bioTotal" layout="row">
+                <div class="bio-Info" layout="column">
+                    <md-card>
+                        <div class="bioContainer"><h3><strong>BIO</strong></h3></div>
+                        <div class="bioContent">
+                            <p>
+                                {{profile.user.about}}
+                            </p>
+                            <p><strong>Estoy interesado en:</strong></p>
+                            <md-chips><md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip></md-chips>
+                            <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a>
+                            </p>
+                            <p ng-if="profile.user.id && profile.user.interests_list.length == 0">{{profile.user.name}} No ha completado sus intereses</p>
+                        </div>
+                    </md-card>
+                    <md-card>
+                        <div class="mis-Winwins-Container"><h3>MIS WINWINS {{profile.creadospormi.length}}</h3></div>
+                        <div class="mis-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
+                            <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
+                            <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
+                            <p ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
+                        </div>
+                    </md-card>
+                    <md-card>
+                        <div class="participo-Winwins-Container"><h3><strong>WINWINS EN QUE PARTICIPO {{profile.enqueparticipo.length}}</strong></h3></div>
+                        <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
+                            <acme-highlighted items="profile.enqueparticipo && vm.showDescription == false" icon="'icon-highlighted'"></acme-highlighted>
+                            <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
+                            <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
+                        </div>
+                    </md-card>
+                    <md-card>
+                        <div class="seguidores-Container"><h3><strong>Seguidores {{profile.seguidores.length}}</strong></h3></div>
+                        <div class="seguidores-Content" layout="column">
+                            <p>Proximamente podras seguir usuarios</p>
+                        </div>
+                    </md-card>
+                    <md-card>
+                        <div class="siguiendo-Container"><h3><strong>Siguiendo a {{profile.seguidores.length}}</strong></h3></div>
+                        <div class="siguiendo-Content" layout="column">
+                            <p>Proximamente podras seguir usuarios</p>
+                        </div>
+                    </md-card>
                 </div>
-                <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
-                  <h3 translate>Grupos</h3>
-                  <p>{{profile.user.groups.length}}</p>
+                <div class="bio-Actions" layout="column" hide-xs hide-sm>
+                    <div class="mensajeriaPrivada">
+                        <md-button ng-if="!profile.user.myself">Manda un mensaje a {{profile.user.name}}</md-button>
+                    </div>
+                    <md-card class="actividadReciente">
+                        <md-list>ACTIVIDAD RECIENTE</md-list>
+                    </md-card>
                 </div>
-              </div>
-            </md-card-title>
-          </md-card-content>
-        </md-card>
-      </div>
-      <div flex class="bio">
-        <h3>SOBRE MI</h3>
-        <p>
-          Mi nombre es <span style="text-transform: capitalize;"> {{profile.user.name}} {{profile.user.lastname}} </span> y soy miembro de Winwins desde el {{profile.user.created_at |moment: 'DD/MM/YYYY'}}<br/><pre>{{profile.user.about}}</pre>
-        </p>
-      </div>
-    </div>
-    <div layout="row" class="mje-privacidad" ng-if="profile.user.private && !profile.user.myself">
-      <p translate>El perfil de este usuario no se muestra debido a su configuración de privacidad.</p>
-    </div>
-    <div layout="row" layout-xs="column" ng-show="(!profile.user.private && profile.user.interests_list.length > 0) || profile.user.myself">
-      <div flex class="intereses">
-        <h4 translate>Intereses</h4>
-        <md-chips>
-          <md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip>
-        </md-chips>
-        <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a></p>
-      </div>
-    </div>
-    
-    <div layout="row" layout-xs="column" ng-show="(!profile.user.private && profile.user.skills.length > 0) || profile.user.myself">
-      <div flex class="intereses">
-        <h4 translate>Habilidades</h4>
-        <md-chips>
-          <md-chip ng-repeat="skill in profile.user.skills">{{skill.text}}</md-chip>
-        </md-chips>
-        <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no cargaste habilidad, <a ui-sref="home.profile">completalas!</a></p>
-      </div>
-    </div>
+            </div>
+          </md-tab-body>
+        </md-tab>
 
-    <div layout="column" ng-show="(!profile.user.private && profile.enqueparticipo.length > 0) || profile.user.myself">
-      <h3 class="title-destacado" translate>WINWINS EN QUE PARTICIPO</h3>
-      <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'"></acme-highlighted>
-      <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
-    </div>
-    <div layout="column" ng-show="(!profile.user.private && profile.creadospormi.length > 0) || profile.user.myself">
-      <h3 class="title-destacado dark" translate>WINWINS CREADOS POR MI</h3>
-      <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
-      <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
-    </div>
-    <div layout="column" ng-show="(!profile.user.private)">
-      <h3 class="title-destacado bg-orange" translate>GRUPOS EN LOS QUE PARTICIPO</h3>
-      <group_list items="profile.groups"></group_list>
-      <p class="mensaje" ng-if="(profile.user.groups.length <= 0)">Aun no participás de ningún grupo. <a ui-sref="home.grupo-list">Ver grupos.</a> <a ui-sref="home.grupo-creacion">Crear grupo.</a></p>
-    </div>
-  </div>
-</md-content>
+        <md-tab>
+            <md-tab-label>
+            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+            </md-tab-label>
+            <md-tab-body>
+                <div layout="row" layout-xs="column">
+                <div flex>
+                    <md-card class="public-profile">
+                        <md-card-content>
+                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                            <md-card-title>
+                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Winwins</h3>
+                                        <p>{{profile.winwins_length}}</p>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                                        <div ng-if="!profile.user.private || profile.user.myself">
+                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                                        </div>
+                                    </div>
+                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Seguidores</h3>
+                                        <p>{{profile.seguidores.length}}</p>
+                                    </div>
+                                </div>
+                            </md-card-title>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+                <div class="blueBlock" layout="column"><strong>Mensajes</strong></div>
+                <div class="blueArrow"></div>
+            </md-tab-body>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>
+            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+            </md-tab-label>
+            <md-tab-body> <div layout="row" layout-xs="column">
+                <div flex>
+                    <md-card class="public-profile">
+                        <md-card-content>
+                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                            <md-card-title>
+                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Winwins</h3>
+                                        <p>{{profile.winwins_length}}</p>
+                                    </div>
+                                    <div layout="column" layout-align="center center">
+                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                                        <div ng-if="!profile.user.private || profile.user.myself">
+                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                                        </div>
+                                    </div>
+                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                                        <h3 translate>Seguidores</h3>
+                                        <p>{{profile.seguidores.length}}</p>
+                                    </div>
+                                </div>
+                            </md-card-title>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+                <div class="blueBlock" layout="column"><strong>Actividad Reciente</strong></div>
+                <div class="blueArrow"></div>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+</div>
+
