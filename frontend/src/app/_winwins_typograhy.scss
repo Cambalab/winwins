@@ -1,0 +1,5 @@
+$mainHomeFont: Montserrat,serif;
+
+@mixin mainHomeTitle {
+  font: $mainHomeSubtitlesFont;
+}
