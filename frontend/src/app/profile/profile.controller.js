@@ -31,7 +31,7 @@
         return vm.skills;
       });
 
-    }
+    };
 
     vm.user = {
       interests_list:[],

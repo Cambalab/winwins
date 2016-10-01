@@ -136,6 +136,8 @@ class UserController extends Controller {
             ->select('skills.id', 'skills.name as text')
             ->get();
 
+            $userDetail->activities = DB::select('(select notifications.type, winwins.title from notifications,winwins where notifications.user_id = '.$user -> id.' and (notifications.type=\'WW_JOIN\' || notifications.type=\'WW_SUCCESSFUL\'|| notifications.type=\'WW_CREATED\') and notifications.object_id = winwins.id) UNION (select notifications.type, groups.name from notifications, groups where notifications.user_id = '.$user -> id.' and (notifications.type=\'GROUP_JOIN\' || notifications.type=\'GROUP_LEFT\'|| notifications.type=\'GROUP_CREATED\') and notifications.object_id = groups.id)UNION (select notifications.type, users.username from notifications, users where notifications.user_id = '.$user -> id.' and (notifications.type=\'USER_FOLLOW\' || notifications.type=\'USER_UNFOLLOW\') and notifications.object_id = users.id)');
+
             //$userDetail->followers = $user->followers;
             //$userDetail->following = $user->following;
 
@@ -159,7 +161,7 @@ class UserController extends Controller {
             ->where('posts.reference_id', '=', $id)->where('posts.type', 'USER')->orderBy('posts.created_at', 'desc')->get();
 
             $userDetail->comments = $comments;
-
+            $userDetail->myself = true;
             Log::info($my_self);
             if($my_self) {
                 if($my_self->id == $id) {

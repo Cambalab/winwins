@@ -5,7 +5,8 @@
     .module('winwins')
     .directive('acmeHighlighted', acmeHighlighted);
 
-  /** @ngInject */
+
+      /** @ngInject */
   function acmeHighlighted() {
     var directive = {
       restrict: 'E',
@@ -15,11 +16,19 @@
         title: '=',
         icon: '=',
         viewmore: '=',
-        loading: '='
+        loading: '=',
+        showDescription: '='
+
+
       },
       controller: HighlightedController,
       controllerAs: 'vm',
-      bindToController: true
+      bindToController: true,
+      compile: function(element, attrs) {
+        if (!attrs.showDescription) {
+          attrs.showDescription = true;
+        }
+      }
     };
 
     return directive;

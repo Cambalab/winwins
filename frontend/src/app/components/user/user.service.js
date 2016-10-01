@@ -34,6 +34,10 @@
       return Restangular.all('skills').customPOST({ q: queryText }, "search", undefined, undefined);
     }
 
+    _user.getActivities =  function(queryText) {
+      return Restangular.all('activities').get();
+    }
+
     return _user;
   }
 

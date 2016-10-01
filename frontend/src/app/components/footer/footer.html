@@ -27,9 +27,25 @@
           </ul>
         </div>
         <div class="share" layout="row" layout-align="space-around center">
-            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon></div>
-            <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon></div>
-            <div><md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon></div>
+            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" <a href="#" socialshare
+               socialshare-provider="facebook"
+               socialshare-text="Junta gente para realizar tus proyectos"
+               socialshare-url="http://dev-winwins.net"
+               socialshare-media="https://youtu.be/gyyTDPe8TwY">
+            </a>
+              </md-icon></div>
+            <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" <a href="#" socialshare
+               socialshare-provider="twitter"
+               socialshare-text="Junta gente para realizar tus proyectos"
+               socialshare-hastags="winwins, ProyectoseIdeas, HechosRealidad"
+               socialshare-url="http://dev-winwins.net"
+               socialshare-media="https://youtu.be/gyyTDPe8TwY">
+            </a>
+              </md-icon></div>
+            <div><md-icon md-svg-src="assets/images/icon-google-share.svg" <a href="#" socialshare
+              socialshare-provider="google"
+              socialshare-url="http://dev-winwins.net"
+            ></md-icon></div>
         </div>
         <div flex>
           <md-button class="md-primary create-winwin-button" ui-sref="home.crear-winwin()">

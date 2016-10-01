@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, ENV,winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics, grupo) {
+  function MainController($timeout,sponsor,ENV ,winwin ,miembro,gettextCatalog ,gettext ,$auth ,$mdDialog ,$window ,$document,$sce ,Analytics ,grupo) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -23,7 +23,15 @@
     sponsor.getMainList().then(function(data) {
       vm.partners = data;
     });
-    
+
+
+    winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
+      vm.nuevosWinwin = data[0];
+      data.shift();
+      vm.destacados = data;
+    });
+
+
     winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
       vm.monthWinwin = data[0];
       data.shift();

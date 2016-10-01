@@ -52,29 +52,40 @@
                         </div>
                     </md-card>
                     <md-card>
-                        <div class="mis-Winwins-Container"><h3>MIS WINWINS {{profile.creadospormi.length}}</h3></div>
-                        <div class="mis-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
-                            <acme-highlighted items="profile.creadospormi" icon="'icon-highlighted'"></acme-highlighted>
+                        <div class="my-Winwins-Container" layout-align="row">
+                            <strong><h3>MIS WINWINS</h3></strong>
+                            <div class="length">{{profile.creadospormi.length}}</div>
+                        </div>
+                        <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
+                            <acme-highlighted items="profile.creadospormi && vm.showDescription == false" icon="'icon-highlighted'"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
                             <p ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
                         </div>
                     </md-card>
                     <md-card>
-                        <div class="participo-Winwins-Container"><h3><strong>WINWINS EN QUE PARTICIPO {{profile.enqueparticipo.length}}</strong></h3></div>
+                        <div class="participo-Winwins-Container" layout-align="row">
+                            <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
+                            <div class="length">{{profile.enqueparticipo.length}}</div>
+                        </div>
                         <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
-                            <acme-highlighted items="profile.enqueparticipo && vm.showDescription == false" icon="'icon-highlighted'"></acme-highlighted>
+                            <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
                             <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
                         </div>
                     </md-card>
                     <md-card>
-                        <div class="seguidores-Container"><h3><strong>Seguidores {{profile.seguidores.length}}</strong></h3></div>
+                        <div class="seguidores-Container" layout-align="row">
+                            <h3><strong>Seguidores</strong></h3>
+                            <div class="length">{{profile.seguidores.length}}</div>
+                        </div>
                         <div class="seguidores-Content" layout="column">
                             <p>Proximamente podras seguir usuarios</p>
                         </div>
                     </md-card>
                     <md-card>
-                        <div class="siguiendo-Container"><h3><strong>Siguiendo a {{profile.seguidores.length}}</strong></h3></div>
+                        <div class="siguiendo-Container" layout-align="row">
+                            <h3><strong>Siguiendo a </strong></h3><div class="length">{{profile.seguidores.length}}</div>
+                        </div>
                         <div class="siguiendo-Content" layout="column">
                             <p>Proximamente podras seguir usuarios</p>
                         </div>
@@ -85,7 +96,10 @@
                         <md-button ng-if="!profile.user.myself">Manda un mensaje a {{profile.user.name}}</md-button>
                     </div>
                     <md-card class="actividadReciente">
-                        <md-list>ACTIVIDAD RECIENTE</md-list>
+                        <md-list>ACTIVIDAD RECIENTE
+                        <md-list-item ng-repeat="act in profile.user.activities"> {{act.mensajito}}
+                        </md-list-item>
+                        </md-list>
                     </md-card>
                 </div>
             </div>

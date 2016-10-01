@@ -497,6 +497,7 @@
       width: 100%;
       .bioContainer {
         margin: 10px 20px;
+        border-bottom: 1px;
         h3 {
           color: #666;
           text-transform: uppercase;
@@ -531,8 +532,18 @@
         white-space: pre-wrap;
       }
       .my-Winwins-Container {
+        .length {
+          background: orangered;
+          color: #fff;
+          border-radius: 5px;
+          display: inline;
+          padding: 3px;
+        }
         margin: 10px 20px;
+        border-bottom: 1px;
         h3 {
+          margin-right: 5px;
+          display: inline;
           font-size: 14px;
           text-transform: uppercase;
           color: #666;
@@ -544,12 +555,22 @@
         }
       }
       .my-Winwins-Content {
+        border-bottom: 1px;
         background: #f7f7f7;
         padding: 10px;
       }
       .participo-Winwins-Container {
         margin: 10px 20px;
+        .length {
+          background: orangered;
+          color: #fff;
+          border-radius: 5px;
+          display: inline;
+          padding: 3px;
+        }
         h3 {
+          margin-right: 5px;
+          display: inline;
           font-size: 14px;
           color: #666;
           text-transform: uppercase;
@@ -568,7 +589,16 @@
       .seguidores-Container {
         padding: 10px;
         margin: 10px 20px;
+        .length {
+          background: blueviolet;
+          color: #fff;
+          border-radius: 5px;
+          display: inline;
+          padding: 3px;
+        }
         h3 {
+          margin-right: 5px;
+          display: inline;
           font-size: 14px;
           color: #666;
           text-transform: uppercase;
@@ -577,8 +607,9 @@
             margin: 0;
             font-weight: bold;
             border-radius: 0 0 3px 3px;
-            .seguidores-Content {
-              background: #f7f7f7;
+     .seguidores-Content {
+       border-bottom: 1px;
+       background: #f7f7f7;
               padding: 20px;
             }
           }
@@ -587,8 +618,17 @@
       .siguiendo-Container {
         padding: 10px;
         margin: 10px 20px;
-        max-width: 100%;
+        border-bottom: 1px;
+        .length {
+          background: blueviolet;
+          color: #fff;
+          border-radius: 5px;
+          display: inline;
+          padding: 3px;
+        }
         h3 {
+          margin-right: 5px;
+          display: inline;
           font-size: 14px;
           color: #666;
           text-transform: uppercase;

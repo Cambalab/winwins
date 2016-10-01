@@ -183,9 +183,10 @@
                 <div flex="15" layout="column" class="content-social-media">
                   <div
                     socialshare
-                    socialshare-provider="facebook" 
-                    socialshare-text="{{winwin.winwin.title}}" 
-                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
+                    socialshare-provider="facebook"
+                    socialshare-type="feed"
+                    socialshare-text="{{winwin.winwin.title}}"
+                    socialshare-url="{{winwin.base}}/{{winwin.winwin.id}}"
                     socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
                     socialshare-via="{{winwin.facebookId}}">
                     <md-button class="md-icon-button" ng-href aria-label="facebook">
@@ -195,7 +196,7 @@
                   <div
                     socialshare  
                     socialshare-text="{{winwin.winwin.title}}" 
-                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
+                    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"
                     socialshare-provider="twitter">
                     <md-button class="md-icon-button" ng-href aria-label="twitter">
                       <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
