@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, ENV,winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics, grupo) {
+  function MainController($timeout, sponsor, ENV, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics, grupo) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -30,7 +30,7 @@
       vm.destacados = data; 
     });
 
-    grupo.getList(0, 3).then(function(data){
+    grupo.getList(0, 3).then(function(data) {
       vm.gruposDestacados = data;
       vm.gruposDestacadosTitle = "GRUPOS DESTACADOS";
     });
