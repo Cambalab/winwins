@@ -74,7 +74,6 @@ class WinwinController extends Controller {
         $winwins = [];
         $categories = explode(",", $request->input('categories'));
 
-        Log::info($categories);
         if($categories == 'all') {
             $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
             return response()->json($winwins, 200, [], JSON_NUMERIC_CHECK);
@@ -86,7 +85,6 @@ class WinwinController extends Controller {
                 ->where('interests_interested.type', '=', 'WINWIN')
                 ->skip($page * $amount)->take($amount)->get();
             $collection = $this->processCollection($winwins);
-            Log::info($collection);
 
             return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
         }
@@ -184,7 +182,6 @@ class WinwinController extends Controller {
             ->where('interested_id', '=', $winwin->id)
             ->select('interests.name','interests.description', 'interests.id')
             ->get();
-
         $winwin->already_joined = false;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
@@ -529,7 +526,6 @@ class WinwinController extends Controller {
             return response()->json(['message' => 'operation_not_until_activate_account'], 400);
         }
 
-
         $winwin = Winwin::find($id);
         $winwin->user();
         if($user->id == $winwin->user->id) {
@@ -538,7 +534,6 @@ class WinwinController extends Controller {
             $already_joined = count($winwin->users->filter(function($model) use ($user) {
                 return $model->id == $user->id;
             })) > 0;
-
             if($already_joined) {
                 return response()->json(['message' => 'join_already_join'], 400);
             } else {
@@ -575,9 +570,11 @@ class WinwinController extends Controller {
 
                 });
 
+                $winwin = Winwin::find($id);
+                $totalUsers = $winwin->users;
 
                 if($winwin->status == 'SUCCESSFUL') {
-                    $this->sentCompleteQuorum($request, $mailer, $winwin);
+                    $this->sentCompleteQuorum($request, $mailer, $winwin, $totalUsers);
                 }
 
 
@@ -1017,10 +1014,10 @@ class WinwinController extends Controller {
     }
 
 
-	public function sentCompleteQuorum(Request $request, Mailer $mailer, $winwin) {
+	public function sentCompleteQuorum(Request $request, Mailer $mailer, $winwin, $totalUsers) {
         Log::info("Enviando mails completado");
         $template_name = 'winwin_ww_total_users_joined';
-        foreach($winwin->users as $user) {
+        foreach($totalUsers as $user) {
             $recipient = $user->email;
             Log::info("Mail: ".$recipient);
             if(isset($recipient)) {

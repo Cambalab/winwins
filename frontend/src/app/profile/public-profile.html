@@ -11,6 +11,10 @@
             <md-card-title>
               <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
                 <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                    <h3 translate>Seguidores</h3>
+                    <p>{{profile.user.followers_amount}}</p>
+                  </div></br>
                   <h3 translate>Winwins</h3>
                   <p>{{profile.winwins_length}}</p>
                 </div>
@@ -18,7 +22,8 @@
                   <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
                   <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                   <div ng-if="!profile.user.private || profile.user.myself">
-                    <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir</md-button>
+                    <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
+                    <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
                     <md-button class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                   </div>
                 </div>

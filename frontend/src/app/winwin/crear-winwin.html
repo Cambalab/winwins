@@ -83,7 +83,7 @@
   es uno de ellos, ingresala aquí.
                 </div>
               </div>
-            <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-placeholder="20/4/2016"></md-datepicker>
+            <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-min-date="winwin.minDate" md-placeholder="{{winwin.hoy}}"></md-datepicker>
           </div>
           <md-input-container class="md-block" flex-gt-sm>
             <md-checkbox class="green" ng-model="winwin.winwin.terms" name="terms" ng-change="winwin.clearError()">

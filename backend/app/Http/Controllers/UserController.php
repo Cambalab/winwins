@@ -160,7 +160,6 @@ class UserController extends Controller {
 
             $userDetail->comments = $comments;
 
-            Log::info($my_self);
             if($my_self) {
                 if($my_self->id == $id) {
                     $userDetail->myself = true;
@@ -285,7 +284,10 @@ class UserController extends Controller {
         }
 
         $userDetail = UserDetail::find($user->id);
-        Log::info($userDetail);
+
+        if($request->has('email')){
+            $user->email = $request->input('email');
+        }
 
 		if($request->has('name')) {
             $userDetail->name = $request->input('name');
@@ -399,8 +401,6 @@ class UserController extends Controller {
 
         $user->save();
         $userDetail->save();
-
-        Log::info($userDetail);
         
         return $userDetail;
     }
@@ -439,9 +439,7 @@ class UserController extends Controller {
         if($user->id == $followed->id) {
             return response()->json(['message' => 'follow_not_himself'], 400);
         } else {
-            Log::info($followed->followers);
             $already_following = count($followed->followers->filter(function($model) use ($user) {
-                Log::info($model);
                 return $model->id == $user->id;
             })) > 0;
 

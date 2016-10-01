@@ -21,13 +21,14 @@
 
     account.getProfile().then(function(data) {
       vm.account = data.profile;
-
+      vm.user_id = data.user.id;
       vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
         return notification.type == "CAMPANADA" && notification.object_id == vm.winwinId; 
       });
     });
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
       vm.polls = vm.winwin.polls;
