@@ -95,14 +95,20 @@
                     <div class="mensajeriaPrivada">
                         <md-button ng-if="!profile.user.myself">Manda un mensaje a {{profile.user.name}}</md-button>
                     </div>
-                    <md-card class="actividadReciente">
-                        <md-list>ACTIVIDAD RECIENTE
-                        <md-list-item ng-repeat="act in profile.user.activities"> {{act.mensajito}}
-                        </md-list-item>
+                    <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
+                        <md-list class="actividadRecienteContainer">
+                    <div layout-align="row">
+                            <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
+                            <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({user.id})">
+                              <div layout-align="column">
+                                  <div layout-align="row"><p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
+                                  </div>
+                                  <p class="titulo {{act.type}}">{{act.titulo}}</p>
+                              </div>
+                            </md-list-item>
                         </md-list>
-                    </md-card>
+                    </div>
                 </div>
-            </div>
           </md-tab-body>
         </md-tab>
 

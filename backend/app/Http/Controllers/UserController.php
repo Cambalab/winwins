@@ -161,7 +161,6 @@ class UserController extends Controller {
             ->where('posts.reference_id', '=', $id)->where('posts.type', 'USER')->orderBy('posts.created_at', 'desc')->get();
 
             $userDetail->comments = $comments;
-            $userDetail->myself = true;
             Log::info($my_self);
             if($my_self) {
                 if($my_self->id == $id) {
