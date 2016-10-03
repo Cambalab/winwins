@@ -8,6 +8,7 @@
   /** @ngInject */
   function CrearWinwinController($stateParams, $state, winwin, ENV, $location, $mdDialog, $document, $q, $window, $element) {
     var vm = this;
+
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
     vm.facebookId = ENV.satellizer.facebook.clientId;
@@ -15,7 +16,8 @@
     vm.emailsOK = false;
 
     vm.mails = [];
-
+    vm.minDate = new Date();
+    vm.hoy = new Date().toLocaleDateString();
     vm.winwin = {
       interests:[],
       scope: 'GLOBAL'

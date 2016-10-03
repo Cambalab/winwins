@@ -23,22 +23,14 @@
     sponsor.getMainList().then(function(data) {
       vm.partners = data;
     });
-
-
-    winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
-      vm.nuevosWinwin = data[0];
-      data.shift();
-      vm.destacados = data;
-    });
-
-
+    
     winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
       vm.monthWinwin = data[0];
       data.shift();
       vm.destacados = data; 
     });
 
-    grupo.getList(0, 3).then(function(data){
+    grupo.getList(0, 3).then(function(data) {
       vm.gruposDestacados = data;
       vm.gruposDestacadosTitle = "GRUPOS DESTACADOS";
     });

@@ -112,7 +112,7 @@
               <div layout="column" layout-align="center center">
                 <div class="creadores">
                   <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded"  ui-sref="home.public-profile({userId: winwin.winwin.user.id})"/>
-                  <h3>{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</h3>
+                  <md-button ui-sref="home.public-profile({userId: winwin.winwin.user.id})">{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</md-button>
                   <strong>CREADOR</strong>
                 </div>
                 <div class="activadores">
@@ -159,8 +159,8 @@
                     </div>
                   </div>
                   <md-button ng-href class="ver-mas" ng-click="winwin.showMasDetalleDialog()" ng-if="winwin.winwin.description" hide show-gt-sm>+ VER MAS DETALLES</md-button>
-                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.published && !winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
-                  <md-button class="bt-green md-whiteframe-17dp" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="!winwin.user_id && (winwin.user_id!=winwin.winwin.user_id) && winwin.winwin.published && !winwin.winwin.is_successful && !winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.join()">SI, ME SUMO!</md-button>
+                  <md-button class="bt-green md-whiteframe-17dp" ng-if="false && winwin.winwin.already_joined && !winwin.winwin.canceled" ng-click="winwin.showGroupsModal()">VINCULAR WINWIN A GRUPO</md-button>
                   <div class="califica" ng-show="false">
                     <p translate>CALIFICA LA CAMPAÑA DE ESTE WINWIN</p>
                     <md-button class="md-star active" md-ink-ripple="false">
@@ -527,7 +527,7 @@
         </md-tab>
       </md-tabs>
     </md-content>
-    
+
     <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
     <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled">
       <div ng-if="winwin.post.media_type" class="content-img-video">

@@ -34,8 +34,12 @@
       return Restangular.all('skills').customPOST({ q: queryText }, "search", undefined, undefined);
     }
 
-    _user.getActivities =  function(queryText) {
-      return Restangular.all('activities').get();
+    _user.follow = function (id){
+      return Restangular.one('users/follow', id).get();
+    }
+
+    _user.unfollow = function (id){
+      return Restangular.one('users/unfollow', id).get();
     }
 
     return _user;

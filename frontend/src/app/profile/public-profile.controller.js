@@ -107,18 +107,24 @@
       vm.winwins_length = vm.creadospormi.length + vm.enqueparticipo.length;
     });
 
-    vm.showSeguirDialog = function() {
+    vm.unfollow = function(id){
+      user.unfollow(id);
       $mdDialog.show({
-        controller: SeguirController,
-        templateUrl: 'app/profile/modal-seguir.tmpl.html',
+        templateUrl: 'app/profile/modal-unfollow.tmpl.html',
         parent: angular.element($document.body),
         clickOutsideToClose:true
       });
     }
+
+    vm.follow = function(id){
+        user.follow(id);
+        $mdDialog.show({
+            templateUrl: 'app/profile/modal-follow.tmpl.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose:true
+      });
+    }
   }
 
-  function SeguirController() {
-
-  }
 
 })();

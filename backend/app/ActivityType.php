@@ -1,4 +1,6 @@
-<?php namespace Winwins;
+<?php
+
+namespace Winwins;
 
 use Illuminate\Database\Eloquent\Model;
 
