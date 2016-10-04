@@ -21,13 +21,14 @@
 
     account.getProfile().then(function(data) {
       vm.account = data.profile;
-
+      vm.user_id = data.user.id;
       vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
         return notification.type == "CAMPANADA" && notification.object_id == vm.winwinId; 
       });
     });
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
+
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
       vm.polls = vm.winwin.polls;
@@ -135,24 +136,19 @@
 
     vm.join = function() {
       if($auth.isAuthenticated()) {
-        winwin.join(vm.winwinId).then(function(data) {
-          winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
-            vm.winwin = winwin_data;
-            vm.winwin.closing_date = new Date(vm.winwin.closing_date);
-            vm.winwin.already_joined = true;
-          });
-          
-          $mdDialog.show({
-            controller: ModalConfirmacionSumarseController,
-            controllerAs: 'vm',
-            templateUrl: 'app/winwin/modal-confirmacion-sumarse.tmpl.html',
-            parent: angular.element($document.body),
-            clickOutsideToClose:true,
-            locals: {
-              current_winwin: vm.winwin
-            }
-          });
+
+        $mdDialog.show({
+          controller: ModalConfirmacionSumarseController,
+          controllerAs: 'vm',
+          templateUrl: 'app/winwin/modal-confirmacion-sumarse.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose: true,
+          locals: {
+            winwin_id: vm.winwinId
+
+          }
         });
+
       } else {
         $mdDialog.show({
           controller: 'LoginController',
@@ -579,21 +575,37 @@
   }  
     
   /** @ngInject */
-  function ModalConfirmacionSumarseController($timeout, current_winwin, ENV, winwin) {
+  function ModalConfirmacionSumarseController($timeout, winwin_id, ENV, winwin, $mdDialog, $scope) {
     var vm = this;
 
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
     vm.facebookId = ENV.satellizer.facebook.clientId;
-    vm.status = 'success';
-    vm.winwin = current_winwin;
+    vm.status = 'honorCode';
+    vm.winwin = {};
     vm.emailsOK = false;
 
     vm.mails = [];
 
-    $timeout(function() {
-      vm.status = 'share';
-    }, 3000);
+
+
+    vm.cancel = function() {
+      $mdDialog.cancel()
+    };
+
+    vm.join = function() {
+      winwin.join(winwin_id).then(function (data) {
+        winwin.getWinwin(winwin_id).then(function (winwin_data) {
+          $scope.$parent.winwin = winwin_data;
+          $scope.$parent.winwin.closing_date = new Date(vm.winwin.closing_date);
+          $scope.$parent.winwin.already_joined = true;
+          vm.status = 'success';
+          $timeout(function () {
+            vm.status = 'share';
+          }, 3000);
+        });
+      });
+    };
 
     vm.validateMail = function(chip) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -602,9 +614,10 @@
         var index = vm.mails.indexOf(chip);
         vm.mails.splice(index, 1);
       }
-    }
+    };
 
-    vm.sentInvitations = function() {
+
+      vm.sentInvitations = function() {
       winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
         vm.mails = [];
         vm.emailsOK = true;

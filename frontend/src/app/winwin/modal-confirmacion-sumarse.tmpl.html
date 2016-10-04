@@ -1,4 +1,22 @@
-<div layout="column" layout-padding class="lightbox-crear" ng-show="vm.status == 'success'">
+
+
+<div class="confirmationBoxContainer" layout="column" layout-align="space-around center" ng-show="vm.status == 'honorCode'">
+	<img src="assets/images/handshake.png">
+	<strong>Codigo De Honor</strong>
+	<p> {{vm.winwin.title}} </p>
+	<md-dialog-content class="confirmationBoxText"><md-content>blablablablablablablablablablablablablablablablabla
+		blablablablablablablabla<br>blablablablablablablabl
+		ablablablablab<br>lablablablablablablabla
+		blablablablablablablabl<br>ablablablablablablablablablabla
+		blablablablablablablablabla</md-content>
+		<md-dialog-actions>
+			<md-button ng-click="vm.cancel()" class="bt-red">CANCELAR</md-button>
+			<md-button ng-click="vm.join()" class="bt-green">CONFIRMAR</md-button>
+		</md-dialog-actions>
+	</md-dialog-content>
+</div>
+
+<div layout="column" layout-align="center center" ng-show="vm.status == 'success'">
 	<md-dialog-content class="acme-crearwinwin">
 		<div layout="column" layout-align="center center" layout-margin class="comparti">
 		  <md-icon md-svg-src="assets/images/icon-ok.svg" class="icon-big"></md-icon>

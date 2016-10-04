@@ -1,116 +1,112 @@
-<md-toolbar class="md-tall md-warn" layout="row" layout-align="center center" ng-if="!profile.is_public">
-  <h2><span translate ng-show="!profile.is_complete && !profile.loading">COMPLETA TU PERFIL</span><span translate ng-show="profile.is_complete && !profile.loading">MI CUENTA</span></h2>
-</md-toolbar>
-<md-content class="acme-profile">
+<md-content class="acme-profile" layout="column" layout-align="center center">
   <div class="container">
     <form method="post" name="profileForm" ng-submit="profile.saveProfile()">
-      <div layout="column" layout-padding layout-gt-sm="row" class="profile-bg-top">
-        <div flex="20">
-          <md-card>
-            <div class="card-wrap">
-              <img ng-src="{{ profile.cover_image.file }}" src="{{profile.imageServer}}/smart/{{profile.user.cover_photo}}" alt="" class="md-card-image" />
-              <span class="card-opacity"></span>
+    <div layout="row">
+        <md-card class="public-profile">
+          <md-card-content>
+            <div><img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
             </div>
-            <div layout="column" class="profile-head" layout-align="space-between center">
-              <div flex class="profile-head-image-content"><img ng-src="{{ profile.avatar_image.file }}" src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="profile-head-image" />
-                <a class="bt-gray middle" translate ng-click="profile.showCropAvatarDialog()" ng-if="!profile.is_public">subir avatar</a></div>
-              <div flex>
-                <md-card-title>
-                  <md-card-title-text>
-                    <span class="md-headline">{{profile.user.name}} {{profile.user.lastname}}</span>
-                  </md-card-title-text>
-                </md-card-title>
+            <md-card-title>
+              <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                  <h3 >Siguiendo</h3>
+                  <!--<p>{{siguiendo.length}}</p>-->
+                </div>
+                <div layout="column" layout-align="center center">
+                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                  <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                  <div class="name"><strong>{{profile.user.name}} {{profile.user.lastname}}</strong>
+                  </div>
+                </div>
+                <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                  <h3 >Seguidores</h3>
+                  <!--<p>{{seguidores.length}}</p>-->
+                </div>
+                  <!--<md-button class="bt-gray bottom" ng-click="profile.showCropCoverDialog()"></md-button>-->
               </div>
-              <div flex ng-if="!profile.is_public">
-                <a class="bt-gray bottom" translate ng-click="profile.showCropCoverDialog()">subir portada</a>
-              </div>
-            </div>
-          </md-card>
+            </md-card-title>
+          </md-card-content>
+        </md-card>
+    </div>
+  <div class="blueBlock" layout="column" hide-xs><strong>Edita tu perfil</strong></div>
+    <div class="blueArrow" hide-xs></div>
+
+  <div flex class="editor-Perfil" layout="row" layout-xs="column">
+    <div layout="column" class="credentials">
+      <md-input-container class="md-block">
+        <label >Nombre</label>
+        <input required name="name" ng-model="profile.user.name" ng-disabled="profile.is_public">
+        <div ng-messages="profileForm.name.$error">
+          <div ng-message="required" >Campo requerido.</div>
         </div>
-        <div flex>        
-          <md-input-container class="md-block">
-            <label translate>Nombre</label>
-            <input required name="name" ng-model="profile.user.name" ng-disabled="profile.is_public">
-            <div ng-messages="profileForm.name.$error">
-              <div ng-message="required" translate>Campo requerido.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label translate>Apellido</label>
-            <input required name="lastname" ng-model="profile.user.lastname" ng-disabled="profile.is_public">
-            <div ng-messages="profileForm.lastname.$error">
-              <div ng-message="required" translate>Campo requerido.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label translate>Email</label>
-            <input required name="email" ng-model="profile.user.email" ng-disabled="profile.is_public">
-            <div ng-messages="profileForm.email.$error">
-              <div ng-message="required" translate>Campo requerido.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label translate>Intereses</label>
-            <md-input-container class="intereses">
-              <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple ng-disabled="profile.is_public" aria-label="interests">
-                <md-optgroup label="intereses">
-                  <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>
-                </md-optgroup>
-              </md-select>
-            </md-input-container>
-          </md-input-container> 
-          <md-input-container class="md-block">
-            <label translate>Habilidades</label>
-            <md-input-container class="habilidades">
-              <tags-input placeholder="" ng-model="profile.user.skills_list">
-                <auto-complete source="profile.loadSkills($query)"></auto-complete>
-              </tags-input>
-            </md-input-container>
-          </md-input-container>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label >Apellido</label>
+        <input required name="lastname" ng-model="profile.user.lastname" ng-disabled="profile.is_public">
+        <div ng-messages="profileForm.lastname.$error">
+          <div ng-message="required" >Campo requerido.</div>
         </div>
-        <div flex>
-          <md-input-container class="md-block">
-            <label translate>Sobre vos</label>
-            <textarea name="about" ng-model="profile.user.about"  md-no-asterisk md-maxlength="500" rows="3" md-select-on-focus ng-disabled="profile.is_public"></textarea>
-            <div ng-messages="profileForm.about.$error">
-              <div ng-message="required" translate>Campo requerido.</div>
-              <div ng-message="md-maxlength" translate>The name has to be less than 500 characters long.</div>
-            </div>
-          </md-input-container>
-          <div class="md-block wrap-input">
-            <am-date-picker ng-model="profile.user.birthdate"
-              am-cancel-button="Cancelar"
-              am-back-button-text="Volver"
-              am-input-label="Fecha de Nacimiento"
-              am-allow-clear="false"
-              am-input-date-format="L"
-              am-popup-date-format="D MMMM YYYY"
-              am-show-input-icon="true"
-              name="birthdate">
-            </am-date-picker>
-          </div>        
-        </div>      
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label >Email</label>
+        <input required name="email" ng-model="profile.user.email" ng-disabled="profile.is_public">
+        <div ng-messages="profileForm.email.$error">
+          <div ng-message="required" >Campo requerido.</div>
+        </div>
+        </md-input-container>
       </div>
-      <div layout="column" layout-padding class="profile-bottom" layout-align-gt-sm="center center" layout-gt-sm="row" ng-if="profile.is_complete && !profile.is_public">
-        <div flex><h3 translate>Cambiar Contraseña</h3></div>
-        <div flex>
+    <div layout="column" class="credentials">
+      <div class="md-block wrap-input">
+          <am-date-picker ng-model="profile.user.birthdate"
+                          am-cancel-button="Cancelar"
+                          am-back-button-text="Volver"
+                          am-input-label="Fecha de Nacimiento"
+                          am-allow-clear="false"
+                          am-input-date-format="DD/MM/YYYY"
+                          am-popup-date-format="D MMMM YYYY"
+                          am-show-input-icon="true"
+                          name="birthdate">
+          </am-date-picker>
+      </div>
+      <md-input-container class="md-block">
+        <label >Intereses</label>
+        <md-input-container class="intereses">
+          <md-select ng-model="profile.user.interests_list" ng-model-options="{trackBy: '$value.id'}" multiple ng-disabled="profile.is_public" aria-label="interests">
+            <md-optgroup label="intereses">
+              <md-option ng-value="item" ng-repeat="item in profile.interests">{{item.description}}</md-option>
+            </md-optgroup>
+          </md-select>
+        </md-input-container>
+      </md-input-container>
+    </div>
+    <div layout="column" class="credentials">
+      <md-input-container class="md-block">
+        <label>Sobre vos</label>
+        <textarea class="sobreVos" name="about" ng-model="profile.user.about"  md-no-asterisk md-maxlength="500" rows="3" md-select-on-focus ng-disabled="profile.is_public"></textarea>
+        <div ng-messages="profileForm.about.$error">
+          <div ng-message="required">Campo requerido.</div>
+          <div ng-message="md-maxlength">Maximo 500 caracteres.</div>
+        </div>
+      </md-input-container>
+    </div>
+  </div>
+    <div class="contrasena-Notificaciones" layout="column">
+      <div class="cambiar-Contrasena">
+      <div flex class="credentials" layout="row" layout-xs="column">
+          <h6>Cambiar Contraseña</h6>
           <md-input-container class="md-block">
-            <label translate>Contraseña actual</label>
+            <label >Contraseña actual</label>
             <input name="current_password" ng-model="profile.user.current_password" type="password" ng-change="profileForm.current_password.$setValidity('currentPasswordWrong', true)">
             <div ng-messages="profileForm.current_password.$error">
-              <div ng-message="currentPasswordWrong" translate>Clave actual incorrecta.</div>
+              <div ng-message="currentPasswordWrong" >Clave actual incorrecta.</div>
             </div>
           </md-input-container>
-        </div>
-        <div flex>
           <md-input-container class="md-block">
-            <label translate>Nueva Contraseña</label>
+            <label >Nueva Contraseña</label>
             <input name="password" ng-model="profile.user.password" type="password">
           </md-input-container>
-        </div>
-        <div flex="10">
           <md-input-container class="md-block">
-            <label translate>Ingresa otra vez tu nueva contraseña</label>
+            <label >Reingresa nueva contraseña</label>
             <input name="confirmPassword" ng-model="profile.user.confirmPassword" data-password-verify="profile.user.password" type="password">
             <div ng-messages="profileForm.confirmPassword.$error" ng-if="profileForm.confirmPassword.$touched">
               <div ng-message="passwordVerify" translate>Las contraseñas ingresadas no son iguales.</div>

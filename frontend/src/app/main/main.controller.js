@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, sponsor, ENV, winwin, miembro, gettextCatalog, gettext, $auth, $mdDialog, $window, $document, $sce, Analytics, grupo) {
+  function MainController($timeout,sponsor,ENV ,winwin ,miembro,gettextCatalog ,gettext ,$auth ,$mdDialog ,$window ,$document,$sce ,Analytics ,grupo) {
     var vm = this;
 
     vm.awesomeThings = [];

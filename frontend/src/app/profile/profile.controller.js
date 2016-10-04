@@ -31,7 +31,7 @@
         return vm.skills;
       });
 
-    }
+    };
 
     vm.user = {
       interests_list:[],
@@ -47,9 +47,9 @@
         vm.user = user_data;
         vm.is_complete = (user_data.name && user_data.lastname && user_data.email && user_data.birthdate);
         if (vm.user.birthdate) {
-          vm.user.birthdate = new Date(vm.user.birthdate);
+          vm.user.birthdate = new Date(user_data.birthdate.toString().replace(/-/g,'/'));
         }
-        
+
         winwin.getInterests().then(function(data) {
           vm.interests = data;
         });
