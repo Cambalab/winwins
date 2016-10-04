@@ -42,7 +42,7 @@
     });
 
     $rootScope.createWinwin = function() {
-      if ($auth.isAuthenticated) {
+      if ($auth.isAuthenticated()) {
         $state.go('home.crear-winwin');
       } else {
         $rootScope.returnState = 'home.crear-winwin';
