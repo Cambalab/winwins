@@ -136,7 +136,6 @@
 
     vm.join = function() {
       if($auth.isAuthenticated()) {
-
         $mdDialog.show({
           controller: ModalConfirmacionSumarseController,
           controllerAs: 'vm',

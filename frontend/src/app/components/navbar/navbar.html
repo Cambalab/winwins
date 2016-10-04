@@ -27,7 +27,7 @@
 					{{(vm.notifications | filter:{is_read:0}).length }}
 				</span>
 			</md-button>
-			<md-button class="md-primary create-winwin-button" hide-sm ui-sref="home.crear-winwin()">
+			<md-button class="md-primary create-winwin-button" hide-sm ng-click="$root.createWinwin()">
 				<md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
 				<translate>CREAR UN WINWIN</translate>
 			</md-button>

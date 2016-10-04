@@ -6,7 +6,7 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, $rootScope, gettextCatalog, ENV, Analytics) {
+  function runBlock($log, $rootScope, gettextCatalog, ENV, Analytics, $auth, $state, $mdDialog, $document) {
 
     var changeLang = function(event, lang) {
       gettextCatalog.setCurrentLanguage(lang);
@@ -40,6 +40,23 @@
             $rootScope.loadingFlag = false;
         }
     });
+
+    $rootScope.createWinwin = function() {
+      if ($auth.isAuthenticated) {
+        $state.go('home.crear-winwin');
+      } else {
+        $rootScope.returnState = 'home.crear-winwin';
+        $mdDialog.show({
+          controller: 'LoginController',
+          controllerAs: 'login',
+          templateUrl: 'app/login/login.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true
+        });
+      }
+    }
+    
+    
   }
 
 })();
