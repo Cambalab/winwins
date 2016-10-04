@@ -15,10 +15,11 @@
                                     </div>
                                     <div layout="column" layout-align="center center">
                                         <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                                        <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"></md-button>
                                         <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                                         <div ng-if="!profile.user.private || profile.user.myself">
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                                            <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
+                                            <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
                                             <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                                         </div>
                                     </div>
@@ -57,7 +58,7 @@
                             <div class="length">{{profile.creadospormi.length}}</div>
                         </div>
                         <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
-                            <acme-highlighted items="profile.creadospormi && vm.showDescription == false" icon="'icon-highlighted'"></acme-highlighted>
+                            <acme-highlighted items="profile.creadospormi" showDescription="false" icon="'icon-highlighted'"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
                             <p ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
                         </div>
@@ -76,7 +77,7 @@
                     <md-card>
                         <div class="seguidores-Container" layout-align="row">
                             <h3><strong>Seguidores</strong></h3>
-                            <div class="length">{{profile.seguidores.length}}</div>
+                            <div class="length"> <p>{{profile.user.followers_amount}}</p></div>
                         </div>
                         <div class="seguidores-Content" layout="column">
                             <p>Proximamente podras seguir usuarios</p>
@@ -133,12 +134,13 @@
                                         <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
                                         <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                                         <div ng-if="!profile.user.private || profile.user.myself">
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                                            <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
+                                            <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
                                             <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                                         </div>
                                     </div>
                                     <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Seguidores</h3>
+                                        <h3>Seguidores</h3>
                                         <p>{{profile.seguidores.length}}</p>
                                     </div>
                                 </div>
@@ -177,7 +179,7 @@
                                     </div>
                                     <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                                         <h3 translate>Seguidores</h3>
-                                        <p>{{profile.seguidores.length}}</p>
+                                        <p>{{profile.user.followers_amount}}</p>
                                     </div>
                                 </div>
                             </md-card-title>
@@ -187,6 +189,21 @@
             </div>
                 <div class="blueBlock" layout="column"><strong>Actividad Reciente</strong></div>
                 <div class="blueArrow"></div>
+                <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
+                <div layout-align="row">
+                    <md-list class="actividadRecienteContainer">
+                        <md-list-item class="sinActividad" ng-if="profile.user.activities.length == 0">No tiene actividad Reciente</md-list-item>
+                        <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
+                            <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({user.id})">
+                            <div layout-align="column">
+                                <div layout-align="row"><p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
+                                </div>
+                                <p class="titulo {{act.type}}">{{act.titulo}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+
             </md-tab-body>
         </md-tab>
     </md-tabs>

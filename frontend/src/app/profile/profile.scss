@@ -389,6 +389,8 @@
         width: 100%;
         .md-card-avatar {
           border-radius: 100px;
+          max-height: 140px;
+          max-width: 140px;
         }
         .name {
           font-size: 5vmin;
@@ -463,6 +465,8 @@
         .md-card-image {
           display: block;
           max-width: 100%;
+          height: 200px;
+          width: 360px;
         }
       }
     }
@@ -485,7 +489,9 @@
       background: #548ed8;
       font-size: 12px;
       color: #fff;
-    }
+      line-height: 32px;
+      border-radius: 0;
+        }
   }
 
   .bioTotal {
@@ -666,51 +672,52 @@
         }
       }
     }
-    .actividadReciente {
-      text-align: center;
-      font-size: 12px;
-      color: #666666;
-      padding: 8px;
-    }
-    .actividadRecienteContainer{
-      overflow: scroll;
-      overflow-x: hidden;
-      height: 400px;
-      text-align: left;
-      .actividadRecienteContent {
-        border-radius: 5px;
-        margin: 4px;
-        font-size: 12px;
-        font-weight: normal;
-        background: #fff;
-        height: 80px;
+  }
+}
 
-        .titulo.WW_JOIN  {
-          color: #EE874F;
-        }
-        .titulo.WW_CREATED {
-          color: #EE874F;
-        }
-        .titulo.USER_FOLLOW {
-          color: #FF2626;
-        }
-        .titulo.USER_UNFOLLOW {
-          color: #FF2626;
-        }
-        .titulo.GROUP_JOIN {
-          color: #5EA645
-        }
-        .titulo.GROUP_CREATED {
-          color: #5EA645
-        }
-        .mensajito {
-          line-height: 0px;
-          font-weight: bold;
-        }
-        .mensajito:first-letter {
-          text-transform: uppercase;
-        }
-      }
+.actividadReciente {
+  text-align: center;
+  font-size: 12px;
+  color: #666666;
+  padding: 8px;
+}
+.actividadRecienteContainer{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 400px;
+  text-align: left;
+  .actividadRecienteContent {
+    border-radius: 5px;
+    margin: 4px;
+    font-size: 12px;
+    font-weight: normal;
+    background: #fff;
+    height: 80px;
+
+    .titulo.WW_JOIN  {
+      color: #EE874F;
+    }
+    .titulo.WW_CREATED {
+      color: #EE874F;
+    }
+    .titulo.USER_FOLLOW {
+      color: #FF2626;
+    }
+    .titulo.USER_UNFOLLOW {
+      color: #FF2626;
+    }
+    .titulo.GROUP_JOIN {
+      color: #5EA645
+    }
+    .titulo.GROUP_CREATED {
+      color: #5EA645
+    }
+    .mensajito {
+      line-height: 0px;
+      font-weight: bold;
+    }
+    .mensajito:first-letter {
+      text-transform: uppercase;
     }
   }
 }
