@@ -154,19 +154,15 @@
           });
         });
       } else {
-        $rootScope.returnState = {
-          state: 'home.winwin',
-          parameters: {
-              winwinId: vm.winwin.id
-          }
-        };
         $mdDialog.show({
           controller: 'LoginController',
           controllerAs: 'login',
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
           clickOutsideToClose:true
-        });
+        }).then(function(success) {
+          vm.join();
+        })
       }
     }
 
