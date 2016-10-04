@@ -34,6 +34,11 @@
         return $auth.isAuthenticated();
       };
 
+      vm.back = function() {
+        history.back();
+        vm.apply();
+      };
+
       var event1 = $rootScope.$on('account_change',function(event){
         if (vm.isAuthenticated) {
           account.getProfile()
