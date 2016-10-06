@@ -139,6 +139,7 @@
         views: {
           'content@home': {
             templateUrl: 'app/winwin/winwin-list.html',
+            controller: 'WinwinListController',
             controllerAs: 'winwin'
           }
         }
