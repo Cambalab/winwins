@@ -465,8 +465,6 @@
         .md-card-image {
           display: block;
           max-width: 100%;
-          height: 200px;
-          width: 360px;
         }
       }
     }
@@ -477,7 +475,7 @@
   .buttons-xs-sm {
     margin: 3px;
     .bt-green {
-      width: 178px;
+      width: 100%;
       background: #4cae4e;
       font-size: 12px;
       color: #fff;
@@ -485,13 +483,13 @@
     }
     .bt-blue {
       margin-top: 0;
-      width: 178px;
+      width: 100%;
       background: #548ed8;
       font-size: 12px;
       color: #fff;
       line-height: 32px;
       border-radius: 0;
-        }
+    }
   }
 
   .bioTotal {
@@ -543,7 +541,7 @@
           color: #fff;
           border-radius: 5px;
           display: inline;
-          padding: 3px;
+          padding: 6px;
         }
         margin: 10px 20px;
         border-bottom: 1px;
@@ -556,23 +554,27 @@
         }
         .mensaje {
           font-size: 10px;
-          margin: 0;
+          margin: 0px;
           border-radius: 0 0 3px 3px;
         }
       }
       .my-Winwins-Content {
         border-bottom: 1px;
         background: #f7f7f7;
-        padding: 20px;
+          .mensaje {
+            font-size: 15px;
+            margin: 20px;
+            border-radius: 0 0 3px 3px;
+          }
       }
       .participo-Winwins-Container {
         margin: 10px 20px;
         .length {
-          background:  #EC8645;
+          background: #EC8645;
           color: #fff;
           border-radius: 5px;
           display: inline;
-          padding: 3px;
+          padding: 6px;
         }
         h3 {
           margin-right: 5px;
@@ -583,11 +585,10 @@
           .mensaje {
             font-size: 10px;
             padding-left: 10px;
-            margin: 0;
+            margin: 20px;
             border-radius: 0 0 3px 3px;
             .participo-Winwins-Content {
               background: #f7f7f7;
-              padding: 20px;
             }
           }
         }
@@ -600,7 +601,7 @@
           color: #fff;
           border-radius: 5px;
           display: inline;
-          padding: 3px;
+          padding: 6px;
         }
         h3 {
           margin-right: 5px;
@@ -613,12 +614,27 @@
             margin: 0;
             font-weight: bold;
             border-radius: 0 0 3px 3px;
-     .seguidores-Content {
-       border-bottom: 1px;
-       background: #f7f7f7;
-              padding: 20px;
-            }
           }
+        }
+      }
+      .seguidores-Content {
+        background: #fafafa;
+        .seguidores-items {
+          padding: 20px;
+          max-width: 100%
+        }
+        .avatarSeguidor {
+          max-width: 80px;
+          border-radius: 100px;
+          margin: 5px;
+        }
+        .mensaje {
+          text-align: center;
+          font-size: 15px;
+          padding: 30px;
+          margin: 0;
+          border-radius: 0 0 3px 3px;
+          text-color: #d5d5d5;
         }
       }
       .siguiendo-Container {
@@ -630,7 +646,7 @@
           color: #fff;
           border-radius: 5px;
           display: inline;
-          padding: 3px;
+          padding: 6px;
         }
         h3 {
           margin-right: 5px;
@@ -644,96 +660,114 @@
             margin: 0;
             font-weight: bold;
             border-radius: 0 0 3px 3px;
-            .siguiendo-Content {
-              max-width: 100%;
-              background: #f7f7f7;
-              padding: 20px;
+
+          }
+        }
+      }
+      .siguiendo-Content {
+        background: #fafafa;
+        .siguiendo-items {
+          padding: 20px;
+          max-width: 100%;
+          .avatarSiguiendo {
+            max-width: 80px;
+            border-radius: 100px;
+            margin: 5px;
+            .mensaje {
+              font-size: 10px;
+              padding-left: 10px;
+              margin: 0;
+              border-radius: 0 0 3px 3px;
+            }
+          }
+        }
+
+      }
+    }
+      .bio-Actions {
+        flex: 30%;
+        max-width: 100%;
+        .mensajeriaPrivada {
+          .md-button {
+            max-width: 100%;
+            width: 275px;
+            background: #548ed8;
+            font-size: 12px;
+            color: #fff;
+            margin: 0px;
+            margin-top: 8px;
+            margin-left: 8px;
+            .md-button:first-letter {
+              text-transform: uppercase
             }
           }
         }
       }
-    }
-    .bio-Actions {
-      flex: 30%;
-      max-width: 100%;
-      .mensajeriaPrivada {
-        .md-button {
-          max-width: 100%;
-          width: 275px;
-          background: #548ed8;
-          font-size: 12px;
-          color: #fff;
-          margin: 0px;
-          margin-top: 8px;
-          margin-left: 8px;
-          .md-button:first-letter {
-            text-transform: uppercase
-          }
-        }
+
+
+  }
+}
+
+  .actividadReciente {
+    text-align: center;
+    font-size: 12px;
+    color: #666666;
+    padding: 8px;
+  }
+  .actividadRecienteContainer {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
+    text-align: left;
+    .actividadRecienteContent {
+      border-radius: 5px;
+      margin: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #fff;
+      height: 80px;
+
+      .titulo.WW_JOIN {
+        color: #EE874F;
+      }
+      .titulo.WW_CREATED {
+        color: #EE874F;
+      }
+      .titulo.USER_FOLLOW {
+        color: #FF2626;
+      }
+      .titulo.USER_UNFOLLOW {
+        color: #FF2626;
+      }
+      .titulo.GROUP_JOIN {
+        color: #5EA645
+      }
+      .titulo.GROUP_CREATED {
+        color: #5EA645
+      }
+      .mensajito {
+        line-height: 0px;
+        font-weight: normal;
+      }
+      .mensajito:first-letter {
+        text-transform: uppercase;
       }
     }
   }
-}
 
-.actividadReciente {
-  text-align: center;
-  font-size: 12px;
-  color: #666666;
-  padding: 8px;
-}
-.actividadRecienteContainer{
-  overflow: scroll;
-  overflow-x: hidden;
-  height: 400px;
-  text-align: left;
-  .actividadRecienteContent {
-    border-radius: 5px;
-    margin: 4px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #fff;
-    height: 80px;
-
-    .titulo.WW_JOIN  {
-      color: #EE874F;
-    }
-    .titulo.WW_CREATED {
-      color: #EE874F;
-    }
-    .titulo.USER_FOLLOW {
-      color: #FF2626;
-    }
-    .titulo.USER_UNFOLLOW {
-      color: #FF2626;
-    }
-    .titulo.GROUP_JOIN {
-      color: #5EA645
-    }
-    .titulo.GROUP_CREATED {
-      color: #5EA645
-    }
-    .mensajito {
-      line-height: 0px;
-      font-weight: normal;
-    }
-    .mensajito:first-letter {
-      text-transform: uppercase;
+  .responsiveTabs {
+    md-tabs-wrapper {
+      background: #7199f4;
+      @media (min-width: 770px) {
+        display: none;
+        background: #fff;
+      }
     }
   }
-}
-
-.responsiveTabs {
-  md-tabs-wrapper {
-    background: #7199f4;
-    @media (min-width: 600px) {
-      display: none;
-      background: #fff;
-    }
-  }
-}
 
 
-.title-destacado {
+
+  .title-destacado {
     background: #7199f4;
     color: #fff;
     font-size: 16px;
@@ -755,27 +789,32 @@
     }
   }
 
-.blueBlock {
-  max-height: 100%;
-  max-width: 100%;
-  height: 100px;
-  width: 100%;
-  line-height: 100px;
-  font-size: 25px;
-  text-align: center;
-  color: #fff;
-  background: #496ccd;
-  margin: auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-.blueArrow {
-  width: 0px;
-  height: 0px;
-  border-style: solid;
-  margin: auto;
-  border-width: 30px 28px 0 28px;
-  border-color: #496ccd transparent transparent transparent;
-  line-height: 0px;
-  _border-color: #496ccd #000000 #000000 #000000;
-}
+  .blueBlock {
+    max-height: 100%;
+    max-width: 100%;
+    height: 100px;
+    width: 100%;
+    line-height: 100px;
+    font-size: 25px;
+    text-align: center;
+    color: #fff;
+    background: #496ccd;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+  .blueArrow {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    margin: auto;
+    border-width: 30px 28px 0 28px;
+    border-color: #496ccd transparent transparent transparent;
+    line-height: 0px;
+  }
 
+  .sinActividad {
+    padding: 20px;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+  }

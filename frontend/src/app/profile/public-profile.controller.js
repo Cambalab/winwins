@@ -105,6 +105,7 @@
       });
 
       vm.winwins_length = vm.creadospormi.length + vm.enqueparticipo.length;
+
     });
 
     vm.unfollow = function(id){
