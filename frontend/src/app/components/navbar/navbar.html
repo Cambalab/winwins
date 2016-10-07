@@ -1,3 +1,4 @@
+<div layout-align="column">
 <md-toolbar md-scroll-shrink lg="true" layout-align="center center" layout="row">
 	<div class="menu hide-xs" layout="row" layout-align="space-between center">
 	  	<div layout="row" layout-align="center center">
@@ -48,7 +49,7 @@
 	<div class="menu hide show-xs">
 		<div layout="row">
 			<div layout="row">
-				<md-icon>keyboard_arrow_left</md-icon>
+				<md-button class="md-icon-button" ng-click="vm.back" alt="Back"><md-icon>keyboard_arrow_left</md-icon></md-button>
 			</div>
 			<div>
 				<a href="#" class="logo-md"><img src="../assets/images/logo.svg" alt="" /></a>
@@ -119,8 +120,13 @@
 	  </div>
   </md-content>
 </md-sidenav>
-<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive">
+	<div>
+<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" style="height: 75px;">
   <p>
-    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}. <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span> <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail" ng-disabled="loadingFlag">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
+    <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}.
+	  <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span>
+	  <a href ng-click="vm.resendActivationMail()" translate ng-show="!vm.sentActivationMail" ng-disabled="loadingFlag">clic para reenviartelo.</a> <span ng-show="vm.sentActivationMail">{{ 'Te reenviamos el mail.' | translate }}</span>
   </p>
 </md-toolbar>
+	</div>
+</div>
