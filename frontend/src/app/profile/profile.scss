@@ -688,6 +688,25 @@
         flex: 30%;
         max-width: 100%;
         .mensajeriaPrivada {
+          .mensajes-recibidos-title{
+            text-align: center;
+            padding: 15px;
+            color: #666666;
+            .mensajes-recibidos-content {
+            margin: 10px;
+            }
+          }
+          .block-mensaje {
+            width: 270px;
+            max-width: 100%;
+            height: 150px;
+            background: #fff;
+            margin: 10px;
+            border-radius: 2px;
+            .placeholder-mensaje {
+              font-size: 10px;
+            }
+          }
           .md-button {
             max-width: 100%;
             width: 275px;
@@ -697,9 +716,16 @@
             margin: 0px;
             margin-top: 8px;
             margin-left: 8px;
+            &:hover {
+              background: #bcdeff;
+            }
             .md-button:first-letter {
               text-transform: uppercase
             }
+          }
+          .exito {
+            text-align:center;
+            font-size: 14px;
           }
         }
       }

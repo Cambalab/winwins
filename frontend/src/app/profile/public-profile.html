@@ -107,7 +107,27 @@
                 </div>
                 <div class="bio-Actions" layout="column" hide-xs hide-sm>
                     <div class="mensajeriaPrivada">
-                        <md-button ng-if="!profile.user.myself">Manda un mensaje a {{profile.user.name}}</md-button>
+                      <div class="inbox" ng-if="profile.user.myself">
+                        <md-card class="mensajes-recibidos-title">INBOX</md-card>
+                        <md-card class="mensajes-recibidos-content" ng-repeat="mensajes in conversations">{{vm.user.conversations}}</md-card>
+                      </div>
+                        <form method="post" ng-submit="profile.sendMessage()" name="Conversation" ng-if="!profile.user.myself">
+                           <md-card>
+                                <div class="mensajes-anteriores-public" ng-show="vm.user.conversations > 0">Mensajes anteriores
+                                    <div>{{vm.user.conversations}}</div>
+                                </div>
+                           </md-card>
+                            <md-button type="submit">Envia mensaje a {{profile.user.name}} &#x279e;</md-button>
+                            <div class="exito" vm.status="succesful">Tu mensaje ha sido enviado!</div>
+                            <md-input-container class="block-mensaje">
+                                <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
+                                <textarea class="Mensaje" name="mensaje" md-maxlength="140" rows="5" md-select-on-focus></textarea>
+                                <div ng-messages="profileForm.about.$error">
+                                    <div ng-message="required">Campo requerido.</div>
+                                    <div ng-message="md-maxlength">Maximo 140 caracteres.</div>
+                                </div>
+                            </md-input-container>
+                        </form>
                     </div>
                     <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
                         <md-list class="actividadRecienteContainer">

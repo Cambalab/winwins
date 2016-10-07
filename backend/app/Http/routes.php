@@ -131,6 +131,8 @@ Route::post('api/group/{id}', ['middleware' => 'auth', 'uses' => 'GroupControlle
 Route::post('api/users/{id}/comment', ['middleware' => 'auth', 'uses' => 'UserController@comment']);
 Route::resource('api/users', 'UserController');
 
+Route::post('api/users/send', ['middleware' => 'auth', 'uses' => 'UserController@sendMessage']);
+
 // Skills
 Route::post('api/skills/search', ['middleware' => 'auth', 'uses' => 'SkillsController@search']);
 
