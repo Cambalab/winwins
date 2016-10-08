@@ -58,7 +58,7 @@ class UserController extends Controller {
         $cnvid = $request->input('conversation_id');
         //HARCODED
         if($current_user){
-            //    if(true){
+            //        if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
                 //aLog::info('ES CERO');
@@ -98,7 +98,7 @@ class UserController extends Controller {
                 ->where('participants.conversation_id', '=', $cnvid)
                 //HARCODED
                 ->where('participants.user_id', '=', $current_user->id)
-                //->where('participants.user_id', '=', 32)
+                // ->where('participants.user_id', '=', 32)
                 ->select('participants.id')
                 ->get();
 
@@ -112,7 +112,9 @@ class UserController extends Controller {
                     'body' => $request->input('message')]
             );
         }
+        return response()->json(['enviado']);
     }
+
 
     public function paginate(Request $request, $page = 0, $amount = 15) {
         $current_user = false;
@@ -226,11 +228,11 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-            //$anonymus = false;
+            // $anonymus = false;
             if (!$anonymus){
                 if ($my_self->id == $user->id){
                 //HARCODED!!!
-                //    if (true){
+                    //    if (false){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
@@ -245,9 +247,12 @@ class UserController extends Controller {
                     foreach($converown as $c) {
                         Log::info($c->id);
                         $messages = DB::table('messages')
-                            ->select('body', 'participant_id', 'created_at')
-                            ->where('conversation_id', '=', $c->id)
-                            ->orderBy('created_at', 'asc')
+                            ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                            ->join('users','participants.user_id','=','users.id')
+                            ->join('user_details','users.id','=','user_details.user_id')
+                            ->select('messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                            ->where('messages.conversation_id', '=', $c->id)
+                            ->orderBy('messages.created_at', 'asc')
                             ->get();
 
                         $cnv = new Conversation();
@@ -278,13 +283,16 @@ class UserController extends Controller {
                     $conversations = new Collection();
 
                     foreach($cvsIDS as $c) {
-                        Log::info($c->id);
+                        Log::info('SACANDO ENSAJE'.$c->id);
                         $messages = DB::table('messages')
-                            ->select('body', 'participant_id', 'created_at')
-                            ->where('conversation_id', '=', $c->id)
-                            ->orderBy('created_at', 'asc')
+                            ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                            ->join('users','participants.user_id','=','users.id')
+                            ->join('user_details','users.id','=','user_details.user_id')
+                            ->select('messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                            ->where('messages.conversation_id', '=', $c->id)
+                            ->orderBy('messages.created_at', 'asc')
                             ->get();
-
+                        //Log::info($messages);
                         $cnv = new Conversation();
                         $cnv -> id = $c->id;
                         $cnv -> subject = $c->subject;

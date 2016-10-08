@@ -128,7 +128,7 @@
     }
 
     vm.sendMessage = function(convid, msj){
-      user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'SUBJECT'})
+      user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'asunto new conversation'})
     }
   }
 
