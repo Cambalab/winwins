@@ -6,7 +6,7 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin) {
+  function PublicProfileController($log, user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin) {
     var vm = this;
 
     vm.userId = $stateParams.userId;
@@ -118,12 +118,17 @@
     }
 
     vm.follow = function(id){
+
         user.follow(id);
         $mdDialog.show({
             templateUrl: 'app/profile/modal-follow.tmpl.html',
             parent: angular.element($document.body),
             clickOutsideToClose:true
       });
+    }
+
+    vm.sendMessage = function(convid, msj){
+      user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'SUBJECT'})
     }
   }
 
