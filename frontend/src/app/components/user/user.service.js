@@ -43,6 +43,7 @@
     }
 
     _user.sendMessage = function(msj){
+
       return Restangular.all('users/send').post(msj);
     }
 
