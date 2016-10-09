@@ -61,7 +61,7 @@
                             <div class="length">{{profile.creadospormi.length}}</div>
                         </div>
                         <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
-                            <acme-highlighted items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
+                            <acme-highlighted class="profile" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
                             <p class="mensaje" ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
                         </div>
@@ -72,7 +72,7 @@
                             <div class="length">{{profile.enqueparticipo.length}}</div>
                         </div>
                         <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
-                            <acme-highlighted items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
+                            <acme-highlighted class="profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
                             <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
                         </div>
