@@ -1,0 +1,15 @@
+<md-dialog aria-label="List dialog">
+    <md-dialog-content>
+        <md-list>
+            <md-list-item class="mensajes-recibidos-content" ng-repeat="conversation in profile.user.conversations">
+              <md-list-item ng-repeat="message in conversation.messages" layout="row" layout-align="space-around-center">
+                <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                <div class="datos-mensaje" layout="column">De: {{message.name}}
+                  <div>Subject: {{conversation.subject}}
+                  </div>
+              </div>
+            </md-list-item>
+            </md-list-item>
+     </md-list>
+    </md-dialog-content>
+</md-dialog>

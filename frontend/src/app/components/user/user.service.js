@@ -42,6 +42,10 @@
       return Restangular.one('users/unfollow', id).get();
     }
 
+    _user.sendMessage = function(msj) {
+          return Restangular.all('users/send').post(msj);
+    }
+
     return _user;
   }
 

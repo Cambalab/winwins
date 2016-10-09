@@ -185,7 +185,7 @@
       background: #f1f1f1;
       padding-top: 4px;
       padding-bottom: 4px;
-      margin-bottom: 4px;
+      margin-top:20px;
       h3 {
         color: #4a6dce;
         font-size: 16px;
@@ -281,6 +281,7 @@
     }
     .contrasena-Notificaciones {
       max-width: 100%;
+      margin-top: 20px;
       .cambiar-Contrasena {
         background: #f9f9f9;
         padding: 10px;
@@ -688,24 +689,11 @@
         flex: 30%;
         max-width: 100%;
         .mensajeriaPrivada {
-          .mensajes-recibidos-title{
+          .mensajes-anteriores {
+            font-size: 12px;
             text-align: center;
-            padding: 15px;
-            color: #666666;
-            .mensajes-recibidos-content {
-            margin: 10px;
-            }
-          }
-          .block-mensaje {
-            width: 270px;
-            max-width: 100%;
-            height: 150px;
-            background: #fff;
-            margin: 10px;
-            border-radius: 2px;
-            .placeholder-mensaje {
-              font-size: 10px;
-            }
+            padding: 10px;
+            color: #5e5e5e;
           }
           .md-button {
             max-width: 100%;
@@ -723,13 +711,44 @@
               text-transform: uppercase
             }
           }
-          .exito {
-            text-align:center;
-            font-size: 14px;
+          .block-mensaje {
+            width: 270px;
+            max-width: 100%;
+            height: 150px;
+            background: #fff;
+            margin: 10px;
+            border-radius: 2px;
+            .placeholder-mensaje {
+              font-size: 10px;
+            }
+          }
+          .avatar-mensaje {
+            width: 40px;
+            height: 40px;
+            border-radius: 100px;
+            margin: 10px;
+          }
+          .datos-mensaje {
+            font-size: 12px;
+            font-weight: normal;
+            margin: 3px;
+          }
+          .mensajes-recibidos-title {
+            text-align: center;
+            padding: 15px;
+            color: #666666;
+            .mensajes-recibidos-content {
+              margin: 10px;
+            }
+
+
+            .exito {
+              text-align: center;
+              font-size: 14px;
+            }
           }
         }
       }
-
 
   }
 }
@@ -843,4 +862,5 @@
     font-weight: normal;
     font-size: 12px;
     text-align: center;
+    color: #666666;
   }

@@ -85,6 +85,7 @@
                         </div>
                         <div class="seguidores-Content" layout="row" layout-align="space-around center">
                             <div class="mensaje" ng-if="profile.user.followers.length == 0 && profile.user.myself">Aún no te sigue nadie</div>
+                            <div class="mensaje" ng-if="profile.user.followers.length == 0 && !profile.user.myself">Aún no lo sigue nadie</div>
                             <div class="seguidores-items" layout="column" layout-align="space-around center" ng-repeat="following in profile.user.followers" ui-sref="home.public-profile({userId: following.user_id})">
                                 <img class="avatarSeguidor" ng-src="{{profile.imageServer}}//{{following.photo}}">
                                 <p class="nombreSeguidor">{{following.name}} {{following.lastname}}</p>
@@ -97,8 +98,10 @@
                             <div class="length">{{profile.user.following.length}}</div>
                         </div>
                         <div class="siguiendo-Content" layout="row" layout-align="space-around center">
-                            <div class="mensaje" ng-if="profile.user.following.length == 0 && profile.user.myself">Aún no sigues a nadie, buscá entre nuestra lista de usuarios  </div>
-                        <div class="siguiendo-items" layout="column" layout-align="space-around center" ng-repeat="follower in profile.user.following" ui-sref="home.public-profile({userId: follower.user_id})">
+                            <div class="mensaje" ng-if="profile.user.following.length == 0 && profile.user.myself">Aún no sigues a nadie, buscá entre nuestra lista de usuarios</div>
+                            <div class="mensaje" ng-if="profile.user.following.length == 0 && !profile.user.myself">Aún no sigue a nadie</div>
+
+                            <div class="siguiendo-items" layout="column" layout-align="space-around center" ng-repeat="follower in profile.user.following" ui-sref="home.public-profile({userId: follower.user_id})">
                             <img class="avatarSiguiendo" ng-src="{{profile.imageServer}}//{{follower.photo}}">
                             <p class="nombreSiguiendo">{{follower.name}} {{follower.lastname}}</p>
                         </div>
@@ -108,17 +111,29 @@
                 <div class="bio-Actions" layout="column" hide-xs hide-sm>
                     <div class="mensajeriaPrivada">
                       <div class="inbox" ng-if="profile.user.myself">
-                        <md-card class="mensajes-recibidos-title">INBOX</md-card>
-                        <md-card class="mensajes-recibidos-content" ng-repeat="mensaje in conversations">{{mensajes.name}} {{mensajes.user_id}} {{mensaje.message}}</md-card>
+                        <md-card class="mensajes-recibidos-title" ng-click="profile.inbox()">INBOX</md-card>
+                          <md-card class="mensajes-recibidos-content" ng-repeat="conversation in profile.user.conversations">
+                              <md-card ng-repeat="message in conversation.messages" layout="row" layout-align="space-around-center">
+                                  <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                                  <div class="datos-mensaje" layout="column">De: {{message.name}}
+                                  <div>Subject: {{conversation.subject}}
+                                  </div>
+                                  </div>
+                              </md-card>
+                           </md-card>
                       </div>
-                        <form method="post" ng-submit="profile.sendMessage()" name="Conversation" ng-if="!profile.user.myself">
+                        <form method="post" ng-submit="profile.sendMessage(profile.conversation_id, mensaje)" name="Conversation" ng-if="!profile.user.myself">
                            <md-card>
-                                <div class="mensajes-anteriores-public" ng-show="vm.user.conversations > 0" ng-if="!profile.user.myself">Mensajes anteriores
-                                    <div>{{vm.user.conversations}}</div>
+                              <md-card class="mensajes-anteriores">Mensajes anteriores</md-card>
+                               <div class="mensajes-anteriores-public" ng-if="!profile.user.myself" ng-repeat="cnv in profile.user.conversations">
+                                   <div ng-repeat="message in cnv.messages">
+                                     <md-card class="anterior-contenido" ng-if="profile.user.conversations.length == 0">No hay mensajes</md-card>
+                                     <md-card class="anterior-contenido" ng-if="profile.user.conversations.length > 0">{{message.body}}</md-card>
+                                   </div>
                                 </div>
                            </md-card>
-                            <md-button type="submit">Envia mensaje a {{profile.user.name}} &#x279e;</md-button>
-                            <div class="exito" vm.status="succesful">Tu mensaje ha sido enviado!</div>
+                            <md-button class="md-button" type="submit" ng-click="profile.sendMessage(profile.conversation_id, mensaje)">Envia mensaje a {{profile.user.name}} &#x279e;</md-button>
+                            <!--<div class="exito" vm.status="succesful">Tu mensaje ha sido enviado!</div>-->
                             <md-input-container class="block-mensaje">
                                 <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
                                 <textarea class="Mensaje" ng-model="mensaje" md-maxlength="140" rows="5" md-select-on-focus>
