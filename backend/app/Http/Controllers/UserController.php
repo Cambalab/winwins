@@ -237,7 +237,7 @@ class UserController extends Controller {
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
-                        ->where('users.id', '=',$my_self->id)
+                          ->where('users.id', '=',$my_self->id)
                         //->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
@@ -269,7 +269,7 @@ class UserController extends Controller {
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
                         ->where('users.id', '=',$my_self->id)
-                        //->where('users.id', '=','32')
+                        // ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
                     $converother = DB::table('participants')
@@ -452,6 +452,10 @@ class UserController extends Controller {
         }
 
         $userDetail = UserDetail::find($user->id);
+
+        if($request->has('email')){
+            $user->email = $request->input('email');
+        }
 
 		if($request->has('name')) {
             $userDetail->name = $request->input('name');
