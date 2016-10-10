@@ -143,6 +143,21 @@
         })
       }
     }
+
+    vm.sendMessage = function(convid, msj){
+      user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'asunto new conversation'})
+    }
+
+      vm.inbox = function () {
+          $mdDialog.show({
+              controller: function () {
+                  return self;
+              },
+              controllerAs: 'PublicProfileController',
+              templateUrl: 'app/profile/modal-inbox.tmpl.html',
+              clickOutsideToClose: true
+          });
+      };
   }
 
 
