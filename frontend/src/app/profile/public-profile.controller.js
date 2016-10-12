@@ -6,7 +6,7 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController($log, user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin) {
+  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth) {
     var vm = this;
 
     vm.userId = $stateParams.userId;
@@ -109,27 +109,55 @@
     });
 
     vm.unfollow = function(id){
-      user.unfollow(id);
-      $mdDialog.show({
-        templateUrl: 'app/profile/modal-unfollow.tmpl.html',
-        parent: angular.element($document.body),
-        clickOutsideToClose:true
+      user.unfollow(id).then(function(){
+        $mdDialog.show({
+          templateUrl: 'app/profile/modal-unfollow.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true
+        });
+        vm.user.already_following = false;
       });
     }
 
     vm.follow = function(id){
 
-        user.follow(id);
+      if($auth.isAuthenticated()) {
+        user.follow(id).then(function(){
+          $mdDialog.show({
+              templateUrl: 'app/profile/modal-follow.tmpl.html',
+              parent: angular.element($document.body),
+              clickOutsideToClose:true
+          });
+          vm.user.already_following = true;
+        });
+
+      } else {
         $mdDialog.show({
-            templateUrl: 'app/profile/modal-follow.tmpl.html',
-            parent: angular.element($document.body),
-            clickOutsideToClose:true
-      });
+          controller: 'LoginController',
+          controllerAs: 'login',
+          templateUrl: 'app/login/login.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true
+        }).then(function(success) {
+          vm.follow();
+        })
+      }
     }
 
     vm.sendMessage = function(convid, msj){
       user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'asunto new conversation'})
     }
+
+      vm.inbox = function () {
+          $mdDialog.show({
+              controller: function () {
+                  return self;
+              },
+              controllerAs: 'PublicProfileController',
+              templateUrl: 'app/profile/modal-inbox.tmpl.html',
+              clickOutsideToClose: true
+          });
+      };
   }
 
 
