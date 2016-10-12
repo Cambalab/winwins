@@ -58,7 +58,7 @@ class UserController extends Controller {
         $cnvid = $request->input('conversation_id');
         //HARCODED
         if($current_user){
-            //        if(true){
+            //if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
                 //aLog::info('ES CERO');
@@ -98,7 +98,7 @@ class UserController extends Controller {
                 ->where('participants.conversation_id', '=', $cnvid)
                 //HARCODED
                 ->where('participants.user_id', '=', $current_user->id)
-                // ->where('participants.user_id', '=', 32)
+                //->where('participants.user_id', '=', 32)
                 ->select('participants.id')
                 ->get();
 
@@ -228,16 +228,16 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-            // $anonymus = false;
+            //$anonymus = false;
             if (!$anonymus){
+                //HARCODED
                 if ($my_self->id == $user->id){
-                //HARCODED!!!
-                    //    if (false){
+                    //if (false){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
-                          ->where('users.id', '=',$my_self->id)
+                        ->where('users.id', '=',$my_self->id)
                         //->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
@@ -263,23 +263,30 @@ class UserController extends Controller {
                     }
                 }else{
                     //GET CONVERSATION LOGGED Y EL DE PERFIL
-                    //HARCODED ID DEL LOGGEADO !!!
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
                         ->where('users.id', '=',$my_self->id)
-                        // ->where('users.id', '=','32')
+                        //->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
+
                     $converother = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         ->where('users.id', '=',$user->id)
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
-                    $cvsIDS = array_intersect_key($converown,$converother);
-                    //Log::info('donde quiero');
+
+                    foreach($converown as $cown){
+                        foreach ($converother as $cother){
+                            if($cown->id==$cother->id){
+                                $cvsIDS[] = $cown;
+                            }
+                        }
+                    }
+
                     $conversations = new Collection();
 
                     foreach($cvsIDS as $c) {
@@ -292,14 +299,12 @@ class UserController extends Controller {
                             ->where('messages.conversation_id', '=', $c->id)
                             ->orderBy('messages.created_at', 'asc')
                             ->get();
-                        //Log::info($messages);
                         $cnv = new Conversation();
                         $cnv -> id = $c->id;
                         $cnv -> subject = $c->subject;
                         $cnv -> messages = $messages;
                         $conversations[] = $cnv;
                     }
-
             }
         }else{
                 $conversations   = array();
