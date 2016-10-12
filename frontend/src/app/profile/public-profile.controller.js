@@ -13,6 +13,7 @@
     vm.imageServer = ENV.imageServer;
     vm.user = {interests_list:[]};
     vm.is_public = true;
+    vm.sendMessageStatus = false;
 
     user.getUser(vm.userId)
     .then(function(user_data) {
@@ -145,7 +146,15 @@
     }
 
     vm.sendMessage = function(convid, msj){
-      user.sendMessage({ conversation_id: convid, message: msj, receiver_id: vm.userId, subject : 'asunto new conversation'})
+        user.sendMessage({
+          conversation_id: convid,
+          message: msj,
+          receiver_id: vm.userId, subject : 'asunto new conversation'
+        }).then(function(data){
+            if(data[0]=='enviado'){
+                vm.sendMessageStatus = true;
+            }
+      })
     }
 
       vm.inbox = function () {

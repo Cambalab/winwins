@@ -58,7 +58,7 @@ class UserController extends Controller {
         $cnvid = $request->input('conversation_id');
         //HARCODED
         if($current_user){
-            //if(true){
+        //if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
                 //aLog::info('ES CERO');
@@ -250,7 +250,7 @@ class UserController extends Controller {
                             ->join('participants', 'participants.id', '=', 'messages.participant_id')
                             ->join('users','participants.user_id','=','users.id')
                             ->join('user_details','users.id','=','user_details.user_id')
-                            ->select('messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                            ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
                             ->where('messages.conversation_id', '=', $c->id)
                             ->orderBy('messages.created_at', 'asc')
                             ->get();
@@ -295,7 +295,7 @@ class UserController extends Controller {
                             ->join('participants', 'participants.id', '=', 'messages.participant_id')
                             ->join('users','participants.user_id','=','users.id')
                             ->join('user_details','users.id','=','user_details.user_id')
-                            ->select('messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                            ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
                             ->where('messages.conversation_id', '=', $c->id)
                             ->orderBy('messages.created_at', 'asc')
                             ->get();
