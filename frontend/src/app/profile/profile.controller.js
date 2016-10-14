@@ -6,7 +6,7 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController(account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document, winwin, $log) {
+  function ProfileController($window, account, user, $mdDialog, $q, ENV, $state, $auth, $rootScope, $scope, $document, winwin, $log) {
     var vm = this;
 
     if (!$auth.isAuthenticated()) {
@@ -49,6 +49,16 @@
         if (vm.user.birthdate) {
           vm.user.birthdate = new Date(user_data.birthdate.toString().replace(/-/g,'/'));
         }
+
+        vm.creadospormi = $window._.filter(vm.user.winwins, function(winwin) {
+          return winwin.user_id == vm.user.user_id && winwin.canceled == 0;
+        });
+
+        vm.enqueparticipo = $window._.filter(vm.user.winwins, function(winwin) {
+          return winwin.user_id != vm.user.user_id && winwin.canceled == 0;
+        });
+
+        vm.winwins_length = vm.creadospormi.length + vm.enqueparticipo.length;
 
         winwin.getInterests().then(function(data) {
           vm.interests = data;

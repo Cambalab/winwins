@@ -10,7 +10,7 @@
               <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
                 <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                   <h3>Winwins</h3>
-                  <p>{{profile.winwins_length}}</p>
+                  <p>{{profile.user.winwins_length}}</p>
                 </div>
                 <div layout="column" layout-align="center center">
                   <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">

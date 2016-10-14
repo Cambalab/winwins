@@ -110,26 +110,34 @@
     });
 
     vm.unfollow = function(id){
-      user.unfollow(id).then(function(){
+      user.unfollow(id).then(function(data){
         $mdDialog.show({
+          controller: 'PublicProfileController',
+          controllerAs: 'profile',
           templateUrl: 'app/profile/modal-unfollow.tmpl.html',
           parent: angular.element($document.body),
-          clickOutsideToClose:true
+          clickOutsideToClose:true,
         });
-        vm.user.already_following = false;
+        if(data[0]=='unfollow'){
+          vm.user.already_following = false;
+        }
       });
     }
 
     vm.follow = function(id){
 
       if($auth.isAuthenticated()) {
-        user.follow(id).then(function(){
+        user.follow(id).then(function(data){
           $mdDialog.show({
+              controller: 'PublicProfileController',
+              controllerAs: 'profile',
               templateUrl: 'app/profile/modal-follow.tmpl.html',
               parent: angular.element($document.body),
               clickOutsideToClose:true
           });
-          vm.user.already_following = true;
+          if(data[0]=='follow'){
+            vm.user.already_following = true;
+          }
         });
 
       } else {
@@ -140,7 +148,10 @@
           parent: angular.element($document.body),
           clickOutsideToClose:true
         }).then(function(success) {
-          vm.follow();
+          vm.follow(id);
+          if(data[0]=='follow'){
+            vm.user.already_following = true;
+          }
         })
       }
     }
@@ -159,10 +170,8 @@
 
       vm.inbox = function () {
           $mdDialog.show({
-              controller: function () {
-                  return self;
-              },
-              controllerAs: 'PublicProfileController',
+              controller: 'PublicProfileController',
+              controllerAs: 'profile',
               templateUrl: 'app/profile/modal-inbox.tmpl.html',
               clickOutsideToClose: true
           });
