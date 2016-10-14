@@ -1,16 +1,44 @@
 <md-dialog aria-label="List dialog">
-    <md-dialog-content>
-        <md-list>
-            <md-list-item class="mensajes-recibidos-content" ng-repeat="conversation in profile.user.conversations">
-              <md-list-item ng-repeat="message in conversation.messages" layout="row" layout-align="space-around-center">
-                <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                <div class="datos-mensaje" layout="column">De: {{message.name}}
-                  <div>Subject: {{conversation.subject}}
-                  </div>
-              </div>
-            </md-list-item>
-            </md-list-item>
-     </md-list>
+    <md-dialog-content class="inboxtmpl">
+        <md-tabs class="tabs">
+          <md-tab>
+              <md-tab-label>Recibidos</md-tab-label>
+              <md-tab-body>
+                <div class="inbox-title">INBOX</div>
+                  <md-list>
+                      <md-list-item ng-repeat="conversation in profile.user.conversations">
+                      <md-list-item ng-repeat="message in conversation.messages">
+                      <md-card class="carta-inbox" ng-hide="message.user_id == profile.userId" layout="row" layout-align="space-around-center">
+                        <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                          <div class="datos-mensaje" layout="column" style="flex: 0.9;">De: {{message.name}}
+                            <div>Mensaje: {{message.body}}</div>
+                              <md-button class="mensajeria" ng-click="profile.mensaje()">Responder</md-button>
+                          </div>
+                      </md-card>
+                      </md-list-item>
+                      </md-list-item>
+                  </md-list>
+              </md-tab-body>
+          </md-tab>
+          <md-tab>
+              <md-tab-label>Enviados</md-tab-label>
+              <md-tab-body>
+                  <div class="inbox-title">SENT</div>
+                  <md-list>
+                      <md-list-item class="mensajes-recibidos-content" ng-repeat="conversation in profile.user.conversations">
+                          <md-list-item ng-repeat="message in conversation.messages">
+                              <md-card class="carta-inbox" ng-show="message.user_id == profile.userId"  layout="row" layout-align="space-around-center">
+                                  <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                                  <div class="datos-mensaje" layout="column" style="flex: 0.9;">Para: {{message.name}}
+                                      <div>Mensaje: {{message.body}}</div>
+                                  </div>
+                              </md-card>
+                          </md-list-item>
+                      </md-list-item>
+                  </md-list>
+              </md-tab-body>
+          </md-tab>
+        </md-tabs>
     </md-dialog-content>
 </md-dialog>
 

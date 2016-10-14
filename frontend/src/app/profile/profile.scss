@@ -390,8 +390,6 @@
         width: 100%;
         .md-card-avatar {
           border-radius: 100px;
-          max-height: 140px;
-          max-width: 140px;
         }
         .name {
           font-size: 5vmin;
@@ -409,11 +407,10 @@
           }
         }
         .md-item-text {
-          margin-left: 50px;
           h3 {
             color: #fff;
             background: #38383a;
-            font-size: 1em;
+            font-size: 0.8em;
             text-transform: capitalize;
             margin: 0;
             padding: 8px;
@@ -657,15 +654,18 @@
 
       }
     }
+
       .bio-Actions {
         flex: 30%;
         max-width: 100%;
         .mensajeriaPrivada {
+          background: #fafafa;
           .chat {
-            width: 400px;
+            width: 270px;
           }
 
           .bubble{
+            max-width: 130px;
             background-color: #F2F2F2;
             border-radius: 5px;
             box-shadow: 0 0 6px #B2B2B2;
@@ -692,25 +692,27 @@
             width:  20px;
           }
 
-          .me {
+          .you {
             float: left;
             margin: 5px 45px 5px 20px;
           }
 
-          .me::before {
+          .you::before {
             box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
             left: -9px;
           }
 
-          .you {
+          .me {
             float: right;
             margin: 5px 20px 5px 45px;
           }
 
-          .you::before {
+          .me::before {
             box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
             right: -9px;
           }
+
+
 
 
           .mensajes-anteriores {
@@ -725,11 +727,8 @@
             background: #548ed8;
             font-size: 12px;
             color: #fff;
-            margin: 0px;
-            margin-top: 8px;
-            margin-left: 8px;
-            margin-bottom: 10px;
-            margin-right: 5px;
+            margin: auto;
+            margin-top: 10px;
             &:hover {
               background: #bcdeff;
             }
@@ -738,10 +737,10 @@
             }
           }
           .block-mensaje {
-            width: 270px;
+            width: 255px;
             max-width: 100%;
             height: 150px;
-            background: #fff;
+            background: #fafafa;
             margin: 10px;
             border-radius: 2px;
             .placeholder-mensaje {
@@ -768,6 +767,9 @@
             text-align: center;
             padding: 15px;
             color: #666666;
+            &:hover {
+              background: #fafafa;
+            }
             .mensajes-recibidos-content {
               margin: 10px;
             }
@@ -832,6 +834,7 @@
   }
 
   .responsiveTabs {
+    max-width: 100%;
     md-tabs-wrapper {
       background: #7199f4;
       @media (min-width: 1000px) {
@@ -839,13 +842,15 @@
         background: #fff;
       }
     }
-    .mensajeriaPrivada {
+    .mensajeriaPrivadaMobile {
       width: 290px;
+      height: 20vmin;
+      overflow: scroll;
+      overflow-x: hidden;
       .chat {
         width: 290px;
       }
-
-      .bubble{
+      .bubble {
         background-color: #F2F2F2;
         border-radius: 5px;
         box-shadow: 0 0 6px #B2B2B2;
@@ -864,34 +869,33 @@
         height: 16px;
         position: absolute;
         top: 11px;
-        transform:             rotate( 29deg ) skew( -35deg );
-        -moz-transform:    rotate( 29deg ) skew( -35deg );
-        -ms-transform:     rotate( 29deg ) skew( -35deg );
-        -o-transform:      rotate( 29deg ) skew( -35deg );
-        -webkit-transform: rotate( 29deg ) skew( -35deg );
-        width:  20px;
+        transform: rotate(29deg) skew(-35deg);
+        -moz-transform: rotate(29deg) skew(-35deg);
+        -ms-transform: rotate(29deg) skew(-35deg);
+        -o-transform: rotate(29deg) skew(-35deg);
+        -webkit-transform: rotate(29deg) skew(-35deg);
+        width: 20px;
       }
 
-      .me {
+      .you {
         float: left;
         margin: 5px 45px 5px 20px;
       }
 
-      .me::before {
-        box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+      .you::before {
+        box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, .4);
         left: -9px;
       }
 
-      .you {
+      .me {
         float: right;
         margin: 5px 20px 5px 45px;
       }
 
-      .you::before {
-        box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+      .me::before {
+        box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, .4);
         right: -9px;
       }
-
       .mensajes-anteriores-public {
         width: 270px;
       }
@@ -904,15 +908,12 @@
       }
       .md-button {
         max-width: 100%;
-        width: 275px;
+        width: 100%;
         background: #548ed8;
         font-size: 12px;
         color: #fff;
-        margin: 0px;
-        margin-top: 8px;
-        margin-left: 8px;
-        margin-bottom: 10px;
-        margin-right: 5px;
+        position: relative;
+        left: 30px;
         &:hover {
           background: #bcdeff;
         }
@@ -921,7 +922,7 @@
         }
       }
       .block-mensaje {
-        width: 290px;
+        width: 275px;
         max-width: 100%;
         height: 150px;
         background: #fff;
@@ -947,14 +948,17 @@
         font-weight: normal;
         margin: 3px;
       }
-      .mensajes-recibidos-title {
+      .mensajes-recibidos-title-mobile {
         text-align: center;
         padding: 15px;
         color: #666666;
+        display: inline;
+        &:hover {
+          background: #fafafa;
+        }
         .mensajes-recibidos-content {
           margin: 10px;
         }
-
 
         .exito {
           text-align: center;
@@ -962,10 +966,7 @@
         }
       }
     }
-
   }
-
-
 
   .title-destacado {
     background: #7199f4;
@@ -1026,6 +1027,50 @@
   border-radius: 0 0 3px 3px;
   margin: 15px;
 }
-.acme-highlighted.profile {
-  width:650px;
+.acme-profile {
+  width: 350px;
+  @media (min-width: 600px) {
+    width: 650px;
+  }
+}
+.inbox-title {
+  text-align: center;
+  background: #fafafa;
+  padding: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.avatar-mensaje {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  margin: 10px;
+}
+
+.md-button.mensajeria {
+  max-width: 100%;
+  width: 275px;
+  background: #548ed8;
+  font-size: 12px;
+  color: #fff;
+  margin-top: 10px;
+  &:hover {
+    background: #bcdeff;
+  }
+  .md-button.mensajeria:first-letter {
+    text-transform: uppercase
+  }
+}
+.inboxtmpl {
+  height: 100vmin;
+  width: 100vmin;
+  overflow-x: hidden;
+  .carta-inbox {
+    width: 90vmin;
+    height: 15vmin;
+  }
+  .tabs {
+    width: 100%;
+    height: 100%;
+  }
 }

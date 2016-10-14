@@ -58,7 +58,7 @@ class UserController extends Controller {
         $cnvid = $request->input('conversation_id');
         //HARCODED
         if($current_user){
-        //if(true){
+//        if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
                 //aLog::info('ES CERO');
@@ -89,7 +89,7 @@ class UserController extends Controller {
                         'created_at' => new Carbon(),
                         'updated_at' => new Carbon(),
                         //HARCODED
-                        //'user_id' => 32]
+//                        'user_id' => 32]
                         'user_id' => $current_user->id]
                 );
             }
@@ -98,7 +98,7 @@ class UserController extends Controller {
                 ->where('participants.conversation_id', '=', $cnvid)
                 //HARCODED
                 ->where('participants.user_id', '=', $current_user->id)
-                //->where('participants.user_id', '=', 32)
+//                 ->where('participants.user_id', '=', 32)
                 ->select('participants.id')
                 ->get();
 
@@ -222,23 +222,90 @@ class UserController extends Controller {
             ->select('skills.id', 'skills.name as text')
             ->get();
 
-            $userDetail->activities = DB::select('(select notifications.type, winwins.title from notifications,winwins where notifications.user_id = '.$user -> id.' and (notifications.type=\'WW_JOIN\' || notifications.type=\'WW_SUCCESSFUL\'|| notifications.type=\'WW_CREATED\') and notifications.object_id = winwins.id) UNION (select notifications.type, groups.name from notifications, groups where notifications.user_id = '.$user -> id.' and (notifications.type=\'GROUP_JOIN\' || notifications.type=\'GROUP_LEFT\'|| notifications.type=\'GROUP_CREATED\') and notifications.object_id = groups.id)UNION (select notifications.type, users.username from notifications, users where notifications.user_id = '.$user -> id.' and (notifications.type=\'USER_FOLLOW\' || notifications.type=\'USER_UNFOLLOW\') and notifications.object_id = users.id)');
+            $userDetail->activities = DB::select(' SELECT notifications.type,
 
+                                                          notifications.created_at,
+
+                                                          winwins.title
+
+                                                   FROM   notifications,
+
+                                                          winwins
+
+                                                   WHERE  notifications.user_id = ' . $user->id . '
+
+                                                   AND    (
+
+                                                           notifications.type="ww_join"
+
+                                                           || notifications.type="ww_successful"
+
+                                                           || notifications.type="ww_created")
+
+                                                   AND    notifications.object_id = winwins.id
+
+                                                   UNION
+
+                                                   SELECT notifications.type,
+
+                                                          notifications.created_at,
+
+                                                          groups.NAME
+
+                                                   FROM   notifications,
+
+                                                          groups
+
+                                                   WHERE  notifications.user_id = ' . $user->id . '
+
+                                                   AND    (
+
+                                                          notifications.type="group_join"
+
+                                                           || notifications.type="group_left"
+
+                                                           || notifications.type="group_created")
+
+                                                  AND    notifications.object_id = groups.id
+
+                                                  UNION
+
+                                                  SELECT   notifications.type,
+
+                                                           notifications.created_at,
+
+                                                           users.username
+
+                                                  FROM     notifications,
+
+                                                           users
+
+                                                  WHERE    notifications.user_id = ' . $user->id . '
+
+                                                  AND      (
+
+                                                          notifications.type="user_follow"
+
+                                                           || notifications.type="user_unfollow")
+
+                                                  AND      notifications.object_id = users.id
+
+                                                  ORDER BY created_at DESC ');
             //$userDetail->followers = $user->followers;
             //$userDetail->following = $user->following;
 
             //HARCODED
-            //$anonymus = false;
+//            $anonymus = false;
             if (!$anonymus){
                 //HARCODED
                 if ($my_self->id == $user->id){
-                    //if (false){
+//                    if (false){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
                         ->where('users.id', '=',$my_self->id)
-                        //->where('users.id', '=','32')
+//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
                     Log::info('donde quiero');
@@ -268,10 +335,9 @@ class UserController extends Controller {
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
                         ->where('users.id', '=',$my_self->id)
-                        //->where('users.id', '=','32')
+//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
-
                     $converother = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
@@ -299,12 +365,14 @@ class UserController extends Controller {
                             ->where('messages.conversation_id', '=', $c->id)
                             ->orderBy('messages.created_at', 'asc')
                             ->get();
+                        //Log::info($messages);
                         $cnv = new Conversation();
                         $cnv -> id = $c->id;
                         $cnv -> subject = $c->subject;
                         $cnv -> messages = $messages;
                         $conversations[] = $cnv;
                     }
+
             }
         }else{
                 $conversations   = array();
@@ -330,8 +398,10 @@ class UserController extends Controller {
             ->join('user_details', 'posts.user_id', '=', 'user_details.user_id')
             ->where('posts.reference_id', '=', $id)->where('posts.type', 'USER')->orderBy('posts.created_at', 'desc')->get();
 
+
             $userDetail->comments = $comments;
 
+//            $userDetail->myself = true;
 
             if($my_self) {
                 if($my_self->id == $id) {
