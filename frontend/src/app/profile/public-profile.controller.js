@@ -96,7 +96,7 @@
       if (vm.user.birthdate) {
         vm.user.birthdate = new Date(vm.user.birthdate);
       }
-      
+
       vm.creadospormi = $window._.filter(vm.user.winwins, function(winwin) {
         return winwin.user_id == vm.user.user_id && winwin.canceled == 0;
       });
@@ -168,12 +168,24 @@
       })
     }
 
-      vm.inbox = function () {
+      vm.inbox = function ($http) {
           $mdDialog.show({
               controller: 'PublicProfileController',
               controllerAs: 'profile',
               templateUrl: 'app/profile/modal-inbox.tmpl.html',
               clickOutsideToClose: true
+          });
+      };
+
+      vm.mensaje= function ($http) {
+          $mdDialog.show({
+              controller: 'PublicProfileController',
+              controllerAs: 'profile',
+              templateUrl: 'app/profile/modal-mensaje.tmpl.html',
+              clickOutsideToClose: true,
+              scope: {
+                  show: '='
+              }
           });
       };
   }

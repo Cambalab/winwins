@@ -27,11 +27,14 @@
           </ul>
         </div>
         <div class="share" layout="row" layout-align="space-around center">
-            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" <a href="#" socialshare
+            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" <a
+               socialshare
                socialshare-provider="facebook"
+               socialshare-type="feed"
                socialshare-text="Junta gente para realizar tus proyectos"
-               socialshare-url="http://dev-winwins.net"
-               socialshare-media="https://youtu.be/gyyTDPe8TwY">
+               socialshare-url="dev-winwins.net"
+               socialshare-media="https://youtu.be/gyyTDPe8TwY"
+               socialshare-via="{{winwin.facebookId}}">
             </a>
               </md-icon></div>
             <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" <a href="#" socialshare
@@ -44,8 +47,8 @@
               </md-icon></div>
             <div><md-icon md-svg-src="assets/images/icon-google-share.svg" <a href="#" socialshare
               socialshare-provider="google"
-              socialshare-url="http://dev-winwins.net"
-            ></md-icon></div>
+              socialshare-url="http://dev-winwins.net">
+                </a></md-icon></div>
         </div>
         <div flex>
           <md-button class="md-primary create-winwin-button" ng-click="$root.createWinwin()">
