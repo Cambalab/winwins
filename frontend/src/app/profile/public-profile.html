@@ -61,7 +61,7 @@
                             <div class="length">{{profile.creadospormi.length}}</div>
                         </div>
                         <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
-                            <acme-highlighted class="acme-profile" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
+                            <acme-highlighted class="acme-profile-fix" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
                             <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
                             <p class="mensaje" ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
                         </div>
@@ -307,7 +307,7 @@
                             <div layout-align="column">
                                 <div layout-align="row"><p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
                                 </div>
-                                <p class="titulo {{act.type}}">{{act.titulo}}</p>
+                                <p ng-if="act.type == WWJOIN" class="titulo {{act.type}}">{{act.titulo}}</p>
                             </div>
                         </md-list-item>
                     </md-list>

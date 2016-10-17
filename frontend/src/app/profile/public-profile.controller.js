@@ -172,9 +172,7 @@
               controllerAs: 'profile',
               templateUrl: 'app/profile/modal-mensaje.tmpl.html',
               clickOutsideToClose: true,
-              scope: {
-                  show: '='
-              }
+              parent: angular.element($document.body)
           });
       };
   }
