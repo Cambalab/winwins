@@ -123,13 +123,13 @@
                   No hay mensajes...
                 </div>
                 <div ng-if="profile.user.conversations.length > 0">
-                  <md-button class="mensajeria" ng-click="profile.showMessageModal('cnv.conversation.id')" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-button>
+                  <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-card>
                   <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
                   <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
                     <div ng-repeat="message in cnv.messages">
-                      <md-card layout="row" ng-click="profile.showMessageModal(cnv.conversations_id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
+                      <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                           <img class="msg-avatar" ng-src="{{ profile.imageServer}}/smart/{{ message.photo }}"  alt="">
-                          <p class="msg-body">{{ message.body }}</p><p class="msg-name">De: {{message.name}}</p>
+                          <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
                     </div>
                   </div>
                 </div>

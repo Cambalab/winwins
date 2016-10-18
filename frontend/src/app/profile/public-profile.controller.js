@@ -188,9 +188,10 @@
       templateUrl: 'app/profile/message-modal-controller.tmpl.html',
       clickOutsideToClose: true,
       locals: {
+        myself_id: user.myself,
         conversation_id: conversationId,
         to_user_id: vm.userId,
-        conversation_messages: conversation_messages
+        conversation_messages: conversation_messages,
       }
     });
   }
@@ -198,14 +199,16 @@
   }
 
   /** @ngInject */
-  function MessageModalController(conversation_id, to_user_id, conversation_messages, user, $log){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $log, $mdDialog, $timeout){
     var vm = this;
 
+    vm.imageServer = ENV.imageServer
+    vm.myself_id = user.myself,
     vm.conversation_messages = conversation_messages,
     vm.toUserId = to_user_id;
     vm.messages = conversation_messages;
     vm.mensaje = "";
-    vm.sendMessageStatus = "notSent";
+    vm.sendMessageStatus = "notSended";
     vm.conversationId = conversation_id;
     $log.log(vm.toUserId)
     $log.log(conversation_id),
@@ -218,7 +221,10 @@
         subject : 'asunto new conversation'
       }).then(function(data){
         if(data[0]=='enviado'){
-          vm.sendMessageStatus = "Sent";
+          vm.sendMessageStatus = "Sended";
+          $timeout(function() {
+            $mdDialog.hide(data);
+            }, 3000);
         }
       });
     }
