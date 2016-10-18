@@ -147,7 +147,7 @@
           parent: angular.element($document.body),
           clickOutsideToClose:true
         }).then(function(success) {
-          vm.follow(vm.user_id);
+          vm.follow(vm.userId);
         })
       }
     }
