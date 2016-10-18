@@ -13,7 +13,6 @@
     vm.imageServer = ENV.imageServer;
     vm.user = {interests_list:[]};
     vm.is_public = true;
-    vm.sendMessageStatus = false;
 
     user.getUser(vm.userId)
     .then(function(user_data) {
@@ -116,9 +115,9 @@
           controllerAs: 'profile',
           templateUrl: 'app/profile/modal-unfollow.tmpl.html',
           parent: angular.element($document.body),
-          clickOutsideToClose:true,
+          clickOutsideToClose:true
         });
-        if(data[0]=='unfollow'){
+        if(data[0] =='unfollow'){
           vm.user.already_following = false;
         }
       });
@@ -148,10 +147,7 @@
           parent: angular.element($document.body),
           clickOutsideToClose:true
         }).then(function(success) {
-          vm.follow(id);
-          if(data[0]=='follow'){
-            vm.user.already_following = true;
-          }
+          vm.follow(vm.user_id);
         })
       }
     }
@@ -162,31 +158,70 @@
           message: msj,
           receiver_id: vm.userId, subject : 'asunto new conversation'
         }).then(function(data){
-            if(data[0]=='enviado'){
-                vm.sendMessageStatus = true;
-            }
       })
     }
 
-      vm.inbox = function ($http) {
-          $mdDialog.show({
-              controller: 'PublicProfileController',
-              controllerAs: 'profile',
-              templateUrl: 'app/profile/modal-inbox.tmpl.html',
-              clickOutsideToClose: true
-          });
-      };
+    vm.inbox = function ($http) {
+        $mdDialog.show({
+            controller: 'PublicProfileController',
+            controllerAs: 'profile',
+            templateUrl: 'app/profile/modal-inbox.tmpl.html',
+            clickOutsideToClose: true
+        });
+    };
 
-      vm.mensaje= function ($http) {
-          $mdDialog.show({
-              controller: 'PublicProfileController',
-              controllerAs: 'profile',
-              templateUrl: 'app/profile/modal-mensaje.tmpl.html',
-              clickOutsideToClose: true,
-              parent: angular.element($document.body)
-          });
-      };
+    vm.mensaje= function ($http) {
+        $mdDialog.show({
+            controller: 'PublicProfileController',
+            controllerAs: 'profile',
+            templateUrl: 'app/profile/modal-mensaje.tmpl.html',
+            clickOutsideToClose: true,
+            parent: angular.element($document.body)
+        });
+    };
+
+
+   vm.showMessageModal = function(conversationId, conversation_messages) {
+    $mdDialog.show({
+        controller: MessageModalController,
+        controllerAs: 'msgController',
+      templateUrl: 'app/profile/message-modal-controller.tmpl.html',
+      clickOutsideToClose: true,
+      locals: {
+        conversation_id: conversationId,
+        to_user_id: vm.userId,
+        conversation_messages: conversation_messages
+      }
+    });
   }
 
+  }
+
+  /** @ngInject */
+  function MessageModalController(conversation_id, to_user_id, conversation_messages, user, $log){
+    var vm = this;
+
+    vm.conversation_messages = conversation_messages,
+    vm.toUserId = to_user_id;
+    vm.messages = conversation_messages;
+    vm.mensaje = "";
+    vm.sendMessageStatus = "notSent";
+    vm.conversationId = conversation_id;
+    $log.log(vm.toUserId)
+    $log.log(conversation_id),
+
+        vm.sendMessage = function(){
+      user.sendMessage({
+        conversation_id: vm.conversationId,
+        message: vm.mensaje,
+        receiver_id: vm.toUserId,
+        subject : 'asunto new conversation'
+      }).then(function(data){
+        if(data[0]=='enviado'){
+          vm.sendMessageStatus = "Sent";
+        }
+      });
+    }
+  }
 
 })();

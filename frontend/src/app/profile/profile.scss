@@ -727,8 +727,7 @@
             background: #548ed8;
             font-size: 12px;
             color: #fff;
-            margin: auto;
-            margin-top: 10px;
+            margin: 10px;
             &:hover {
               background: #bcdeff;
             }
@@ -742,7 +741,7 @@
             height: 150px;
             background: #fafafa;
             margin: 10px;
-            border-radius: 2px;
+            border: 0;
             .placeholder-mensaje {
               font-size: 10px;
             }
@@ -927,7 +926,6 @@
         height: 150px;
         background: #fff;
         margin: 10px;
-        border-radius: 2px;
         .placeholder-mensaje {
           font-size: 10px;
         }
@@ -1034,11 +1032,12 @@
   }
 }
 .inbox-title {
+  color: #666;
   text-align: center;
   background: #fafafa;
-  padding: 20px;
-  font-size: 30px;
-  font-weight: bold;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: normal;
 }
 .avatar-mensaje {
   width: 40px;
@@ -1048,12 +1047,11 @@
 }
 
 .md-button.mensajeria {
-  max-width: 100%;
   width: 275px;
   background: #548ed8;
   font-size: 12px;
   color: #fff;
-  margin-top: 10px;
+  margin: 10px 10px;
   &:hover {
     background: #bcdeff;
   }
@@ -1073,4 +1071,39 @@
     width: 100%;
     height: 100%;
   }
+}
+.caja-mensaje {
+  background: #fafafa;
+  height: 200px;
+  padding: 30px;
+  .boton-enviar {
+    background: #548ed8;
+    color: #fff;
+  }
+}
+.inbox {
+  .sin-mensajes {
+    text-align: center;
+    color: #666;
+  }
+  .msg-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    margin: 5px;
+  }
+  .msg-body {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    position: relative;
+    bottom: 20px;
+  }
+  .msg-name {
+    font-size: 10px;
+    font-weight: normal;
+  }
+}
+.textarea.Mensaje {
+  border: 0;
 }

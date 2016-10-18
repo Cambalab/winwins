@@ -1,320 +1,299 @@
 <div class="acme-public-profile" layout="column" layout-align="center center">
-    <md-tabs class="responsiveTabs" md-dynamic-height md-selected="myTabIndex">
-        <md-tab>
-            <md-tab-label>
-                <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
-            </md-tab-label>
-          <md-tab-body>
-            <div layout="row" layout-xs="column">
-                <div flex>
-                    <md-card class="public-profile">
-                        <md-card-content>
-                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
-                            <md-card-title>
-                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Winwins</h3>
-                                        <p>{{profile.winwins_length}}</p>
-                                    </div>
-                                    <div layout="column" layout-align="center center">
-                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                                        <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"></md-button>
-                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                                        <div ng-if="!profile.user.private || profile.user.myself">
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
-                                        </div>
-                                    </div>
-                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Seguidores</h3>
-                                        <p>{{profile.user.followers_amount}}</p>
-                                    </div>
-                                </div>
-                            </md-card-title>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
-            <div class="buttons-xs-sm" layout="row" hide-gt-sm>
-                <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
-                <md-button class="bt-blue" ng-if="!profile.user.myself" ng-click="myTabIndex = myTabIndex+1">Manda un mensaje<br>a {{profile.user.name}}</md-button>
-            </div>
-            <div class="bioTotal" layout="row">
-                <div class="bio-Info" layout="column">
-                    <md-card>
-                        <div class="bioContainer"><h3><strong>BIO</strong></h3></div>
-                        <div class="bioContent">
-                            <p>
-                                {{profile.user.about}}
-                            </p>
-                            <p><strong>Estoy interesado en:</strong></p>
-                            <md-chips><md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip></md-chips>
-                            <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a>
-                            </p>
-                            <p ng-if="profile.user.id && profile.user.interests_list.length == 0">{{profile.user.name}} No ha completado sus intereses</p>
-                        </div>
-                    </md-card>
-                    <md-card>
-                        <div class="my-Winwins-Container" layout-align="row">
-                            <strong><h3>MIS WINWINS</h3></strong>
-                            <div class="length">{{profile.creadospormi.length}}</div>
-                        </div>
-                        <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
-                            <acme-highlighted class="acme-profile-fix" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
-                            <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
-                            <p class="mensaje" ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
-                        </div>
-                    </md-card>
-                    <md-card>
-                        <div class="participo-Winwins-Container" layout-align="row">
-                            <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
-                            <div class="length">{{profile.enqueparticipo.length}}</div>
-                        </div>
-                        <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
-                            <acme-highlighted class="acme-profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
-                            <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
-                            <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
-                        </div>
-
-                    </md-card>
-                    <md-card>
-                        <div class="seguidores-Container" layout-align="row">
-                            <h3><strong>Seguidores</strong></h3>
-                            <div class="length">{{profile.user.followers.length}}</div>
-                        </div>
-                        <div class="seguidores-Content" layout="row" layout-align="space-around center">
-                            <div class="mensaje" ng-if="profile.user.followers.length == 0 && profile.user.myself">Aún no te sigue nadie</div>
-                            <div class="mensaje" ng-if="profile.user.followers.length == 0 && !profile.user.myself">Aún no lo sigue nadie</div>
-                            <div class="seguidores-items" layout="column" layout-align="space-around center" ng-repeat="following in profile.user.followers" ui-sref="home.public-profile({userId: following.user_id})">
-                                <img class="avatarSeguidor" ng-src="{{profile.imageServer}}//{{following.photo}}">
-                                <p class="nombreSeguidor">{{following.name}} {{following.lastname}}</p>
-                            </div>
-                            </div>
-                    </md-card>
-                    <md-card>
-                        <div class="siguiendo-Container" layout-align="row">
-                            <h3><strong>Siguiendo a </strong></h3>
-                            <div class="length">{{profile.user.following.length}}</div>
-                        </div>
-                        <div class="siguiendo-Content" layout="row" layout-align="space-around center">
-                            <div class="mensaje" ng-if="profile.user.following.length == 0 && profile.user.myself">Aún no sigues a nadie, buscá entre nuestra lista de usuarios</div>
-                            <div class="mensaje" ng-if="profile.user.following.length == 0 && !profile.user.myself">Aún no sigue a nadie</div>
-
-                            <div class="siguiendo-items" layout="column" layout-align="space-around center" ng-repeat="follower in profile.user.following" ui-sref="home.public-profile({userId: follower.user_id})">
-                            <img class="avatarSiguiendo" ng-src="{{profile.imageServer}}//{{follower.photo}}">
-                            <p class="nombreSiguiendo">{{follower.name}} {{follower.lastname}}</p>
-                        </div>
-                        </div>
-                    </md-card>
-                </div>
-                <div class="bio-Actions" layout="column" hide-xs hide-sm>
-
-                    <md-button class="mensajeria" ng-click="showme" ng-if="!profile.user.myself">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
-                    <md-card class="mensajeriaPrivada">
-                      <div class="inbox" ng-if="profile.user.myself">
-                          <md-card class="mensajes-recibidos-title" ng-click="profile.inbox()">INBOX</md-card>
-                          <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations" ng-click="profile.inbox()">
-                              <md-card class="anterior-contenido" ng-if="cnv.length = 0">No hay mensajes</md-card>
-                              <md-card ng-repeat="message in cnv.messages" layout="row" layout-align="space-between-center">
-                                  <div class="datos-mensaje" layout="row" ng-show="message.user_id != profile.userId">
-                                      <img class="avatar-mensaje" ng-src="{{imageServer}}/smart/{{message.photo}}" ui-sref="home.public-profile{{user.id}}">
-                                     <div layout="column">
-                                      De: {{message.name}}
-                                      <div>Mensaje: {{ message.body | limitTo: 10 }}{{myString.length > 10 ? '...' : ''}}</div>
-                                     </div>
-                                  </div>
-                              </md-card>
-                          </div>
+  <md-tabs class="responsiveTabs" md-dynamic-height md-selected="myTabIndex">
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+      </md-tab-label>
+      <md-tab-body>
+        <div layout="row" layout-xs="column">
+          <div flex>
+            <md-card class="public-profile">
+              <md-card-content>
+                <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                <md-card-title>
+                  <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                      <h3 translate>Winwins</h3>
+                      <p>{{profile.winwins_length}}</p>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"></md-button>
+                      <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                      <div ng-if="!profile.user.private || profile.user.myself">
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                       </div>
-
-
-                                <div class="mensajes-anteriores-public" ng-if="!profile.user.myself" ng-repeat="cnv in profile.user.conversations">
-                                    <form method="post" ng-submit="profile.sendMessage(cnv.conversation_id, mensaje)" name="Conversation" ng-if="!profile.user.myself">
-                                        <div class="bubble-container">
-                                        <div ng-repeat="message in cnv.messages">
-                                     <md-card class="anterior-contenido" ng-if="message.length == 0">No hay mensajes</md-card>
-                                     <md-card class="bubble you" ng-show="message.user_id == profile.userId">{{message.body}}</md-card>
-                                     <md-card class="bubble me" ng-show="message.user_id != profile.userId">{{message.body}}</md-card>
-                                        </div>
-                                        </div>
-                                </div>
-                            <md-input-container class="block-mensaje" ng-if="!profile.user.myself">
-
-                                <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
-                                <textarea required class="Mensaje" name="mensaje" ng-model="mensaje" md-maxlength="140" rows="4" md-select-on-focus>
-                                </textarea>
-                                <div ng-messages="public-profileForm.mensaje.$error">
-                                    <div ng-message="required">Campo requerido.</div>
-                                    <div ng-message="md-maxlength">Maximo 140 caracteres.</div>
-                                </div>
-                                <!--<div class="exito" ng-show="profile.sendMessageStatus == true">Tu mensaje ha sido enviado!</div>-->
-
-                            </md-input-container>
-
-
-               </md-card>
-                    <md-button ng-if="!profile.user.myself" class="mensajeria" type="submit" ng-click="profile.sendMessage(profile.conversation_id, mensaje)">Enviar &#x279e;</md-button>
-                    </form>
-
-                    <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
-                    <div layout-align="row">
-                        <md-list class="actividadRecienteContainer">
-                          <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.</md-card>
-                          <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-                            <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                              <div layout-align="column">
-                                  <div layout-align="row"><p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
-                                  </div>
-                                  <p class="titulo {{act.type}}">{{act.titulo}}</p>
-                              </div>
-                            </md-list-item>
-                        </md-list>
                     </div>
-                </div>
-                </div>
-          </md-tab-body>
-        </md-tab>
-
-        <md-tab>
-            <md-tab-label>
-            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
-            </md-tab-label>
-            <md-tab-body>
-                <div layout="row" layout-xs="column">
-                <div flex>
-                    <md-card class="public-profile">
-                        <md-card-content>
-                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
-                            <md-card-title>
-                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Winwins</h3>
-                                        <p>{{profile.winwins_length}}</p>
-                                    </div>
-                                    <div layout="column" layout-align="center center">
-                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
-                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                                        <div ng-if="!profile.user.private || profile.user.myself">
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
-                                        </div>
-                                    </div>
-                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3>Seguidores</h3>
-                                        <p>{{profile.seguidores.length}}</p>
-                                    </div>
-                                </div>
-                            </md-card-title>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
-                <div class="blueBlock" layout="column"><strong>Mensajes</strong></div>
-                <div class="blueArrow"></div>
-              <div layout="column" layout-align="center center">
-                <md-button class="mensajeria" ng-click="showme" ng-if="!profile.user.myself">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
-                <md-card class="mensajeriaPrivadaMobile">
-                    <div class="inbox" ng-if="profile.user.myself">
-                        <md-card class="mensajes-recibidos-title-mobile" ng-click="profile.inbox()">INBOX</md-card>
-                        <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations" ng-click="profile.inbox()">
-                            <md-card ng-repeat="message in cnv.messages" layout="row" layout-align="space-between-center">
-                                <div class="datos-mensaje" layout="row" ng-show="message.user_id != profile.userId">
-                                    <img class="avatar-mensaje" ng-src="{{imageServer}}/smart/{{message.photo}}" ui-sref="home.public-profile{{user.id}}">
-                                    <div layout="column">
-                                        De: {{message.name}}
-                                        <div>Mensaje: {{ message.body | limitTo: 10 }}{{myString.length > 10 ? '...' : ''}}</div>
-                                    </div>
-                                </div>
-                            </md-card>
-                        </div>
+                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                      <h3 translate>Seguidores</h3>
+                      <p>{{profile.user.followers_amount}}</p>
                     </div>
-
-
-                    <div class="mensajes-anteriores-public" ng-if="!profile.user.myself" ng-repeat="cnv in profile.user.conversations">
-                        <form method="post" ng-submit="profile.sendMessage(cnv.conversation_id, mensaje)" name="Conversation" ng-if="!profile.user.myself">
-                            <div class="bubble-container">
-                                <div ng-repeat="message in cnv.messages">
-                                    <md-card class="anterior-contenido" ng-if="message.length == 0">No hay mensajes</md-card>
-                                    <md-card class="bubble you" ng-show="message.user_id == profile.userId">{{message.body}}</md-card>
-                                    <md-card class="bubble me" ng-show="message.user_id != profile.userId">{{message.body}}</md-card>
-                                </div>
-                            </div>
-                    </div>
-                    <md-input-container class="block-mensaje" ng-if="!profile.user.myself">
-
-                        <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
-                        <textarea required class="Mensaje" name="mensaje" ng-model="mensaje" md-maxlength="140" rows="4" md-select-on-focus>
-                                </textarea>
-                        <div ng-messages="public-profileForm.mensaje.$error">
-                            <div ng-message="required">Campo requerido.</div>
-                            <div ng-message="md-maxlength">Maximo 140 caracteres.</div>
-                        </div>
-                        <!--<div class="exito" ng-show="profile.sendMessageStatus == true">Tu mensaje ha sido enviado!</div>-->
-
-                    </md-input-container>
-
-
-                </md-card>
-                <md-button ng-if="!profile.user.myself" class="mensajeria" type="submit" ng-click="profile.sendMessage(profile.conversation_id, mensaje)">Enviar &#x279e;</md-button>
-                </form>
                   </div>
-            </md-tab-body>
-        </md-tab>
-        <md-tab>
-            <md-tab-label>
-            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
-            </md-tab-label>
-            <md-tab-body> <div layout="row" layout-xs="column">
-                <div flex>
-                    <md-card class="public-profile">
-                        <md-card-content>
-                            <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
-                            <md-card-title>
-                                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Winwins</h3>
-                                        <p>{{profile.winwins_length}}</p>
-                                    </div>
-                                    <div layout="column" layout-align="center center">
-                                        <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                                        <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
-                                        <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                                        <div ng-if="!profile.user.private || profile.user.myself">
-                                            <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
-                                            <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
-                                        </div>
-                                    </div>
-                                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
-                                        <h3 translate>Seguidores</h3>
-                                        <p>{{profile.user.followers_amount}}</p>
-                                    </div>
-                                </div>
-                            </md-card-title>
-                        </md-card-content>
-                    </md-card>
+                </md-card-title>
+              </md-card-content>
+            </md-card>
+          </div>
+        </div>
+        <div class="buttons-xs-sm" layout="row" hide-gt-sm>
+          <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+          <md-button class="bt-blue" ng-if="!profile.user.myself" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
+        </div>
+        <div class="bioTotal" layout="row">
+          <div class="bio-Info" layout="column">
+            <md-card>
+              <div class="bioContainer">
+                <h3><strong>BIO</strong></h3>
+              </div>
+              <div class="bioContent">
+                <p>
+                  {{profile.user.about}}
+                </p>
+                <p><strong>Estoy interesado en:</strong></p>
+                <md-chips>
+                  <md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip>
+                </md-chips>
+                <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a>
+                </p>
+                <p ng-if="profile.user.id && profile.user.interests_list.length == 0">{{profile.user.name}} No ha completado sus intereses</p>
+              </div>
+            </md-card>
+            <md-card>
+              <div class="my-Winwins-Container" layout-align="row">
+                <strong>
+                  <h3>MIS WINWINS</h3>
+                </strong>
+                <div class="length">{{profile.creadospormi.length}}</div>
+              </div>
+              <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
+                <acme-highlighted class="acme-profile-fix" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
+                <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
+                <p class="mensaje" ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
+              </div>
+            </md-card>
+            <md-card>
+              <div class="participo-Winwins-Container" layout-align="row">
+                <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
+                <div class="length">{{profile.enqueparticipo.length}}</div>
+              </div>
+              <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
+                <acme-highlighted class="acme-profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
+                <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
+                <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
+              </div>
+            </md-card>
+            <md-card>
+              <div class="seguidores-Container" layout-align="row">
+                <h3><strong>Seguidores</strong></h3>
+                <div class="length">{{profile.user.followers.length}}</div>
+              </div>
+              <div class="seguidores-Content" layout="row" layout-align="space-around center">
+                <div class="mensaje" ng-if="profile.user.followers.length == 0 && profile.user.myself">Aún no te sigue nadie</div>
+                <div class="mensaje" ng-if="profile.user.followers.length == 0 && !profile.user.myself">Aún no lo sigue nadie</div>
+                <div class="seguidores-items" layout="column" layout-align="space-around center" ng-repeat="following in profile.user.followers" ui-sref="home.public-profile({userId: following.user_id})">
+                  <img class="avatarSeguidor" ng-src="{{profile.imageServer}}//{{following.photo}}">
+                  <p class="nombreSeguidor">{{following.name}} {{following.lastname}}</p>
+                </div>
+              </div>
+            </md-card>
+            <md-card>
+              <div class="siguiendo-Container" layout-align="row">
+                <h3><strong>Siguiendo a </strong></h3>
+                <div class="length">{{profile.user.following.length}}</div>
+              </div>
+              <div class="siguiendo-Content" layout="row" layout-align="space-around center">
+                <div class="mensaje" ng-if="profile.user.following.length == 0 && profile.user.myself">Aún no sigues a nadie, buscá entre nuestra lista de usuarios</div>
+                <div class="mensaje" ng-if="profile.user.following.length == 0 && !profile.user.myself">Aún no sigue a nadie</div>
+                <div class="siguiendo-items" layout="column" layout-align="space-around center" ng-repeat="follower in profile.user.following" ui-sref="home.public-profile({userId: follower.user_id})">
+                  <img class="avatarSiguiendo" ng-src="{{profile.imageServer}}//{{follower.photo}}">
+                  <p class="nombreSiguiendo">{{follower.name}} {{follower.lastname}}</p>
+                </div>
+              </div>
+            </md-card>
+          </div>
+          <div class="bio-Actions" layout="column" hide-xs hide-sm>
+            <div class="button" ng-if="profile.conversation.length == 0 && !profile.user.myself">
+            <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
+            </div>
+
+            <md-card class="mensajeriaPrivada">
+              <div class="inbox">
+                <div class="sin-mensajes" ng-if="profile.conversations.length == 0">
+                  No hay mensajes...
+                </div>
+                <div ng-if="profile.user.conversations.length > 0">
+                  <md-button class="mensajeria" ng-click="profile.showMessageModal('cnv.conversation.id')" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-button>
+                  <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
+                  <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
+                    <div ng-repeat="message in cnv.messages">
+                      <md-card layout="row" ng-click="profile.showMessageModal(cnv.conversations_id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
+                          <img class="msg-avatar" ng-src="{{ profile.imageServer}}/smart/{{ message.photo }}"  alt="">
+                          <p class="msg-body">{{ message.body }}</p><p class="msg-name">De: {{message.name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card>
+
+            <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
+            <div layout-align="row">
+              <md-list class="actividadRecienteContainer">
+                <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.</md-card>
+                <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
+                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                  <div layout-align="column">
+                    <div layout-align="row">
+                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
+                    </div>
+                    <p class="titulo {{act.type}}">{{act.titulo}}</p>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </div>
+        </div>
+      </md-tab-body>
+    </md-tab>
+</div>
+</div>
+
+
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+      </md-tab-label>
+      <md-tab-body>
+        <div layout="row" layout-xs="column">
+          <div flex>
+            <md-card class="public-profile">
+              <md-card-content>
+                <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                <md-card-title>
+                  <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                      <h3 translate>Winwins</h3>
+                      <p>{{profile.winwins_length}}</p>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                      <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                      <div ng-if="!profile.user.private || profile.user.myself">
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                      </div>
+                    </div>
+                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                      <h3>Seguidores</h3>
+                      <p>{{profile.seguidores.length}}</p>
+                    </div>
+                  </div>
+                </md-card-title>
+              </md-card-content>
+            </md-card>
+          </div>
+        </div>
+        <div class="blueBlock" layout="column"><strong>Mensajes</strong></div>
+        <div class="blueArrow"></div>
+        <div layout="column" layout-align="center center">
+          <div ng-if="">
+          <md-button class="mensajeria" ng-click="showme" ng-if="!profile.user.myself">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
+            </div>
+          <md-card class="mensajeriaPrivadaMobile">
+            <div class="inbox" ng-if="profile.user.myself">
+              <md-card class="mensajes-recibidos-title-mobile" ng-click="profile.inbox()">INBOX</md-card>
+              <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations" ng-click="profile.inbox()">
+                <md-card ng-repeat="message in cnv.messages" layout="row" layout-align="space-between-center">
+                  <div class="datos-mensaje" layout="row" ng-show="message.user_id != profile.userId">
+                    <img class="avatar-mensaje" ng-src="{{imageServer}}/smart/{{message.photo}}" ui-sref="home.public-profile{{user.id}}">
+                    <div layout="column">
+                      De: {{message.name}}
+                      <div>Mensaje: {{ message.body | limitTo: 10 }}{{myString.length > 10 ? '...' : ''}}</div>
+                    </div>
+                  </div>
+                </md-card>
+              </div>
+            </div>
+            <div class="mensajes-anteriores-public" ng-if="!profile.user.myself" ng-repeat="cnv in profile.user.conversations">
+              <form method="post" ng-submit="profile.sendMessage(cnv.conversation_id, mensaje)" name="Conversation" ng-if="!profile.user.myself">
+                <div class="bubble-container">
+                  <div ng-repeat="message in cnv.messages">
+                    <md-card class="anterior-contenido" ng-if="message.length == 0">No hay mensajes</md-card>
+                    <md-card class="bubble you" ng-show="message.user_id == profile.userId">{{message.body}}</md-card>
+                    <md-card class="bubble me" ng-show="message.user_id != profile.userId">{{message.body}}</md-card>
+                  </div>
                 </div>
             </div>
-                <div class="blueBlock" layout="column"><strong>Actividad Reciente</strong></div>
-                <div class="blueArrow"></div>
+            <md-input-container class="block-mensaje" ng-if="!profile.user.myself">
+              <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
+              <textarea required class="Mensaje" name="mensaje" ng-model="mensaje" md-maxlength="140" rows="4" md-select-on-focus>
+            </textarea>
+              <div ng-messages="public-profileForm.mensaje.$error">
+                <div ng-message="required">Campo requerido.</div>
+                <div ng-message="md-maxlength">Maximo 140 caracteres.</div>
+              </div>
+              <!--<div class="exito" ng-show="profile.sendMessageStatus == true">Tu mensaje ha sido enviado!</div>-->
+            </md-input-container>
+          </md-card>
+          <md-button ng-if="!profile.user.myself" class="mensajeria" type="submit" ng-click="profile.sendMessage(profile.conversation_id, mensaje)">Enviar &#x279e;</md-button>
+          </form>
+        </div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
+      </md-tab-label>
+      <md-tab-body>
+        <div layout="row" layout-xs="column">
+          <div flex>
+            <md-card class="public-profile">
+              <md-card-content>
+                <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+                <md-card-title>
+                  <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                      <h3 translate>Winwins</h3>
+                      <p>{{profile.winwins_length}}</p>
+                    </div>
+                    <div layout="column" layout-align="center center">
+                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                      <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                      <div ng-if="!profile.user.private || profile.user.myself">
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                      </div>
+                    </div>
+                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                      <h3 translate>Seguidores</h3>
+                      <p>{{profile.user.followers_amount}}</p>
+                    </div>
+                  </div>
+                </md-card-title>
+              </md-card-content>
+            </md-card>
+          </div>
+        </div>
+        <div class="blueBlock" layout="column"><strong>Actividad Reciente</strong></div>
+        <div class="blueArrow"></div>
+        <div layout-align="row">
+          <md-list class="actividadRecienteContainer">
+            <md-list-item class="sinActividad" ng-if="profile.user.activities.length == 0">No tiene actividad Reciente</md-list-item>
+            <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
+              <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+              <div layout-align="column">
                 <div layout-align="row">
-                    <md-list class="actividadRecienteContainer">
-                        <md-list-item class="sinActividad" ng-if="profile.user.activities.length == 0">No tiene actividad Reciente</md-list-item>
-                        <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-                            <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                            <div layout-align="column">
-                                <div layout-align="row"><p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
-                                </div>
-                                <p ng-if="act.type == WWJOIN" class="titulo {{act.type}}">{{act.titulo}}</p>
-                            </div>
-                        </md-list-item>
-                    </md-list>
+                  <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
                 </div>
-
-            </md-tab-body>
-        </md-tab>
+                <p ng-if="act.type == WWJOIN" class="titulo {{act.type}}">{{act.titulo}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </div>
+      </md-tab-body>
+    </md-tab>
 </div>
 </md-tabs>
 </div>

@@ -1,3 +1,4 @@
+{{msgController.conversations}}
 <md-dialog aria-label="List dialog">
     <md-dialog-content class="inboxtmpl">
         <md-tabs class="tabs">
@@ -6,7 +7,7 @@
               <md-tab-body>
                 <div class="inbox-title">INBOX</div>
                   <md-list>
-                      <md-list-item ng-repeat="conversation in profile.user.conversations">
+                      <md-list-item ng-repeat="conversation in msgController.conversations">
                       <md-list-item ng-repeat="message in conversation.messages">
                       <md-card class="carta-inbox" ng-hide="message.user_id == profile.userId" layout="row" layout-align="space-around-center">
                         <img class="avatar-mensaje" ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
