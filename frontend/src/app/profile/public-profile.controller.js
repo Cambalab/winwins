@@ -191,7 +191,7 @@
         myself_id: user.myself,
         conversation_id: conversationId,
         to_user_id: vm.userId,
-        conversation_messages: conversation_messages,
+        conversation_messages: conversation_messages
       }
     });
   }

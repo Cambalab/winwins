@@ -1,11 +1,12 @@
 <md-dialog aria-label="List dialog">
 <md-dialog-content>
-<div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended">
+  <div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended">
   <md-list>
-    <md-list-item ng-repeat="message in msgController.conversation_messages" layout="row" layout-align="space-around end">
+    <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row" layout-align="center center">
         <img class="msg-avatar" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
-      <md-card class="bubble you" ng-show="message.user_id == msgController.userId">{{message.body}}</md-card>
-      <md-card class="bubble me" ng-show="message.user_id != msgController.userId">{{message.body}}</md-card>
+      <p class="msg-name">{{message.name}}</p>
+      <md-card class="bubble you" ng-show="message.user_id != msgController.userId">{{message.body}}</md-card>
+      <md-card class="bubble me" ng-show="message.user_id == msgController.userId">{{message.body}}</md-card>
     </md-list-item>
   </md-list>
 <div class="caja-mensaje">
@@ -20,7 +21,5 @@
   <md-button class="boton-enviar" ng-click="msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
 </div>
 </div>
-
-
 </md-dialog-content>
 </md-dialog>
