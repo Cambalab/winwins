@@ -11,6 +11,7 @@
     var _user = {};
 
     _user.getUser = function(id) {
+    $log.log()
       return Restangular.one('users', id).get();
     };
 

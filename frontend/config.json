@@ -5,8 +5,8 @@
     "dev": {
       "ENV": {
         "name": "dev",
-        "base": "http://winwins.com:8000",
-        "apiBase": "http://winwins.com:8000/api",
+        "base": "http://localhost:8000",
+        "apiBase": "http://localhost:8000/api",
         "imageServer": "http://images.dev-winwins.net",
         "defaultLang": "es",
         "baseLang": "es",
@@ -59,7 +59,7 @@
         "name": "staging",
         "base": "http://dev-winwins.net/",
         "apiBase": "http://dev-winwins.net/api",
-        "imageServer": "http://images.dev-winwins.net",
+        "imageServer": "http://images.winwins.org",
         "defaultLang": "es",
         "baseLang": "es",
         "availableLangs": ["es", "en"],
