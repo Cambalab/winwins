@@ -28,6 +28,7 @@ class AuthController extends Controller {
             'iat' => time(),
             'exp' => time() + (2 * 7 * 24 * 60 * 60)
         ];
+        Log::info($user->id);
         return JWT::encode($payload, Config::get('app.token_secret'));
     }
 
@@ -61,11 +62,9 @@ class AuthController extends Controller {
         if (Hash::check($password, $user->password)) {
             unset($user->password);
 
-
             if(!isset($user->detail()->photo)) {
                 $this->dispatch(new UpdateProfilePicture($user));
             }
- 
 
             return response()->json(['token' => $this->createToken($user)]);
         } else {

@@ -6,12 +6,13 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($mdDialog, $auth, $state, $timeout, account, $rootScope) {
+  function LoginController($mdDialog, $auth, $state, $timeout, account, $rootScope, $log) {
     var vm = this;
 
     vm.login_status = 'login'
 
     vm.login = function() {
+      $log.log("Se registro un usuario");
       $auth.login({ email: vm.login.email, password: vm.login.password })
       .then(function() {
         $rootScope.$broadcast('account_change');
@@ -24,6 +25,7 @@
     };
 
     vm.authenticate = function(provider) {
+      $log.log("Se autentifico a un usuario");
       $auth.authenticate(provider)
       .then(function() {
         vm.provider = provider;
@@ -118,6 +120,7 @@
 
     /** @ngInject */
   function passwordVerify() {
+    $log.log("Se verifico el pass");
     var directive = {
       require: "ngModel",
       scope: {
