@@ -5,8 +5,8 @@
     "dev": {
       "ENV": {
         "name": "dev",
-        "base": "http://winwins.com:8000",
-        "apiBase": "http://winwins.com:8000/api",
+        "base": "http://localhost:8000",
+        "apiBase": "http://localhost:8000/api",
         "imageServer": "http://images.dev-winwins.net",
         "defaultLang": "es",
         "baseLang": "es",
