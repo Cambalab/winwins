@@ -214,7 +214,7 @@
   }
 
   /** @ngInject */
-  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $log, $mdDialog, $timeout){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $timeout){
     var vm = this;
 
     // vm.imageServer = ENV.imageServer
