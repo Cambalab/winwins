@@ -36,12 +36,12 @@
             </md-card>
           </div>
         </div>
-        <div class="buttons-xs-sm" layout="row" hide-gt-sm>
+        <div class="buttons-xs-sm" layout="row" hide-gt-sm ng-if="profile.isAuthenticated()">
           <md-button class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
         </div>
-        <div class="bioTotal" layout="row">
-          <div class="bio-Info" layout="column">
+        <div class="bioTotal" layout="row" layout-align="center start">
+          <div class="bio-Info" layout="column" layout-align="center strech">
             <md-card>
               <div class="bioContainer">
                 <h3><strong>BIO</strong></h3>
@@ -60,28 +60,35 @@
               </div>
             </md-card>
             <md-card>
-              <div class="my-Winwins-Container" layout-align="row">
-                <strong>
-                  <h3>MIS WINWINS</h3>
-                </strong>
-                <div class="length">{{profile.creadospormi.length}}</div>
+              <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
+                <div class="my-Winwins-Container" layout="row">
+                  <strong>
+                    <h3>MIS WINWINS</h3>
+                  </strong>
+                  <div class="length">{{profile.creadospormi.length}}</div>
+                  <md-icon class="arrowdown">keyboard_arrow_down</md-icon>
+                </div>
               </div>
-              <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi)">
+              <div class="my-Winwins-Content" layout="column" ng-show="(profile.creadospormi) && active">
                 <acme-highlighted class="acme-profile-fix" items="profile.creadospormi" showDescription="false" showAllProfile="true"></acme-highlighted>
                 <p class="mensaje" ng-if="profile.user.myself && profile.creadospormi.length == 0">Aun no creaste ningún Winwin. <a ui-sref="home.crear-winwin">Crear Winwin.</a></p>
                 <p class="mensaje" ng-if="profile.user.id && profile.creadospormi.length == 0 && !profile.user.myself">{{profile.user.name}} No ha creado ningun Winwin.</p>
               </div>
             </md-card>
             <md-card>
-              <div class="participo-Winwins-Container" layout-align="row">
-                <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
-                <div class="length">{{profile.enqueparticipo.length}}</div>
+              <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active1}">
+                <div class="participo-Winwins-Container" layout="row">
+                    <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
+                  <div class="length">{{profile.enqueparticipo.length}}</div>
+                  <md-icon class="arrowdown">keyboard_arrow_down</md-icon>
+                </div>
               </div>
-              <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo)">
-                <acme-highlighted class="acme-profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
-                <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
-                <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
-              </div>
+                <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo) && active">
+                  <acme-highlighted class="acme-profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
+                  <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
+                  <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
+                </div>
+
             </md-card>
             <md-card>
               <div class="seguidores-Container" layout-align="row">
@@ -113,7 +120,8 @@
             </md-card>
           </div>
           <div class="bio-Actions" layout="column" hide-xs hide-sm>
-            <div class="button" ng-if="profile.user.conversations.length == 0 && !profile.user.myself">
+            <div ng-if="profile.isAuthenticated()">
+              <div class="button" ng-if="profile.user.conversations.length == 0 && !profile.user.myself">
             <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
             </div>
             <md-card class="inbox-title" ng-if="profile.user.conversations.length == 0 && profile.user.myself">INBOX
@@ -137,7 +145,7 @@
                 </div>
               </div>
             </md-card>
-
+          </div>
             <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
             <div layout-align="row">
               <md-list class="actividadRecienteContainer">
@@ -197,7 +205,10 @@
         </div>
         <div class="blueBlock" layout="column"><strong>Mensajes</strong></div>
         <div class="blueArrow"></div>
-        <div class="bio-Actions" layout="column">
+        <md-button class="btn-login-msg" ng-if="!profile.isAuthenticated()" ng-click="profile.showLoginDialog()" layout="column" layout-align="center center">
+          Por favor inicia sesion <br> para ver o enviar mensajes.
+        </md-button>
+        <div class="bio-Actions" layout="column" ng-if="profile.isAuthenticated()">
           <div class="button" ng-if="profile.user.conversations.length == 0 && !profile.user.myself">
             <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
           </div>
@@ -245,7 +256,7 @@
                       <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
                       <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                      <div ng-if="!profile.user.private || profile.user.myself">
+                      <div ng-if="profile.isAuthenticated() && !profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
                         <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
                       </div>

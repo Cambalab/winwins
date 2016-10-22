@@ -606,6 +606,7 @@ md-card.public-profile {
         }
       }
       .seguidores-Content {
+        overflow-x: scroll;
         background: #fafafa;
         .seguidores-items {
           padding: 20px;
@@ -645,7 +646,15 @@ md-card.public-profile {
         }
       }
       .siguiendo-Content {
+        overflow-x: scroll !important;
         background: #fafafa;
+        max-width: 655px;
+        @media (max-width: 400px) {
+          max-width: 314px !important;
+        }
+        @media (max-width: 765px) {
+          max-width: 510px;
+        }
         .siguiendo-items {
           padding: 20px;
           max-width: 100%;
@@ -1025,7 +1034,9 @@ md-card.public-profile {
 .caja-mensaje {
   background: #fafafa;
   padding: 15px;
+  padding-left: 50px;
   .boton-enviar {
+    margin-top: 15px;
     background: #548ed8;
     color: #fff;
   }
@@ -1049,6 +1060,7 @@ md-card.public-profile {
     bottom: 12px;
   }
   .msg-name {
+    margin-top: 22px;
     padding-right: 3px;
     font-size: 10px;
     font-weight: normal;
@@ -1076,7 +1088,7 @@ md-card.public-profile {
   display: block;
   height: 16px;
   position: absolute;
-  top: 45%;
+  top: 32%;
   transform: rotate(29deg) skew(-35deg);
   -moz-transform: rotate(29deg) skew(-35deg);
   -ms-transform: rotate(29deg) skew(-35deg);
@@ -1118,7 +1130,19 @@ md-card.public-profile {
   font-size: 10px;
 }
 .msg-name {
+  margin-top: 25px;
   padding-right: 15px;
   font-size: 10px;
   font-weight: normal;
+}
+.arrowdown {
+  margin-right: 0;
+}
+.btn-login-msg {
+  margin: auto;
+  color: #fff;
+  background: #4cae4e;
+  .btn-login-msg:hover {
+    background: #62F065
+  }
 }

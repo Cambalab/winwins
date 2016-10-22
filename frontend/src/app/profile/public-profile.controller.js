@@ -6,8 +6,15 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth) {
+  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
     var vm = this;
+    var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
+
+    expandCollapseApp.controller('expandCollapseCtrl', function ($scope) {
+      $scope.active = false;
+      $scope.active1 = false;
+
+    });
 
     vm.userId = $stateParams.userId;
     vm.imageServer = ENV.imageServer;
@@ -161,15 +168,6 @@
       })
     }
 
-    vm.inbox = function ($http) {
-        $mdDialog.show({
-            controller: 'PublicProfileController',
-            controllerAs: 'profile',
-            templateUrl: 'app/profile/modal-inbox.tmpl.html',
-            clickOutsideToClose: true
-        });
-    };
-
     vm.mensaje= function ($http) {
         $mdDialog.show({
             controller: 'PublicProfileController',
@@ -196,6 +194,23 @@
     });
   }
 
+    vm.showLoginDialog = function(redirect) {
+      if (redirect) {
+        $rootScope.returnState = {
+          state: redirect
+        };
+      }
+      $mdDialog.show({
+        controller: 'LoginController',
+        controllerAs: 'login',
+        templateUrl: 'app/login/login.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true
+      });
+    };
+    vm.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
   }
 
   /** @ngInject */
