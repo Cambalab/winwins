@@ -76,14 +76,14 @@
               </div>
             </md-card>
             <md-card>
-              <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active1}">
+              <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
                 <div class="participo-Winwins-Container" layout="row">
                     <h3><strong>WINWINS EN QUE PARTICIPO</strong></h3>
                   <div class="length">{{profile.enqueparticipo.length}}</div>
                   <md-icon class="arrowdown">keyboard_arrow_down</md-icon>
                 </div>
               </div>
-                <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo) && active">
+                <div class="participo-Winwins-Content" layout="column" ng-show="(profile.enqueparticipo) && active1">
                   <acme-highlighted class="acme-profile" items="profile.enqueparticipo" icon="'icon-highlighted'" showDescription="false" showAllProfile="true"></acme-highlighted>
                   <p class="mensaje" ng-if="profile.user.myself && profile.enqueparticipo.length == 0">Aun no te sumaste a ningún Winwin. <a ui-sref="home.winwin-list">Ver Wiwins.</a></p>
                   <p ng-if="profile.user.id && profile.enqueparticipo.length == 0 && !profile.user.myself">{{profile.user.name}} No se ha sumado a ningun Winwin.... Me pregunto que hace aca</p>
