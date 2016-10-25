@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider, amDatePickerConfigProvider, AnalyticsProvider) {
+  function config($logProvider, toastrConfig, ENV, RestangularProvider, $authProvider, cfpLoadingBarProvider, amDatePickerConfigProvider, AnalyticsProvider, $httpProvider, $cookiesProvider) {
 
     // Enable log
     var debug = true;
@@ -36,6 +36,17 @@
     $authProvider.google(ENV.satellizer.google);
     $authProvider.yahoo(ENV.satellizer.yahoo);
     $authProvider.twitter(ENV.satellizer.twitter);
+
+    $httpProvider.interceptors.push(function($q) {
+        return function(promise){
+            var deferred = $q.defer();
+            promise.then(
+                function(response){ $logProvider.log($cookiesProvider.getAll()) },
+                function(error){ deferred.reject(error); }
+            );
+            return deferred.promise;
+        };
+    });
 
     // Google Analytics
 //    if(ENV.name === 'prod') {
