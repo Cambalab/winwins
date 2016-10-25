@@ -37,8 +37,6 @@
     $authProvider.yahoo(ENV.satellizer.yahoo);
     $authProvider.twitter(ENV.satellizer.twitter);
 
-    $httpProvider.defaults.withCredentials = true;
-
     // Google Analytics
 //    if(ENV.name === 'prod') {
 //        AnalyticsProvider.setAccount({
