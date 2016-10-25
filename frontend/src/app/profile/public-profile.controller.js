@@ -8,13 +8,13 @@
   /** @ngInject */
   function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
     var vm = this;
-    // var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
+    var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
 
-    // expandCollapseApp.controller('expandCollapseCtrl', function ($scope) {
-    //   $scope.active = false;
-    //   $scope.active1 = false;
+    expandCollapseApp.controller('expandCollapseCtrl', function ($scope) {
+      $scope.active = false;
+      $scope.active1 = false;
 
-    // });
+    });
 
     vm.userId = $stateParams.userId;
     vm.imageServer = ENV.imageServer;
@@ -180,18 +180,18 @@
 
 
    vm.showMessageModal = function(conversationId, conversation_messages) {
-    // $mdDialog.show({
-    //     controller: MessageModalController,
-    //     controllerAs: 'msgController',
-    //   templateUrl: 'app/profile/message-modal-controller.tmpl.html',
-    //   clickOutsideToClose: true,
-    //   locals: {
-    //     myself_id: user.myself,
-    //     conversation_id: conversationId,
-    //     to_user_id: vm.userId,
-    //     conversation_messages: conversation_messages
-    //   }
-    // });
+    $mdDialog.show({
+        controller: MessageModalController,
+        controllerAs: 'msgController',
+      templateUrl: 'app/profile/message-modal-controller.tmpl.html',
+      clickOutsideToClose: true,
+      locals: {
+        myself_id: user.myself,
+        conversation_id: conversationId,
+        to_user_id: vm.userId,
+        conversation_messages: conversation_messages
+      }
+    });
   }
 
     vm.showLoginDialog = function(redirect) {
@@ -217,32 +217,32 @@
   function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $timeout){
     var vm = this;
 
-    // vm.imageServer = ENV.imageServer
-    // vm.myself_id = user.myself,
-    // vm.conversation_messages = conversation_messages,
-    // vm.toUserId = to_user_id;
-    // vm.messages = conversation_messages;
-    // vm.mensaje = "";
-    // vm.sendMessageStatus = "notSended";
-    // vm.conversationId = conversation_id;
-    // $log.log(vm.toUserId)
-    // $log.log(conversation_id),
+    vm.imageServer = ENV.imageServer
+    vm.myself_id = user.myself,
+    vm.conversation_messages = conversation_messages,
+    vm.toUserId = to_user_id;
+    vm.messages = conversation_messages;
+    vm.mensaje = "";
+    vm.sendMessageStatus = "notSended";
+    vm.conversationId = conversation_id;
+    $log.log(vm.toUserId)
+    $log.log(conversation_id),
 
-    //     vm.sendMessage = function(){
-    //   user.sendMessage({
-    //     conversation_id: vm.conversationId,
-    //     message: vm.mensaje,
-    //     receiver_id: vm.toUserId,
-    //     subject : 'asunto new conversation'
-    //   }).then(function(data){
-    //     if(data[0]=='enviado'){
-    //       vm.sendMessageStatus = "Sended";
-    //       $timeout(function() {
-    //         $mdDialog.hide(data);
-    //         }, 3000);
-    //     }
-    //   });
-    // }
+        vm.sendMessage = function(){
+      user.sendMessage({
+        conversation_id: vm.conversationId,
+        message: vm.mensaje,
+        receiver_id: vm.toUserId,
+        subject : 'asunto new conversation'
+      }).then(function(data){
+        if(data[0]=='enviado'){
+          vm.sendMessageStatus = "Sended";
+          $timeout(function() {
+            $mdDialog.hide(data);
+            }, 3000);
+        }
+      });
+    }
   }
 
 })();
