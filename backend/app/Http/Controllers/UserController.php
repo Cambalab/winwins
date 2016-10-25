@@ -58,8 +58,8 @@ class UserController extends Controller {
         $cnvid = $request->input('conversation_id');
 
         //HARCODED
-//        if($current_user){
-        if(true){
+        if($current_user){
+//        if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
                 //aLog::info('ES CERO');
