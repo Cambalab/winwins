@@ -90,16 +90,16 @@ class UserController extends Controller {
                         'created_at' => new Carbon(),
                         'updated_at' => new Carbon(),
                         //HARCODED
-                        'user_id' => 32]
-//                        'user_id' => $current_user->id]
+//                        'user_id' => 32]
+                        'user_id' => $current_user->id]
                 );
             }
             $participantsID = DB::table('participants')
                 ->join('users','users.id','=','participants.user_id')
                 ->where('participants.conversation_id', '=', $cnvid)
                 //HARCODED
-//                ->where('participants.user_id', '=', $current_user->id)
-                 ->where('participants.user_id', '=', 32)
+                ->where('participants.user_id', '=', $current_user->id)
+//                 ->where('participants.user_id', '=', 32)
                 ->select('participants.id')
                 ->get();
 
@@ -296,17 +296,17 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-            $anonymus = false;
-            if (!$anonymus){
+//            $anonymus = false;
+//            if (!$anonymus){
                 //HARCODED
-//                if ($my_self->id == $user->id){
+                if ($my_self->id == $user->id){
                     if (false){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
-//                        ->where('users.id', '=',$my_self->id)
-                        ->where('users.id', '=','32')
+                        ->where('users.id', '=',$my_self->id)
+//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
 //                    Log::info('donde quiero');
@@ -335,8 +335,8 @@ class UserController extends Controller {
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
                         //HARCODED
-//                        ->where('users.id', '=',$my_self->id)
-                        ->where('users.id', '=','32')
+                        ->where('users.id', '=',$my_self->id)
+//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
                     $converother = DB::table('participants')
