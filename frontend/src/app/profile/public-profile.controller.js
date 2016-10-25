@@ -8,13 +8,13 @@
   /** @ngInject */
   function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
     var vm = this;
-    var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
-
-    expandCollapseApp.controller('expandCollapseCtrl', function ($scope) {
-      $scope.active = false;
-      $scope.active1 = false;
-
-    });
+    // var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
+    //
+    // expandCollapseApp.controller('expandCollapseCtrl', function ($scope) {
+    //   $scope.active = false;
+    //   $scope.active1 = false;
+    //
+    // });
 
     vm.userId = $stateParams.userId;
     vm.imageServer = ENV.imageServer;
