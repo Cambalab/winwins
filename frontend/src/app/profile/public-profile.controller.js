@@ -168,6 +168,15 @@
       })
     }
 
+    vm.inbox = function ($http) {
+        $mdDialog.show({
+            controller: 'PublicProfileController',
+            controllerAs: 'profile',
+            templateUrl: 'app/profile/modal-inbox.tmpl.html',
+            clickOutsideToClose: true
+        });
+    };
+
     vm.mensaje= function ($http) {
         $mdDialog.show({
             controller: 'PublicProfileController',
