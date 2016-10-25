@@ -225,8 +225,6 @@
     vm.mensaje = "";
     vm.sendMessageStatus = "notSended";
     vm.conversationId = conversation_id;
-    $log.log(vm.toUserId)
-    $log.log(conversation_id),
 
         vm.sendMessage = function(){
       user.sendMessage({
