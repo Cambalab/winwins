@@ -17,8 +17,8 @@
                       <p>{{profile.winwins_length}}</p>
                     </div>
                     <div layout="column" layout-align="center center">
-                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"></md-button>
+                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar">Cambiar Avatar</md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
@@ -151,7 +151,7 @@
               <md-list class="actividadRecienteContainer">
                 <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.</md-card>
                 <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                  <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
                   <div layout-align="column">
                     <div layout-align="row">
                       <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
@@ -184,8 +184,8 @@
                       <p>{{profile.winwins_length}}</p>
                     </div>
                     <div layout="column" layout-align="center center">
-                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                      <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()">Cambiar Avatar</md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
@@ -253,8 +253,8 @@
                       <p>{{profile.winwins_length}}</p>
                     </div>
                     <div layout="column" layout-align="center center">
-                      <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                      <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                      <md-button ng-click="profile.showCropAvatarDialog()">Cambiar Avatar</md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="profile.isAuthenticated() && !profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
@@ -277,7 +277,7 @@
           <md-list class="actividadRecienteContainer">
             <md-list-item class="sinActividad" ng-if="profile.user.activities.length == 0">No tiene actividad Reciente</md-list-item>
             <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-              <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+              <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
               <div layout-align="column">
                 <div layout-align="row">
                   <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>

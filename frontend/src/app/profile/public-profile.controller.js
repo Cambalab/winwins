@@ -6,7 +6,7 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController(user, ENV, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
+  function PublicProfileController(user, $q, ENV, $state, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
     var vm = this;
     // var expandCollapseApp = angular.module('expandCollapseApp', ['ngAnimate']);
     //
@@ -15,7 +15,7 @@
     //   $scope.active1 = false;
     //
     // });
-
+    vm.avatar = '';
     vm.userId = $stateParams.userId;
     vm.imageServer = ENV.imageServer;
     vm.user = {interests_list:[]};
@@ -112,8 +112,87 @@
       });
 
       vm.winwins_length = vm.creadospormi.length + vm.enqueparticipo.length;
-
+      vm.avatar = vm.imageServer+'/smart/'+vm.user.photo;
     });
+
+    var dataURItoBlob = function(dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {type: mimeString});
+    };
+
+    vm.showCropAvatarDialog = function(ev) {
+      $mdDialog.show({
+        controller: CropAvatarController,
+        templateUrl: 'app/profile/avatar_crop.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+          .then(function(image) {
+            vm.avatar_image = image;
+            vm.avatar = image.file;
+          }).then(function(){
+            console.log('GUARDANDO IMAGEN PAPU');
+        vm.current_password_wrong_message = '';
+
+        var promises = [];
+
+        if (vm.avatar_image) {
+          promises.push(account.uploadImage(dataURItoBlob(vm.avatar_image.file), vm.avatar_image.name));
+        }
+        if (vm.cover_image) {
+          promises.push(account.uploadImage(dataURItoBlob(vm.cover_image.file), vm.cover_image.name));
+        }
+
+        $q.all(promises).then(function(data) {
+          var indexAvatar = 0;
+          var indexCover = 1;
+          if (!vm.avatar_image) {
+            indexCover = 0;
+          }
+
+          if (vm.avatar_image) {
+            vm.user.photo = data[indexAvatar].filename;
+          }
+          if (vm.cover_image) {
+            vm.user.cover_photo = data[indexCover].filename;
+          }
+
+          vm.user.language_code = 'ES';
+
+          user.saveProfile(vm.user)
+              .then(function(){
+                $rootScope.$broadcast('account_change');
+
+                $mdDialog.show({
+                  controller: CropAvatarController,
+                  templateUrl: 'app/profile/modal_success.tmpl.html',
+                  parent: angular.element($document.body),
+                  clickOutsideToClose:true
+                });
+
+                $state.go('home.public-profile', {
+                  userId: vm.user.id
+                });
+              })
+              .catch(function(response) {
+                if(response.data) {
+                  if(response.data.message == 'user_current_password_wrong') {
+                    $scope.profileForm.current_password.$setValidity("currentPasswordWrong", false);
+                  }
+                }
+              });
+
+
+          //vm.processing = false;
+        });
+      });
+    };
 
     vm.unfollow = function(id){
       user.unfollow(id).then(function(data){
@@ -220,6 +299,28 @@
     vm.isAuthenticated = function() {
       return $auth.isAuthenticated();
     };
+  }
+
+  function CropAvatarController($scope, $mdDialog) {
+    $scope.myImage='';
+    $scope.myCroppedImage='';
+    $scope.fileName='';
+
+    $scope.handleFileSelect = function(evt) {
+      var file=evt.files[0];
+      $scope.fileName = file.name;
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function($scope){
+          $scope.myImage=evt.target.result;
+        });
+      };
+      reader.readAsDataURL(file);
+    };
+
+    $scope.cropImage = function() {
+      $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
+    }
   }
 
   /** @ngInject */

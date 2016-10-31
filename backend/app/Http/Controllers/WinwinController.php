@@ -14,6 +14,7 @@ use Illuminate\Pagination\Paginator;
 use Winwins\Http\Requests;
 use Winwins\Http\Controllers\Controller;
 use Winwins\Winwin;
+use Winwins\Conversation;
 use Winwins\Model\Repository\WinwinRepository;
 use Winwins\WinwinsUser;
 use Winwins\SponsorsWinwin;
@@ -151,11 +152,17 @@ class WinwinController extends Controller {
                 $token = explode(' ', $request->header('Authorization'))[1];
                 $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
                 $user = User::find($payload['sub']);
+                Log::info('obteniendo el usuario logueado en winwin');
             }
         }
 
+        //HARCODED
+        $user = User::find(32);
         $ww_user = $winwin->user;
         $ww_user->detail;
+
+        $ww_user = User::find($winwin->user_id);
+
         $users = $winwin->users;
         $sponsors = $winwin->sponsors;
         $location = $winwin->location;
@@ -239,6 +246,48 @@ class WinwinController extends Controller {
 
             $winwin->active_sponsors = $active_sponsors;
         }
+        //conversation
+        //GET CONVERSATION LOGGED Y EL DE PERFIL
+        $converown = DB::table('participants')
+            ->join('users', 'participants.user_id', '=', 'users.id')
+            ->join('conversations','conversations.id','=','participants.conversation_id')
+            ->where('users.id', '=',$user->id)
+            ->select('conversations.id', 'conversations.subject')
+            ->get();
+        $converother = DB::table('participants')
+            ->join('users', 'participants.user_id', '=', 'users.id')
+            ->join('conversations','conversations.id','=','participants.conversation_id')
+            ->where('users.id', '=',$ww_user->id)
+            ->select('conversations.id', 'conversations.subject')
+            ->get();
+
+        $cvsIDS = array();
+        foreach($converown as $cown){
+            foreach ($converother as $cother){
+                if($cown->id==$cother->id){
+                    $cvsIDS[] = $cown;
+                }
+            }
+        }
+
+        $conversations = new Collection();
+
+        foreach($cvsIDS as $c) {
+            $messages = DB::table('messages')
+                ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                ->join('users','participants.user_id','=','users.id')
+                ->join('user_details','users.id','=','user_details.user_id')
+                ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                ->where('messages.conversation_id', '=', $c->id)
+                ->orderBy('messages.created_at', 'asc')
+                ->get();
+            $cnv = new Conversation();
+            $cnv -> id = $c->id;
+            $cnv -> subject = $c->subject;
+            $cnv -> messages = $messages;
+            $conversations[] = $cnv;
+        }
+        $winwin->conversations = $conversations;
 
         $winwin->polls = DB::table('polls')
             ->where('type', '=', 'WINWIN')
@@ -384,7 +433,7 @@ class WinwinController extends Controller {
                 $winwin->image = $request->input('gallery_image')[0];
             }
 
-            if( !isset($winwin->image) ) {
+            if( !isset($winwin->image) && !$request->has('video') ) {
                 $winwin->image = 'ww-main-default.jpg';
             }
 
@@ -398,17 +447,7 @@ class WinwinController extends Controller {
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
 
-
-            $winwin->save();
-                 
-            $winwinsUsers = new WinwinsUser;
-            $winwinsUsers->user_id = $user->id;
-            $winwinsUsers->winwin_id = $winwin->id;
-            $winwinsUsers->creator = true;
-            $winwinsUsers->moderator = true;
-            $winwinsUsers->save();
-
-            if($request->input('video')) {
+            if($request->has('video')) {
                 Media::create([
                     'name' => $request->input('video'),
                     'path' => $request->input('video'),
@@ -418,15 +457,25 @@ class WinwinController extends Controller {
                 ]);
                 if(!isset($winwin->image)) {
                     $youtube_img = 'http://img.youtube.com/vi/'.$request->input('video').'/hqdefault.jpg';
-                
+
                     Storage::disk('s3-gallery')->put('/' .$request->input('video').'.jpg', file_get_contents($youtube_img), 'public');
 
-                    $winwin->is_video = true;
+                    $winwin->is_video = 1;
                     $winwin->video = $request->input('video');
                     $winwin->image = $request->input('video').'.jpg';
                     $winwin->save();
                 }
             }
+
+            $winwin->save();
+
+            $winwinsUsers = new WinwinsUser;
+            $winwinsUsers->user_id = $user->id;
+            $winwinsUsers->winwin_id = $winwin->id;
+            $winwinsUsers->creator = true;
+            $winwinsUsers->moderator = true;
+            $winwinsUsers->save();
+
 
             if($request->has('interests')) {
                 $interests = $request->input('interests');
@@ -1015,11 +1064,9 @@ class WinwinController extends Controller {
 
 
 	public function sentCompleteQuorum(Request $request, Mailer $mailer, $winwin, $totalUsers) {
-        Log::info("Enviando mails completado");
         $template_name = 'winwin_ww_total_users_joined';
         foreach($totalUsers as $user) {
             $recipient = $user->email;
-            Log::info("Mail: ".$recipient);
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
@@ -1043,17 +1090,14 @@ class WinwinController extends Controller {
                 $message->subject('WW - '.$winwin->title);
                 $message->to(null, $recipient);
                 $message_sent = $mailer->send($message);
-                Log::info("Mail enviado");
             }
         }
     }
 
 	public function sentNewPost(Request $request, Mailer $mailer, $winwin, $post) {
-        Log::info("Enviando mails nuevo Post");
         $template_name = 'winwin_ww_new_post';
         foreach($winwin->users as $user) {
             $recipient = $user->email;
-            Log::info("Mail: ".$recipient);
             if(isset($recipient)) {
                 $message = new Message($template_name, array(
                     'meta' => array(
@@ -1077,7 +1121,6 @@ class WinwinController extends Controller {
                 $message->subject('WW - '.$winwin->title);
                 $message->to(null, $recipient);
                 $message_sent = $mailer->send($message);
-                Log::info("Mail enviado");
             }
         }
     }

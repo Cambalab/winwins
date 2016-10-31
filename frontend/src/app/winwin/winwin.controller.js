@@ -91,6 +91,7 @@
           vm.cover_post_image = null;
         }
 
+        vm.post.user_id = vm.user_id;
         winwin.createPost(vm.post)
         .then(function(data){
           if (!vm.winwin.published && !vm.winwin.canceled) {
@@ -595,6 +596,7 @@
     vm.join = function() {
       winwin.join(winwin_id).then(function (data) {
         winwin.getWinwin(winwin_id).then(function (winwin_data) {
+          vm.winwin.title = winwin_data.title;
           $scope.$parent.winwin = winwin_data;
           $scope.$parent.winwin.closing_date = new Date(vm.winwin.closing_date);
           $scope.$parent.winwin.already_joined = true;
@@ -617,7 +619,7 @@
 
 
       vm.sentInvitations = function() {
-      winwin.shareMails(vm.winwin.id, vm.mails).then(function() {
+      winwin.shareMails($scope.$parent.winwin.id, vm.mails).then(function() {
         vm.mails = [];
         vm.emailsOK = true;
       });
