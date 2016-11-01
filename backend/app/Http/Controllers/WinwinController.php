@@ -62,6 +62,11 @@ class WinwinController extends Controller {
             default:
                 $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         }
+      foreach($winwins as $win){ Log::info($win->id); $win->users = DB::table('users')
+        ->join('winwins_users', 'users.id', '=', 'winwins_users.user_id')
+        ->select('users.id', 'users.username', 'users.photo')
+        ->where('winwins_users.winwin_id', '=', $win->id)
+        ->get(); }
 
         //$winwins = Winwin::where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         //$winwins = DB::table('winwins')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();

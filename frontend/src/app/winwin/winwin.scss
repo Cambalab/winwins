@@ -40,6 +40,11 @@
     }
 
   }
+  .name-creador {
+    width: 50px;
+    word-wrap: break-word;
+    line-height: 20px;
+  }
 
 }
 .acme-winwin {
@@ -207,7 +212,6 @@
             font-size: 18px;
             font-weight: 400;
             line-height: 20px;
-            white-space: inherit;
             &:hover {
               background:none;
             }
@@ -838,7 +842,6 @@
       font-size: 14px;
       color: #666;
       word-wrap: break-word;
-      white-space: pre-wrap;
       text-align: left;
     }
   }
@@ -1020,7 +1023,6 @@
     font-size: 12px;
     color: #5d5d5d;
     word-wrap: break-word;
-    white-space: pre-wrap;
   }
   md-list {
     @media (min-width: 960px) {

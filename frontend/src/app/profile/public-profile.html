@@ -18,7 +18,7 @@
                     </div>
                     <div layout="column" layout-align="center center">
                       <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"></md-button>
+                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon></md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
@@ -130,7 +130,7 @@
               </div>
             </md-card>
 
-            <md-card class="mensajeriaPrivada" ng-if="profile.user.conversations.length > 0">
+            <div class="mensajeriaPrivada" ng-if="profile.user.conversations.length > 0">
               <div class="inbox">
                 <div>
                   <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-card>
@@ -144,7 +144,7 @@
                   </div>
                 </div>
               </div>
-            </md-card>
+            </div>
           </div>
             <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
             <div layout-align="row">
@@ -282,7 +282,7 @@
                 <div layout-align="row">
                   <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
                 </div>
-                <p ng-if="act.type == WWJOIN" class="titulo {{act.type}}">{{act.titulo}}</p>
+                <p class="titulo {{act.type}}">{{act.titulo}}</p>
               </div>
             </md-list-item>
           </md-list>

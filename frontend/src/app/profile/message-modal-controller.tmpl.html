@@ -2,7 +2,7 @@
 <md-dialog-content>
   <div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended">
   <md-list>
-    <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row" layout-align="center center">
+    <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row">
       <div layout="row">
         <img class="msg-avatar" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
         <p class="msg-name">{{message.name}}</p>

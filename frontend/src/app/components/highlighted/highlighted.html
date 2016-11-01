@@ -1,56 +1,65 @@
 <md-content class="acme-highlighted">
   <div class="container" layout="column"></div>
-    <div layout="column" class="title-container" layout-align"center center" layout-margin>
-      <span class="title" ng-if="vm.title">
-        {{ vm.title }}
-      </span>
-      <span class="subtitle" ng-if="vm.title">
-        Propuestas para buscar personas y recursos para materializar una idea
-      </span>
-    </div>
-    <div layout="row" layout-align="center center">
-      <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="100px"></md-progress-circular>
-    </div>
-    <div layout="row" layout-wrap  layout-xs="column" layout-margin layout-align="center center">
-      <div ng-repeat="item in vm.items" class="winwins-container" ng-show="!vm.loading">
-        <md-card>
-          <md-card-content>
-              <div class="wrap-md-card-img">
-                <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/>
-              </div>
-            <md-card-title-text layout-align="center center" layout="column">
-              <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})" arial-label="title">{{item.title}}</md-button>
-            </md-card-title-text>
-            <div class="card-labels">
-              <md-icon class="icon icon-access_time" ng-if="item.finishing">access_time</md-icon>
-              <md-icon class="icon icon-watshot" ng-if="item.popular">whatshot</md-icon>
-              <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="item.remarkable"></md-icon>
-            </div>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="space-between center">
-            <md-card-header>
-              <md-card-avatar>
-                <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
-              </md-card-avatar>
-              <md-card-content>
-                <img ng-repeat="sponsor in item.sponsors | limitTo: 1" class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">
-              </md-card-content>
-            </md-card-header>
-            <div layout="row" layout-align="end center">
-              <div class="card-members"><translate>Somos</translate> <strong>{{ item.users_already_joined }}</strong></div>
-              <md-button class="md-icon-button" ng-click="vm.share(item)" arial-label="share">
-                <md-icon>share</md-icon>
-              </md-button>
-            </div>
-          </md-card-actions>
-          <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
-            {{ item.what_we_do }}
-          </md-card-content>
-        </md-card>
-      </div>
-    </div>
-    <div layout="row" class="view-more-container" layout-align="center center">
-      <div class="view-more-background-line"></div>
-      <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
+  <div layout="column" class="title-container" layout-align="center center" layout-margin>
+    <span class="title" ng-if="vm.title">
+    {{ vm.title }}
+    </span>
+    <span class="subtitle" ng-if="vm.title">
+    Propuestas para buscar personas y recursos para materializar una idea
+    </span>
+  </div>
+  <div layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="100px"></md-progress-circular>
+  </div>
+  <div layout="row" layout-wrap  layout-xs="column" layout-margin layout-align="center center">
+    <div ng-repeat="item in vm.items" class="winwins-container" ng-show="!vm.loading">
+      <md-card>
+        <md-card-content>
+          <div class="wrap-md-card-img">
+            <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/>
+          </div>
+          <div class="card-labels">
+            <md-icon class="icon icon-access_time" ng-if="item.finishing">access_time</md-icon>
+            <md-icon class="icon icon-watshot" ng-if="item.popular">whatshot</md-icon>
+            <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="item.remarkable"></md-icon>
+          </div>
+        </md-card-content>
+        <md-card-title-text layout-align="center center" layout="column">
+          <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">{{item.title}}</md-button>
+        </md-card-title-text>
+        <div class="grey-divider" layout="column" layout-align="center center"></div>
+        <md-card-avatar layout="row" layout-align="start center">
+          <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
+          <p class="md-user-creator-name">{{item.user.username}}</p>
+        </md-card-avatar>
+        <div class="ultimos-participantes" layout="row" layout-align="start center">
+          <img ng-repeat="user in item.users" class="md-user-avatar-members" ng-src="{{vm.imageServer}}//{{user.photo}}" ui-sref="home.public-profile({userId: user.user.id})">
+        </div>
+    <md-card-actions layout="row" layout-align="space-between center">
+      <!--<md-card-header>-->
+        <!--<md-card-content>-->
+          <!--<img ng-repeat="sponsor in item.sponsors | limitTo: 1" class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">-->
+        <!--</md-card-content>-->
+      <!--</md-card-header>-->
+        <div layout="row" class="card-members">
+          <div class="somos">Somos</div>
+          <div class="users-joined">{{ item.users_already_joined }}</div>
+        </div>
+        <div>
+          <md-button class="md-icon-button" ng-click="vm.share(item)" arial-label="share">
+            <md-icon>share</md-icon>
+          </md-button>
+        </div>
+    </md-card-actions>
+    <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
+      {{ item.what_we_do }}
+    </md-card-content>
+    </md-card>
+  </div>
+  <div layout="row" class="view-more-container" layout-align="center center">
+    <div class="view-more-background-line"></div>
+    <md-button ng-show="vm.viewmore" ui-sref="home.winwin-list" class="ver-todos" arial-label="see all">{{ 'Ver todos' | translate }}</md-button>
+  </div>
     </div>
 </md-content>
+

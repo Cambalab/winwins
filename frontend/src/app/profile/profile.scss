@@ -393,6 +393,11 @@ md-card.public-profile {
       height: 100px;
       border-radius: 100px;
     }
+    .upload-image {
+      width: 70px;
+      height: 35px;
+      margin-top: 10px;
+    }
     .name {
       font-size: 5vmin;
       text-transform: capitalize;
@@ -539,6 +544,7 @@ md-card.public-profile {
       }
       .my-Winwins-Container {
         .length {
+          height: 25px;
           background: #EC8645;
           color: #fff;
           border-radius: 5px;
@@ -562,6 +568,7 @@ md-card.public-profile {
       .participo-Winwins-Container {
         margin: 10px 20px;
         .length {
+          height: 25px;
           background: #EC8645;
           color: #fff;
           border-radius: 5px;
@@ -672,7 +679,6 @@ md-card.public-profile {
       flex: 30%;
       max-width: 100%;
       .mensajeriaPrivada {
-        background: #fafafa;
         .chat {
           width: 270px;
         }
@@ -756,8 +762,8 @@ md-card.public-profile {
   height: 400px;
   text-align: left;
   .actividadRecienteContent {
-    border-radius: 5px;
-    margin: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    margin: 10px;
     font-size: 12px;
     font-weight: bold;
     background: #fff;
@@ -1035,6 +1041,7 @@ md-card.public-profile {
   background: #fafafa;
   padding: 15px;
   padding-left: 50px;
+  padding-bottom: 40px;
   .boton-enviar {
     margin-top: 15px;
     background: #548ed8;
