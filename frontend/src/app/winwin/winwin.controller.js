@@ -599,7 +599,6 @@
           vm.winwin.title = winwin_data.title;
           $scope.$parent.winwin = winwin_data;
           $scope.$parent.winwin.closing_date = new Date(vm.winwin.closing_date);
-          $scope.$parent.winwin.already_joined = true;
           vm.status = 'success';
           $timeout(function () {
             vm.status = 'share';

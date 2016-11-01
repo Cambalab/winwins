@@ -62,7 +62,8 @@ class ReportController extends Controller {
                         'base_url' => Config::get('app.url'),
                         // TODO agregar link a reporte en backend
                         'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
     				),
                     'sender' => array(  
                         'username' => $user->username,

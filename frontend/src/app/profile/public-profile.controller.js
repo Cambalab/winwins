@@ -137,7 +137,6 @@
             vm.avatar_image = image;
             vm.avatar = image.file;
           }).then(function(){
-            console.log('GUARDANDO IMAGEN PAPU');
         vm.current_password_wrong_message = '';
 
         var promises = [];

@@ -475,9 +475,12 @@ class AuthController extends Controller {
         $message = new Message($template_name, array(
             'meta' => array(
                 'base_url' => Config::get('app.url'),
-                'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
             ),
-            'registration_link' => Config::get('app.url').'/auth/activate/'.$user->activation_code
+            'registration_link' => Config::get('app.url').'/auth/activate/'.$user->activation_code,
+            'video' => "    <iframe width=\"440\" height=\"355\" src=\"https://www.youtube.com/embed/SDdGYotJ4-E\" frameborder=\"0\" allowfullscreen></iframe>",
+            'username' => $user->username
         ));
         $message->subject('WinWin - Confirma tu nueva cuenta');
         $message->to(null, $user->email);
@@ -496,7 +499,8 @@ class AuthController extends Controller {
             $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
-                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'organization_name' => $sponsor->name
             ));
@@ -513,7 +517,8 @@ class AuthController extends Controller {
         $message = new Message($template_name, array(
             'meta' => array(
                 'base_url' => Config::get('app.url'),
-                'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
             ),
             'registration_link' => Config::get('app.url').'/auth/activate/'.$user->activation_code,
             'organization_name' => $sponsor->name
@@ -527,11 +532,13 @@ class AuthController extends Controller {
 
 
    	public function sentEmailWelcome($mailer, $user) {
+   	    Log::info('en sentEmailWelcome');
         $template_name = 'winwin_welcome';
         $message = new Message($template_name, array(
             'meta' => array(
                 'base_url' => Config::get('app.url'),
-                'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
             ),
             'registration_link' => Config::get('app.url').'/auth/activate/'.$user->activation_code
         ));

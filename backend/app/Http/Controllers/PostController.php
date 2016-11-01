@@ -241,7 +241,7 @@ class PostController extends Controller {
         
         $filename = 'post_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
-        Log::info('Uploading to S3 file '.$filename);
+        Log::info('Uploading to S file '.$filename);
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
         $image->name = $filename;
         $image->save();
@@ -337,7 +337,8 @@ class PostController extends Controller {
                         'meta' => array(
                             'base_url' => Config::get('app.url'),
                             'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                            'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                            //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                            'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                         ),
                         'sender' => array(
                             'post_username' => $username,
@@ -379,7 +380,8 @@ class PostController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'group_link' => Config::get('app.url').'/#/grupo/'.$group->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'post_username' => $user->username,

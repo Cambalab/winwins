@@ -408,7 +408,8 @@ class GroupController extends Controller {
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
                     'group_link' => Config::get('app.url').'/#/group/'.$group->id,
-                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
                     'name' => $detail->name,

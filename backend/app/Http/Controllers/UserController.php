@@ -42,7 +42,7 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-        $current_user = User::find(32);
+        //$current_user = User::find(132);
         $cnvid = $request->input('conversation_id');
 
         if($current_user){
@@ -156,8 +156,8 @@ class UserController extends Controller {
                 $my_self= User::find($payload['sub']);
             }
         }
-
-        $my_self = User::find(32);
+        //HARCODED
+        //$my_self = User::find(132);
 
         if($user) {
             $winwins = $user->winwins;
@@ -275,7 +275,7 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-            $anonymus = false;
+            //$anonymus = false;
             if (!$anonymus){
                 if ($my_self->id == $user->id){
                     $converown = DB::table('participants')

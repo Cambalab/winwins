@@ -63,7 +63,6 @@ class WinwinController extends Controller {
             default:
                 $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         }
-
         //$winwins = Winwin::where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         //$winwins = DB::table('winwins')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         $collection = $this->processCollection($winwins);
@@ -157,7 +156,7 @@ class WinwinController extends Controller {
         }
 
         //HARCODED
-        $user = User::find(32);
+       // $user = User::find(132);
         $ww_user = $winwin->user;
         $ww_user->detail;
 
@@ -738,7 +737,8 @@ class WinwinController extends Controller {
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
                     'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                    'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
                     'name' => $detail->name,
@@ -1072,7 +1072,8 @@ class WinwinController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
@@ -1103,7 +1104,8 @@ class WinwinController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        //logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'username' => $user->username,
