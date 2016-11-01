@@ -35,34 +35,19 @@ class UserController extends Controller {
         $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
         if ( $token )  {
             $token = $request->header('Authorization');
-            if(isset($tokenm[1])) {
+            if(isset($token[1])) {
                 $token = explode(' ', $request->header('Authorization'))[1];
                 $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
                 $current_user = User::find($payload['sub']);
             }
         }
-        if($request->has('conversation_id')) {
-            Log::info($request->input('conversation_id'));
-        }
-        if($request->has('message')) {
-            Log::info($request->input('message'));
-        }
-
-        if($request->has('receiver_id')) {
-            Log::info($request->input('receiver_id'));
-        }
-        if($request->has('subject')) {
-            Log::info(''.$request->input('subject'));
-        }
-
+        //HARCODED
+        //$current_user = User::find(132);
         $cnvid = $request->input('conversation_id');
 
-        //HARCODED
         if($current_user){
-//        if(true){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
-                //aLog::info('ES CERO');
                 //CRE CONVERSACION
                 DB::table('conversations')->insert(
                     [   'created_at' => new Carbon(),
@@ -71,8 +56,6 @@ class UserController extends Controller {
                 );
 
                 $cnvid = DB::table('conversations')->max('id');
-
-//                Log::info('creada conver'.$cnvid);
 
                 //CREO PARTICIPANTE (perfil publico)
                 DB::table('participants')->insert(
@@ -89,21 +72,15 @@ class UserController extends Controller {
                         'last_read' => new Carbon(),
                         'created_at' => new Carbon(),
                         'updated_at' => new Carbon(),
-                        //HARCODED
-//                        'user_id' => 32]
                         'user_id' => $current_user->id]
                 );
             }
             $participantsID = DB::table('participants')
                 ->join('users','users.id','=','participants.user_id')
                 ->where('participants.conversation_id', '=', $cnvid)
-                //HARCODED
                 ->where('participants.user_id', '=', $current_user->id)
-//                 ->where('participants.user_id', '=', 32)
                 ->select('participants.id')
                 ->get();
-
-            //Log::info("participante:".$participantsID[0]->id);
 
             DB::table('messages')->insert(
                 ['conversation_id' => $cnvid,
@@ -179,6 +156,8 @@ class UserController extends Controller {
                 $my_self= User::find($payload['sub']);
             }
         }
+        //HARCODED
+        //$my_self = User::find(132);
 
         if($user) {
             $winwins = $user->winwins;
@@ -296,24 +275,18 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-//            $anonymus = false;
-//            if (!$anonymus){
-                //HARCODED
+            //$anonymus = false;
+            if (!$anonymus){
                 if ($my_self->id == $user->id){
-                    if (false){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
-                        //HARCODED
                         ->where('users.id', '=',$my_self->id)
-//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
-//                    Log::info('donde quiero');
                     $conversations = new Collection();
 
                     foreach($converown as $c) {
-//                        Log::info($c->id);
                         $messages = DB::table('messages')
                             ->join('participants', 'participants.id', '=', 'messages.participant_id')
                             ->join('users','participants.user_id','=','users.id')
@@ -334,9 +307,7 @@ class UserController extends Controller {
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
                         ->join('conversations','conversations.id','=','participants.conversation_id')
-                        //HARCODED
                         ->where('users.id', '=',$my_self->id)
-//                        ->where('users.id', '=','32')
                         ->select('conversations.id', 'conversations.subject')
                         ->get();
                     $converother = DB::table('participants')
@@ -358,7 +329,6 @@ class UserController extends Controller {
                     $conversations = new Collection();
 
                     foreach($cvsIDS as $c) {
-                        Log::info('SACANDO ENSAJE'.$c->id);
                         $messages = DB::table('messages')
                             ->join('participants', 'participants.id', '=', 'messages.participant_id')
                             ->join('users','participants.user_id','=','users.id')

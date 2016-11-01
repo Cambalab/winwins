@@ -4,17 +4,18 @@
     <div layout="row">
         <md-card class="public-profile">
           <md-card-content>
-            <div><img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
+            <div><img ng-src="{{profile.portrait}}" class="md-card-image" alt="">
             </div>
             <md-card-title>
               <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
                 <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                   <h3>Winwins</h3>
-                  <p>{{profile.user.winwins_length}}</p>
+                  <p>{{profile.winwins_length}}</p>
                 </div>
                 <div layout="column" layout-align="center center">
-                  <img ng-src="{{profile.imageServer}}/smart/{{profile.user.photo}}" class="md-card-avatar" alt="">
-                  <md-button ng-click="profile.showCropAvatarDialog()"></md-button>
+                  <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                  <md-button class="bt-gray bottom" ng-click="profile.showCropAvatarDialog()">Cambiar avatar</md-button>
+                  <md-button class="bt-gray bottom" ng-click="profile.showCropCoverDialog()">Cambiar portada</md-button>
                   <div class="name"><strong>{{profile.user.name}} {{profile.user.lastname}}</strong>
                   </div>
                 </div>
@@ -22,7 +23,6 @@
                   <h3 >Seguidores</h3>
                    <p>{{profile.user.followers_amount}}</p>
                 </div>
-                  <!--<md-button class="bt-gray bottom" ng-click="profile.showCropCoverDialog()"></md-button>-->
               </div>
             </md-card-title>
           </md-card-content>

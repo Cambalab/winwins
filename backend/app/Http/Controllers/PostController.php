@@ -241,7 +241,7 @@ class PostController extends Controller {
         
         $filename = 'post_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
-        Log::info('Uploading to S3 file '.$filename);
+        Log::info('Uploading to S file '.$filename);
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
         $image->name = $filename;
         $image->save();
@@ -327,36 +327,44 @@ class PostController extends Controller {
 	}
 
 	public function sentNewPost(Request $request, Mailer $mailer, $winwin, $post, $username) {
-        Log::info("Enviando mails nuevo Post");
+        Log::info("Enviando mails nuevo Post desde PostController");
         $template_name = 'winwin_ww_new_post';
         foreach($winwin->users as $user) {
             $recipient = $user->email;
-            Log::info("Mail: ".$recipient);
             if(isset($recipient)) {
-                $message = new Message($template_name, array(
-                    'meta' => array(
-                        'base_url' => Config::get('app.url'),
-                        'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
-                    ),
-                    'sender' => array(
-                        'post_username' => $username,
-                        'username' => $user->username,
-                        'name' => $user->detail->name,
-                        'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
-                    ),
-                    'winwin' => array(
-                        'id' => $winwin->id,
-                        'users_amount' => $winwin->users_amount,
-                        'winwin_title' => $winwin->title,
-                        'what_we_do' => $winwin->what_we_do,
-                    ),
+                if($request->input('user_id')!=$user->id){
+                    $message = new Message($template_name, array(
+                        'meta' => array(
+                            'base_url' => Config::get('app.url'),
+                            'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                            //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                            'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
+                        ),
+                        'sender' => array(
+                            'post_username' => $username,
+                            'username' => $user->username,
+                            'name' => $user->detail->name,
+                            'photo' => Config::get('app.url_images').'/72x72/smart/'.$user->photo,
+                        ),
+                        'winwin' => array(
+                            'id' => $winwin->id,
+                            'users_amount' => $winwin->users_amount,
+                            'winwin_title' => $winwin->title,
+                            'what_we_do' => $winwin->what_we_do,
+                        ),
 
-                ));
-                $message->subject('WW - '.$winwin->title);
-                $message->to(null, $recipient);
-                $message_sent = $mailer->send($message);
-                Log::info("Mail enviado");
+                    ));
+                    $message->subject('WW - '.$winwin->title);
+                    $message->to(null, $recipient);
+                    $message_sent = $mailer->send($message);
+                    Log::info("Mail enviado");
+                }
+
+            }else{
+                Log::info('also');
+            }
+            if($request->input('user_id')==$user->id){
+                Log::info('no se mando: '.$user->id);
             }
         }
     }
@@ -372,7 +380,8 @@ class PostController extends Controller {
                     'meta' => array(
                         'base_url' => Config::get('app.url'),
                         'group_link' => Config::get('app.url').'/#/grupo/'.$group->id,
-                        'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                        'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                     ),
                     'sender' => array(
                         'post_username' => $user->username,
