@@ -176,7 +176,7 @@
               .catch(function(response) {
                 if(response.data) {
                   if(response.data.message == 'user_current_password_wrong') {
-                    $scope.profileForm.current_password.$setValidity("currentPasswordWrong", false);
+                    //$scope.profileForm.current_password.$setValidity("currentPasswordWrong", false);
                   }
                 }
               });
