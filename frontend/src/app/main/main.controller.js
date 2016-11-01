@@ -9,25 +9,45 @@
   function MainController($timeout,sponsor, ENV, $rootScope, winwin ,miembro, gettextCatalog ,gettext ,$auth ,$mdDialog ,$window ,$document,$sce ,Analytics ,grupo) {
     var vm = this;
 
+
     vm.awesomeThings = [];
     vm.classAnimation = '';
     vm.imageServer = ENV.imageServer;
 
     var w = angular.element($window);
 
+    vm.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+
+    vm.showLoginDialog = function(redirect) {
+      if (redirect) {
+        $rootScope.returnState = {
+          state: redirect
+        };
+      }
+      $mdDialog.show({
+        controller: 'LoginController',
+        controllerAs: 'login',
+        templateUrl: 'app/login/login.tmpl.html',
+        parent: angular.element($document.body),
+        clickOutsideToClose:true
+      });
+    };
+
     sponsor.getList(0, (w.width() < 481) ? 3 : 3).then(function(data) {
       vm.sponsors = data;
       vm.sponsorsDestacadosTitle = "SPONSORS DESTACADOS";
     });
-    
+
     sponsor.getMainList().then(function(data) {
       vm.partners = data;
     });
-    
+
     winwin.getList(0, 'select', (w.width() < 481) ? 4 : 4).then(function(data) {
       vm.monthWinwin = data[0];
       data.shift();
-      vm.destacados = data; 
+      vm.destacados = data;
     });
 
     grupo.getList(0, 3).then(function(data) {
@@ -38,7 +58,7 @@
     miembro.getList(0, (w.width()<481) ? 6 : 12).then(function(data) {
       vm.miembros = data;
     });
-    
+
     winwin.getInterests().then(function(data) {
       vm.interests = data;
     });
@@ -81,10 +101,10 @@
         vm.loadingDestacados = false;
       });
     };
-    
+
     vm.doCategories = function(id) {
       var _index = _categories.indexOf(id);
-      
+
       if (_index == -1) {
         _categories.push(id);
       } else {
@@ -142,7 +162,10 @@
         }
       });
     }
+
   }
+
+
 
   /** @ngInject */
   function MonthWinwinMoreDetailController($scope, winwin) {
@@ -158,3 +181,4 @@
   }
 
 })();
+

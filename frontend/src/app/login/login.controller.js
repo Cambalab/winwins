@@ -88,7 +88,7 @@
         $mdDialog.hide();
         if($rootScope.returnState) {
             switch($rootScope.returnState.state) {
-              case 'home.winwin': 
+              case 'home.winwin':
                 var winwinId = $rootScope.returnState.parameters.winwinId;
                 $rootScope.returnState = null;
                 $state.go('home.winwin', {
@@ -101,7 +101,7 @@
                 break;
               default:
                 $rootScope.returnState = null;
-                $state.go('home'); 
+                $state.go('home');
             }
         } else {
           if (redirect) {

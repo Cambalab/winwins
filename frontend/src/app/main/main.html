@@ -1,181 +1,141 @@
-<section class="acme-video" layout="row" layout-align="center" hide show-sm show-gt-sm>
-  <div class="login" layout="column" layout-align="space-around center">
-    <img src="assets/images/logo-head.png" alt="" class="main-header-logo"/>
-    <p class="main-header-slogan"> <translate>COLABORANDO <span class="main-header-slogan-highlight">GANAMOS</span> TODOS</translate> </p>
-    <div class="main-header-slogan-subtitle"><translate>Consigue un equipo y recursos para que tus winwins sean realidad.</translate> </div>
+<div class="main-container" layout="column">
+  <div class="header-container" layout="column" layout-align="space-around center">
+    <div class="texto-utopia">"Nuestra utopía es lograr un gran<br>acuerdo humano, para crear juntos<br>un planeta donde todos podemos<br>vivir mejor, y ser mas felices."</div>
+    <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">SÉ PARTE, SUMATE.</md-button>
+    <md-button class="facebook-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">o ingresa con Facebook</md-button>
+    <md-icon class="arrow-down" ng-click="main.scrollTo = '#video-container'">keyboard_arrow_down</md-icon>
+  </div>
+  <div id="video-container">
+    <iframe width="100%" height="760" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen ></iframe>
+  </div>
 
-    <div layout="row" layout-align="center space-around">
-      <md-button class="main-header-watch-video-button" ng-click="main.showVideoDialog()">
-        <md-icon md-svg-src="assets/images/main-play-video.svg"></md-icon>
-        <translate>VER VIDEO</translate>
-      </md-button>
-      <md-button class="main-header-create-winwin-button" ng-click="$root.createWinwin()">
-        <md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
-        <translate>CREAR UN WINWIN</translate>
-      </md-button>
-      <md-button class="main-header-search-winwins-button" ui-sref="home.winwin-list()">
-        <md-icon md-svg-src="assets/images/main-icon-search.svg"></md-icon>
-        <translate>BUSCAR WINWINS</translate>
-      </md-button>
+  <div class="grey-diagonal">
+ </div>
+  <acme-highlighted items="main.destacados" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
+  </acme-highlighted>
+
+
+  <div class="como-funciona" layout="column" layout-align="space-around center">
+    <div layout="column" layout-align="center center">
+    <p class="funciona-titulo">ASÍ FUNCIONA</p>
+    <p class="funciona-subtitulo">PEQUEÑOS CAMBIOS INDIVIDUALES,<br>GRANDES CAMBIOS COLECTIVOS</p>
     </div>
-
-    <div class="social-media">
-      <p translate>Ingresa con: </p>
-      <md-button class="md-icon-button" ng-click="main.showLoginDialog()" aria-label="facebook">
-        <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-click="main.showLoginDialog()" aria-label="winwin">
-        <md-icon md-svg-src="assets/images/icon-ww.svg"></md-icon>
-      </md-button>
+    <div class="flujo-funcionamiento" layout="row" layout-xs="column">
+      <div class="crea-flujo" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="crea-title">1-CREA O UNITE<br>A UNA CAUSA WINWIN</p>
+        <p class="crea-subtitle">Tu imaginación es el límite</p>
+        <p class="crea-info">Construí creando nuevas ideas y acciones<br>sociales para que todos ganemos.<br><br>
+        Creá o sumaté en 30 segs y comenzá a jugar un juego,<br>dónde todos ganamos mejorando el mundo. Súmate.</p>
+        <md-button class="btn-orange-main" ng-click="$root.createWinwin()">CREAR UN WINWIN</md-button>
+      </div>
+      <div class="participa-flujo" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="participa-title">2-PARTICIPA DE LA ACCIÓN,<br>SUMA IDEAS Y PERSONAS</p>
+        <p class="participa-subtitle">El poder es nuestro</p>
+        <p class="participa-info">Compartí tu desafio al mundo a través de las<br>redes sociales y la difusión en Internet.<br><br>
+          Sé un lider social, empoderado inmediatamente<br>por otras personas y por winwins.org</p>
+        <md-button class="btn-orange-main" ui-sref="home.winwin-list()">BUSCAR WINWINS</md-button>
+      </div>
+      <div class="mejora-flujo" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="mejora-title">3-MEJORA EL MUNDO</p>
+        <p class="mejora-subtitle">Con tu acción todos ganamos.</p>
+        <p class="mejora-info">Un im, por más mínimo o pequeño que sea<br><br>
+          Con tus ideas, tu compromiso y la acción<br>conjunta de todos, juntos ganamos.</p>
+        <md-button class="btn-orange-main">CASOS DE IMPACTO</md-button>
+      </div>
     </div>
   </div>
-  <!-- Facebook share main url with video -->
-  <meta property="og:url" content="http://winwins.org/#/"/>
-  <meta property="og:title" content="Winwins"/>
-  <meta property="og:description" content="Convenios con fines sociales"/>
-  <meta property="og:video" content="https://www.youtube.com/embed/gyyTDPe8TwY?autoplay=0"/>
-</section>
-
-<div class="video-container" hide-sm hide-gt-sm>
-  <iframe width="420" height="315" ng-src="{{ main.getIframeSrc('gyyTDPe8TwY') }}" frameborder="0" allowfullscreen ></iframe>
-</div>
-
-<div layout="column" class="main-mobile-buttons" layout-align="center space-around" hide-sm hide-gt-sm>
-  <md-button class="main-header-watch-video-button mobile-button" ng-click="main.showVideoDialog()">
-    <md-icon md-svg-src="assets/images/main-play-video.svg"></md-icon>
-    <translate>VER VIDEO</translate>
-  </md-button>
-  <md-button class="main-header-create-winwin-button mobile-button" ui-sref="home.crear-winwin()">
-    <md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
-    <translate>CREAR UN WINWIN</translate>
-  </md-button>
-  <md-button class="main-header-search-winwins-button mobile-button" ui-sref="home.winwin-list()">
-    <md-icon md-svg-src="assets/images/main-icon-search.svg"></md-icon>
-    <translate>BUSCAR WINWINS</translate>
-  </md-button>
-</div>
-
-
-<acme-contador items="main.contador"></acme-contador>
-
-<section class="main-quorum-rules" layout="column">
-  <div class="quorum-rules-header">
-    <p><span class="orange-highlight">WINWINS</span> SE BASA EN <span class="orange-highlight">CONFIANZA RECIPROCA</span></p>
+  <div class="que-es-winwins" layout="column" layout-align="space-around center">
+    <p class="title-que-es">¿QUÉ ES WINWINS?</p>
+    <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
+      <div class="item" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="item-title">UNA RED SOCIAL</p>
+        <p class="item-info">Winwins es una red social para<br>
+        conectarnos y coordinar<br>voluntades e intereses reales<br>
+        para concretar acciones<br>generadoras de valor social.<br><br>
+        Es una oportunidad para<br>empoderarnos como lideres de<br>
+          nuestro entorno creando desafios<br>de accion colectiva a los que<br>llamamos Winwins.</p>
+      </div>
+      <div class="item" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="item-title">DONDE TODOS<br>GANAMOS</p>
+        <p class="item-info">Es una red que conecta Instituciones<br>
+        y causas (particulares y colectivas)<br>con potenciales sponsors y<br>
+        colaboradores para llevarlas al plano<br>de lo real sobre un paradigma fértil<br>
+        en el que todos ganamos.</p>
+      </div>
+      <div class="item" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="item-title">¿COMO FUNCIONA?</p>
+        <p class="item-info">Todos podemos crear un desafío<br>Winwin. Todos podemos<br>comprometernos a participar.<br><br>
+        Si no se cumple el quórum de<br>personas planteado para un desafío<br>no hay obligación de participar.</p>
+      </div>
+      <div class="item" layout="column" layout-align="center center">
+        <img class="crea-img" src="assets/images/winwin.png">
+        <p class="item-title">FILOSOFÍA</p>
+        <p class="item-info">Si sabemos que otras personas se<br>comprometen a hacer algo, vamos<br>
+        a sentir mas seguridad y entusiasmo<br>de participar.<br><br>
+        Cambiar el mundo es posible, si nos<br>ponemos de acuerdo.</p>
+      </div>
+    </div>
   </div>
-  <div class="quorum-rules-content" layout="column" layout-align="center center" >
-    <span class="quorum-rules-subtitle"><translate>ALGUNAS <span class="black-highlight">REGLAS </span> DE WINWINS</translate></span>
-    <div layout="row" class="quorum-rules-state" layout-align="space-around center" layout-xs="column" layout-margin>
-      <div class="needed-quorum quorum-box" layout="column" layout-align="center center">
+  <div class="reglas-quorum" layout="row" layout-xs="column" layout-align="center center">
+    <div class="reglas-container" layout="column" layout-align="space-around center">
+      <p class="reglas-info">El cambio social lo podemos llevar adelante<br>sólo si hay compromiso de utilizar la virtualidad<br>
+        para pasar a la realidad.</p>
+      <p class="reglas-title">DOS REGLAS BÁSICAS</p>
+      <p class="reglas-list">I- Si en el proceso te arrepentís<br>o no podés participar avisale<br>al creador para que no cuente<br>con vos.<br><br>
+      II- Evitá sumarte si no estás seguro o segura!</p>
+    </div>
+    <div class="quorum-wrapper" layout="column" layout-align="space-around center">
+      <div layout="row" layout-align="space-around center" class="quorum-container" style="border: none">
         <md-icon class="quorum-icon" md-svg-src="assets/images/quorum_ico.svg"></md-icon>
-        <div class="quorum-box-title">
-          Quorum necesario
+        <div class="quorum-necesario" layout="column">
+          <div class="quorum-box-title">
+            Quorum necesario
+          </div>
+          <div class="quorum-box-title-divider"></div>
+          <div class="quorum-box-subtitle">
+            Los winwins requieren un quorumminimo participacion.
+          </div>
+          <span class="quorum-box-footer"> <strong>
+             (Cuando se logra, le avisamos a todos)</strong>
+           </span>
         </div>
-        <div class="quorum-box-title-divider"></div>
-        <div class="quorum-box-subtitle">
-          Los winwins requieren un quorum <strong>minimo participacion.</strong>
-        </div>
-        <span class="quorum-box-footer">
-          (Cuando se logra, le avisamos a todos)
-        </span>
       </div>
-      <div class="unreached-quorum quorum-box" layout="column" layout-align="center center">
+      <div layout="row" layout-align="space-around center" class="quorum-container">
         <md-icon class="quorum-icon" md-svg-src="assets/images/sin_quorum_ico.svg"></md-icon>
-        <span class="quorum-box-title">
-          Quorum no alcanzado
-        </span>
-        <div class="quorum-box-title-divider"></div>
-        <span class="quorum-box-subtitle">
-          Si ese quorum no se alcanza, <strong>no hay compromisos de participar.</strong>
-        </span>
-        <span class="quorum-box-footer">
-          (Asi, nadie queda pagando)
-        </span>
+        <div class="no-quorum" layout="column">
+          <span class="quorum-box-title">
+           Quorum no alcanzado
+         R </span>
+          <div class="quorum-box-title-divider"></div>
+          <span class="quorum-box-subtitle">
+           Si ese quorum no se alcanza,no hay compromisos de participar.
+         </span>
+          <span class="quorum-box-footer"> <strong>
+           (Asi, nadie queda pagando)</strong>
+         </span>
+        </div>
       </div>
-      <div class="reached-quorum quorum-box" layout="column" layout-align="center center">
+      <div layout="row" layout-align="space-around center" class="quorum-container">
         <md-icon class="quorum-icon" md-svg-src="assets/images/con_quorum_ico.svg"></md-icon>
-        <span class="quorum-box-title">
-          Quorum alcanzado
-        </span>
-        <div class="quorum-box-title-divider"></div>
-        <span class="quorum-box-subtitle">
-          Si se cumple el quorum, considera que <strong>los participantes cuentan con vos.</strong>
-        </span>
-        <span class="quorum-box-footer">
-          (No te sumes si no estas seguro)
-        </span>
+        <div class="con-quorum" layout="column">
+            <span class="quorum-box-title">
+         Quorum alcanzado
+       </span>
+          <div class="quorum-box-title-divider"></div>
+          <span class="quorum-box-subtitle">
+         Si se cumple el quorum, considera que los participantes cuentan con vos.
+       </span>
+          <span class="quorum-box-footer"><strong>
+         (No te sumes si no estas seguro)</strong>
+       </span>
+        </div>
       </div>
     </div>
   </div>
-</section>
-
-<section layout="column" class="month-winwin" layout-align="space-around center">
-    <span class="month-winwin-title">
-      <span class="orange-highlight">WINWIN</span> DEL MES
-    </span>
-    <span class="month-winwin-subtitle">
-      Propuestas para buscar personas y recursos para materializar una idea.
-    </span>
-    <div class="month-winwin-winwin" layout="row" layout-xs="column" layout-margin>
-      <div class="winwin-card">
-        <md-card class="md-whiteframe-4dp no-padding">
-          <md-card-content class="winwin-card-content">
-            <div class="ribbon" ng-if="main.monthWinwin.is_successful"><span>CONCRETADO</span></div>
-            <img ng-src="assets/images/icon-concretado.svg" alt="" class="icon-concretado" ng-if="main.monthWinwin.is_successful" />
-            <div class="wrap-card-img">
-              <img ng-src="{{ main.imageServer }}/{{ main.monthWinwin.image }}" alt="" class="md-card-img" ng-if="!main.monthWinwin.is_video"/>              
-              <iframe class="embed-responsive-item" ng-src="{{main.getIframeSrc(main.monthWinwin.video)}}" allowfullscreen="" style="width: 100%;height: 225px;" ng-if="winwin.winwin.is_video"></iframe>
-            </div>
-            <div class="card-labels">
-              <md-icon class="icon icon-access_time" ng-if="main.monthWinwin.finishing">access_time</md-icon>
-              <md-icon class="icon icon-watshot" ng-if="main.monthWinwin.popular">whatshot</md-icon>
-              <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="main.monthWinwin.remarkable">highlighted</md-icon>
-            </div>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="space-between center">
-            <div class="card-numbers">
-              <div layout="row" layout-wrap layout-align="center center">
-                <div class="md-item-text bg-green">
-                  <h3 translate>Somos</h3>
-                  <p>{{ main.monthWinwin.users_already_joined }}</p>
-                </div>
-                <div class="md-item-text bg-orange">
-                  <h3 translate>Faltan</h3>
-                  <p>{{ main.monthWinwin.users_left }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-time"><h3 translate>HAY TIEMPO HASTA EL</h3>
-              <strong><md-icon class="icon icon-access_time">access_time</md-icon>{{ main.monthWinwin.closing_date | date:"dd/MM/yyyy" }}</strong>
-            </div>
-          </md-card-actions>
-        </md-card>        
-      </div>
-      <div class="winwin-content" layout="column" layout-align="space-between center">
-        <div class="month-winwin-title">
-        <div class="title-text">
-          {{ main.monthWinwin.title }}
-        </div>
-        </div>
-        <div class="month-winwin-what-we-do">
-          {{ main.monthWinwin.what_we_do }}
-        </div>
-        <div class="month-winwin-buttons" layout="row" layout-align="space-between" layout-wrap>
-          <md-button class="month-winwin-more-details" ng-click="main.showMoreDetailMonthWinwin()">MAS DETALLES</md-button>
-          <md-button class="month-winwin-go" ui-sref="home.winwin({winwinId: main.monthWinwin.id})">IR AL WINWIN</md-button>
-        </div>
-      </div>  
-    </div>
-</section>
-<div class="divider"></div>
-
-<acme-highlighted items="main.destacados" title="main.destacadosTitle" icon="'icon-concretados'" viewmore="true" seeDescription="false" loading="main.loadingDestacados" class="acme-tabs"></acme-highlighted>
-<group-list items="main.gruposDestacados" title="main.gruposDestacadosTitle" viewmore="true"></group-list>
-<acme-sponsor items="main.sponsors" title="main.sponsorsDestacadosTitle" viewmore="false"></acme-sponsor>
-<section class="partners" layout="column" layout-align="center center">
-    <span class="title">ALGUNAS DE LAS <span class="orange-highlight">ORGANIZACIONES</span><br>QUE <span class="orange-highlight">CONSTRUYEN</span> JUNTO A WINWINS
-    </span>
-    <div class="partners-list" ng-repeat="item in main.partners" layout="row" layout-xs="column" layout-align="space-around center">
-      <img class="partners-image" ng-src="{{main.imageServer}}/200x110/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
-    </div>
-</section>
-<acme-footer items="main.footer"></acme-footer>
+</div>
