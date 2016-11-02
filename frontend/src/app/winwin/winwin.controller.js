@@ -144,8 +144,8 @@
           parent: angular.element($document.body),
           clickOutsideToClose: true,
           locals: {
-            winwin_id: vm.winwinId
-
+            winwin_id: vm.winwinId,
+            winwin_image: vm.winwin.image
           }
         });
 
@@ -575,7 +575,7 @@
   }  
     
   /** @ngInject */
-  function ModalConfirmacionSumarseController($timeout, winwin_id, ENV, winwin, $mdDialog, $scope) {
+  function ModalConfirmacionSumarseController($window, $timeout, winwin_image, winwin_id, ENV, winwin, $mdDialog, $scope) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -584,7 +584,8 @@
     vm.status = 'honorCode';
     vm.winwin = {};
     vm.emailsOK = false;
-
+    vm.image = winwin_image;
+    vm.winwinId = winwin_id;
     vm.mails = [];
 
 
