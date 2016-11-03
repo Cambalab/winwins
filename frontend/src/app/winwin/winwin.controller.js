@@ -588,6 +588,7 @@
     vm.image = winwin_image;
     vm.winwinId = winwin_id;
     vm.mails = [];
+    vm.winwin.title = $scope.winwin.winwin.title;
 
     vm.cancel = function() {
       $mdDialog.cancel()

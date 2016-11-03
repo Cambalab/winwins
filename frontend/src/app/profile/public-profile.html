@@ -18,7 +18,7 @@
                     </div>
                     <div layout="column" layout-align="center center">
                       <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
-                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar">Cambiar Avatar</md-button>
+                      <md-button ng-click="profile.showCropAvatarDialog()" ng-show="profile.user.myself" aria-label="changeAvatar">Cambiar Avatar</md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
