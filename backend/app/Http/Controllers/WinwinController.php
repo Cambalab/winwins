@@ -135,7 +135,7 @@ class WinwinController extends Controller {
             if($winwin->users_amount) {
                 $winwin->users_left = ($winwin->users_amount - $users_count);
             }
-            
+
             $winwin->popular = $winwin->users_joined > 5;
             $winwin->finishing = $winwin->closing_date < Carbon::now()->addDay(2) && $winwin->closing_date > Carbon::now();
             $winwin->remarkable = $winwin->selected;
@@ -209,7 +209,7 @@ class WinwinController extends Controller {
                 $model->detail;
                 $model->my_self = ($model->id == $user->id);
                 if($model->my_self && $model->pivot->moderator ) {
-                   $winwin->is_moderator = true; 
+                   $winwin->is_moderator = true;
                 }
 
 
@@ -237,7 +237,7 @@ class WinwinController extends Controller {
                 if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                     array_push($active_sponsors, $sponsor);
                 }
-                
+
                 if($is_sponsor && ($sponsor->user_id == $user->id)) {
                     if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                         $winwin->already_sponsored = true;
@@ -253,7 +253,7 @@ class WinwinController extends Controller {
         $converown = DB::table('participants')
             ->join('users', 'participants.user_id', '=', 'users.id')
             ->join('conversations','conversations.id','=','participants.conversation_id')
-            ->where('users.id', '=',$user->id)
+            ->where('users.id', '=', $user->id)
             ->select('conversations.id', 'conversations.subject')
             ->get();
         $converother = DB::table('participants')

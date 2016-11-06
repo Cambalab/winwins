@@ -396,7 +396,7 @@ md-card.public-profile {
     .upload-image {
       width: 70px;
       height: 35px;
-      margin-top: 10px;
+      border-radius: 100px;
     }
     .name {
       font-size: 5vmin;
@@ -469,9 +469,10 @@ md-card.public-profile {
       }
     }
     .md-card-image {
-      background-size:cover;
+      background-size: cover;
       display: block;
       max-width: 100%;
+      width: 950px;
     }
   }
 }
@@ -496,6 +497,7 @@ md-card.public-profile {
       color: #fff;
       line-height: 32px;
       border-radius: 0;
+      box-shadow: 2px 2px 5px #999
     }
   }
 
@@ -617,7 +619,10 @@ md-card.public-profile {
         background: #fafafa;
         .seguidores-items {
           padding: 20px;
-          max-width: 100%
+          max-width: 100%;
+          &:hover {
+          background: #f1f1f1;
+        }
         }
         .avatarSeguidor {
           max-width: 80px;
@@ -665,6 +670,9 @@ md-card.public-profile {
         .siguiendo-items {
           padding: 20px;
           max-width: 100%;
+          &:hover {
+            background: #f1f1f1;
+          }
           .avatarSiguiendo {
             max-width: 80px;
             border-radius: 100px;
@@ -1151,5 +1159,29 @@ md-card.public-profile {
   background: #4cae4e;
   .btn-login-msg:hover {
     background: #62F065
+  }
+}
+.not-following-msj {
+  text-align: center;
+  color: #666;
+  padding: 10px;
+  strong {
+    color: #548ed8;
+  }
+}
+.invisible-space {
+  height: 40px ;
+  visibility: hidden;
+;
+}
+.change-cover {
+  .upload-image {
+    width: 70px;
+    height: 35px;
+    border-radius: 100px;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    z-index: 1;
   }
 }

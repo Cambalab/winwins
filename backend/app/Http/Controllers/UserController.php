@@ -42,7 +42,7 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-        //$current_user = User::find(132);
+        $current_user = User::find(33);
         $cnvid = $request->input('conversation_id');
 
         if($current_user){
@@ -157,7 +157,7 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-        //$my_self = User::find(132);
+        $my_self = User::find(32);
 
         if($user) {
             $winwins = $user->winwins;
@@ -275,7 +275,7 @@ class UserController extends Controller {
             //$userDetail->following = $user->following;
 
             //HARCODED
-            //$anonymus = false;
+            $anonymus = false;
             if (!$anonymus){
                 if ($my_self->id == $user->id){
                     $converown = DB::table('participants')
@@ -388,7 +388,10 @@ class UserController extends Controller {
             
         }
 
-        return response()->json($userDetail, 200, [], JSON_NUMERIC_CHECK);
+//    $userDetail->already_following = true;
+
+
+    return response()->json($userDetail, 200, [], JSON_NUMERIC_CHECK);
 	}
 
     protected function createToken($user) {

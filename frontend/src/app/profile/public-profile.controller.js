@@ -176,7 +176,7 @@
               .catch(function(response) {
                 if(response.data) {
                   if(response.data.message == 'user_current_password_wrong') {
-                    $scope.profileForm.current_password.$setValidity("currentPasswordWrong", false);
+                    //$scope.profileForm.current_password.$setValidity("currentPasswordWrong", false);
                   }
                 }
               });
@@ -197,7 +197,9 @@
           clickOutsideToClose:true
         });
         if(data[0] =='unfollow'){
-          vm.user.already_following = false;
+          user.getUser(id).then(function(data){
+            vm.user = data;
+          })
         }
       });
     }
@@ -214,7 +216,9 @@
               clickOutsideToClose:true
           });
           if(data[0]=='follow'){
-            vm.user.already_following = true;
+            user.getUser(id).then(function(data){
+              vm.user = data;
+            })
           }
         });
 

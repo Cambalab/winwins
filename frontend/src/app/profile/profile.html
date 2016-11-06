@@ -4,7 +4,8 @@
     <div layout="row">
         <md-card class="public-profile">
           <md-card-content>
-            <div><img ng-src="{{profile.portrait}}" class="md-card-image" alt="">
+            <div>
+              <img ng-src="{{profile.portrait}}" class="md-card-image" alt="">
             </div>
             <md-card-title>
               <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
@@ -14,8 +15,7 @@
                 </div>
                 <div layout="column" layout-align="center center">
                   <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
-                  <md-button class="bt-gray bottom" ng-click="profile.showCropAvatarDialog()">Cambiar avatar</md-button>
-                  <md-button class="bt-gray bottom" ng-click="profile.showCropCoverDialog()">Cambiar portada</md-button>
+                  <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
                   <div class="name"><strong>{{profile.user.name}} {{profile.user.lastname}}</strong>
                   </div>
                 </div>
@@ -25,6 +25,7 @@
                 </div>
               </div>
             </md-card-title>
+            <md-button class="change-cover" ng-click="profile.showCropCoverDialog()"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon></md-button>
           </md-card-content>
         </md-card>
     </div>

@@ -86,7 +86,7 @@
 
   .winwins-container {
     width: 250px;
-    height: 400px;
+    height: 410px;
     display:flex; 
     md-card {
       flex-grow: 33;
@@ -247,6 +247,7 @@
   background: #cccccc;
 }
 .md-headline {
+  width: 220px;
   text-transform: capitalize;
   font-weight: bold;
   color: #585858;

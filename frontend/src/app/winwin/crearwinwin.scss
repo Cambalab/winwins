@@ -1,4 +1,10 @@
 .acme-crearwinwin {
+    @media (min-width: 960px) {
+  background: url('../assets/images/crear-ww-background.jpg');
+  height: 1100px;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
   background: #fff;
   .container {
     background: #f9f9f9;
