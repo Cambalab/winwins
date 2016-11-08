@@ -162,6 +162,7 @@ class WinwinController extends Controller {
 
         $ww_user = $winwin->user;
         $ww_user->detail;
+  
 
         $ww_user = User::find($winwin->user_id);
 
