@@ -135,7 +135,7 @@ class WinwinController extends Controller {
             if($winwin->users_amount) {
                 $winwin->users_left = ($winwin->users_amount - $users_count);
             }
-
+            
             $winwin->popular = $winwin->users_joined > 5;
             $winwin->finishing = $winwin->closing_date < Carbon::now()->addDay(2) && $winwin->closing_date > Carbon::now();
             $winwin->remarkable = $winwin->selected;
@@ -192,6 +192,8 @@ class WinwinController extends Controller {
             ->select('interests.name','interests.description', 'interests.id')
             ->get();
         $winwin->already_joined = false;
+        $conversations = new Collection();
+        $winwin -> conversations = $conversations;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
             $winwin->is_creator = ( $winwin->user_id == $user->id );
@@ -209,7 +211,7 @@ class WinwinController extends Controller {
                 $model->detail;
                 $model->my_self = ($model->id == $user->id);
                 if($model->my_self && $model->pivot->moderator ) {
-                   $winwin->is_moderator = true;
+                   $winwin->is_moderator = true; 
                 }
 
 
@@ -237,7 +239,7 @@ class WinwinController extends Controller {
                 if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                     array_push($active_sponsors, $sponsor);
                 }
-
+                
                 if($is_sponsor && ($sponsor->user_id == $user->id)) {
                     if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                         $winwin->already_sponsored = true;
@@ -247,49 +249,49 @@ class WinwinController extends Controller {
             }
 
             $winwin->active_sponsors = $active_sponsors;
-        }
-        //conversation
-        //GET CONVERSATION LOGGED Y EL DE PERFIL
-        $converown = DB::table('participants')
-            ->join('users', 'participants.user_id', '=', 'users.id')
-            ->join('conversations','conversations.id','=','participants.conversation_id')
-            ->where('users.id', '=', $user->id)
-            ->select('conversations.id', 'conversations.subject')
-            ->get();
-        $converother = DB::table('participants')
-            ->join('users', 'participants.user_id', '=', 'users.id')
-            ->join('conversations','conversations.id','=','participants.conversation_id')
-            ->where('users.id', '=',$ww_user->id)
-            ->select('conversations.id', 'conversations.subject')
-            ->get();
+            //conversation
+            //GET CONVERSATION LOGGED Y EL DE PERFIL
+            $converown = DB::table('participants')
+                ->join('users', 'participants.user_id', '=', 'users.id')
+                ->join('conversations','conversations.id','=','participants.conversation_id')
+                ->where('users.id', '=',$user->id)
+                ->select('conversations.id', 'conversations.subject')
+                ->get();
+            $converother = DB::table('participants')
+                ->join('users', 'participants.user_id', '=', 'users.id')
+                ->join('conversations','conversations.id','=','participants.conversation_id')
+                ->where('users.id', '=',$ww_user->id)
+                ->select('conversations.id', 'conversations.subject')
+                ->get();
 
-        $cvsIDS = array();
-        foreach($converown as $cown){
-            foreach ($converother as $cother){
-                if($cown->id==$cother->id){
-                    $cvsIDS[] = $cown;
+            $cvsIDS = array();
+            foreach($converown as $cown){
+                foreach ($converother as $cother){
+                    if($cown->id==$cother->id){
+                        $cvsIDS[] = $cown;
+                    }
                 }
             }
+
+            foreach($cvsIDS as $c) {
+                $messages = DB::table('messages')
+                    ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                    ->join('users','participants.user_id','=','users.id')
+                    ->join('user_details','users.id','=','user_details.user_id')
+                    ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
+                    ->where('messages.conversation_id', '=', $c->id)
+                    ->orderBy('messages.created_at', 'asc')
+                    ->get();
+                $cnv = new Conversation();
+                $cnv -> id = $c->id;
+                $cnv -> show_avatar = $ww_user -> photo;
+                $cnv -> subject = $c->subject;
+                $cnv -> messages = $messages;
+                $conversations[] = $cnv;
+            }
+            $winwin->conversations = $conversations;
         }
 
-        $conversations = new Collection();
-
-        foreach($cvsIDS as $c) {
-            $messages = DB::table('messages')
-                ->join('participants', 'participants.id', '=', 'messages.participant_id')
-                ->join('users','participants.user_id','=','users.id')
-                ->join('user_details','users.id','=','user_details.user_id')
-                ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
-                ->where('messages.conversation_id', '=', $c->id)
-                ->orderBy('messages.created_at', 'asc')
-                ->get();
-            $cnv = new Conversation();
-            $cnv -> id = $c->id;
-            $cnv -> subject = $c->subject;
-            $cnv -> messages = $messages;
-            $conversations[] = $cnv;
-        }
-        $winwin->conversations = $conversations;
 
         $winwin->polls = DB::table('polls')
             ->where('type', '=', 'WINWIN')

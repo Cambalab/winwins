@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user, sponsor) {
+  function WinwinController($scope, $stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user, sponsor) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -141,11 +141,12 @@
           controller: ModalConfirmacionSumarseController,
           controllerAs: 'vm',
           templateUrl: 'app/winwin/modal-confirmacion-sumarse.tmpl.html',
-          parent: angular.element($document.body),
+          scope: $scope,
+          preserveScope: true,
           clickOutsideToClose: true,
           locals: {
-            winwin_id: vm.winwinId
-
+            winwin_id: vm.winwinId,
+            winwin_image: vm.winwin.image
           }
         });
 
@@ -575,7 +576,7 @@
   }  
     
   /** @ngInject */
-  function ModalConfirmacionSumarseController($timeout, winwin_id, ENV, winwin, $mdDialog, $scope) {
+  function ModalConfirmacionSumarseController($window, $timeout, winwin_image, winwin_id, ENV, winwin, $mdDialog, $scope) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -584,10 +585,10 @@
     vm.status = 'honorCode';
     vm.winwin = {};
     vm.emailsOK = false;
-
+    vm.image = winwin_image;
+    vm.winwinId = winwin_id;
     vm.mails = [];
-
-
+    vm.winwin.title = $scope.winwin.winwin.title;
 
     vm.cancel = function() {
       $mdDialog.cancel()
@@ -596,9 +597,8 @@
     vm.join = function() {
       winwin.join(winwin_id).then(function (data) {
         winwin.getWinwin(winwin_id).then(function (winwin_data) {
-          vm.winwin.title = winwin_data.title;
-          $scope.$parent.winwin = winwin_data;
-          $scope.$parent.winwin.closing_date = new Date(vm.winwin.closing_date);
+          $scope.winwin.winwin = winwin_data;
+          $scope.winwin.winwin.closing_date = new Date(vm.winwin.closing_date);
           vm.status = 'success';
           $timeout(function () {
             vm.status = 'share';
