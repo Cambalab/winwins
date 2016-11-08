@@ -42,7 +42,7 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-//        $current_user = User::find(32);
+        $current_user = User::find(32);
         //END HARCODED
 
         $cnvid = $request->input('conversation_id');
@@ -158,7 +158,7 @@ class UserController extends Controller {
       }
     }
     //HARCODED
-//    $my_self = User::find(32);
+    $my_self = User::find(32);
     //END HARCODED
 
     if ($user) {
