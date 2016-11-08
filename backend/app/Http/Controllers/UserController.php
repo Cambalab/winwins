@@ -42,7 +42,9 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-        //$current_user = User::find(132);
+        //$current_user = User::find(32);
+        //END HARCODED
+
         $cnvid = $request->input('conversation_id');
 
         if($current_user){
@@ -145,19 +147,18 @@ class UserController extends Controller {
         $userDetail = array();
 
         $my_self = false;
-        $anonymus = true;
 		$token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
 		if ( $token )  {
             $token = $request->header('Authorization');
             if(isset($token[1])) {
-                $anonymus = false;
                 $token = explode(' ', $request->header('Authorization'))[1];
                 $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
                 $my_self= User::find($payload['sub']);
             }
         }
         //HARCODED
-        //$my_self = User::find(132);
+        //$my_self = User::find(32);
+        //END HARCODED
 
         if($user) {
             $winwins = $user->winwins;
@@ -274,9 +275,7 @@ class UserController extends Controller {
             //$userDetail->followers = $user->followers;
             //$userDetail->following = $user->following;
 
-            //HARCODED
-            //$anonymus = false;
-            if (!$anonymus){
+            if ($my_self){
                 if ($my_self->id == $user->id){
                     $converown = DB::table('participants')
                         ->join('users', 'participants.user_id', '=', 'users.id')
@@ -300,6 +299,7 @@ class UserController extends Controller {
                         $cnv -> id = $c->id;
                         $cnv -> subject = $c->subject;
                         $cnv -> messages = $messages;
+                        $cnv -> show_avatar = $user -> photo;
                         $conversations[] = $cnv;
                     }
                 }else{
@@ -342,6 +342,7 @@ class UserController extends Controller {
                         $cnv -> id = $c->id;
                         $cnv -> subject = $c->subject;
                         $cnv -> messages = $messages;
+                        $cnv -> show_avatar = $user -> photo;
                         $conversations[] = $cnv;
                     }
 
