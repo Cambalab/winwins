@@ -142,6 +142,7 @@
                         <p><pre>{{winwin.winwin.description}}</pre></p>
                       </div>
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
+                        <md-button  ng-click="winwin.showMessageModal(0, {})">Enviar mensaje al Creador de este winwin</md-button>
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
                         <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>
                         <div>
@@ -406,6 +407,17 @@
                     </md-button>
                   </h3>
                 </div>
+                <div ng-if="winwin.isAuthenticated()">
+                  <md-button ng-if="winwin.winwin.conversations.length == 0" ng-click="winwin.showMessageModal(0, {})">Enviar mensaje a {{winwin.winwin.user.detail.name}}</md-button>
+                  <md-card class="inbox-title" ng-if="winwin.winwin.conversations.length > 0">Mensajes con {{winwin.winwin.user.detail.name}}</md-card>
+                  <div class="mensajes-recibidos-content" ng-repeat="cnv in winwin.winwin.conversations">
+                    <div ng-repeat="message in cnv.messages">
+                      <md-card class="mensajeria" layout="row" ng-click="winwin.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
+                        <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador-mensajeria"  ui-sref="home.public-profile({userId: winwin.winwin.user.id})"/>
+                        <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
+                    </div>
+                  </div>
+                </div>
                 <div class="content-bg">
                   <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>
                 </div>
@@ -546,7 +558,9 @@
           </div>
           <form role="form" ng-submit="winwin.submitPost()" name="postForm" layout="row" layout-align="center center" layout-padding>
             <md-input-container class="md-block">
-              <textarea name="content" id="post-input-focus" ng-model="winwin.post.content" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+              <label>Escribí aca...</label>
+              <textarea name="content" id="post-input-focus" ng-model="winwin.post.content" md-maxlength="500" rows="5" md-select-on-focus>
+              </textarea>
             </md-input-container>
             <div layout="column" layout-align="center center" class="social-media">
               <md-button class="md-fab youtube" aria-label="" ng-click="winwin.showModalVideoPostDialog()">

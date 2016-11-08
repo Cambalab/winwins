@@ -121,6 +121,21 @@
       });
     }
 
+    vm.showMessageModal = function(conversationId, conversation_messages) {
+      $mdDialog.show({
+        controller: MessageModalController,
+        controllerAs: 'msgController',
+        templateUrl: 'app/profile/message-modal-controller.tmpl.html',
+        clickOutsideToClose: true,
+        locals: {
+          myself_id: user.myself,
+          conversation_id: conversationId,
+          to_user_id: vm.userId,
+          conversation_messages: conversation_messages
+        }
+      });
+    }
+
     var dataURItoBlob = function(dataURI) {
       var binary = atob(dataURI.split(',')[1]);
       var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -429,9 +444,41 @@
         }
       });
     }
+    vm.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
   }
 
   /** @ngInject */
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $timeout){
+    var vm = this;
+
+    vm.imageServer = ENV.imageServer
+    vm.myself_id = user.myself,
+        vm.conversation_messages = conversation_messages,
+        vm.toUserId = to_user_id;
+    vm.messages = conversation_messages;
+    vm.mensaje = "";
+    vm.sendMessageStatus = "notSended";
+    vm.conversationId = conversation_id;
+
+    vm.sendMessage = function(){
+      user.sendMessage({
+        conversation_id: vm.conversationId,
+        message: vm.mensaje,
+        receiver_id: vm.toUserId,
+        subject : 'asunto new conversation'
+      }).then(function(data){
+        if(data[0]=='enviado'){
+          vm.sendMessageStatus = "Sended";
+          $timeout(function() {
+            $mdDialog.hide(data);
+          }, 3000);
+        }
+      });
+    }
+  }
+
   function ModalSharePostController(current_post, ENV) {
     var vm = this;
 

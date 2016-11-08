@@ -40,7 +40,7 @@
         <div class="buttons-xs-sm" layout="row" hide-gt-sm ng-if="profile.isAuthenticated()">
           <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
           <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-          <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
+          <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following && profile.user.conversations.length == 0" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself && profile.user.already_following" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
         </div>
         <div class="bioTotal" layout="row" layout-align="center start">
@@ -137,15 +137,17 @@
             <div class="mensajeriaPrivada" ng-if="profile.user.conversations.length > 0">
               <div class="inbox">
                 <div>
-                  <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-card>
-                  <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
-                  <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
+                  <md-card class="inbox-title" ng-if="!profile.user.myself" ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">Mensajes con {{profile.user.name}}</md-card>
+                  <md-card class="inbox-title" ng-if="profile.user.myself" ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">INBOX
+                  <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations" ng-show="active2">
                     <div ng-repeat="message in cnv.messages">
                       <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                           <img class="msg-avatar" ng-src="{{ profile.imageServer}}/smart/{{ message.photo }}"  alt="">
                           <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
+                       </md-card>
                     </div>
                   </div>
+                  </md-card>
                 </div>
               </div>
             </div>

@@ -42,8 +42,7 @@ class UserController extends Controller {
             }
         }
         //HARCODED
-        $current_user = User::find(33);
-        //$current_user = User::find(32);
+//        $current_user = User::find(32);
         //END HARCODED
 
         $cnvid = $request->input('conversation_id');
@@ -143,69 +142,69 @@ class UserController extends Controller {
         return response()->json($users, 200, [], JSON_NUMERIC_CHECK);
 	}
 
-	public function show(Request $request, $id) {
-        $user = User::find($id);
-        $userDetail = array();
+	public function show(Request $request, $id)
+  {
+    $user = User::find($id);
+    $userDetail = array();
 
-        $my_self = false;
-		$token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
-		if ( $token )  {
-            $token = $request->header('Authorization');
-            if(isset($token[1])) {
-                $token = explode(' ', $request->header('Authorization'))[1];
-                $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
-                $my_self= User::find($payload['sub']);
-            }
+    $my_self = false;
+    $token = $request->input('_token') ?: $request->header('X-XSRF-TOKEN');
+    if ($token) {
+      $token = $request->header('Authorization');
+      if (isset($token[1])) {
+        $token = explode(' ', $request->header('Authorization'))[1];
+        $payload = (array)JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
+        $my_self = User::find($payload['sub']);
+      }
+    }
+    //HARCODED
+//    $my_self = User::find(32);
+    //END HARCODED
+
+    if ($user) {
+      $winwins = $user->winwins;
+      foreach ($winwins as $winwin) {
+        $winwin->user;
+      }
+
+      $userDetail = $user->detail;
+      $userDetail->email = $user->email;
+      $userDetail->groups = $user->groups;
+      $userDetail->winwins = $winwins;
+      $userDetail->notifications = $user->notifications;
+
+      $userDetail->groups->each(function ($group) {
+        $users_count = count($group->users);
+        $group->users_already_joined = $users_count;
+      });
+
+      $userDetail->winwins->each(function ($winwin) {
+        $users_count = count($winwin->users);
+        $winwin->users_already_joined = $users_count;
+      });
+
+      $user->notifications->each(function ($notification) {
+        try {
+          $notification->object = $notification->getObject();
+        } catch (\Exception $e) {
         }
-        //HARCODED
-        $my_self = User::find(32);
-        //$my_self = User::find(32);
-        //END HARCODED
+        //$notification->formatted = trans('ww.'.$notification->body, $notification->object->toArray());
+      });
 
-        if($user) {
-            $winwins = $user->winwins;
-            foreach($winwins as $winwin) {
-                $winwin->user;
-            }
+      $userDetail->interests_list = DB::table('interests')
+        ->join('interests_interested', 'interests.id', '=', 'interests_interested.interest_id')
+        ->where('type', '=', 'USER')
+        ->where('interested_id', '=', $user->id)
+        ->select('interests.name', 'interests.description', 'interests.id')
+        ->get();
 
-            $userDetail = $user->detail;
-            $userDetail->email = $user->email;
-            $userDetail->groups = $user->groups;
-            $userDetail->winwins = $winwins;
-            $userDetail->notifications = $user->notifications;
+      $userDetail->skills = DB::table('skills')
+        ->join('user_skills', 'skills.id', '=', 'user_skills.skill_id')
+        ->where('user_id', '=', $user->id)
+        ->select('skills.id', 'skills.name as text')
+        ->get();
 
-            $userDetail->groups->each(function($group) {
-                $users_count = count($group->users);
-                $group->users_already_joined = $users_count;
-            });
-
-            $userDetail->winwins->each(function($winwin) {
-                $users_count = count($winwin->users);
-                $winwin->users_already_joined = $users_count;
-            });
-
-            $user->notifications->each(function($notification) {
-                try {
-                    $notification->object = $notification->getObject();
-                } catch(\Exception $e) {
-                }
-                //$notification->formatted = trans('ww.'.$notification->body, $notification->object->toArray());
-            });
-
-            $userDetail->interests_list = DB::table('interests')
-            ->join('interests_interested', 'interests.id', '=', 'interests_interested.interest_id')
-            ->where('type', '=', 'USER')
-            ->where('interested_id', '=', $user->id)
-            ->select('interests.name','interests.description', 'interests.id')
-            ->get();
-
-            $userDetail->skills = DB::table('skills')
-            ->join('user_skills', 'skills.id', '=', 'user_skills.skill_id')
-            ->where('user_id', '=', $user->id)
-            ->select('skills.id', 'skills.name as text')
-            ->get();
-
-            $userDetail->activities = DB::select(' SELECT notifications.type,
+      $userDetail->activities = DB::select(' SELECT notifications.type,
 
                                                           notifications.created_at,
 
@@ -274,419 +273,439 @@ class UserController extends Controller {
                                                   AND      notifications.object_id = users.id
 
                                                   ORDER BY created_at DESC ');
-            //$userDetail->followers = $user->followers;
-            //$userDetail->following = $user->following;
+      //$userDetail->followers = $user->followers;
+      //$userDetail->following = $user->following;
 
-            //HARCODED
-            $anonymus = false;
-            if (!$anonymus){
-            if ($my_self){
-                if ($my_self->id == $user->id){
-                    $converown = DB::table('participants')
-                        ->join('users', 'participants.user_id', '=', 'users.id')
-                        ->join('conversations','conversations.id','=','participants.conversation_id')
-                        ->where('users.id', '=',$my_self->id)
-                        ->select('conversations.id', 'conversations.subject')
-                        ->get();
-                    $conversations = new Collection();
+        if ($my_self) {
+          if ($my_self->id == $user->id) {
+            $converown = DB::table('participants')
+              ->join('users', 'participants.user_id', '=', 'users.id')
+              ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
+              ->where('users.id', '=', $my_self->id)
+              ->select('conversations.id', 'conversations.subject')
+              ->get();
+            $conversations = new Collection();
 
-                    foreach($converown as $c) {
-                        $messages = DB::table('messages')
-                            ->join('participants', 'participants.id', '=', 'messages.participant_id')
-                            ->join('users','participants.user_id','=','users.id')
-                            ->join('user_details','users.id','=','user_details.user_id')
-                            ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
-                            ->where('messages.conversation_id', '=', $c->id)
-                            ->orderBy('messages.created_at', 'asc')
-                            ->get();
+            foreach ($converown as $c) {
+              $messages = DB::table('messages')
+                ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                ->join('users', 'participants.user_id', '=', 'users.id')
+                ->join('user_details', 'users.id', '=', 'user_details.user_id')
+                ->select('users.id as user_id', 'messages.body', 'messages.participant_id', 'messages.created_at', 'user_details.name', 'users.photo')
+                ->where('messages.conversation_id', '=', $c->id)
+                ->orderBy('messages.created_at', 'asc')
+                ->get();
 
-                        $cnv = new Conversation();
-                        $cnv -> id = $c->id;
-                        $cnv -> subject = $c->subject;
-                        $cnv -> messages = $messages;
-                        $cnv -> show_avatar = $user -> photo;
-                        $conversations[] = $cnv;
-                    }
-                }else{
-                    //GET CONVERSATION LOGGED Y EL DE PERFIL
-                    $converown = DB::table('participants')
-                        ->join('users', 'participants.user_id', '=', 'users.id')
-                        ->join('conversations','conversations.id','=','participants.conversation_id')
-                        ->where('users.id', '=',$my_self->id)
-                        ->select('conversations.id', 'conversations.subject')
-                        ->get();
-                    $converother = DB::table('participants')
-                        ->join('users', 'participants.user_id', '=', 'users.id')
-                        ->join('conversations','conversations.id','=','participants.conversation_id')
-                        ->where('users.id', '=',$user->id)
-                        ->select('conversations.id', 'conversations.subject')
-                        ->get();
-
-                        $cvsIDS = array();
-                    foreach($converown as $cown){
-                        foreach ($converother as $cother){
-                            if($cown->id==$cother->id){
-                                $cvsIDS[] = $cown;
-                            }
-                        }
-                    }
-
-                    $conversations = new Collection();
-
-                    foreach($cvsIDS as $c) {
-                        $messages = DB::table('messages')
-                            ->join('participants', 'participants.id', '=', 'messages.participant_id')
-                            ->join('users','participants.user_id','=','users.id')
-                            ->join('user_details','users.id','=','user_details.user_id')
-                            ->select('users.id as user_id','messages.body', 'messages.participant_id', 'messages.created_at','user_details.name', 'users.photo')
-                            ->where('messages.conversation_id', '=', $c->id)
-                            ->orderBy('messages.created_at', 'asc')
-                            ->get();
-                        //Log::info($messages);
-                        $cnv = new Conversation();
-                        $cnv -> id = $c->id;
-                        $cnv -> subject = $c->subject;
-                        $cnv -> messages = $messages;
-                        $cnv -> show_avatar = $user -> photo;
-                        $conversations[] = $cnv;
-                    }
-
+              $cnv = new Conversation();
+              $cnv->id = $c->id;
+              $cnv->subject = $c->subject;
+              $cnv->messages = $messages;
+              $cnv->show_avatar = $user->photo;
+              $cnv->show_name = $user->username;
+              $conversations[] = $cnv;
             }
-        }else{
-                $conversations   = array();
+          } else {
+            //GET CONVERSATION LOGGED Y EL DE PERFIL
+            $converown = DB::table('participants')
+              ->join('users', 'participants.user_id', '=', 'users.id')
+              ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
+              ->where('users.id', '=', $my_self->id)
+              ->select('conversations.id', 'conversations.subject')
+              ->get();
+            $converother = DB::table('participants')
+              ->join('users', 'participants.user_id', '=', 'users.id')
+              ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
+              ->where('users.id', '=', $user->id)
+              ->select('conversations.id', 'conversations.subject')
+              ->get();
+
+            $cvsIDS = array();
+            foreach ($converown as $cown) {
+              foreach ($converother as $cother) {
+                if ($cown->id == $cother->id) {
+                  $cvsIDS[] = $cown;
+                }
+              }
+            }
+
+            $conversations = new Collection();
+
+            foreach ($cvsIDS as $c) {
+              $messages = DB::table('messages')
+                ->join('participants', 'participants.id', '=', 'messages.participant_id')
+                ->join('users', 'participants.user_id', '=', 'users.id')
+                ->join('user_details', 'users.id', '=', 'user_details.user_id')
+                ->select('users.id as user_id', 'messages.body', 'messages.participant_id', 'messages.created_at', 'user_details.name', 'users.photo')
+                ->where('messages.conversation_id', '=', $c->id)
+                ->orderBy('messages.created_at', 'asc')
+                ->get();
+              //Log::info($messages);
+              $cnv = new Conversation();
+              $cnv->id = $c->id;
+              $cnv->subject = $c->subject;
+              $cnv->messages = $messages;
+              $cnv->show_avatar = $user->photo;
+              $conversations[] = $cnv;
+            }
+
+          }
+        } else {
+          $conversations = array();
         }
 
-            $userDetail->conversations = $conversations;
-            $followers = DB::table('user_details')
-            ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
-            ->join('followers', 'user_details.user_id', '=', 'followers.follower_id')
-            ->where('followers.followed_id', '=', $id)->get();
-            $userDetail->followers = $followers;
+        $userDetail->conversations = $conversations;
+        $followers = DB::table('user_details')
+          ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
+          ->join('followers', 'user_details.user_id', '=', 'followers.follower_id')
+          ->where('followers.followed_id', '=', $id)->get();
+        $userDetail->followers = $followers;
 
-            $following = DB::table('user_details')
-            ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
-            ->join('followers', 'user_details.user_id', '=', 'followers.followed_id')
-            ->where('followers.follower_id', '=', $id)->get();
-            $userDetail->following = $following;
-
-
-
-            $comments = DB::table('posts')
-            ->select('posts.content', 'posts.created_at', 'posts.user_id', 'user_details.photo', 'user_details.name')
-            ->join('user_details', 'posts.user_id', '=', 'user_details.user_id')
-            ->where('posts.reference_id', '=', $id)->where('posts.type', 'USER')->orderBy('posts.created_at', 'desc')->get();
+        $following = DB::table('user_details')
+          ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
+          ->join('followers', 'user_details.user_id', '=', 'followers.followed_id')
+          ->where('followers.follower_id', '=', $id)->get();
+        $userDetail->following = $following;
 
 
-            $userDetail->comments = $comments;
+        $comments = DB::table('posts')
+          ->select('posts.content', 'posts.created_at', 'posts.user_id', 'user_details.photo', 'user_details.name')
+          ->join('user_details', 'posts.user_id', '=', 'user_details.user_id')
+          ->where('posts.reference_id', '=', $id)->where('posts.type', 'USER')->orderBy('posts.created_at', 'desc')->get();
+
+
+        $userDetail->comments = $comments;
 
 //            $userDetail->myself = true;
 
-            if($my_self) {
-                if($my_self->id == $id) {
-                    $userDetail->myself = true;
-                } else {
-                    $already_following = count($user->followers->filter(function($model) use ($my_self) {
-                        return $model->id == $my_self->id;
-                    })) > 0;
-                    $userDetail->already_following = $already_following;
-                }
-            }
-            
+        if ($my_self) {
+          if ($my_self->id == $id) {
+            $userDetail->myself = true;
+          } else {
+            $already_following = count($user->followers->filter(function ($model) use ($my_self) {
+                return $model->id == $my_self->id;
+              })) > 0;
+            $userDetail->already_following = $already_following;
+          }
         }
 
-        return response()->json($userDetail, 200, [], JSON_NUMERIC_CHECK);
-	}
+      }
 
-    protected function createToken($user) {
-        $payload = [
-            'sub' => $user->id,
-            'iat' => time(),
-            'exp' => time() + (2 * 7 * 24 * 60 * 60)
-        ];
-        return JWT::encode($payload, Config::get('app.token_secret'));
+      return response()->json($userDetail, 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function getUserStatus(Request $request) {
-        $user = User::find($request['user']['sub']);
-        return array(
+    protected
+    function createToken($user) {
+      $payload = [
+        'sub' => $user->id,
+        'iat' => time(),
+        'exp' => time() + (2 * 7 * 24 * 60 * 60)
+      ];
+      return JWT::encode($payload, Config::get('app.token_secret'));
+    }
+
+    public
+    function getUserStatus(Request $request)
+    {
+      $user = User::find($request['user']['sub']);
+      return array(
+        'notifications_unread' => $this->countUnreadNotifications($user)
+      );
+    }
+
+    public
+    function getUser(Request $request)
+    {
+      $user = User::find($request['user']['sub']);
+
+      if (isset($user)) {
+        $is_sponsor = false;
+        $is_sponsor_active = false;
+        $user->sponsor;
+        if (isset($user->sponsor)) {
+          $is_sponsor = true;
+          $is_sponsor_active = ($user->sponsor->status == 'ACTIVE');
+        }
+        return response()->json(
+          array(
+            'user' => $user,
+            'profile' => $user->detail,
+            'sponsor' => $user->sponsor,
+            'is_sponsor' => $is_sponsor,
+            'is_sponsor_active' => $is_sponsor_active,
+            'active' => $user->active == 1,
+            'notifications' => $this->notifications($user),
             'notifications_unread' => $this->countUnreadNotifications($user)
-        );
+          ), 200, [], JSON_NUMERIC_CHECK);
+      } else {
+        return response()->json(
+          array(
+            'user' => false,
+            'profile' => false,
+            'sponsor' => false,
+            'is_sponsor' => false,
+            'notifications' => false,
+            'notifications_unread' => false
+          ), 200, [], JSON_NUMERIC_CHECK);
+
+      }
     }
 
-    public function getUser(Request $request) {
-        $user = User::find($request['user']['sub']);
+    public
+    function getUserTimeline($userId)
+    {
+      $user = User::find($userId);
 
-        if(isset($user)) {
-            $is_sponsor = false;
-            $is_sponsor_active = false;
-            $user->sponsor;
-            if(isset($user->sponsor)) {
-                $is_sponsor = true;
-                $is_sponsor_active  = ($user->sponsor->status == 'ACTIVE');
-            }
-            return response()->json(
-                array(
-                'user' => $user,
-                'profile' => $user->detail,
-                'sponsor' => $user->sponsor,
-                'is_sponsor' => $is_sponsor,
-                'is_sponsor_active' => $is_sponsor_active,
-                'active' => $user->active == 1,
-                'notifications' => $this->notifications($user),
-                'notifications_unread' => $this->countUnreadNotifications($user)
-            ), 200, [], JSON_NUMERIC_CHECK);
-        } else {
-            return response()->json(
-                array(
-                'user' => false,
-                'profile' => false,
-                'sponsor' => false,
-                'is_sponsor' => false, 
-                'notifications' => false,
-                'notifications_unread' => false
-            ), 200, [], JSON_NUMERIC_CHECK);
-
+      $activities = $user->notifications;
+      $fellows = array();
+      if (isset($user)) {
+        foreach ($user->following as $fellow) {
+          $fellows[$fellow->id] = $fellow;
+          $activities = $activities->merge($fellow->notifications->filter(function ($item) {
+            return !in_array($item->type, array('CAMPANADA', 'SPONSOR_CANCEL', 'SPONSOR_REQUEST'));
+          }));
         }
-    }
-
-    public function getUserTimeline($userId) {
-        $user = User::find($userId);
-
-        $activities = $user->notifications;
-	$fellows = array();
-        if(isset($user)) {
-            foreach($user->following as $fellow) {
-		$fellows[$fellow->id] = $fellow;
-                $activities = $activities->merge($fellow->notifications->filter(function ($item) {
-		    return !in_array($item->type, array('CAMPANADA', 'SPONSOR_CANCEL', 'SPONSOR_REQUEST'));
-		}));
-            } 
+      }
+      foreach ($activities as $activity) {
+        try {
+          $activity->object = $activity->getObject();
+        } catch (\Exception $e) {
         }
-	foreach($activities as $activity) {
-		try {
-		    $activity->object = $activity->getObject();
-		} catch(\Exception $e) {
-		}
-	}
+      }
 
-        return response()->json($activities->sortByDesc('id')->values(), 200, [], JSON_NUMERIC_CHECK);
+      return response()->json($activities->sortByDesc('id')->values(), 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function updateUser(Request $request) {
-        $user = User::find($request['user']['sub']);
+    public
+    function updateUser(Request $request)
+    {
+      $user = User::find($request['user']['sub']);
 
-        $user->username = $request->input('username');
+      $user->username = $request->input('username');
+      $user->email = $request->input('email');
+      $user->save();
+
+      $token = $this->createToken($user);
+
+      return response()->json(['token' => $token]);
+    }
+
+
+    public
+    function cancelAccount(Request $request)
+    {
+      $user = User::find($request['user']['sub']);
+
+      $user->cancel_reason = $request->input('body');
+      $user->canceled = true;
+
+      $user->save();
+
+      return response()->json(['message' => 'user_cancel']);
+    }
+
+
+    public
+    function updateProfile(Request $request)
+    {
+      $user = User::find($request['user']['sub']);
+
+      if (!$user) {
+        return response()->json(['message' => 'user_not_found']);
+      }
+
+      $userDetail = UserDetail::find($user->id);
+
+      if ($request->has('email')) {
         $user->email = $request->input('email');
-        $user->save();
+      }
 
-        $token = $this->createToken($user);
+      if ($request->has('name')) {
+        $userDetail->name = $request->input('name');
+      }
+      if ($request->has('photo')) {
+        $userDetail->photo = $request->input('photo');
+        $user->photo = $request->input('photo');
+      }
 
-        return response()->json(['token' => $token]);
-    }
+      if ($request->has('cover_photo')) {
+        $userDetail->cover_photo = $request->input('cover_photo');
+        $user->cover_photo = $request->input('cover_photo');
+      }
 
+      if ($request->has('lastname')) {
+        $userDetail->lastname = $request->input('lastname');
+      }
 
-    public function cancelAccount(Request $request) {
-        $user = User::find($request['user']['sub']);
+      if ($request->has('birthdate')) {
+        $userDetail->birthdate = $request->input('birthdate');
+      }
 
-        $user->cancel_reason =  $request->input('body');
-        $user->canceled = true;
+      if ($request->has('about')) {
+        $userDetail->about = $request->input('about');
+      }
 
-        $user->save();
+      if ($request->has('interests')) {
+        $userDetail->interests = $request->input('interests');
+      }
 
-        return response()->json(['message' => 'user_cancel']);
-    }
+      if ($request->has('interests_list')) {
 
-
-    public function updateProfile(Request $request) {
-        $user = User::find($request['user']['sub']);
-
-        if (!$user) {
-            return response()->json(['message' => 'user_not_found']);
+        DB::table('interests_interested')->where('type', 'USER')->where('interested_id', $user->id)->delete();
+        $interests = $request->input('interests_list');
+        foreach ($interests as $interest) {
+          $interestsInterested = InterestsInterested::firstOrCreate([
+            'interest_id' => $interest['id'],
+            'interested_id' => $user->id,
+            'type' => 'USER'
+          ]);
         }
+      }
 
-        $userDetail = UserDetail::find($user->id);
+      if ($request->has('skills_list')) {
+        $skills = $request->input('skills_list');
 
-        if($request->has('email')){
-            $user->email = $request->input('email');
+        DB::table('user_skills')->where('user_id', $user->id)->delete();
+
+        foreach ($skills as $skill) {
+          if (!isset($skill["id"])) {
+            $newSkill = new Skill();
+            $newSkill->name = $skill["text"];
+            $newSkill->save();
+            $userSkills = UserSkills::firstOrCreate([
+              'skill_id' => $newSkill->id,
+              'user_id' => $user->id
+            ]);
+
+          } else {
+            $userSkills = UserSkills::firstOrCreate([
+              'skill_id' => $skill['id'],
+              'user_id' => $user->id
+            ]);
+          }
+
+          $userSkills->save();
         }
+      }
 
-		if($request->has('name')) {
-            $userDetail->name = $request->input('name');
-        }
-		if($request->has('photo')) {
-            $userDetail->photo = $request->input('photo');
-            $user->photo = $request->input('photo');
-        }
+      if ($request->has('language_code')) {
+        $userDetail->language_code = $request->input('language_code');
+      }
 
-		if($request->has('cover_photo')) {
-            $userDetail->cover_photo = $request->input('cover_photo');
-            $user->cover_photo = $request->input('cover_photo');
-        }
+      if ($request->has('invite_ww')) {
+        $userDetail->invite_ww = $request->input('invite_ww');
+      }
 
-		if($request->has('lastname')) {
-            $userDetail->lastname = $request->input('lastname');
-        }
+      if ($request->has('ww_to_finish')) {
+        $userDetail->ww_to_finish = $request->input('ww_to_finish');
+      }
 
-		if($request->has('birthdate')) {
-            $userDetail->birthdate = $request->input('birthdate');
-        }
+      if ($request->has('invite_group')) {
+        $userDetail->invite_group = $request->input('invite_group');
+      }
 
-		if($request->has('about')) {
-            $userDetail->about = $request->input('about');
-        }
+      if ($request->has('not_message')) {
+        $userDetail->not_message = $request->input('not_message');
+      }
 
-		if($request->has('interests')) {
-            $userDetail->interests = $request->input('interests');
-        }
+      if ($request->has('email_notification')) {
+        $userDetail->email_notification = $request->input('email_notification');
+      }
 
-        if($request->has('interests_list')){
+      if ($request->has('private')) {
+        $userDetail->private = $request->input('private');
+      }
 
-            DB::table('interests_interested')->where('type', 'USER')->where('interested_id', $user->id)->delete();
-            $interests = $request->input('interests_list');
-            foreach($interests as $interest) {
-                $interestsInterested = InterestsInterested::firstOrCreate([
-                    'interest_id' => $interest['id'],
-                    'interested_id' => $user->id,
-                    'type' => 'USER'
-                ]);
-            }
-        }
+      $user->username = $userDetail->name . ' ' . $userDetail->lastname;
 
-        if($request->has('skills_list')) {
-            $skills = $request->input('skills_list');
+      $current_password = $request->input('current_password');
+      $password = $request->input('password');
 
-            DB::table('user_skills')->where('user_id', $user->id)->delete();
+      if (isset($current_password) && isset($password)) {
 
-            foreach ($skills as $skill) {
-                if(!isset($skill["id"])){
-                    $newSkill = new Skill();
-                    $newSkill->name = $skill["text"];
-                    $newSkill->save();
-                    $userSkills = UserSkills::firstOrCreate([
-                        'skill_id' => $newSkill->id,
-                        'user_id' => $user->id
-                    ]);
-
-                } else {
-                    $userSkills = UserSkills::firstOrCreate([
-                        'skill_id' => $skill['id'],
-                        'user_id' => $user->id
-                    ]);
-                }
-
-                $userSkills->save();
-            }
-        }
-
-		if($request->has('language_code')) {
-            $userDetail->language_code = $request->input('language_code');
-        }
-
-		if($request->has('invite_ww')) {
-            $userDetail->invite_ww = $request->input('invite_ww');
-        }
-
-		if($request->has('ww_to_finish')) {
-            $userDetail->ww_to_finish = $request->input('ww_to_finish');
-        }
-
-		if($request->has('invite_group')) {
-            $userDetail->invite_group = $request->input('invite_group');
-        }
-
-		if($request->has('not_message')) {
-            $userDetail->not_message = $request->input('not_message');
-        }
-
-		if($request->has('email_notification')) {
-            $userDetail->email_notification = $request->input('email_notification');
-        }
-
-		if($request->has('private')) {
-            $userDetail->private = $request->input('private');
-        }
-
-        $user->username = $userDetail->name . ' ' . $userDetail->lastname;
-
-        $current_password =  $request->input('current_password');
-        $password =  $request->input('password');
-
-        if(isset($current_password) && isset($password) ) {
-
-            if (Hash::check($current_password, $user->password)) {
-                $user->password = Hash::make($request->input('password'));
-            } else {
-                return response()->json(['message' => 'user_current_password_wrong'], 400);
-            }
-        }
-
-        $user->save();
-        $userDetail->save();
-        
-        return $userDetail;
-    }
-
-	public function search(Request $request, UserRepository $userRepository) {
-        $query = $request->input('q');
-        return $userRepository->search($query);
-    }
-
-	public function notifications($user) {
-        $notifications = $user->notifications;
-        return $notifications;
-	}
-
-	public function countUnreadNotifications($user) {
-        $notificationsCount = $user->notifications()->unread()->count();
-        return $notificationsCount;
-    }
-
-	public function unreadNotifications($id) {
-        $user = User::find($id);
-        $notifications = $user->notifications()->unread()->get();
-        return $notifications;
-	}
-
-	public function follow(Request $request, $id) {
-        $user = User::find($request['user']['sub']);
-        $followed = User::find($id);
-
-        $already_following = false;
-        if(!$user) {
-            return response()->json(['message' => 'follow_not_logged'], 401);
-        }
-
-        if($user->id == $followed->id) {
-            return response()->json(['message' => 'follow_not_himself'], 400);
+        if (Hash::check($current_password, $user->password)) {
+          $user->password = Hash::make($request->input('password'));
         } else {
-            Log::info($followed->followers);
-            $already_following = count($followed->followers->filter(function($model) use ($user) {
-                return $model->id == $user->id;
-            })) > 0;
-
-            if($already_following) {
-                return response()->json(['message' => 'follow_already_folllowing'], 400);
-            } else {
-                DB::transaction(function() use ($followed, $user) {
-                    $followedsUsers = new Follower;
-                    $followedsUsers->follower_id = $user->id;
-                    $followedsUsers->followed_id = $followed->id;
-                    $followedsUsers->save();
-                    DB::table('users')->whereId($followed->id)->increment('followers_amount');
-                    DB::table('user_details')->where('user_id','=',$followed->id)->increment('followers_amount');
-
-                    $followed->newNotification()
-                        ->from($user)
-                        ->withType('FOLLOWING')
-                        ->withSubject('following_you_title')
-                        ->withBody('following_you_body')
-                        ->regarding($user)
-                        ->deliver();
-                });
-            }
+          return response()->json(['message' => 'user_current_password_wrong'], 400);
         }
-        return response()->json(['follow']);
-	}
+      }
+
+      $user->save();
+      $userDetail->save();
+
+      return $userDetail;
+    }
+
+    public
+    function search(Request $request, UserRepository $userRepository)
+    {
+      $query = $request->input('q');
+      return $userRepository->search($query);
+    }
+
+    public
+    function notifications($user)
+    {
+      $notifications = $user->notifications;
+      return $notifications;
+    }
+
+    public
+    function countUnreadNotifications($user)
+    {
+      $notificationsCount = $user->notifications()->unread()->count();
+      return $notificationsCount;
+    }
+
+    public
+    function unreadNotifications($id)
+    {
+      $user = User::find($id);
+      $notifications = $user->notifications()->unread()->get();
+      return $notifications;
+    }
+
+    public
+    function follow(Request $request, $id)
+    {
+      $user = User::find($request['user']['sub']);
+      $followed = User::find($id);
+
+      $already_following = false;
+      if (!$user) {
+        return response()->json(['message' => 'follow_not_logged'], 401);
+      }
+
+      if ($user->id == $followed->id) {
+        return response()->json(['message' => 'follow_not_himself'], 400);
+      } else {
+        Log::info($followed->followers);
+        $already_following = count($followed->followers->filter(function ($model) use ($user) {
+            return $model->id == $user->id;
+          })) > 0;
+
+        if ($already_following) {
+          return response()->json(['message' => 'follow_already_folllowing'], 400);
+        } else {
+          DB::transaction(function () use ($followed, $user) {
+            $followedsUsers = new Follower;
+            $followedsUsers->follower_id = $user->id;
+            $followedsUsers->followed_id = $followed->id;
+            $followedsUsers->save();
+            DB::table('users')->whereId($followed->id)->increment('followers_amount');
+            DB::table('user_details')->where('user_id', '=', $followed->id)->increment('followers_amount');
+
+            $followed->newNotification()
+              ->from($user)
+              ->withType('FOLLOWING')
+              ->withSubject('following_you_title')
+              ->withBody('following_you_body')
+              ->regarding($user)
+              ->deliver();
+          });
+        }
+      }
+      return response()->json(['follow']);
+    }
 
 	public function unfollow(Request $request, $id) {
         $user = User::find($request['user']['sub']);

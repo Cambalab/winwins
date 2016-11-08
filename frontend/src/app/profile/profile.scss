@@ -556,6 +556,7 @@ md-card.public-profile {
         margin: 10px 20px;
         border-bottom: 1px;
         h3 {
+          margin-top: 7px;
           margin-right: 5px;
           display: inline;
           font-size: 14px;
@@ -578,6 +579,7 @@ md-card.public-profile {
           padding: 6px;
         }
         h3 {
+          margin-top: 7px;
           margin-right: 5px;
           display: inline;
           font-size: 14px;
@@ -745,6 +747,7 @@ md-card.public-profile {
           }
           .mensajes-recibidos-content {
             margin: 10px;
+            background: #fafafa;
           }
 
           .exito {
@@ -1007,7 +1010,7 @@ md-card.public-profile {
 .inbox-title {
   color: #666;
   text-align: center;
-  background: #fff;
+  background: #fafafa;
   padding: 10px;
   font-size: 15px;
   font-weight: normal;
@@ -1054,6 +1057,7 @@ md-card.public-profile {
     margin-top: 15px;
     background: #548ed8;
     color: #fff;
+    box-shadow: 2px 2px 5px #999;
   }
 }
 .inbox {
