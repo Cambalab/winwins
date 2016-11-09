@@ -3,12 +3,12 @@
     <div class="texto-utopia">"Nuestra utopía es lograr un gran<br>acuerdo humano, para crear juntos<br>un planeta donde todos podemos<br>vivir mejor, y ser mas felices."</div>
     <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">SÉ PARTE, SUMATE.</md-button>
     <md-button class="facebook-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">o ingresa con Facebook</md-button>
-    <md-icon class="arrow-down" ng-click="main.scrollTo = 'video-container'">keyboard_arrow_down</md-icon>
-  </div>
-  <div class="video-container">
-    <iframe width="100%" height="760" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen ></iframe>
+    <md-icon class="arrow-down" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
 
+  <div id="video-container">
+    <iframe width="760px" height="760px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen ></iframe>
+  </div>
 
   <acme-highlighted items="main.destacados" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
   </acme-highlighted>
@@ -50,7 +50,7 @@
     <p class="title-que-es">¿QUÉ ES WINWINS?</p>
     <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
       <div class="item" layout="column" layout-align="center center">
-        <img class="crea-img" src="assets/images/winwin.png">
+        <img class="crea-img1" src="assets/images/winwin.png">
         <p class="item-title">UNA RED SOCIAL</p>
         <p class="item-info">Winwins es una red social para<br>
         conectarnos y coordinar<br>voluntades e intereses reales<br>
@@ -110,7 +110,7 @@
         <div class="no-quorum" layout="column">
           <span class="quorum-box-title">
            Quorum no alcanzado
-         R </span>
+          </span>
           <div class="quorum-box-title-divider"></div>
           <span class="quorum-box-subtitle">
            Si ese quorum no se alcanza,no hay compromisos de participar.

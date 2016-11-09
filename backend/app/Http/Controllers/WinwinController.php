@@ -161,7 +161,9 @@ class WinwinController extends Controller {
         }
 
         //HARCODED
-        $user = User::find(32);
+
+//        $user = User::find(32);
+
         //END HARCODED
 
 
@@ -1171,8 +1173,6 @@ class WinwinController extends Controller {
         }
 
 	}
-
-
 
 
 

@@ -33,7 +33,7 @@
           <p class="md-user-creator-name">{{item.user.username}}</p>
         </md-card-avatar>
         <div class="ultimos-participantes" layout="row" layout-align="start center">
-          <img ng-repeat="usr in item.users" class="md-user-avatar-members" ng-if="usr.id!=item.user.id" ng-src="{{vm.imageServer}}//{{usr.photo}}" ui-sref="home.public-profile({userId: usr.id})">
+          <img ng-repeat="usr in item.users | limitTo: 6" class="md-user-avatar-members" ng-if="usr.id!=item.user.id" ng-src="{{vm.imageServer}}//{{usr.photo}}" ui-sref="home.public-profile({userId: usr.id})">
         </div>
     <md-card-actions layout="row" layout-align="space-between center">
       <!--<md-card-header>-->

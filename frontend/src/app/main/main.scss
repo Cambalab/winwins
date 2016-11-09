@@ -22,6 +22,12 @@ overflow-x: hidden;
   height: 100px;
   border-radius: 100px;
 }
+  .crea-img1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-top: 52px;
+  }
 
 //especifico
 
@@ -61,11 +67,17 @@ overflow-x: hidden;
     margin-top: 50px;
     margin-bottom: 50px;
     font-size: 70px;
+    cursor: pointer;
+    padding-top: 5px;
+    border-radius: 100px;
+    &:hover {
+      background: rgba(220, 220, 220, 0.5)
+    }
   }
 }
-  .video-container {
+  #video-container {
     margin-bottom: -5px;
-    padding: 0;
+    align-self: center;
   }
   .grey-diagonal {
     background: #fafafa;
@@ -197,6 +209,10 @@ overflow-x: hidden;
   }
   .items-que-es {
     .item.layout-align-center-center.layout-column {
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-content: baseline;
       @media (min-width: 800px) {
       margin-right: 40px;
       }
@@ -221,9 +237,11 @@ overflow-x: hidden;
     background: radial-gradient(ellipse at center, #5b8dd7 0%,#547bc0 50%,#335ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#547bc0', endColorstr='#335ba3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */;
     .reglas-info {
+      padding-left: 5px;
       font-size: 14px;
     }
     .reglas-title {
+      padding-left: 5px;
       font-size: 30px;
       font-weight: bolder;
     }
@@ -232,8 +250,10 @@ overflow-x: hidden;
       font-weight: bold;
     }
     .quorum-wrapper {
-      padding-left: 80px;
       align-items: left;
+      @media (min-width: 960px) {
+        padding-left: 80px;
+      }
     }
     .quorum-icon {
       width: 60px;
