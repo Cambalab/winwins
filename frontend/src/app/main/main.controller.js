@@ -163,13 +163,6 @@
       });
     }
 
-    vm.scrollTo = function() {
-      controller: scrollController,
-      value('duScrollDuration', 2000),
-      value('duScrollOffset', 30)
-
-    }
-
   }
 
 
@@ -186,14 +179,6 @@
         return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+videoId+'?autoplay=0');
     };
   }
-
-  function scrollController($scope, $document) {
-    $document.scrollTopAnimated(400).then(function () {
-    });
-
-    var someElement = angular.element(document.getElementById('video-container'));
-    $document.scrollToElementAnimated(someElement);
-  };
 
 })();
 
