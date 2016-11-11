@@ -92,7 +92,14 @@ overflow-x: hidden;
     -o-transform:rotate(-5deg);
     z-index: 1;
   }
+  .
+
   .index-winwins {
+    transform:rotate(-5deg);
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);
     margin: 0;
     padding: 0;
     background: #fafafa;

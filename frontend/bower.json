@@ -2,6 +2,7 @@
   "name": "winwins",
   "version": "0.0.1",
   "dependencies": {
+    "angular-scroll": "1.0.0",
     "angular-animate": "~1.4.2",
     "angular-cookies": "~1.4.2",
     "angular-sanitize": "~1.4.2",
