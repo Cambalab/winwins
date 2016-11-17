@@ -32,9 +32,12 @@ overflow-x: hidden;
 //especifico
 
 .header-container {
-  height: 620px;
+  height: 650px;
   width: 100%;
-  background: #5e5e5e;
+  background: url('../assets/images/fondowinwins.jpg');
+  background-size: cover;
+
+
   .texto-utopia {
     color: #fff;
     font-size: 6vmin;
@@ -65,7 +68,6 @@ overflow-x: hidden;
     color: #fff;
     font-weight: bold;
     margin-top: 50px;
-    margin-bottom: 50px;
     font-size: 70px;
     cursor: pointer;
     padding-top: 5px;
@@ -82,17 +84,22 @@ overflow-x: hidden;
   }
   .grey-diagonal {
     background: #fafafa;
-    width:100%;
+    width: 1920px;
     height: 2px;
-    padding:6px 0 12px;
+    padding:6px 0 670px;
     transform:rotate(-5deg);
     -webkit-transform:rotate(-5deg);
     -moz-transform:rotate(-5deg);
     -ms-transform:rotate(-5deg);
     -o-transform:rotate(-5deg);
     z-index: 1;
+    position: absolute;
+    top: 1350px;
   }
+
+
   .index-winwins {
+    z-index: 1;
     margin: 0;
     padding: 0;
     background: #fafafa;
