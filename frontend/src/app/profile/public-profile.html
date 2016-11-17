@@ -137,9 +137,9 @@
             <div class="mensajeriaPrivada" ng-if="profile.user.conversations.length > 0">
               <div class="inbox">
                 <div>
-                  <md-card class="inbox-title" ng-if="!profile.user.myself" ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">Mensajes con {{profile.user.name}}
-                  <md-card class="inbox-title" ng-if="profile.user.myself" ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">INBOX
-                  <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations" ng-show="active2">
+                  <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}
+                  <md-card class="inbox-title" ng-if="profile.user.myself">INBOX
+                  <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
                     <div ng-repeat="message in cnv.messages">
                       <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                           <img class="msg-avatar" ng-src="{{profile.avatar}}"  alt="">
