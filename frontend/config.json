@@ -59,7 +59,7 @@
         "name": "staging",
         "base": "http://dev-winwins.net/",
         "apiBase": "http://dev-winwins.net/api",
-        "imageServer": "http://images.winwins.org",
+        "imageServer": "http://thumbor.dev-winwins.net",
         "defaultLang": "es",
         "baseLang": "es",
         "availableLangs": ["es", "en"],
