@@ -208,7 +208,9 @@ class UserController extends Controller {
 
                                                           notifications.created_at,
 
-                                                          winwins.title
+                                                          winwins.title,
+
+                                                          winwins.id
 
                                                    FROM   notifications,
 
@@ -232,7 +234,9 @@ class UserController extends Controller {
 
                                                           notifications.created_at,
 
-                                                          groups.NAME
+                                                          groups.NAME,
+
+                                                          groups.id
 
                                                    FROM   notifications,
 
@@ -256,7 +260,9 @@ class UserController extends Controller {
 
                                                            notifications.created_at,
 
-                                                           users.username
+                                                           users.username,
+
+                                                           users.id
 
                                                   FROM     notifications,
 

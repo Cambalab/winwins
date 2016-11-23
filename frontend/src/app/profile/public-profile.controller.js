@@ -22,6 +22,7 @@
       for(var i = 0;i<vm.user.activities.length;i++) {
         vm.user.activities[i].type = user_data.activities[i].type;
         vm.user.activities[i].title = user_data.activities[i].title;
+        vm.user.activities[i].id = user_data.activities[i].id;
 
         if (user_data.activities[i].type == 'WW_JOIN') {
           vm.user.activities[i].mensajito = ' se unió al winwin ';
