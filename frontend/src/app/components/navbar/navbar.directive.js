@@ -78,9 +78,11 @@
       };
 
       vm.search = function() {
-        $state.go('home.search', {
-          query: vm.search_query
-        }); 
+        if (vm.search_query.trim().length > 0) {
+          $state.go('home.search', {
+            query: vm.search_query
+          }); 
+        }
       }
 
       vm.showLoginDialog = function(redirect) {
