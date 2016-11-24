@@ -22,74 +22,54 @@
       for(var i = 0;i<vm.user.activities.length;i++) {
         vm.user.activities[i].type = user_data.activities[i].type;
         vm.user.activities[i].title = user_data.activities[i].title;
-        vm.user.activities[i].id = user_data.activities[i].id;
+        vm.user.activities[i].titulo = vm.user.activities[i].title; // legacy, hay que ver si se usa titulo y si se puede unificar y eliminar uno
 
-        if (user_data.activities[i].type == 'WW_JOIN') {
-          vm.user.activities[i].mensajito = ' se unió al winwin ';
-        }
-        if (user_data.activities[i].type == 'WW_LEFT') {
-          vm.user.activities[i].mensajito = ' abandonó el winwin '
-        }
-        if (user_data.activities[i].type == 'WW_CREATED') {
-          vm.user.activities[i].mensajito = ' creó el winwin ';
-        }
-        if (user_data.activities[i].type == 'WW_SUCCESSFUL') {
-          vm.user.activities[i].mensajito = ' participó en el winwin ';
-        }
-
-        if (user_data.activities[i].type == 'GROUP_CREATED') {
-          vm.user.activities[i].mensajito = ' creó el grupo ';
-        }
-        if (user_data.activities[i].type == 'GROUP_JOIN') {
-          vm.user.activities[i].mensajito = ' unió al grupo ';
-        }
-        if (user_data.activities[i].type == 'GROUP_LEFT') {
-          vm.user.activities[i].mensajito = ' abandonó el grupo ';
+        switch (vm.user.activities[i].type.split('_')[0]) {
+          case "WW":
+            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+                                                 '/#/winwin/' + vm.user.activities[i].id;
+            break;
+          case "GROUP":
+            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+                                                 '/#/grupo/' + vm.user.activities[i].id;
+            break;
+          case "USER":
+            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+                                                 '/#/profile/' + vm.user.activities[i].id;
+            break;
+          default:  
+            vm.user.activities[i].activity_url = '#';
         }
 
-        if (user_data.activities[i].type == 'USER_FOLLOW') {
-          vm.user.activities[i].mensajito = ' ahora sigue a ';
+        switch (user_data.activities[i].type) {
+          case 'WW_JOIN':
+            vm.user.activities[i].mensajito = ' se unió al winwin ';
+            break;
+          case 'WW_LEFT' :
+            vm.user.activities[i].mensajito = ' abandonó el winwin ';
+            break;
+          case 'WW_CREATED':
+            vm.user.activities[i].mensajito = ' creó el winwin ';
+            break;
+          case 'WW_SUCCESSFUL':
+            vm.user.activities[i].mensajito = ' participó en el winwin ';
+            break;
+          case 'GROUP_CREATED':
+            vm.user.activities[i].mensajito = ' creó el grupo ';
+            break;
+          case 'GROUP_JOIN':
+            vm.user.activities[i].mensajito = ' unió al grupo ';
+            break;
+          case 'GROUP_LEFT':
+            vm.user.activities[i].mensajito = ' abandonó el grupo ';
+            break;
+          case 'USER_FOLLOW':
+            vm.user.activities[i].mensajito = ' ahora sigue a ';
+            break;
+          case 'USER_UNFOLLOW':
+            vm.user.activities[i].mensajito = ' ahora sigue a ';
+            break;
         }
-        if (user_data.activities[i].type == 'USER_UNFOLLOW') {
-          vm.user.activities[i].mensajito = ' ahora sigue a ';
-        }
-
-        if (user_data.activities[i].type == 'WW_JOIN') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'WW_LEFT') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'WW_CREATED') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'WW_SUCCESSFUL') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'GROUP_CREATED') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'GROUP_JOIN') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'GROUP_LEFT') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'USER_FOLLOW') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
-        if (user_data.activities[i].type == 'USER_UNFOLLOW') {
-          vm.user.activities[i].titulo = vm.user.activities[i].title;
-        }
-
       }
 
       vm.is_complete = (user_data.name && user_data.lastname && user_data.email && user_data.birthdate);
