@@ -26,15 +26,15 @@
 
         switch (vm.user.activities[i].type.split('_')[0]) {
           case "WW":
-            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+            vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] + 
                                                  '/#/winwin/' + vm.user.activities[i].id;
             break;
           case "GROUP":
-            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+            vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] + 
                                                  '/#/grupo/' + vm.user.activities[i].id;
             break;
           case "USER":
-            vm.user.activities[i].activity_url = "http://" + window.location["hostname"] + ":" + window.location["port"] + 
+            vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] + 
                                                  '/#/profile/' + vm.user.activities[i].id;
             break;
           default:  
