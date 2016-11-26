@@ -314,20 +314,21 @@
     vm.sendMessageStatus = "notSended";
     vm.conversationId = conversation_id;
 
-        vm.sendMessage = function(){
-      user.sendMessage({
-        conversation_id: vm.conversationId,
-        message: vm.mensaje,
-        receiver_id: vm.toUserId,
-        subject : 'asunto new conversation'
-      }).then(function(data){
-        if(data[0]=='enviado'){
-          vm.sendMessageStatus = "Sended";
-          $timeout(function() {
-            $mdDialog.hide(data);
-            }, 3000);
-        }
-      });
+    vm.sendMessage = function(){
+      if (vm.mensaje.trim().lenght>0)
+        user.sendMessage({
+          conversation_id: vm.conversationId,
+          message: vm.mensaje,
+          receiver_id: vm.toUserId,
+          subject : 'asunto new conversation'
+        }).then(function(data){
+          if(data[0]=='enviado'){
+            vm.sendMessageStatus = "Sended";
+            $timeout(function() {
+              $mdDialog.hide(data);
+              }, 3000);
+          }
+        });
     }
   }
 
