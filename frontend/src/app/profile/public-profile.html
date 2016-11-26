@@ -228,7 +228,7 @@
                 </div>
               </md-card>
               <div ng-if="profile.user.conversations.length > 0">
-                <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-card>
+                <md-card class="inbox-title" ng-if="!profile.user.myself" ng-click="profile.showMessageModal(cnv.id, cnv.messages)">Mensajes con {{profile.user.name}}</md-card>
                 <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
                 <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
                   <div ng-repeat="message in cnv.messages">
@@ -297,5 +297,5 @@
       </md-tab-body>
     </md-tab>
 </md-tabs>
-
 </div>
+
