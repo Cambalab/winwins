@@ -11,16 +11,16 @@
       <md-card class="bubble me" ng-show="message.user_id == msgController.userId">{{message.body}}</md-card>
     </md-list-item>
   </md-list>
-<div class="caja-mensaje">
+<div class="caja-mensaje" ng-Form name="messageForm">
   <div ng-if="(msgController.sendMessageStatus == 'Sended')" layout="column" layout-align="center center">
     <md-button aria-label="ok"><md-icon class="messageSent" md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
   </div>
   <md-input-container class="block-mensaje">
     <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
-    <textarea required class="Mensaje" name="mensaje" ng-model="msgController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0">
+    <textarea ng-required="true" class="Mensaje" name="mensaje" ng-model="msgController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0" >
         </textarea>
   </md-input-container>
-  <md-button class="boton-enviar" ng-click="msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
+  <md-button class="boton-enviar" ng-click="messageForm.$valid && msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
 </div>
 </div>
 </md-dialog-content>
