@@ -135,7 +135,7 @@ class WinwinController extends Controller {
             if($winwin->users_amount) {
                 $winwin->users_left = ($winwin->users_amount - $users_count);
             }
-            
+
             $winwin->popular = $winwin->users_joined > 5;
             $winwin->finishing = $winwin->closing_date < Carbon::now()->addDay(2) && $winwin->closing_date > Carbon::now();
             $winwin->remarkable = $winwin->selected;
@@ -220,7 +220,7 @@ class WinwinController extends Controller {
                 $model->detail;
                 $model->my_self = ($model->id == $user->id);
                 if($model->my_self && $model->pivot->moderator ) {
-                   $winwin->is_moderator = true; 
+                   $winwin->is_moderator = true;
                 }
 
 
@@ -248,7 +248,7 @@ class WinwinController extends Controller {
                 if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                     array_push($active_sponsors, $sponsor);
                 }
-                
+
                 if($is_sponsor && ($sponsor->user_id == $user->id)) {
                     if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                         $winwin->already_sponsored = true;
@@ -360,7 +360,7 @@ class WinwinController extends Controller {
 
     }
 
-    
+
 	public function winwinSponsorsCandidates(Request $request, $id) {
         $winwin = Winwin::find($id);
         $user = false;
@@ -415,7 +415,7 @@ class WinwinController extends Controller {
         if($user->active == 0) {
             return response()->json(['message' => 'operation_not_until_activate_account'], 400);
         }
-        
+
         if($request->has('id')) {
             return $this->update($request, $request->input('id'));
         }
@@ -456,7 +456,7 @@ class WinwinController extends Controller {
                 $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
                 $winwin->categories_text = implode(" ",$text_interest);
             }
-            
+
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
 
@@ -582,6 +582,8 @@ class WinwinController extends Controller {
         Winwin::destroy($id);
 	}
 
+
+
 	public function join(Request $request, Mailer $mailer, $id) {
         $user = User::find($request['user']['sub']);
         if($user->active == 0) {
@@ -673,7 +675,7 @@ class WinwinController extends Controller {
                         ->regarding($winwin)
                         ->deliver();
                 });
- 
+
 
             }
         }
@@ -702,7 +704,7 @@ class WinwinController extends Controller {
 
     /**
      * Send a notification to winwin members
-     * @deprecated 
+     * @deprecated
      *
      * @param Request $request
      * @param $id
@@ -738,6 +740,39 @@ class WinwinController extends Controller {
         return response()->json(['message' => 'winwin_sponsor_accepted'], 200);
     }
 
+    public function requestSponsorship(Request $request, Mailer $mailer, $id) {
+        $template_name = 'winwin_ww_invitation'; // TODO: Cambiar template y armar el mensaje en consecuencia
+        $winwin = Winwin::find($id);
+        $user_email = $winwin->user->email;
+        $message = new Message($template_name, array(
+                'meta' => array(
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
+                ),
+                'sender' => array(
+                    'lastname' => $request['org'],
+                    'name' => $request['contact'],
+                    'tel' => $request['tel'],
+                    'message' => $request['message'],
+                ),
+                'winwin' => array(
+                    'id' => $id,
+                    'users_amount' => $winwin->users_amount,
+                    'what_we_do' => $winwin->what_we_do,
+                ),
+
+        ));
+        $message->subject('WW - Solicitud de sponsoreo del Winwin: '.$winwin->title);
+        // Send it to winwin's owner
+        $message->to(null, $user_email);
+        $message_sent = $mailer->send($message);
+        // Send it to webmaster
+        $message->to(null, 'miguelmsoler@gmail.com'); // Todo: Sacar este hardcoding y mandar a alguna dirección de winwins.net configurable
+        $message_sent = $mailer->send($message);
+
+        return response()->json(['message' => 'winwin_emails_sent'], 200);
+    }
 
 	public function sentEmailInvitations(Request $request, Mailer $mailer, $winwinId) {
 
@@ -938,7 +973,7 @@ class WinwinController extends Controller {
 
         $user = User::find($request['user']['sub']);
 
-        if(!$request->hasFile('file')) { 
+        if(!$request->hasFile('file')) {
             return Response::json(['error' => 'no_file_sent']);
         }
 
@@ -965,7 +1000,7 @@ class WinwinController extends Controller {
             'bucket' => 'S3',
             'type' => 'IMAGE'
         ]);
-        
+
         $filename = 'winwin_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
@@ -1034,7 +1069,7 @@ class WinwinController extends Controller {
 
 
         return response()->json(['message' => 'winwin_rated'], 200);
-        
+
 	}
 
     public function processGeoValue($geo) {
@@ -1063,7 +1098,7 @@ class WinwinController extends Controller {
                     if($key_code == 'sublocality_level_1') {
                         $key_code = 'sublocality';
                     }
-                    $result[$key_code] = $component['short_name']; 
+                    $result[$key_code] = $component['short_name'];
                 }
             }
         }
@@ -1072,7 +1107,7 @@ class WinwinController extends Controller {
             $result['latitude'] = $coordinates['lat'];
             $result['longitude'] = $coordinates['lng'];
         }
-    
+
         return $result;
     }
 
