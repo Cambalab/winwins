@@ -22,6 +22,7 @@ use Winwins\Media;
 use Winwins\Sponsor;
 use Winwins\Location;
 use Winwins\InterestsInterested;
+use Winwins\TagsTagger;
 use Winwins\User;
 use Winwins\Message\Mailer;
 use Winwins\Message\Message;
@@ -85,14 +86,14 @@ class WinwinController extends Controller {
             return response()->json($winwins, 200, [], JSON_NUMERIC_CHECK);
 
         } else {
-            $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)
-                ->join('interests_interested', 'winwins.id', '=', 'interests_interested.interested_id')
-                ->whereIn('interests_interested.interest_id', $categories)
-                ->where('interests_interested.type', '=', 'WINWIN')
-                ->skip($page * $amount)->take($amount)->get();
-            $collection = $this->processCollection($winwins);
+          $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)
+            ->join('interests_interested', 'winwins.id', '=', 'interests_interested.interested_id')
+            ->whereIn('interests_interested.interest_id', $categories)
+            ->where('interests_interested.type', '=', 'WINWIN')
+            ->skip($page * $amount)->take($amount)->get();
+          $collection = $this->processCollection($winwins);
 
-            return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
+          return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
         }
 
     }
@@ -200,6 +201,14 @@ class WinwinController extends Controller {
             ->where('interested_id', '=', $winwin->id)
             ->select('interests.name','interests.description', 'interests.id')
             ->get();
+
+        $winwin->tags = DB::table('tags')
+          ->join('tags_tagger', 'tags.id', '=', 'tags_tagger.tag_id')
+          ->where('type', '=', 'WINWIN')
+          ->where('tagger_id', '=', $winwin->id)
+          ->select('tags.text', 'tags.id')
+          ->get();
+
         $winwin->already_joined = false;
         $conversations = new Collection();
         $winwin -> conversations = $conversations;
@@ -456,6 +465,18 @@ class WinwinController extends Controller {
                 $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
                 $winwin->categories_text = implode(" ",$text_interest);
             }
+          if($request->has('tags')) {
+
+            $winwin->text = $request->input('text');
+            $winwin->created_at = new Carbon();
+            $winwin->updated_at = new Carbon();
+            if($request->has('id')) {
+              return $this->update($request, $request->input('id'));
+            }
+
+
+
+          }
             
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
@@ -502,11 +523,24 @@ class WinwinController extends Controller {
                 }
             }
 
+
+            if($request->has('tags')) {
+              $tag = $request->input('tags');
+                foreach($tag as $tags) {
+
+                  $tagsTagger = tagsTagger::firstOrCreate([
+                    'tag_id' => $tag['id'],
+                    'tagger_id' => $winwin->id,
+                    'type' => 'WINWIN'
+                  ]);
+                }
+            }
+
             $user->newActivity()
                 ->from($user)
                 ->withType('WW_CREATED')
                 ->withSubject('you_have_created_new_ww_title')
-                ->withBody('you_have_created_new_ww_title_body')
+                ->withBody('you_have_created__ww_title_body')
                 ->regarding($winwin)
                 ->deliver();
         });
@@ -552,6 +586,25 @@ class WinwinController extends Controller {
                 $location = Location::firstOrCreate($geo);
                 $location->save();
                 $winwin->location_id = $location->id;
+            }
+
+            if ($request->has('tags')) {
+              DB::table('tags')
+                ->insert(
+                [
+                  'created_at' =>  Carbon(),
+                  'updated_at' => new Carbon(),
+                  'text' => $request->input('text')
+                ]
+              );
+
+              DB::table('tags_tagger')->insert(
+                [
+                  'tagger_id' => $winwin -> id,
+                  'created_at' => new Carbon(),
+                  'updated_at' => new Carbon(),
+                  ]
+              );
             }
 
             $winwin->save();

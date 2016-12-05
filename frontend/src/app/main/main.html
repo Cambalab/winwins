@@ -1,15 +1,15 @@
 <div class="main-container" layout="column">
-  <div class="header-container" layout="column" layout-align="space-around center">
+  <div id="header" class="header-container" layout="column" layout-align="space-around center">
     <div class="texto-utopia">"Nuestra utopía es lograr un gran<br>acuerdo humano, para crear juntos<br>un planeta donde todos podemos<br>vivir mejor, y ser mas felices."</div>
     <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">SÉ PARTE, SUMATE.</md-button>
-    <md-button class="facebook-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">o ingresa con Facebook</md-button>
+    <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button>
     <md-icon class="arrow-down" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
-
-  <div id="video-container">
-    <iframe width="760px" height="760px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen ></iframe>
+  <div class="video-container">
+    <div id="video-container">
+      <iframe width="640px" height="450px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
+    </div>
   </div>
-
   <div class="grey-diagonal" hide-xs>
   </div>
   <acme-highlighted items="main.destacados" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
@@ -47,8 +47,72 @@
       </div>
     </div>
   </div>
+  <div class="grey-diagonal2" hide-xs></div>
+  <div class="reglas-quorum" layout="row" layout-xs="column" layout-align="center center">
+    <div class="ideas-winwin">
+      <div class="ideas-title">
+        IDEAS PARA UN WINWIN
+      </div>
+      <div class="ideas-content">
+        <br>
+        Preguntate
+        <br>
+        <br>
+        Qué necesidades tiene mi mundo?<br>Qué podemos hacer para mejorar?<br>Que estaría bueno realizar?<br>Qué me interesa hacer?<br><br>Empezá por casa, tu barrio, tu escuela<br>
+        la facultad, la plaza, el país, y llegá al mundo.<br>Planteate algo simple, para seguir hacia<br>desafíos más grandes.<br><br>También podés buscar ideas en la web<br>
+        y replicar Winwins en tu barrio o ciudad.
+      </div>
+    </div>
+    <div class="quorum-wrapper" layout="column" layout-align="space-around center">
+      <p class="quorum-title">EL QUORUM</p>
+      <div layout="row" layout-align="space-around center" class="quorum-container" style="border: none">
+        <md-icon class="quorum-icon1" md-svg-src="assets/images/quorum_ico.svg"></md-icon>
+        <div class="quorum-necesario" layout="column">
+          <div class="quorum-box-title">
+            Quorum necesario
+          </div>
+          <div class="quorum-box-title-divider"></div>
+          <div class="quorum-box-subtitle">
+            Los winwins requieren un quorumminimo participacion.
+          </div>
+          <span class="quorum-box-footer"> <strong>
+             (Cuando se logra, le avisamos a todos)</strong>
+           </span>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center" class="quorum-container">
+        <md-icon class="quorum-icon2" md-svg-src="assets/images/sin_quorum_ico.svg"></md-icon>
+        <div class="no-quorum" layout="column">
+          <span class="quorum-box-title">
+           Quorum no alcanzado
+          </span>
+          <div class="quorum-box-title-divider"></div>
+          <span class="quorum-box-subtitle">
+           Si ese quorum no se alcanza,no hay compromisos de participar.
+         </span>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center" class="quorum-container">
+        <md-icon class="quorum-icon3" md-svg-src="assets/images/con_quorum_ico.svg"></md-icon>
+        <div class="con-quorum" layout="column">
+            <span class="quorum-box-title">
+         Quorum alcanzado
+       </span>
+          <div class="quorum-box-title-divider"></div>
+          <span class="quorum-box-subtitle">
+         Si se cumple el quorum, considera que los participantes cuentan con vos.
+       </span>
+        </div>
+      </div>
+    </div>
+    <div class="reglas-container" layout="column" layout-align="space-around center">
+      <p class="reglas-title">DOS REGLAS BÁSICAS</p>
+      <p class="reglas-list">I- Si en el proceso te arrepentís<br>o no podés participar avisale<br>al creador para que no cuente<br>con vos.<br><br>
+        II- Evitá sumarte si no estás seguro o segura!</p>
+    </div>
+  </div>
   <div class="que-es-winwins" layout="column" layout-align="space-around center">
-    <p class="title-que-es">¿QUÉ ES WINWINS?</p>
+    <p class="title-que-es">¿QUÉ ES WINWINS.ORG?</p>
     <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
       <div class="item" layout="column" layout-align="center center">
         <img class="crea-img1" src="assets/images/winwin.png">
@@ -82,60 +146,29 @@
       </div>
     </div>
   </div>
-  <div class="reglas-quorum" layout="row" layout-xs="column" layout-align="center center">
-    <div class="reglas-container" layout="column" layout-align="space-around center">
-      <p class="reglas-info">El cambio social lo podemos llevar adelante<br>sólo si hay compromiso de utilizar la virtualidad<br>
-        para pasar a la realidad.</p>
-      <p class="reglas-title">DOS REGLAS BÁSICAS</p>
-      <p class="reglas-list">I- Si en el proceso te arrepentís<br>o no podés participar avisale<br>al creador para que no cuente<br>con vos.<br><br>
-      II- Evitá sumarte si no estás seguro o segura!</p>
-    </div>
-    <div class="quorum-wrapper" layout="column" layout-align="space-around center">
-      <div layout="row" layout-align="space-around center" class="quorum-container" style="border: none">
-        <md-icon class="quorum-icon" md-svg-src="assets/images/quorum_ico.svg"></md-icon>
-        <div class="quorum-necesario" layout="column">
-          <div class="quorum-box-title">
-            Quorum necesario
-          </div>
-          <div class="quorum-box-title-divider"></div>
-          <div class="quorum-box-subtitle">
-            Los winwins requieren un quorumminimo participacion.
-          </div>
-          <span class="quorum-box-footer"> <strong>
-             (Cuando se logra, le avisamos a todos)</strong>
-           </span>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center" class="quorum-container">
-        <md-icon class="quorum-icon" md-svg-src="assets/images/sin_quorum_ico.svg"></md-icon>
-        <div class="no-quorum" layout="column">
-          <span class="quorum-box-title">
-           Quorum no alcanzado
-          </span>
-          <div class="quorum-box-title-divider"></div>
-          <span class="quorum-box-subtitle">
-           Si ese quorum no se alcanza,no hay compromisos de participar.
-         </span>
-          <span class="quorum-box-footer"> <strong>
-           (Asi, nadie queda pagando)</strong>
-         </span>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center" class="quorum-container">
-        <md-icon class="quorum-icon" md-svg-src="assets/images/con_quorum_ico.svg"></md-icon>
-        <div class="con-quorum" layout="column">
-            <span class="quorum-box-title">
-         Quorum alcanzado
-       </span>
-          <div class="quorum-box-title-divider"></div>
-          <span class="quorum-box-subtitle">
-         Si se cumple el quorum, considera que los participantes cuentan con vos.
-       </span>
-          <span class="quorum-box-footer"><strong>
-         (No te sumes si no estas seguro)</strong>
-       </span>
-        </div>
-      </div>
-    </div>
+  <div class="comunidad-container" layout="row" hide-xs>
+    <img class="mapa-mundi" src="assets/images/comunidadwinwins.png">
+    <p class="comunidad-content">
+      Si hay una comunidad de personas,<br>
+      empresas y marcas que apoyan la<br>
+      evolución social, organizaciones e<br>
+      instituciones accionando en conjunto<br>
+      sus misiones.<br><br>
+      ¿Podemos construir un mundo mejor?<br><br>
+      Nuestra respuesta es Si.
+    </p>
   </div>
+  <div flex class="scroll-top">
+    <md-button class="scroll-top-button" scroll-top  scroll href="#header" du-smooth-scroll ng-class="{scrollFixed:boolChangeClass}" hide-xs>
+      <md-icon md-svg-src="assets/images/icon-arrow-up.svg" aria-label="subir"></md-icon>{{$windows.crolly}}
+    </md-button>
+  </div>
+  <section class="partners" layout="column" layout-align="center center">
+   <span class="title">ALGUNAS DE LAS <span class="orange-highlight">ORGANIZACIONES</span><br>QUE <span class="orange-highlight">CONSTRUYEN</span> JUNTO A WINWINS
+   </span>
+    <div class="partners-list" ng-repeat="item in main.partners" layout="row" layout-xs="column" layout-align="space-around center">
+      <img class="partners-image" ng-src="{{main.imageServer}}/200x110/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
+    </div>
+  </section>
+  <acme-footer items="main.footer"></acme-footer>
 </div>

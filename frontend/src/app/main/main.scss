@@ -78,23 +78,57 @@ overflow-x: hidden;
     }
   }
 }
-  #video-container {
-    margin-bottom: -5px;
+
+  .video-container {
+    width: 100%;
+    max-width: 640px;
     align-self: center;
   }
+  #video-container  {
+    margin-bottom: -5px;
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    overflow:hidden;
+    left: 50px;
+  }
+  #video-container iframe, #video-container object, #video-container embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+
   .grey-diagonal {
     background: #fafafa;
     width: 1920px;
     height: 2px;
-    padding:6px 0 670px;
-    transform:rotate(-5deg);
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -ms-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    padding:6px 0 620px;
+    transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    -ms-transform:rotate(-3deg);
+    -o-transform:rotate(-3deg);
     z-index: 1;
     position: absolute;
-    top: 1350px;
+    top: 1100px;
+    left: -60px;
+  }
+  .grey-diagonal2 {
+    background: #eee;
+    width: 1920px;
+    height: 2px;
+    padding:6px 0 550px;
+    transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    -ms-transform:rotate(-3deg);
+    -o-transform:rotate(-3deg);
+    z-index: 1;
+    position: absolute;
+    top: 2445px;
+    left: -60px;
   }
 
 
@@ -205,6 +239,7 @@ overflow-x: hidden;
   }
 }
 .que-es-winwins {
+  padding-top: 50px;
   padding-bottom: 50px;
   background: #547bc0;
   background: radial-gradient(ellipse at center, #5b8dd7 0%,#547bc0 50%,#335ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -238,13 +273,23 @@ overflow-x: hidden;
     }
   }
 }
-  .reglas-quorum {
-    padding-top: 20px;
-    padding-bottom: 150px;
+  .comunidad-container {
+    background: #ea6a23;
+    .mapa-mundi {
+      height: 100%;
+      width: 100%;
+      max-width: 800px;
+    }
+  .comunidad-content {
     color: #fff;
-    background: #547bc0;
-    background: radial-gradient(ellipse at center, #5b8dd7 0%,#547bc0 50%,#335ba3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#547bc0', endColorstr='#335ba3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */;
+    font-weight:bold;
+    padding-left: 40px;
+    font-size: 30px;
+  }
+  }
+  .reglas-quorum {
+    color: #535353;
+    z-index: 1;
     .reglas-info {
       padding-left: 5px;
       font-size: 14px;
@@ -253,10 +298,27 @@ overflow-x: hidden;
       padding-left: 5px;
       font-size: 30px;
       font-weight: bolder;
+      align-content: center;
+    }
+    .reglas-container {
+      padding-bottom: 235px;
     }
     .reglas-list {
       font-size: 14px;
       font-weight: bold;
+    }
+    .ideas-winwin {
+      padding-bottom: 12px;
+    }
+    .ideas-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .ideas-content {
+      text-align: center;
+      font-weight: bold;
+      line-height: 24px;
     }
     .quorum-wrapper {
       align-items: left;
@@ -264,12 +326,38 @@ overflow-x: hidden;
         padding-left: 80px;
       }
     }
-    .quorum-icon {
-      width: 60px;
-      height: 60px;
+    .quorum-title {
+      font-size: 30px;
+      font-weight: bold;
+      margin: auto;
+    }
+    .quorum-icon1 {
+      width: 90px;
+      height: 90px;
       margin-right: 10px;
-      margin-top: 40px;
-      padding-top:5px;
+      margin-top: 10px;
+      padding: 20px;
+      background: #7a4dff;
+      border-radius: 5px;
+    }
+    .quorum-icon2 {
+      width: 90px;
+      height: 90px;
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 20px;
+      background: #e85d4a;
+      border-radius: 5px;
+
+    }
+    .quorum-icon3 {
+      width: 90px;
+      height: 90px;
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 20px;
+      background: #01b286;
+      border-radius: 5px;
     }
     .quorum-container {
       margin-top: 20px;
@@ -1219,7 +1307,40 @@ md-sidenav {
     padding-left: 5px;
   }
 }
+.scroll-top {
+  position: absolute;
+  right: 200px;
+  text-align: right;
+  margin-right: -10px;
+  z-index: 1;
+  background: #ea6a23;
+  border-radius: 3px;
+  md-icon {
+    margin-top: -2px;
+    background: #ea6a23;
+    border-radius: 3px;
+    height: 50px;
+    width: 50px;
+  }
+  .scroll-top-button {
+    border-radius: 3px;
+    transition: bottom .5s ease;
+    bottom: 0;
+    position: absolute;
+    background: #ea6a23;
 
+    &.scrollFixed {
+      bottom: 20px;
+      position: fixed;
+      background: #ea6a23;
+      border-radius: 3px;
+
+    }
+    @media (max-width: 1024px) {
+      right: 0;
+    }
+  }
+}
 
 
 

@@ -1,77 +1,11 @@
 <md-content class="acme-footer">
-  <div class="footer-sumate">
-    <div class="container">
-      <div layout="row" layout-xs="column" layout-padding layout-xs="center center" layout-align="space-between end">
-        <div flex>
-          <h2><img src="assets/images/sumate.svg" class="sumate-img"></h2>
-          <p translate>Cuando la gente lidera,
-    los líderes acompañan.</p>
-          <md-button ng-href ng-click="vm.showLoginDialog()" class="green" ng-if="!vm.isAuthenticated()">{{'COMENZA ESTA AVENTURA' | translate }}</md-button>
-        </div>
-        <div flex class="scroll-top">
-          <md-button class="md-raised md-fab md-warn scroll-top-button" scroll-top  scroll ng-class="{scrollFixed:boolChangeClass}">
-            <md-icon md-svg-src="assets/images/icon-arrow-up.svg" aria-label="subir"></md-icon>{{$windows.crolly}}
-          </md-button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">
-    <div class="container">
-      <div layout-gt-xs="row" layout-padding layout-align="space-between center">
-        <div flex>
-          <ul>
-            <li><a ng-href="/#/about" translate>Qué es winwins</a></li>
-            <li><a ng-href="/#/weare" translate>Quiénes somos</a></li>
-            <li><a href translate ng-click="vm.showLoginDialog()" ng-if="!vm.isAuthenticated()">Registrate</a></li>
-          </ul>
-        </div>
-        <div class="share" layout="row" layout-align="space-around center">
-            <div><md-icon md-svg-src="assets/images/icon-facebook-share.svg" <a
-               socialshare
-               socialshare-provider="facebook"
-               socialshare-type="feed"
-               socialshare-text="Junta gente para realizar tus proyectos"
-               socialshare-url="dev-winwins.net"
-               socialshare-media="https://youtu.be/gyyTDPe8TwY"
-               socialshare-via="{{winwin.facebookId}}">
-            </a>
-              </md-icon></div>
-            <div><md-icon md-svg-src="assets/images/icon-twitter-share.svg" <a href="#" socialshare
-               socialshare-provider="twitter"
-               socialshare-text="Junta gente para realizar tus proyectos"
-               socialshare-hastags="winwins, ProyectoseIdeas, HechosRealidad"
-               socialshare-url="http://dev-winwins.net"
-               socialshare-media="https://youtu.be/gyyTDPe8TwY">
-            </a>
-              </md-icon></div>
-            <div><md-icon md-svg-src="assets/images/icon-google-share.svg" <a href="#" socialshare
-              socialshare-provider="google"
-              socialshare-url="http://dev-winwins.net">
-                </a></md-icon></div>
-        </div>
-        <div flex>
-          <md-button class="md-primary create-winwin-button" ng-click="$root.createWinwin()">
-            <md-icon md-svg-src="assets/images/create-winwin.svg"></md-icon>
-            <translate>CREAR UN WINWIN</translate>
-          </md-button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <div class="container">
-      <div layout-gt-xs="row" layout-padding layout-align="space-between center">
-        <div>
-          <a ng-href="/#/terms" translate target="_blank">Términos y condiciones</a>
-        </div>
-        <div>
-          {{'WinWins - Consensos en acción' | translate }} <span class="beta">beta</span>  ©  2016
-        </div>
-        <div>
-          <a ng-href="/#/contact" translate>Contáctanos</a>
-        </div>
-      </div>
-    </div>
+  <div class="footer-buttons" layout="row" layout-align="center center" layout-xs="column">
+    <md-button class="footer-button">Que Hacemos</md-button>
+    <md-button class="footer-button">Manifiesto</md-button>
+    <a class="privacidad"><i class="fa fa-lock"></i>
+      Politica de Privacidad</a>
+    <md-button class="footer-button">Equipo</md-button>
+    <md-button class="footer-button">Qué es Winwins?</md-button>
+    <md-button class="footer-button">Sé Partner</md-button>
   </div>
 </md-content>

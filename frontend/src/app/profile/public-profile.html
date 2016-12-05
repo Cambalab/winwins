@@ -142,7 +142,7 @@
                   </md-card>
                   <div ng-if="profile.user.conversations.length > 0">
                     <md-card class="inbox-title" ng-if="!profile.user.myself" ng-click="profile.showMessageModal(cnv.id, cnv.messages)">Mensajes con {{profile.user.name}}</md-card>
-                    <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
+                    <md-card class="inbox-title" ng-if="profile.user.myself" style="cursor: default;">INBOX</md-card>
                     <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
                       <div ng-repeat="message in cnv.messages">
                         <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
@@ -198,7 +198,7 @@
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar" style="line-height: 30px;">Editar</md-button>
                       </div>
                     </div>
                     <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">

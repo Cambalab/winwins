@@ -32,6 +32,10 @@ class Winwin extends Model {
         return $this->belongsToMany('Winwins\Interest', 'interests_interested','interested_id', 'interest_id');
     }
 
+    public function tags() {
+      return $this->belongsToMany('Winwins\Tags', 'tags_tagger','tagger_id', 'tag_id');
+    }
+
     public function polls() {
         return $this->hasMany('Winwins\Poll');
     }

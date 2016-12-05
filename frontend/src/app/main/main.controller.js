@@ -5,6 +5,30 @@
     .module('winwins')
     .controller('MainController', MainController);
 
+  angular
+      .module('winwins')
+      .directive('scrollTop', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, $elm) {
+            $elm.on('click', function() {
+              angular.element("body").animate({scrollTop: angular.element("body").offset().top}, "slow");
+            });
+          }
+        };
+      });
+
+  angular
+      .module('winwins')
+      .directive("scroll", function ($window, $document) {
+        return function(scope, element, attrs) {
+          angular.element($window).bind("scroll", function() {
+            scope.boolChangeClass = this.pageYOffset >= 100 && $document[0].body.scrollHeight - this.pageYOffset - $window.innerHeight >= 260;
+            scope.$apply();
+          });
+        };
+      });
+
   /** @ngInject */
   function MainController($timeout,sponsor, ENV, $rootScope, winwin ,miembro, gettextCatalog ,gettext ,$auth ,$mdDialog ,$window ,$document,$sce ,Analytics ,grupo) {
     var vm = this;
@@ -168,6 +192,7 @@
 
 
   /** @ngInject */
+
   function MonthWinwinMoreDetailController($scope, winwin) {
     $scope.winwin = winwin;
   }

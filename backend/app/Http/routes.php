@@ -138,6 +138,7 @@ Route::post('api/users/send', ['middleware' => 'auth', 'uses' => 'UserController
 Route::post('api/skills/search', ['middleware' => 'auth', 'uses' => 'SkillsController@search']);
 
 Route::resource('api/parametric/interests', 'InterestController');
+Route::resource('api/parametric/tags', 'TagsController');
 Route::resource('api/parametric/marital', 'MaritalStatusController');
 Route::resource('api/parametric/languages', 'LanguageController');
 Route::resource('api/parametric/activities', 'ActivityTypeController');

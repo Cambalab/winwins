@@ -1,4 +1,4 @@
-(function() {
+  (function() {
   'use strict';
 
   angular
@@ -20,6 +20,7 @@
     vm.hoy = new Date().toLocaleDateString();
     vm.winwin = {
       interests:[],
+      tags:[],
       scope: 'GLOBAL'
     };
     
@@ -101,6 +102,10 @@
 
     winwin.getInterests().then(function(data) {
       vm.interests = data;
+    });
+
+    winwin.getTags().then(function(data) {
+      vm.tags = data;
     });
 
     vm.validateMail = function(chip) {

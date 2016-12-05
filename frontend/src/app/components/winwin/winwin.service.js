@@ -16,6 +16,9 @@
     _winwin.getInterests = function() {
       return rParametric.customGET('interests');
     };
+    _winwin.getTags = function() {
+      return rParametric.customGET('tags');
+    };
 
     _winwin.getList = function(page, filter, offset) {
       var default_offset = 15;
