@@ -22,6 +22,7 @@ use Winwins\Media;
 use Winwins\Sponsor;
 use Winwins\Location;
 use Winwins\InterestsInterested;
+use Winwins\TagsTagger;
 use Winwins\User;
 use Winwins\Message\Mailer;
 use Winwins\Message\Message;
@@ -32,6 +33,7 @@ class WinwinController extends Controller {
 
     public function __construct() {
         $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'socialShow', 'search', 'summary', 'winwinSponsors', 'paginateCategories', 'requestSponsorship']]);
+
     }
 
 
@@ -85,14 +87,14 @@ class WinwinController extends Controller {
             return response()->json($winwins, 200, [], JSON_NUMERIC_CHECK);
 
         } else {
-            $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)
-                ->join('interests_interested', 'winwins.id', '=', 'interests_interested.interested_id')
-                ->whereIn('interests_interested.interest_id', $categories)
-                ->where('interests_interested.type', '=', 'WINWIN')
-                ->skip($page * $amount)->take($amount)->get();
-            $collection = $this->processCollection($winwins);
+          $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)
+            ->join('interests_interested', 'winwins.id', '=', 'interests_interested.interested_id')
+            ->whereIn('interests_interested.interest_id', $categories)
+            ->where('interests_interested.type', '=', 'WINWIN')
+            ->skip($page * $amount)->take($amount)->get();
+          $collection = $this->processCollection($winwins);
 
-            return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
+          return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
         }
 
     }
@@ -135,7 +137,7 @@ class WinwinController extends Controller {
             if($winwin->users_amount) {
                 $winwin->users_left = ($winwin->users_amount - $users_count);
             }
-
+            
             $winwin->popular = $winwin->users_joined > 5;
             $winwin->finishing = $winwin->closing_date < Carbon::now()->addDay(2) && $winwin->closing_date > Carbon::now();
             $winwin->remarkable = $winwin->selected;
@@ -171,7 +173,7 @@ class WinwinController extends Controller {
         $ww_user = $winwin->user;
         $ww_user->detail;
 
-    //Log::info($ww_user);
+    Log::info($ww_user);
 
 
     $users = $winwin->users;
@@ -200,6 +202,14 @@ class WinwinController extends Controller {
             ->where('interested_id', '=', $winwin->id)
             ->select('interests.name','interests.description', 'interests.id')
             ->get();
+
+        $winwin->tags = DB::table('tags')
+          ->join('tags_tagger', 'tags.id', '=', 'tags_tagger.tag_id')
+          ->where('type', '=', 'WINWIN')
+          ->where('tagger_id', '=', $winwin->id)
+          ->select('tags.text', 'tags.id')
+          ->get();
+
         $winwin->already_joined = false;
         $conversations = new Collection();
         $winwin -> conversations = $conversations;
@@ -220,7 +230,7 @@ class WinwinController extends Controller {
                 $model->detail;
                 $model->my_self = ($model->id == $user->id);
                 if($model->my_self && $model->pivot->moderator ) {
-                   $winwin->is_moderator = true;
+                   $winwin->is_moderator = true; 
                 }
 
 
@@ -248,7 +258,7 @@ class WinwinController extends Controller {
                 if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                     array_push($active_sponsors, $sponsor);
                 }
-
+                
                 if($is_sponsor && ($sponsor->user_id == $user->id)) {
                     if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                         $winwin->already_sponsored = true;
@@ -360,7 +370,7 @@ class WinwinController extends Controller {
 
     }
 
-
+    
 	public function winwinSponsorsCandidates(Request $request, $id) {
         $winwin = Winwin::find($id);
         $user = false;
@@ -415,7 +425,7 @@ class WinwinController extends Controller {
         if($user->active == 0) {
             return response()->json(['message' => 'operation_not_until_activate_account'], 400);
         }
-
+        
         if($request->has('id')) {
             return $this->update($request, $request->input('id'));
         }
@@ -456,7 +466,19 @@ class WinwinController extends Controller {
                 $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
                 $winwin->categories_text = implode(" ",$text_interest);
             }
+          if($request->has('tags')) {
 
+            $winwin->text = $request->input('text');
+            $winwin->created_at = new Carbon();
+            $winwin->updated_at = new Carbon();
+            if($request->has('id')) {
+              return $this->update($request, $request->input('id'));
+            }
+
+
+
+          }
+            
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
 
@@ -502,11 +524,24 @@ class WinwinController extends Controller {
                 }
             }
 
+
+            if($request->has('tags')) {
+              $tag = $request->input('tags');
+                foreach($tag as $tags) {
+
+                  $tagsTagger = tagsTagger::firstOrCreate([
+                    'tag_id' => $tag['id'],
+                    'tagger_id' => $winwin->id,
+                    'type' => 'WINWIN'
+                  ]);
+                }
+            }
+
             $user->newActivity()
                 ->from($user)
                 ->withType('WW_CREATED')
                 ->withSubject('you_have_created_new_ww_title')
-                ->withBody('you_have_created_new_ww_title_body')
+                ->withBody('you_have_created__ww_title_body')
                 ->regarding($winwin)
                 ->deliver();
         });
@@ -554,6 +589,25 @@ class WinwinController extends Controller {
                 $winwin->location_id = $location->id;
             }
 
+            if ($request->has('tags')) {
+              DB::table('tags')
+                ->insert(
+                [
+                  'created_at' =>  Carbon(),
+                  'updated_at' => new Carbon(),
+                  'text' => $request->input('text')
+                ]
+              );
+
+              DB::table('tags_tagger')->insert(
+                [
+                  'tagger_id' => $winwin -> id,
+                  'created_at' => new Carbon(),
+                  'updated_at' => new Carbon(),
+                  ]
+              );
+            }
+
             $winwin->save();
         });
         return $winwin;
@@ -581,8 +635,6 @@ class WinwinController extends Controller {
 	public function destroy($id) {
         Winwin::destroy($id);
 	}
-
-
 
 	public function join(Request $request, Mailer $mailer, $id) {
         $user = User::find($request['user']['sub']);
@@ -675,7 +727,7 @@ class WinwinController extends Controller {
                         ->regarding($winwin)
                         ->deliver();
                 });
-
+ 
 
             }
         }
@@ -704,7 +756,7 @@ class WinwinController extends Controller {
 
     /**
      * Send a notification to winwin members
-     * @deprecated
+     * @deprecated 
      *
      * @param Request $request
      * @param $id
@@ -738,6 +790,42 @@ class WinwinController extends Controller {
             DB::table('sponsors_winwins')->where('winwin_id', $id)->where('sponsor_id', $sponsorId)->update(['ww_accept' => 1]);
         });
         return response()->json(['message' => 'winwin_sponsor_accepted'], 200);
+    }
+
+
+	public function sentEmailInvitations(Request $request, Mailer $mailer, $winwinId) {
+
+        $template_name = 'winwin_ww_invitation';
+        $user = User::find($request['user']['sub']);
+        $winwin = Winwin::find($winwinId);
+        $detail = $user->detail;
+
+        foreach($request->input('mails') as $recipient) {
+            $message = new Message($template_name, array(
+                'meta' => array(
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
+                ),
+                'sender' => array(
+                    'name' => $detail->name,
+                    'lastname' => $detail->lastname,
+                    'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
+                ),
+                'winwin' => array(
+                    'id' => $winwin->id,
+                    'users_amount' => $winwin->users_amount,
+                    'what_we_do' => $winwin->what_we_do,
+                ),
+
+            ));
+            $message->subject('WW - '.$winwin->title);
+            $message->to(null, $recipient);
+            $message_sent = $mailer->send($message);
+        }
+
+        return response()->json(['message' => 'winwin_emails_sent'], 200);
     }
 
     public function requestSponsorship(Request $request, Mailer $mailer, $id) {
@@ -774,41 +862,6 @@ class WinwinController extends Controller {
         $message_sent = $mailer->send($message);
 
         return response()->json(['winwin_emails_sent'], 200);
-    }
-
-	public function sentEmailInvitations(Request $request, Mailer $mailer, $winwinId) {
-
-        $template_name = 'winwin_ww_invitation';
-        $user = User::find($request['user']['sub']);
-        $winwin = Winwin::find($winwinId);
-        $detail = $user->detail;
-
-        foreach($request->input('mails') as $recipient) {
-            $message = new Message($template_name, array(
-                'meta' => array(
-                    'base_url' => Config::get('app.url'),
-                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
-                    //'logo_url' => 'http://winwins.org/assets/imgs/logo-winwins_es.gif'
-                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
-                ),
-                'sender' => array(
-                    'name' => $detail->name,
-                    'lastname' => $detail->lastname,
-                    'photo' => Config::get('app.url_images').'/72x72/smart/'.$detail->photo,
-                ),
-                'winwin' => array(
-                    'id' => $winwin->id,
-                    'users_amount' => $winwin->users_amount,
-                    'what_we_do' => $winwin->what_we_do,
-                ),
-
-            ));
-            $message->subject('WW - '.$winwin->title);
-            $message->to(null, $recipient);
-            $message_sent = $mailer->send($message);
-        }
-
-        return response()->json(['message' => 'winwin_emails_sent'], 200);
     }
 
 
@@ -975,7 +1028,7 @@ class WinwinController extends Controller {
 
         $user = User::find($request['user']['sub']);
 
-        if(!$request->hasFile('file')) {
+        if(!$request->hasFile('file')) { 
             return Response::json(['error' => 'no_file_sent']);
         }
 
@@ -1002,7 +1055,7 @@ class WinwinController extends Controller {
             'bucket' => 'S3',
             'type' => 'IMAGE'
         ]);
-
+        
         $filename = 'winwin_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
@@ -1071,7 +1124,7 @@ class WinwinController extends Controller {
 
 
         return response()->json(['message' => 'winwin_rated'], 200);
-
+        
 	}
 
     public function processGeoValue($geo) {
@@ -1100,7 +1153,7 @@ class WinwinController extends Controller {
                     if($key_code == 'sublocality_level_1') {
                         $key_code = 'sublocality';
                     }
-                    $result[$key_code] = $component['short_name'];
+                    $result[$key_code] = $component['short_name']; 
                 }
             }
         }
@@ -1109,7 +1162,7 @@ class WinwinController extends Controller {
             $result['latitude'] = $coordinates['lat'];
             $result['longitude'] = $coordinates['lng'];
         }
-
+    
         return $result;
     }
 
