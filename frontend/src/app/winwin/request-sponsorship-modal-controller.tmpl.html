@@ -1,0 +1,29 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+    <div class=" lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended">
+      <div class="caja-mensaje" ng-Form name="reqSponsorForm">
+        <div ng-if="(reqSponsorController.sendMessageStatus == 'Sended')" layout="column" layout-align="center center">
+          <label translate=>&iexcl;Gracias! Se envi&oacute; tu solicitud.</label>
+        </div>
+        <md-input-container class="md-block">
+          <label translate>Organizaci&oacute;n</label>
+          <input required name="org" ng-model="reqSponsorController.org">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Nombre del contacto</label>
+          <input required name="nombre" ng-model="reqSponsorController.contact">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label translate>Tel&eacute;fono</label>
+          <input required name="tel" ng-model="reqSponsorController.tel">
+        </md-input-container>
+        <md-input-container class="block-mensaje">
+          <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
+          <textarea ng-required="true" class="Mensaje" name="mensaje" ng-model="reqSponsorController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0" > Algo de prueba
+          </textarea>
+        </md-input-container>
+        <md-button class="boton-enviar" ng-click="reqSponsorForm.$valid && reqSponsorController.sendMessage()">ENVIAR</md-button>
+      </div>
+    </div>
+  </md-dialog-content>
+</md-dialog>

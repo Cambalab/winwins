@@ -31,7 +31,7 @@ use Illuminate\Http\Request;
 class WinwinController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'socialShow', 'search', 'summary', 'winwinSponsors', 'paginateCategories']]);
+        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'socialShow', 'search', 'summary', 'winwinSponsors', 'paginateCategories', 'requestSponsorship']]);
     }
 
 
@@ -171,7 +171,7 @@ class WinwinController extends Controller {
         $ww_user = $winwin->user;
         $ww_user->detail;
 
-    Log::info($ww_user);
+    //Log::info($ww_user);
 
 
     $users = $winwin->users;
@@ -741,7 +741,9 @@ class WinwinController extends Controller {
     }
 
     public function requestSponsorship(Request $request, Mailer $mailer, $id) {
-        $template_name = 'winwin_ww_invitation'; // TODO: Cambiar template y armar el mensaje en consecuencia
+        //Log::info($request['msj']);
+        //Log::info($id);
+        $template_name = 'winwin_request_sponsorship'; 
         $winwin = Winwin::find($id);
         $user_email = $winwin->user->email;
         $message = new Message($template_name, array(
@@ -751,10 +753,10 @@ class WinwinController extends Controller {
                     'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
-                    'lastname' => $request['org'],
-                    'name' => $request['contact'],
+                    'org' => $request['org'],
+                    'contact' => $request['contact'],
                     'tel' => $request['tel'],
-                    'message' => $request['message'],
+                    'msj' => $request['msj'],
                 ),
                 'winwin' => array(
                     'id' => $id,
@@ -771,7 +773,7 @@ class WinwinController extends Controller {
         $message->to(null, 'miguelmsoler@gmail.com'); // Todo: Sacar este hardcoding y mandar a alguna dirección de winwins.net configurable
         $message_sent = $mailer->send($message);
 
-        return response()->json(['message' => 'winwin_emails_sent'], 200);
+        return response()->json(['winwin_emails_sent'], 200);
     }
 
 	public function sentEmailInvitations(Request $request, Mailer $mailer, $winwinId) {

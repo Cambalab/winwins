@@ -156,6 +156,11 @@
       }, undefined, undefined, undefined);
     }
 
+    _winwin.requestSponsorship = function(model) {
+      return Restangular.one('winwins', model.winwinId).customPOST({org: model.org, contact: model.contact, 
+        tel: model.tel, msj: model.mensaje}, 'request/sponsorship', undefined, undefined);
+    }
+
     return _winwin;
   }
 
