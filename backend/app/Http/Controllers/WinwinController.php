@@ -32,7 +32,8 @@ use Illuminate\Http\Request;
 class WinwinController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'socialShow', 'search', 'summary', 'winwinSponsors', 'paginateCategories']]);
+        $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'socialShow', 'search', 'summary', 'winwinSponsors', 'paginateCategories', 'requestSponsorship']]);
+
     }
 
 
@@ -825,6 +826,42 @@ class WinwinController extends Controller {
         }
 
         return response()->json(['message' => 'winwin_emails_sent'], 200);
+    }
+
+    public function requestSponsorship(Request $request, Mailer $mailer, $id) {
+        //Log::info($request['msj']);
+        //Log::info($id);
+        $template_name = 'winwin_request_sponsorship'; 
+        $winwin = Winwin::find($id);
+        $user_email = $winwin->user->email;
+        $message = new Message($template_name, array(
+                'meta' => array(
+                    'base_url' => Config::get('app.url'),
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
+                ),
+                'sender' => array(
+                    'org' => $request['org'],
+                    'contact' => $request['contact'],
+                    'tel' => $request['tel'],
+                    'msj' => $request['msj'],
+                ),
+                'winwin' => array(
+                    'id' => $id,
+                    'users_amount' => $winwin->users_amount,
+                    'what_we_do' => $winwin->what_we_do,
+                ),
+
+        ));
+        $message->subject('WW - Solicitud de sponsoreo del Winwin: '.$winwin->title);
+        // Send it to winwin's owner
+        $message->to(null, $user_email);
+        $message_sent = $mailer->send($message);
+        // Send it to webmaster
+        $message->to(null, 'miguelmsoler@gmail.com'); // Todo: Sacar este hardcoding y mandar a alguna dirección de winwins.net configurable
+        $message_sent = $mailer->send($message);
+
+        return response()->json(['winwin_emails_sent'], 200);
     }
 
 
