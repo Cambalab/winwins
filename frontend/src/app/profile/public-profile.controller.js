@@ -220,7 +220,8 @@
         user.sendMessage({
           conversation_id: convid,
           message: msj,
-          receiver_id: vm.userId, subject : 'asunto new conversation'
+          receiver_id: vm.userId,
+          subject : 'asunto new conversation'
         }).then(function(data){
       })
     }

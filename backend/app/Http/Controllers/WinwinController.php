@@ -203,14 +203,15 @@ class WinwinController extends Controller {
             ->get();
 
         $winwin->tags = DB::table('tags')
-          ->join('tags_tagger', 'tags.id', '=', 'tags_tagger.tag_id')
-          ->where('type', '=', 'WINWIN')
-          ->where('tagger_id', '=', $winwin->id)
-          ->select('tags.text', 'tags.id')
-          ->get();
+            ->join('tags_tagger', 'tags.id', '=', 'tags_tagger.tag_id')
+            ->where('type', '=', 'WINWIN')
+            ->where('tagger_id', '=', $winwin->id)
+            ->select('tags.text', 'tags.id')
+            ->get();
 
         $winwin->already_joined = false;
         $conversations = new Collection();
+
         $winwin -> conversations = $conversations;
         if($user) {
             $winwin->is_moderator = ( $winwin->user_id == $user->id );
@@ -465,18 +466,7 @@ class WinwinController extends Controller {
                 $text_interest = Collection::make($request->input('interests'))->pluck('name')->toArray();
                 $winwin->categories_text = implode(" ",$text_interest);
             }
-          if($request->has('tags')) {
 
-            $winwin->text = $request->input('text');
-            $winwin->created_at = new Carbon();
-            $winwin->updated_at = new Carbon();
-            if($request->has('id')) {
-              return $this->update($request, $request->input('id'));
-            }
-
-
-
-          }
             
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
@@ -525,16 +515,16 @@ class WinwinController extends Controller {
 
 
             if($request->has('tags')) {
-              $tag = $request->input('tags');
-                foreach($tag as $tags) {
+                $tags = $request->input('tags');
+                foreach($tags as $tag) {
 
-                  $tagsTagger = tagsTagger::firstOrCreate([
-                    'tag_id' => $tag['id'],
-                    'tagger_id' => $winwin->id,
-                    'type' => 'WINWIN'
-                  ]);
+                    $tagsTagger = TagsTagger::firstOrNew([
+                      'tagger_id' => $winwin->id,
+                      'type' => 'WINWIN'
+                    ]);
                 }
             }
+
 
             $user->newActivity()
                 ->from($user)
@@ -580,6 +570,17 @@ class WinwinController extends Controller {
 
             }
 
+          if($request->has('tags')) {
+            $tags = $request->input('tags');
+            foreach($tags as $tag) {
+
+              $tagsTagger = TagsTagger::firstOrNew([
+                'tagger_id' => $winwin->id,
+                'type' => 'WINWIN'
+              ]);
+            }
+          }
+
 
             if($request->has('location') && isset($request->input('location')['address_components'])) {
                 $geo = $this->processGeoValue($request->input('location'));
@@ -588,24 +589,6 @@ class WinwinController extends Controller {
                 $winwin->location_id = $location->id;
             }
 
-            if ($request->has('tags')) {
-              DB::table('tags')
-                ->insert(
-                [
-                  'created_at' =>  Carbon(),
-                  'updated_at' => new Carbon(),
-                  'text' => $request->input('text')
-                ]
-              );
-
-              DB::table('tags_tagger')->insert(
-                [
-                  'tagger_id' => $winwin -> id,
-                  'created_at' => new Carbon(),
-                  'updated_at' => new Carbon(),
-                  ]
-              );
-            }
 
             $winwin->save();
         });
