@@ -41,7 +41,10 @@ Route::post('api/sponsor/{sponsorId}/winwin/{id}/accept', ['middleware' => 'auth
 
 Route::post('api/winwins/{id}/close', ['middleware' => 'auth', 'uses' => 'WinwinController@closeWinwin']);
 Route::post('api/winwins/{id}/notifications', ['middleware' => 'auth', 'uses' => 'WinwinController@updateNotifications']);
+
+Route::post('api/winwins/{winwinId}/request/sponsorship', 'WinwinController@requestSponsorship'); // request publico (no precisa login)
 Route::post('api/winwins/{winwinId}/share/mails', ['middleware' => 'auth', 'uses' => 'WinwinController@sentEmailInvitations']);
+
 
 Route::get('api/winwins/groups/{id}', ['middleware' => 'auth', 'uses' => 'WinwinController@winwinGroups']);
 

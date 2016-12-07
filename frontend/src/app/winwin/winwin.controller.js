@@ -136,6 +136,18 @@
       });
     }
 
+    vm.showRequestSponsorshipMessageModal = function() {
+          $mdDialog.show({
+              controller: RequestSponsorshipModalController,
+              controllerAs: 'reqSponsorController',
+            templateUrl: 'app/winwin/request-sponsorship-modal-controller.tmpl.html',
+            clickOutsideToClose: true,
+            locals: {
+              winwin_id: vm.winwinId
+            }
+          });
+        }
+
     var dataURItoBlob = function(dataURI) {
       var binary = atob(dataURI.split(',')[1]);
       var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -855,6 +867,30 @@
 
     $scope.cropImage = function() {
       $mdDialog.hide({file:$scope.myCroppedImage, name:$scope.fileName});
+    }
+  }
+
+    /** @ngInject */
+  function RequestSponsorshipModalController(ENV, winwin_id, user, winwin, $mdDialog, $timeout){
+    var vm = this;
+
+    vm.imageServer = ENV.imageServer
+    vm.winwinId = winwin_id,
+    vm.org = "";
+    vm.contact = "";
+    vm.tel = "";
+    vm.mensaje = "Nos interesa sponsorear este winwin...";
+    vm.sendMessageStatus = "notSended";
+
+    vm.sendMessage = function(){
+      winwin.requestSponsorship(vm).then(function(data){
+        if(data[0]=='winwin_emails_sent'){
+          vm.sendMessageStatus = "Sended";
+          $timeout(function() {
+            $mdDialog.hide(data);
+            }, 2000);
+        }
+      });
     }
   }
   
