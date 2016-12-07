@@ -5,6 +5,17 @@
     .module('winwins')
     .controller('PublicProfileController', PublicProfileController);
 
+  angular
+      .module('winwins')
+      .directive("scroll", function ($window, $document) {
+        return function(scope, element, attrs) {
+          angular.element($window).bind("scroll", function() {
+            scope.boolChangeClass = this.pageYOffset >= 0 && $document[0].body.scrollHeight - this.pageYOffset - $window.innerHeight >= 0;
+            scope.$apply();
+          });
+        };
+      });
+
   /** @ngInject */
   function PublicProfileController(user, $q, ENV, $state, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
     var vm = this;

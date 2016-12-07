@@ -1,6 +1,6 @@
 <md-dialog aria-label="List dialog">
 <md-dialog-content>
-  <div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended">
+  <div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended" style="height: 500px;">
   <md-list>
     <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row">
       <div layout="row">
@@ -11,7 +11,7 @@
       <md-card class="bubble me" ng-show="message.user_id == msgController.userId">{{message.body}}</md-card>
     </md-list-item>
   </md-list>
-<div class="caja-mensaje" ng-Form name="messageForm">
+<div class="caja-mensaje" id="input-msg" ng-Form name="messageForm">
   <div ng-if="(msgController.sendMessageStatus == 'Sended')" layout="column" layout-align="center center">
     <md-button aria-label="ok"><md-icon class="messageSent" md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
   </div>
@@ -20,8 +20,9 @@
     <textarea ng-required="true" class="Mensaje" name="mensaje" ng-model="msgController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0" >
         </textarea>
   </md-input-container>
-  <md-button class="boton-enviar" ng-click="messageForm.$valid && msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
+  <md-button  class="boton-enviar" ng-click="messageForm.$valid && msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
 </div>
 </div>
+  </div>
 </md-dialog-content>
 </md-dialog>
