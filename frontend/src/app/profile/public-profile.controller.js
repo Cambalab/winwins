@@ -18,6 +18,10 @@
     user.getUser(vm.userId)
     .then(function(user_data) {
       vm.user = user_data;
+      vm.conversations = vm.user.conversations.filter(function (element) {
+        return element.winwin_id == null;
+      });
+
       vm.user.activities;
       for(var i = 0;i<vm.user.activities.length;i++) {
         vm.user.activities[i].type = user_data.activities[i].type;

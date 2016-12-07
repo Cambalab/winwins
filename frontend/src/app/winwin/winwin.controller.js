@@ -33,6 +33,10 @@
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
       vm.polls = vm.winwin.polls;
 
+      vm.conversations = vm.winwin.conversations.filter(function (element) {
+        return element.winwin_id == vm.winwinId;
+      });
+
       $window._.each(vm.polls, function(poll) {
         winwin.getPoll(poll.id).then(function(data) {
           poll.data = data;
@@ -68,6 +72,8 @@
         });
       }
     });
+
+    
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
       vm.posts = posts_data.posts;

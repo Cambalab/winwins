@@ -288,7 +288,7 @@ class UserController extends Controller {
               ->join('users', 'participants.user_id', '=', 'users.id')
               ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
               ->where('users.id', '=', $my_self->id)
-              ->select('conversations.id', 'conversations.subject')
+              ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
               ->get();
             $conversations = new Collection();
 
@@ -304,6 +304,7 @@ class UserController extends Controller {
 
               $cnv = new Conversation();
               $cnv->id = $c->id;
+              $cnv->winwin_id = $c->winwin_id;
               $cnv->subject = $c->subject;
               $cnv->messages = $messages;
               $cnv->show_avatar = $user->photo;
@@ -316,7 +317,7 @@ class UserController extends Controller {
               ->join('users', 'participants.user_id', '=', 'users.id')
               ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
               ->where('users.id', '=', $my_self->id)
-              ->select('conversations.id', 'conversations.subject')
+              ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
               ->get();
             $converother = DB::table('participants')
               ->join('users', 'participants.user_id', '=', 'users.id')
@@ -348,6 +349,7 @@ class UserController extends Controller {
               //Log::info($messages);
               $cnv = new Conversation();
               $cnv->id = $c->id;
+              $cnv->winwin_id = $c->winwin_id;
               $cnv->subject = $c->subject;
               $cnv->messages = $messages;
               $cnv->show_avatar = $user->photo;
