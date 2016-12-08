@@ -820,7 +820,7 @@ class WinwinController extends Controller {
         $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
-                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    
                     'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
@@ -831,6 +831,8 @@ class WinwinController extends Controller {
                 ),
                 'winwin' => array(
                     'id' => $id,
+                    'winwin_link' => Config::get('app.url').'/#/winwin/'.$winwin->id,
+                    'winwin_title' => $winwin->title,
                     'users_amount' => $winwin->users_amount,
                     'what_we_do' => $winwin->what_we_do,
                 ),
