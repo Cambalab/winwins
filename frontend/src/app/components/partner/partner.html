@@ -7,7 +7,7 @@
       </translate>
     </h1>
 
-    <div layout="row" layout-align="center center" layout-wrap layout-margin>
+    <div layout="row" layout-xs="column" layout-align="center center">
       <div ng-repeat="item in vm.items | limitTo: 8">
         <img class="md-user-avatar" ng-src="{{vm.imageServer}}/250x120/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
       </div>
