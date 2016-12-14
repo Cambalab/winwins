@@ -47,7 +47,7 @@ class UserController extends Controller {
 
         $cnvid = $request->input('conversation_id');
 
-        Log::info($request);
+        //Log::info($request);
 
         if($current_user){
             //SI NO EXISTE CONVERSATIOn, LA CREO
