@@ -40,7 +40,7 @@
         <div class="buttons-xs-sm" layout="row" hide-gt-sm ng-if="profile.isAuthenticated()">
           <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
           <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-          <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following && profile.user.conversations.length == 0" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
+          <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following && profile.conversations.length == 0" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself && profile.user.already_following" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
         </div>
         <div class="bioTotal" layout="row" layout-align="center start">
@@ -125,25 +125,24 @@
           <div class="bio-Actions" layout="column" hide-xs hide-sm>
             <div ng-if="profile.isAuthenticated()">
               <md-card ng-if="!profile.user.already_following && !profile.user.myself" class="not-following-msj">Debes <strong ng-click="profile.follow(profile.userId)" aria-label="seguir">seguir a {{profile.user.name}}</strong> para poder enviarle un mensaje</md-card>
-              <div class="button" ng-if="profile.user.conversations.length == 0 && !profile.user.myself && profile.user.already_following">
+              <div class="button" ng-if="profile.conversations.length == 0 && !profile.user.myself && profile.user.already_following">
             <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
             </div>
-            <md-card class="inbox-title" style="cursor: default;" ng-if="profile.user.conversations.length == 0 && profile.user.myself">INBOX
+            <md-card class="inbox-title" style="cursor: default;" ng-if="profile.conversations.length == 0 && profile.user.myself">INBOX
               <div class="sin-mensajes">
                 No hay mensajes...
               </div>
             </md-card>
               <md-card class="mensajeriaPrivada">
                 <div class="inbox">
-                  <md-card class="inbox-title" ng-if="profile.user.conversations == null && profile.user.myself">INBOX
+                  <md-card class="inbox-title" ng-if="profile.conversations == null && profile.user.myself">INBOX
                     <div class="sin-mensajes">
                       No hay mensajes...
                     </div>
                   </md-card>
-                  <div ng-if="profile.user.conversations.length > 0">
-                    <md-card class="inbox-title" ng-if="!profile.user.myself">Mensajes con {{profile.user.name}}</md-card>
-                    <md-card class="inbox-title" ng-if="profile.user.myself" style="cursor: default;">INBOX</md-card>
-                    <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
+                  <div ng-if="profile.conversations.length > 0">
+                    <md-card class="inbox-title" style="cursor: default;">{{profile.conversation_title}}</md-card>
+                    <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                       <div ng-repeat="message in cnv.messages">
                         <md-card href="#send-message" du-smooth-scroll class="msg-container" layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                           <img class="msg-avatar" ng-src="{{profile.avatar}}"  alt="">
@@ -217,21 +216,20 @@
           Por favor inicia sesion <br> para ver o enviar mensajes.
         </md-button>
         <div class="bio-Actions" layout="column" ng-if="profile.isAuthenticated()">
-          <div class="button" ng-if="profile.user.conversations.length == 0 && !profile.user.myself">
+          <div class="button" ng-if="profile.conversations.length == 0 && !profile.user.myself">
             <md-button class="mensajeria" ng-if="!profile.user.myself && profile.user.already_following" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
           </div>
 
           <md-card class="mensajeriaPrivada">
             <div class="inbox">
-              <md-card class="inbox-title" ng-if="profile.user.conversations == null && profile.user.myself">INBOX
+              <md-card class="inbox-title" ng-if="profile.conversations == null && profile.user.myself">INBOX
                 <div class="sin-mensajes">
                   No hay mensajes...
                 </div>
               </md-card>
-              <div ng-if="profile.user.conversations.length > 0">
-                <md-card class="inbox-title" ng-if="!profile.user.myself" ng-click="profile.showMessageModal(cnv.id, cnv.messages)">Mensajes con {{profile.user.name}}</md-card>
-                <md-card class="inbox-title" ng-if="profile.user.myself">INBOX</md-card>
-                <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.user.conversations">
+              <div ng-if="profile.conversations.length > 0">
+                <md-card class="inbox-title">{{profile.conversation_title}}</md-card>
+                <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                   <div ng-repeat="message in cnv.messages">
                     <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                       <img class="msg-avatar" ng-src="{{profile.avatar}}"  alt="">

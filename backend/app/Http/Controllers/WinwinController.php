@@ -275,13 +275,13 @@ class WinwinController extends Controller {
                 ->join('users', 'participants.user_id', '=', 'users.id')
                 ->join('conversations','conversations.id','=','participants.conversation_id')
                 ->where('users.id', '=',$user->id)
-                ->select('conversations.id', 'conversations.subject')
+                ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
                 ->get();
             $converother = DB::table('participants')
                 ->join('users', 'participants.user_id', '=', 'users.id')
                 ->join('conversations','conversations.id','=','participants.conversation_id')
                 ->where('users.id', '=',$ww_user->id)
-                ->select('conversations.id', 'conversations.subject')
+                ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
                 ->get();
 
             $cvsIDS = array();
@@ -303,10 +303,12 @@ class WinwinController extends Controller {
                     ->orderBy('messages.created_at', 'asc')
                     ->get();
                 $cnv = new Conversation();
-                $cnv -> id = $c->id;
-                $cnv -> show_avatar = $ww_user -> photo;
-                $cnv -> subject = $c->subject;
-                $cnv -> messages = $messages;
+                Log:info($cnv);
+                $cnv->id = $c->id;
+                $cnv->show_avatar = $ww_user -> photo;
+                $cnv->winwin_id = $c->winwin_id;
+                $cnv->subject = $c->subject;
+                $cnv->messages = $messages;
                 $conversations[] = $cnv;
             }
             $winwin->conversations = $conversations;
