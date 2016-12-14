@@ -6,7 +6,7 @@
     .controller('WinwinController', WinwinController);
 
   /** @ngInject */
-  function WinwinController($scope, $stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user, sponsor) {
+  function WinwinController($scope, $stateParams, winwin, ENV, $mdDialog, $document, $sce, account, $auth, $rootScope, $window, $q, user, sponsor, $log) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -27,12 +27,25 @@
       });
     });
 
+    user.getUser(vm.userId)
+      .then(function(user_data) {
+        if (user_data.myself)
+            vm.conversation_title = "Mensajes con los participantes:";
+          else
+            vm.conversation_title = "Mensajes con el creador del Winwin:";
+        });
+
+
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
 
       vm.winwin = winwin_data;
       vm.winwin.closing_date = new Date(vm.winwin.closing_date);
       vm.polls = vm.winwin.polls;
 
+      vm.conversations = vm.winwin.conversations.filter(function (element) {
+        return element.winwin_id == vm.winwinId;
+      });
+      
       $window._.each(vm.polls, function(poll) {
         winwin.getPoll(poll.id).then(function(data) {
           poll.data = data;
@@ -68,6 +81,8 @@
         });
       }
     });
+
+    
 
     winwin.getPosts(vm.winwinId).then(function(posts_data) {
       vm.posts = posts_data.posts;
@@ -130,8 +145,9 @@
         locals: {
           myself_id: user.myself,
           conversation_id: conversationId,
-          to_user_id: vm.userId,
-          conversation_messages: conversation_messages
+          to_user_id: vm.winwin.user_id,
+          conversation_messages: conversation_messages,
+          winwin_id: vm.winwinId
         }
       });
     }
@@ -462,22 +478,23 @@
   }
 
   /** @ngInject */
-  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $timeout){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, winwin_id, $mdDialog, $timeout){
     var vm = this;
 
     vm.imageServer = ENV.imageServer
-    vm.myself_id = user.myself,
-        vm.conversation_messages = conversation_messages,
-        vm.toUserId = to_user_id;
+    vm.conversation_messages = conversation_messages,
+    vm.toUserId = to_user_id;
     vm.messages = conversation_messages;
     vm.mensaje = "";
     vm.sendMessageStatus = "notSended";
     vm.conversationId = conversation_id;
+    vm.winwinId = winwin_id;
 
     vm.sendMessage = function(){
       user.sendMessage({
         conversation_id: vm.conversationId,
         message: vm.mensaje,
+        winwin_id : vm.winwinId,
         receiver_id: vm.toUserId,
         subject : 'asunto new conversation'
       }).then(function(data){
