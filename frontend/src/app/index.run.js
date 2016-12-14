@@ -42,18 +42,21 @@
     });
 
     $rootScope.createWinwin = function() {
-      if ($auth.isAuthenticated()) {
+      $state.go('home.crear-winwin');
+      /*if ($auth.isAuthenticated()) {
         $state.go('home.crear-winwin');
       } else {
-        $rootScope.returnState = 'home.crear-winwin';
+        $rootScope.returnState = {
+          state : 'home.crear-winwin'
+        };
         $mdDialog.show({
           controller: 'LoginController',
           controllerAs: 'login',
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
-          clickOutsideToClose:true
+          clickOutsideToClose:true,
         });
-      }
+      }*/
     }
     
     

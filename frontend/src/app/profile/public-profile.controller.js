@@ -17,7 +17,7 @@
       });
 
   /** @ngInject */
-  function PublicProfileController(user, $q, ENV, $state, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope) {
+  function PublicProfileController(user, $q, ENV, $state, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope, $log) {
     var vm = this;
    
     vm.userId = $stateParams.userId;
@@ -29,6 +29,15 @@
     user.getUser(vm.userId)
     .then(function(user_data) {
       vm.user = user_data;
+      if (user_data.myself) 
+        vm.conversation_title = "Bandeja de Entrada";
+      else
+        vm.conversation_title = "Mensajes con " + vm.user.name;
+
+      vm.conversations = vm.user.conversations.filter(function (element) {
+        return element.winwin_id == null;
+      });
+
       vm.user.activities;
       for(var i = 0;i<vm.user.activities.length;i++) {
         vm.user.activities[i].type = user_data.activities[i].type;
@@ -326,7 +335,6 @@
     var vm = this;
 
     vm.imageServer = ENV.imageServer
-    vm.myself_id = user.myself,
     vm.conversation_messages = conversation_messages,
     vm.toUserId = to_user_id;
     vm.messages = conversation_messages;

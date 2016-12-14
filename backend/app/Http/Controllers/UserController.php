@@ -47,6 +47,8 @@ class UserController extends Controller {
 
         $cnvid = $request->input('conversation_id');
 
+        //Log::info($request);
+
         if($current_user){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
@@ -54,7 +56,8 @@ class UserController extends Controller {
                 DB::table('conversations')->insert(
                     [   'created_at' => new Carbon(),
                         'updated_at' => new Carbon(),
-                        'subject' => $request->input('subject')]
+                        'subject' => $request->input('subject'),
+                        'winwin_id' => $request->input('winwin_id', null)]
                 );
 
                 $cnvid = DB::table('conversations')->max('id');
@@ -291,7 +294,7 @@ class UserController extends Controller {
               ->join('users', 'participants.user_id', '=', 'users.id')
               ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
               ->where('users.id', '=', $my_self->id)
-              ->select('conversations.id', 'conversations.subject')
+              ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
               ->get();
             $conversations = new Collection();
 
@@ -307,6 +310,7 @@ class UserController extends Controller {
 
               $cnv = new Conversation();
               $cnv->id = $c->id;
+              $cnv->winwin_id = $c->winwin_id;
               $cnv->subject = $c->subject;
               $cnv->messages = $messages;
               $cnv->show_avatar = $user->photo;
@@ -319,7 +323,7 @@ class UserController extends Controller {
               ->join('users', 'participants.user_id', '=', 'users.id')
               ->join('conversations', 'conversations.id', '=', 'participants.conversation_id')
               ->where('users.id', '=', $my_self->id)
-              ->select('conversations.id', 'conversations.subject')
+              ->select('conversations.id', 'conversations.subject','conversations.winwin_id')
               ->get();
             $converother = DB::table('participants')
               ->join('users', 'participants.user_id', '=', 'users.id')
@@ -351,6 +355,7 @@ class UserController extends Controller {
               //Log::info($messages);
               $cnv = new Conversation();
               $cnv->id = $c->id;
+              $cnv->winwin_id = $c->winwin_id;
               $cnv->subject = $c->subject;
               $cnv->messages = $messages;
               $cnv->show_avatar = $user->photo;
@@ -390,6 +395,7 @@ class UserController extends Controller {
           if ($my_self->id == $id) {
             $userDetail->myself = true;
           } else {
+            $userDetail->myself = false;
             $already_following = count($user->followers->filter(function ($model) use ($my_self) {
                 return $model->id == $my_self->id;
               })) > 0;
