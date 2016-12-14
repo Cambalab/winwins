@@ -47,6 +47,8 @@ class UserController extends Controller {
 
         $cnvid = $request->input('conversation_id');
 
+        Log::info($request);
+
         if($current_user){
             //SI NO EXISTE CONVERSATIOn, LA CREO
             if($cnvid==0){
@@ -54,7 +56,8 @@ class UserController extends Controller {
                 DB::table('conversations')->insert(
                     [   'created_at' => new Carbon(),
                         'updated_at' => new Carbon(),
-                        'subject' => $request->input('subject')]
+                        'subject' => $request->input('subject'),
+                        'winwin_id' => $request->input('winwin_id', null)]
                 );
 
                 $cnvid = DB::table('conversations')->max('id');
@@ -389,6 +392,7 @@ class UserController extends Controller {
           if ($my_self->id == $id) {
             $userDetail->myself = true;
           } else {
+            $userDetail->myself = false;
             $already_following = count($user->followers->filter(function ($model) use ($my_self) {
                 return $model->id == $my_self->id;
               })) > 0;

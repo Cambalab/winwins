@@ -408,9 +408,9 @@
                   </h3>
                 </div>
                 <div ng-if="winwin.isAuthenticated()">
-                  <md-button class="bt-blue" ng-if="winwin.winwin.conversations.length == 0" ng-click="winwin.showMessageModal(0, {})">Enviar mensaje a {{winwin.winwin.user.detail.name}}</md-button>
-                  <md-card class="inbox-title" ng-if="winwin.winwin.conversations.length > 0">Mensajes con {{winwin.winwin.user.detail.name}}</md-card>
-                  <div class="mensajes-recibidos-content" ng-repeat="cnv in winwin.winwin.conversations">
+                  <md-button class="bt-blue" ng-if="winwin.conversations.length == 0" ng-click="winwin.showMessageModal(0, {})">Enviar mensaje a {{winwin.winwin.user.detail.name}}</md-button>
+                  <md-card class="inbox-title" ng-if="winwin.conversations.length > 0">{{winwin.conversation_title}}</md-card>
+                  <div class="mensajes-recibidos-content" ng-repeat="cnv in winwin.conversations">
                     <div ng-repeat="message in cnv.messages">
                       <md-card class="mensajeria" layout="row" ng-click="winwin.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
                         <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador-mensajeria"  ui-sref="home.public-profile({userId: winwin.winwin.user.id})"/>
