@@ -10,11 +10,11 @@ overflow-x: hidden;
   font-size: 16px;
   font-weight: bold;
   border-radius: 100px;
-  background: #e56f29;
+  background: #fff;
   color: #fff;
   padding: 8px 30px;
   .btn-orange-main:hover {
-    background: #FF792D;
+    background: #f60;
   }
 }
 .crea-img {
@@ -81,8 +81,9 @@ overflow-x: hidden;
 
   .video-container {
     width: 100%;
-    max-width: 640px;
+    max-width: 960px;
     align-self: center;
+    background: #fff;
   }
   #video-container  {
     margin-bottom: -5px;
@@ -91,6 +92,9 @@ overflow-x: hidden;
     padding-top:30px;
     overflow:hidden;
     left: 50px;
+    margin: 10%;
+    background: #fff;
+    background: url('../assets/images/bg-video.jpg') repea
   }
   #video-container iframe, #video-container object, #video-container embed {
     position:absolute;
@@ -135,12 +139,16 @@ overflow-x: hidden;
   .index-winwins {
     z-index: 1;
     margin: 0;
-    padding: 0;
+    padding: 40px;
     background: #fafafa;
+
   }
 .como-funciona {
-  padding-top: 100px;
-  background: #fff;
+  padding-top: 50px;
+  background: #547bc0;
+  background: -webkit-radial-gradient(center ellipse, #5b8dd7 0%, #547bc0 50%, #335ba3 100%);
+background: radial-gradient(ellipse at center, #5b8dd7 0%, #547bc0 50%, #335ba3 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#547bc0', endColorstr='#335ba3',GradientType=1 );
   padding-bottom: 80px;
   .crea-img {
     width: 100px;
@@ -151,14 +159,14 @@ overflow-x: hidden;
     border-radius: 20px;
     font-size: 40px;
     font-weight: bold;
-    color: #555555;
+    color: #fff;
   }
   .funciona-subtitulo {
     border-radius: 20px;
     font-size: 25px;
     font-weight: bold;
     text-align: center;
-    color: #4b6cb3;
+    color: #fff;
     position: relative;
     bottom: 60px;
   }
@@ -167,6 +175,7 @@ overflow-x: hidden;
     border: 1px solid;
     border-color: #ADADAD;
     padding: 30px;
+    background: #fff;
     @media (min-width: 800px) {
     margin-right: 70px;
   }
@@ -191,6 +200,7 @@ overflow-x: hidden;
   .participa-flujo {
     border: 1px solid;
     border-color: #ADADAD;
+    background: #fff;
     padding: 30px;
     @media (min-width:800px) {
     margin-right: 70px;
@@ -217,6 +227,7 @@ overflow-x: hidden;
     border: 1px solid;
     border-color: #adadad;
     padding: 30px;
+    background: #fff;
     .mejora-title {
       margin-bottom: 32px;
       margin-top: 20px;
@@ -253,22 +264,25 @@ overflow-x: hidden;
   .items-que-es {
     .item.layout-align-center-center.layout-column {
       height: 400px;
+      background: #fff;
+      color: #333;
       display: flex;
       flex-direction: column;
       align-content: baseline;
       @media (min-width: 800px) {
       margin-right: 40px;
+      padding: 30px;
       }
     }
     .item-title {
       font-size: 18px;
-      color: #fff;
+      color: #333;
       font-weight: bold;
       text-align: center;
     }
     .item-info {
       font-size: 12px;
-      color: #fff;
+      color: #333;
       text-align: center;
     }
   }
@@ -289,6 +303,7 @@ overflow-x: hidden;
   }
   .reglas-quorum {
     color: #535353;
+    background-color: #fafafa;
     z-index: 1;
     .reglas-info {
       padding-left: 5px;
@@ -1062,7 +1077,7 @@ md-menu-content {
   }
 }
 .md-dialog-container.ng-scope {
-  background: rgba(0, 0, 0, .5);
+  background: rgb(47, 74, 154. 0.93);
   .lightbox-video {
     @media (min-width: 960px) {
       width: 960px;
@@ -1346,13 +1361,96 @@ md-sidenav {
 
 
 
+//Manuel
+
+
+.main-container {
+    overflow-x: hidden;
+    background: #fff;
+}
 
 
 
 
+.item-sponsor {
+    overflow-x: hidden;
+    background: #fff;
+    margin:20px;
+    padding:30px;
+    border-radius: 3px;
+}
+
+
+  .testimonial-container {
+    width: 100%;
+
+    align-self: center;
+    background: #fff;
+        background: url('../assets/images/back-testimonials.jpg');
+  background-size: cover;
+  }
+
+
+.testimonial {
+    font-color: #666;
+    padding: 100;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center;
+    max-width: 760px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 300px;
+}
+
+
+.footer-v{
+   font-color: #666;
+padding:100;
+height:200px;
+background-color: #3C66B0;
+}
 
 
 
 
+.bottom-logo {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin:30px;
+  margin-top:20px;
+  }
 
 
+
+
+.social-footer-icons {
+text-align:center;
+color: white;
+font-size: 1.5rem;
+border: 2px solid #fff;
+border-radius: 50%;
+height:50px;
+width: 50px;
+margin: 10px;
+background:#3C66B0;
+  }
+
+
+.chevron {
+font-size: 1.5rem;
+color: #fff;
+text-align:center;
+  }
+.ww-destacados {
+padding-top: 50px;
+  background: #f1f1f1;
+  }
+
+  .ww-destacados-titulo {
+    border-radius: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+  }
