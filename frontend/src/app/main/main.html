@@ -1,17 +1,38 @@
 <div class="main-container" layout="column">
   <div id="header" class="header-container" layout="column" layout-align="space-around center">
     <div class="texto-utopia">"Nuestra utopía es lograr un gran<br>acuerdo humano, para crear juntos<br>un planeta donde todos podemos<br>vivir mejor, y ser mas felices."</div>
-    <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()">SÉ PARTE, SUMATE.</md-button>
+    <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()"><i class="fa fa-chevron-right animated infinite flash"></i> SÉ PARTE, SUMATE.</md-button>
     <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button>
-    <md-icon class="arrow-down" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
+    <md-icon class="arrow-down animated infinite pulse" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
   <div class="video-container">
     <div id="video-container">
-      <iframe width="640px" height="450px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
+      <iframe width="760px" height="350px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
     </div>
   </div>
-  <acme-highlighted items="main.destacados" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve">
+<polygon fill="#f1f1f1" points="594.28,27.354 -1,27.354 596.28,0.529 "/>
+</svg>
+
+
+  <div class="ww-destacados" layout="column"style="  background: url(http://www.fondosblackberry.com/user-content/uploads/wall/o/56/World_MapMapa_mundi_gris.jpg);"  layout-align="space-around center">
+    <p class="ww-destacados-titulo" style="font-size: 40px; font-weight: bold;">WINWINS DESTACADOS</p>
+    <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">EXPLORA TODOS LOS WINWINS</button>
+  <acme-highlighted items="main.destacados" title="false"style="background:transparent;" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
   </acme-highlighted>
+    <!--Repeti la linea de arriba, se deberian ver 6 winwins-->
+    <acme-highlighted items="main.destacados"  style="background:transparent; margin-top: -60px;" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
+  </acme-highlighted>
+   <button style="background-color: #999; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
+</div>
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve">
+<rect y="-8.471" fill="#F1F1F1" width="100%" height="100%"/>
+<polygon fill="#3C66B0" points="595.28,26.882 0,26.882 595.28,2.764 "/>
+<polygon fill="#F1F1F1" points="-0.985,0.823 597.546,0.823 -0.985,25.293 "/>
+</svg>
 
   <div class="como-funciona" layout="column" layout-align="space-around center">
     <div layout="column" layout-align="center center">
@@ -45,6 +66,16 @@
       </div>
     </div>
   </div>
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve"style="margin-top: -10px;">
+<rect x="-1.985" y="1.008" transform="matrix(-1 2.780755e-005 -2.780755e-005 -1 591.311 36.3599)" fill="#F1F1F1" width="100%" height="100%" />
+<polygon fill="#3C66B0" points="-1.985,0.017 593.295,0 -1.984,24.135 "/>
+<polygon fill="#fff" points="594.28,26.059 -4.25,26.076 594.28,1.589 "/>
+</svg>
+
+
+<!-- seccion Reglas y Quorum 
   <div class="reglas-quorum" layout="row" layout-xs="column" layout-align="center center">
     <div class="ideas-winwin">
       <div class="ideas-title">
@@ -108,6 +139,43 @@
         II- Evitá sumarte si no estás seguro o segura!</p>
     </div>
   </div>
+
+-->
+
+   <!-- Partners provisorio // -->
+   <div class="que-es-winwins" style="background: #fff;" layout="column" layout-align="space-around center">
+    <p class="title-que-es">ALGUNAS DE LAS ORGANIZACIONES <br> QUE CONSTRUYEN JUNTO A WINWINS</p>
+    <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
+      <div class="item-sponsor" layout="column" layout-align="center center">
+      <img src="http://thumbor.dev-winwins.net/200x110/smart/humanet-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+ <img src="http://thumbor.dev-winwins.net/200x110/smart/corbo-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+        <img src="http://thumbor.dev-winwins.net/200x110/smart/otromundo-sponsor.png">
+      </div>
+    </div>
+        <div class="items-sponsor" layout="row" layout-xs="column" layout-align="center center">
+      <div class="item-sponsor" layout="column" layout-align="center center">
+      <img src="http://thumbor.dev-winwins.net/200x110/smart/camba-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+ <img src="http://thumbor.dev-winwins.net/200x110/smart/chicas-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+        <img src="http://thumbor.dev-winwins.net/200x110/smart/perian-sponsor.png">
+      </div>
+    </div>
+  </div>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve"style="margin-top: -10px;">
+<rect x="-1.985" y="1.008" transform="matrix(-1 2.780755e-005 -2.780755e-005 -1 591.311 36.3599)" fill="#F1F1F1" width="100%" height="100%" />
+<polygon fill="#fff" points="-1.985,0.017 593.295,0 -1.984,24.135 "/>
+<polygon fill="#3C66B0" points="594.28,26.059 -4.25,26.076 594.28,1.589 "/>
+</svg>
+
+
   <div class="que-es-winwins" layout="column" layout-align="space-around center">
     <p class="title-que-es">¿QUÉ ES WINWINS.ORG?</p>
     <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
@@ -116,7 +184,6 @@
         <p class="item-title">UNA RED SOCIAL</p>
         <p class="item-info">Winwins es una red social para<br>
         conectarnos y coordinar<br>voluntades e intereses reales<br>
-        para concretar acciones<br>generadoras de valor social.<br><br>
         Es una oportunidad para<br>empoderarnos como lideres de<br>
           nuestro entorno creando desafios<br>de accion colectiva a los que<br>llamamos Winwins.</p>
       </div>
@@ -143,8 +210,13 @@
       </div>
     </div>
   </div>
+
+
+
   <div class="comunidad-container" layout="row" hide-xs>
-    <img class="mapa-mundi" src="assets/images/comunidadwinwins.png">
+
+      <iframe width="560px" height="350px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
+  
     <p class="comunidad-content">
       Si hay una comunidad de personas,<br>
       empresas y marcas que apoyan la<br>
@@ -155,11 +227,90 @@
       Nuestra respuesta es Si.
     </p>
   </div>
+
+
+    <!-- Partners provisorio // -->
+   <div class="que-es-winwins" layout="column" layout-align="space-around center">
+    <p class="title-que-es">ALGUNAS DE LAS ORGANIZACIONES <br> QUE CONSTRUYEN JUNTO A WINWINS</p>
+    <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
+      <div class="item-sponsor" layout="column" layout-align="center center">
+      <img src="http://thumbor.dev-winwins.net/200x110/smart/humanet-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+ <img src="http://thumbor.dev-winwins.net/200x110/smart/corbo-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+        <img src="http://thumbor.dev-winwins.net/200x110/smart/otromundo-sponsor.png">
+      </div>
+    </div>
+        <div class="items-sponsor" layout="row" layout-xs="column" layout-align="center center">
+      <div class="item-sponsor" layout="column" layout-align="center center">
+      <img src="http://thumbor.dev-winwins.net/200x110/smart/camba-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+ <img src="http://thumbor.dev-winwins.net/200x110/smart/chicas-sponsor.png">
+      </div>
+      <div class="item-sponsor" layout="column" layout-align="center center">
+        <img src="http://thumbor.dev-winwins.net/200x110/smart/perian-sponsor.png">
+      </div>
+    </div>
+  </div>
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve"style="margin-top: -10px;">
+<rect x="-1.985" y="1.008" transform="matrix(-1 2.780755e-005 -2.780755e-005 -1 591.311 36.3599)" fill="#F1F1F1" width="100%" height="100%" />
+<polygon fill="#3C66B0" points="-1.985,0.017 593.295,0 -1.984,24.135 "/>
+<polygon fill="#f1f1f1" points="594.28,26.059 -4.25,26.076 594.28,1.589 "/>
+</svg>
+
+    <!-- Testimonials // -->
+ <div class="testimonial-container">
+<div class="testimonial">
+    <h1>"Nuestra utopia es lograr un gran acuerdo humano, para crear juntos un planeta donde todos podemos vivir mejor y ser mas felices"</h1>
+
+    </div>
+  </div>
+
+<!--Float button scroll up 
+
   <div flex class="scroll-top">
     <md-button class="scroll-top-button" scroll-top  scroll href="#header" du-smooth-scroll ng-class="{scrollFixed:boolChangeClass}" hide-xs>
       <md-icon md-svg-src="assets/images/icon-arrow-up.svg" aria-label="subir"></md-icon>{{$windows.crolly}}
     </md-button>
   </div>
+-->
+  <div style="width:90px; height:90px; background: #f60; border: solid 7px white; border-radius: 50%; display: block; margin-left:auto;margin-right:auto; margin-bottom: -90px; z-index: 999999999999;"><i class="fa fa-chevron-up" style="font-size: 50px;
+color: white;
+margin: 18px;"></i></div>
+   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve" style="margin-top:-20px; margin-bottom: -10px;">
+<rect y="-8.471" fill="#F1F1F1" width="100%" height="100%"/>
+<polyline fill="#3C66B0" points="0,5.647 0,25.882 297.64,25.882 595.28,25.882 595.28,5.647 297.64,22.02 "/>
+</svg>
+   <div class="footer-v" layout="column" layout-align="space-around center"> 
+   <!-- Partners provisorio // -->
+   <div class="bottom-logo" layout="column" layout-align="space-around center">
+    <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
+    
+      <div class="item-footer" layout="column" layout-align="center center"><br>
+        <img src="http://dev-winwins.net/assets/images/logo.svg"> <br>
+<div class="footer-buttons layout-xs-column layout-align-center-center layout-row" layout="row" layout-align="center center" layout-xs="column">
+    <button class="social-footer-icons" type="button" aria-label="Que Hacemos"><span class="ng-scope"> <i class="fa fa-facebook"></i> </span></button>
+    <button class="social-footer-icons" type="button" aria-label="Manifiesto"><span class="ng-scope"> <i class="fa fa-twitter"></i> </span></button>
+    <button class="social-footer-icons" type="button" aria-label="Equipo"><span class="ng-scope"> <i class="fa fa-instagram"></i> </span></button>
+    <button class="social-footer-icons" type="button" aria-label="Qué es Winwins?"><span class="ng-scope"> <i class="fa fa-google"></i> </span></button>
+  </div>
+      </div>
+  
+
+
+    </div>
+  </div>
+
+
+  </div>
+
+  <!-- Responsive a 4 columnas roto //
   <section class="partners" layout="column" layout-align="center center">
    <span class="title">ALGUNAS DE LAS ORGANIZACIONES CONSTRUYEN JUNTO A WINWINS
    </span>
@@ -167,5 +318,10 @@
       <img class="partners-image" ng-src="{{main.imageServer}}/200x110/smart/{{item.cover_photo}}" alt="{{item.name}}" title="{{item.name}}">
     </div>
   </section>
+  -->
+
+
+
+
   <acme-footer items="main.footer"></acme-footer>
 </div>

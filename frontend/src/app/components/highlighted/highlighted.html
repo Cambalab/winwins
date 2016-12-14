@@ -1,13 +1,13 @@
 <md-content class="acme-highlighted">
   <div class="container" layout="column"></div>
-  <div layout="column" class="title-container" layout-align="center center" layout-margin>
+<!--  <div layout="column" class="title-container" layout-align="center center" layout-margin>
     <span class="title" ng-if="vm.title">
     {{ vm.title }}
     </span>
     <span class="subtitle" ng-if="vm.title">
     Propuestas para buscar personas y recursos para materializar una idea
     </span>
-  </div>
+  </div> -->
   <div layout="row" layout-align="center center">
     <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="100px"></md-progress-circular>
   </div>
@@ -16,26 +16,36 @@
       <md-card>
         <md-card-content>
           <div class="wrap-md-card-img">
-            <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/>
+           <a  ui-sref="home.winwin({winwinId: item.id})"> <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/></a>
           </div>
           <div class="card-labels">
-            <md-icon class="icon icon-access_time" ng-if="item.finishing">access_time</md-icon>
+            <md-icon class="icon icon-access_time" ng-if="item.finishing">all_inclusive</md-icon>
             <md-icon class="icon icon-watshot" ng-if="item.popular">whatshot</md-icon>
             <md-icon class="icon icon-highlighted" md-svg-src="assets/images/icon-highlighted.svg" ng-if="item.remarkable"></md-icon>
           </div>
+              <md-card-avatar layout="row" layout-align="start center" style="margin-top: -30px; ">
+        
+   <md-button class=""  ui-sref="home.public-profile({userId: item.user.id})">
+       <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
+          <md-tooltip md-visible="demo.showTooltip" md-direction="{{demo.tipDirection}}">
+           {{item.user.username}}
+          </md-tooltip>
+        </md-button>          
+        </md-card-avatar>
         </md-card-content>
         <md-card-title-text layout-align="center center" layout="column">
-          <md-button class="md-headline" ui-sref="home.winwin({winwinId: item.id})">{{item.title}}</md-button>
+          <md-button class="md-headline ww-card" ui-sref="home.winwin({winwinId: item.id})">{{item.title}}</md-button>
         </md-card-title-text>
-        <div class="grey-divider" layout="column" layout-align="center center"></div>
-        <md-card-avatar layout="row" layout-align="start center">
-          <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
-          <p class="md-user-creator-name">{{item.user.username}}</p>
-        </md-card-avatar>
+    
         <div class="ultimos-participantes" layout="row" layout-align="start center">
           <img ng-repeat="usr in item.users | limitTo: 6" class="md-user-avatar-members" ng-if="usr.id!=item.user.id" ng-src="{{vm.imageServer}}//{{usr.photo}}" ui-sref="home.public-profile({userId: usr.id})">
         </div>
+
+         <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
+      {{ item.what_we_do }}
+    </md-card-content>
     <md-card-actions layout="row" layout-align="space-between center">
+
       <!--<md-card-header>-->
         <!--<md-card-content>-->
           <!--<img ng-repeat="sponsor in item.sponsors | limitTo: 1" class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">-->
@@ -51,9 +61,7 @@
           </md-button>
         </div>
     </md-card-actions>
-    <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
-      {{ item.what_we_do }}
-    </md-card-content>
+   
     </md-card>
   </div>
   <div layout="row" class="view-more-container" layout-align="center center">

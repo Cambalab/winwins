@@ -24,15 +24,15 @@
                     </div>
                   </md-input-container>
                 </div>
-                <button type="submit" ng-disabled="loginForm.$invalid || loadingFlag" name="action" translate class="md-raised md-primary bt-default">{{ 'Ingresar' | translate }}
+                <button type="submit" ng-disabled="loginForm.$invalid || loadingFlag" name="action" translate class="md-raised md-primary bt-default">{{ 'Ir a mi cuenta' | translate }}
                 </button>
               </form>
               <div layout="row" layout-align="center center" class="section-login" ng-show="login.login_status == 'login'">
-                <div flex="60"><small translate>Ingresá con un clic con tu red social:</small></div>
-                <div flex><md-button class="md-icon-button" ng-click="login.authenticate('facebook')" aria-label="Facebook">
-                  <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                
+                <md-button class="md-raised md-primary bt-default" style="background: #44578d;" ng-click="login.authenticate('facebook')" aria-label="Facebook">
+                 INGRESA CON FACEBOOK <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
                 </md-button>
-                </div>
+            
 <!--                 <md-button class="md-icon-button" ng-click="login.authenticate('twitter')" aria-label="Twitter">
                   <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
                 </md-button>
@@ -44,8 +44,8 @@
                 </md-button></div> -->
               </div>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.login_status == 'success'">
-                <div flex><md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
-                <div flex><h2 class="gray" translate>Genial!</h2></div>
+                           <div flex><md-button aria-label="ok"><i class="fa fa-check animated wobble" style="font-size: 90px; color:green;"></i></md-button></div>
+                <div flex><h2 class="gray" translate>Genial!</h2><p> Vamos a tu cuenta</p></div>
               </div>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-if="login.login_status == 'error'" ng-click="login.login_status = 'login'">
                 <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
@@ -113,9 +113,12 @@
                 </div>
                 <button type="submit" name="action" ng-disabled="registerForm.$invalid || loadingFlag" translate class="md-raised md-primary bt-default">{{ 'Registrarme' | translate }}
                 </button>
+                 <md-button class="md-raised md-primary bt-default" style="background: #44578d;" ng-click="login.authenticate('facebook')" aria-label="Facebook">
+                 INGRESA CON FACEBOOK <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
+                </md-button>
               </form>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.register_status == 'success'">
-                <div flex><md-button aria-label="ok"><md-icon md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button></div>
+                <div flex><md-button aria-label="ok"><i class="fa fa-check"></i></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2></div>
                 <div flex><p class="gray font-16">{{ 'Te enviamos un correo a' | translate }}
                             <span class="violet">{{ login.register.email}}</span>
