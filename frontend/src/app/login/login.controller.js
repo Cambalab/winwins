@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($mdDialog, $auth, $state, $timeout, account, $rootScope) {
+  function LoginController($mdDialog, $auth, $state, $timeout, account, $rootScope, $log) {
     var vm = this;
 
     vm.login_status = 'login'
@@ -87,6 +87,8 @@
       $timeout(function() {
         $mdDialog.hide();
         if($rootScope.returnState) {
+            $log.log($rootScope.returnState);
+            $log.log($rootScope.returnState.state);
             switch($rootScope.returnState.state) {
               case 'home.winwin':
                 var winwinId = $rootScope.returnState.parameters.winwinId;
@@ -98,6 +100,8 @@
               case 'home.crear-winwin':
                 $rootScope.returnState = null;
                 $state.go('home.crear-winwin');
+                break;
+              case 'no_redir':
                 break;
               default:
                 $rootScope.returnState = null;

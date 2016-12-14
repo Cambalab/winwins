@@ -6,7 +6,7 @@
     .controller('CrearWinwinController', CrearWinwinController);
 
   /** @ngInject */
-  function CrearWinwinController($stateParams, $state, winwin, ENV, $location, $mdDialog, $document, $q, $window, $element) {
+  function CrearWinwinController($stateParams, $state, winwin, ENV, $location, $mdDialog, $document, $q, $window, $element, $auth, $rootScope, $log, account) {
     var vm = this;
 
     vm.base = ENV.base;
@@ -48,6 +48,37 @@
             });
         });
     };
+    
+    
+    vm.tryToSaveWinwin = function() {
+      if ($auth.isAuthenticated()) {
+        vm.saveWinwin();
+      } else {
+        $rootScope.returnState = {
+          state : 'no_redir'
+        };
+        $mdDialog.show({
+          controller: 'LoginController',
+          controllerAs: 'login',
+          templateUrl: 'app/login/login.tmpl.html',
+          parent: angular.element($document.body),
+          clickOutsideToClose:true          
+        }).then(function(success) {
+          account.getProfile()
+          .then(function(data) {
+            vm.isActive = data.active;
+          });
+          if (vm.isActive)
+            vm.saveWinwin();
+        });
+      }
+    };
+
+    /*vm.login_hook = $rootScope.$on('account_change', function () {
+        if (vm.waitingToSave && $auth.isAuthenticated()) {
+          vm.saveWinwin();
+        }
+    });*/
 
     vm.saveWinwin = function() {
       if (!vm.winwin.location && vm.winwin.scope == 'LOCAL'){
