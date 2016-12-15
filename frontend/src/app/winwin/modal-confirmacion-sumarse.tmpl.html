@@ -2,13 +2,13 @@
 
 <div class="confirmationBoxContainer" layout="column" layout-align="space-around center" ng-show="vm.status == 'honorCode'">
 	
-	<h1><i class="fa fa-code"></i>Codigo De Honor</h1>
-	<md-dialog-content class="confirmationBoxText"><md-content>1- Evitá sumarte si no estás seguro!<br><br>
-      2- Si en el proceso te arrepentís o no podés <br>participar avisale al creador para que no cuente con vos.<br><br>
-      3- Si pensas que un Winwin va en contra de <br>nuestros terminos y condiciones, reportalo.</p><br><br></md-content>
+	<h1><i class="fa fa-code"></i><br>Codigo De Honor</h1>
+	<md-dialog-content class="confirmationBoxText"><p>1- Evitá sumarte si no estás seguro!<br><br>
+      2- Si en el proceso no podés <br>participar avisale al creador para que no cuente con vos.<br><br>
+      3- Si pensas que un Winwin va en contra de <br>nuestros terminos y condiciones, reportalo.</p><br><br>
 		<md-dialog-actions>
-		  <div flex="30"> 	<md-button ng-click="vm.cancel()" class="primary">LO VOY A PENSAR</md-button> 
-		  <div flex="70">   <md-button ng-click="vm.join()" class="primary">ACEPTO!</md-button>
+		  <div flex="30"> 	<md-button ng-click="vm.cancel()" class="primary">LO VOY A PENSAR</md-button></div> 
+		  <div flex="70">   <md-button ng-click="vm.join()" class="primary">ACEPTO!</md-button></div>
 		</md-dialog-actions>
 	</md-dialog-content>
 </div>
