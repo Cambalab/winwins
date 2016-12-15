@@ -25,7 +25,7 @@
     vm.user = {interests_list:[]};
     vm.is_public = true;
     vm.avatar = '';
-    
+
     user.getUser(vm.userId)
     .then(function(user_data) {
       vm.user = user_data;
@@ -53,12 +53,10 @@
             vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] + 
                                                  '/#/grupo/' + vm.user.activities[i].id;
             break;
-          case "USER":
-            vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] + 
-                                                 '/#/profile/' + vm.user.activities[i].id;
-            break;
-          default:  
-            vm.user.activities[i].activity_url = '#';
+
+          default:
+            vm.user.activities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+                '/#/profile/' + vm.user.activities[i].id;
         }
 
         switch (user_data.activities[i].type) {
@@ -83,11 +81,13 @@
           case 'GROUP_LEFT':
             vm.user.activities[i].mensajito = ' abandonó el grupo ';
             break;
-          case 'USER_FOLLOW':
-            vm.user.activities[i].mensajito = ' ahora sigue a ';
+
+          case 'FOLLOWING':
+            vm.user.activities[i].mensajito = ' ahora es seguido por ';
             break;
-          case 'USER_UNFOLLOW':
-            vm.user.activities[i].mensajito = ' ahora sigue a ';
+
+          case 'UNFOLLOWING':
+            vm.user.activities[i].mensajito = ' no es mas seguido por ';
             break;
         }
       }
@@ -200,6 +200,7 @@
         if(data[0] =='unfollow'){
           user.getUser(id).then(function(data){
             vm.user = data;
+            $state.reload();
           })
         }
       });
@@ -219,6 +220,7 @@
           if(data[0]=='follow'){
             user.getUser(id).then(function(data){
               vm.user = data;
+              $state.reload();
             })
           }
         });
@@ -232,6 +234,7 @@
           clickOutsideToClose:true
         }).then(function(success) {
           vm.follow(vm.userId);
+          $state.reload();
         })
       }
     }
@@ -278,8 +281,13 @@
         to_user_id: vm.userId,
         conversation_messages: conversation_messages
       }
-    });
-  }
+    }).then(function(data){
+      if(data[0]=='enviado'){
+        vm.sendMessageStatus = "Sended";
+        $state.reload();
+      }
+    })
+  };
 
     vm.showLoginDialog = function(redirect) {
       if (redirect) {
@@ -323,7 +331,7 @@
   }
 
   /** @ngInject */
-  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $timeout){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $state, $timeout){
     var vm = this;
 
     vm.imageServer = ENV.imageServer
@@ -343,9 +351,7 @@
       }).then(function(data){
         if(data[0]=='enviado'){
           vm.sendMessageStatus = "Sended";
-          $timeout(function() {
-            $mdDialog.hide(data);
-            }, 3000);
+          $state.reload();
         }
       });
     }

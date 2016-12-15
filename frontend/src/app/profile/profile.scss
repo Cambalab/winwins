@@ -217,6 +217,7 @@
     }
 
     .bt-green {
+      line-height: 30px;
       &:before {
         width: 0;
         height: 0;
@@ -715,7 +716,7 @@ md-card.public-profile {
           }
         }
         .block-mensaje {
-          width: 255px;
+          width: 100%;
           max-width: 100%;
           height: 500px;
           background: #fafafa;
@@ -870,6 +871,9 @@ md-card.public-profile {
     .me::before {
       box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, .4);
       right: -9px;
+    }
+    .last {
+      margin-bottom: 40px;
     }
     .mensajes-anteriores-public {
       width: 270px;
@@ -1051,17 +1055,23 @@ md-card.public-profile {
   }
 }
 .caja-mensaje {
+  width: 100%;
   background: #fafafa;
   padding: 15px;
+  padding-right: 88px;
   padding-left: 50px;
   padding-bottom: 40px;
-  position: relative;
+  position: absolute;
+  bottom: 0;
   .boton-enviar {
     margin-top: 15px;
     background: #548ed8;
     color: #fff;
     box-shadow: 2px 2px 5px #999;
   }
+}
+md-dialog.md-transition-in {
+  overflow-y: hidden;
 }
 .inbox {
   .sin-mensajes {
@@ -1132,6 +1142,11 @@ md-card.public-profile {
   left: -9px;
 }
 
+.last { @media (min-width: 640px) {
+  margin-bottom: 150px !important;
+}
+  margin-bottom: 200px !important;
+}
 .me {
   float: right;
   margin: 5px 20px 5px 45px;
@@ -1160,8 +1175,17 @@ md-card.public-profile {
   font-size: 10px;
   font-weight: normal;
 }
+.arrow-down-msg {
+  float: right;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
 .arrowdown {
   margin-right: 0;
+}
+#bottom {
+  visibility: hidden;
 }
 .btn-login-msg {
   margin: auto;

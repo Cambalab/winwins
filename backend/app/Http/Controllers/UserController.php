@@ -271,16 +271,19 @@ class UserController extends Controller {
 
                                                            users
 
-                                                  WHERE    notifications.user_id = ' . $user->id . '
+                                                  WHERE    notifications.user_id = ' . $user->id . ' 
+                                                  
 
                                                   AND      (
 
-                                                          notifications.type="user_follow"
+                                                          notifications.type="following"
 
-                                                           || notifications.type="user_unfollow")
+                                                           || notifications.type="unfollowing")
 
                                                   AND      notifications.object_id = users.id
-
+                                                  
+                                              
+                                                 
                                                   ORDER BY created_at DESC ');
       //$userDetail->followers = $user->followers;
       //$userDetail->following = $user->following;
@@ -732,6 +735,14 @@ class UserController extends Controller {
             DB::table('followers')->where('follower_id', $user->id )->where('followed_id', $followed->id)->delete();
             DB::table('users')->whereId($followed->id)->decrement('followers_amount');
             DB::table('user_details')->where('user_id','=',$followed->id)->decrement('followers_amount');
+
+          $followed->newNotification()
+            ->from($user)
+            ->withType('UNFOLLOWING')
+            ->withSubject('unfollowing_you_title')
+            ->withBody('unfollowing_you_body')
+            ->regarding($user)
+            ->deliver();
         }
         return response()->json(['unfollow']);
 	}
