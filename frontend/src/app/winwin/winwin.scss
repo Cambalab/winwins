@@ -8,36 +8,12 @@
 
   .confirmationBoxText {
     font-family: montserrat;
+    background: #fff;
     font-size: 20px;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-
-    .bt-red {
-      text-align: center;
-      padding: 5px;
-      background: #ae0006;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 0;
-      height: 32px;
-      width: 100%;
-      margin: 20px;
-    }
-
-    .bt-green {
-      text-align: center;
-      padding: 5px;
-      background: #4cae4e;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 0;
-      height: 32px;
-      width: 100%;
-      margin: 20px;
-    }
+    padding: 30px;
 
   }
   .name-creador {
