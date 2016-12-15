@@ -13,10 +13,10 @@
   </div>
   <div layout="row" layout-wrap  layout-xs="column" layout-margin layout-align="center center">
     <div ng-repeat="item in vm.items" class="winwins-container" ng-show="!vm.loading">
-      <md-card>
+      <md-card class="animated fadeInDown">
         <md-card-content>
           <div class="wrap-md-card-img">
-           <a  ui-sref="home.winwin({winwinId: item.id})"> <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/></a>
+           <md-button class="md-raised md-primary" style="background-color: transparent; border:0px;margin:0px;padding: 0px; width:100%;"   ui-sref="home.winwin({winwinId: item.id})"> <img ng-src="{{vm.imageServer}}/315x/{{item.image}}" alt="" class="md-card-img"/></md-button>
           </div>
           <div class="card-labels">
             <md-icon class="icon icon-access_time" ng-if="item.finishing">all_inclusive</md-icon>
@@ -26,7 +26,7 @@
               <md-card-avatar layout="row" layout-align="start center" style="margin-top: -30px; ">
         
    <md-button class=""  ui-sref="home.public-profile({userId: item.user.id})">
-       <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})">
+       <img class="md-user-avatar" ng-src="{{vm.imageServer}}/40x40/{{item.user.photo}}" ui-sref="home.public-profile({userId: item.user.id})" >
           <md-tooltip md-visible="demo.showTooltip" md-direction="{{demo.tipDirection}}">
            {{item.user.username}}
           </md-tooltip>
@@ -41,17 +41,58 @@
           <img ng-repeat="usr in item.users | limitTo: 6" class="md-user-avatar-members" ng-if="usr.id!=item.user.id" ng-src="{{vm.imageServer}}//{{usr.photo}}" ui-sref="home.public-profile({userId: usr.id})">
         </div>
 
-         <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
+         <md-card-actions layout="row" class="card" layout-align="start center">
+         <div class="somos">Somos
+ <span class="card-num"> {{ item.users_already_joined }}</span> </div>
+          <div
+                    socialshare
+                    socialshare-provider="facebook"
+                    socialshare-type="feed"
+                    socialshare-text="{{winwin.winwin.title}}"
+                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}"
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-via="{{winwin.facebookId}}">
+          <md-button class="md-icon-button" >
+           <i class="fa fa-facebook icons-card"></i>
+          </md-button>
+        </div>
+         <div
+                    socialshare  
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}"
+                    socialshare-provider="twitter">
+          <md-button class="md-icon-button">
+     <i class="fa fa-twitter icons-card"></i>
+          </md-button>
+        </div>
+
+            <div
+                    socialshare 
+                    socialshare-provider="google" 
+                    socialshare-text="{{winwin.winwin.title}}" 
+                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}">
+                   <md-button class="md-icon-button" aria-label="Settings">
+     <i class="fa fa-google icons-card"></i>
+          </md-button>
+        </div>
+
+        </md-card-actions>
+
+     <!--    <md-card-content class="what-we-do" ng-if="item.what_we_do && showDescription">
       {{ item.what_we_do }}
     </md-card-content>
-    <md-card-actions layout="row" layout-align="space-between center">
+    <md-card-actions layout="row" layout-align="space-between center"> -->
 
       <!--<md-card-header>-->
         <!--<md-card-content>-->
           <!--<img ng-repeat="sponsor in item.sponsors | limitTo: 1" class="responsive-img md-card-sponsor" ng-src="{{vm.imageServer}}/x35/{{sponsor.photo}}" title="{{sponsor.name}}" alt="{{sponsor.name}}">-->
         <!--</md-card-content>-->
       <!--</md-card-header>-->
-        <div layout="row" class="card-members">
+
+
+
+<!--        <div layout="row" class="card-members">
           <div class="somos">Somos</div>
           <div class="users-joined">{{ item.users_already_joined }}</div>
         </div>

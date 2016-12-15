@@ -1,8 +1,5 @@
 <md-content class="acme-crearwinwin" ng-show="winwin.stage==1">
-  <md-toolbar class="md-tall md-crear md-blue" layout="row" layout-align="center center">
-    <h2><span translate>CREA TU WINWIN, COMIENZA UNA ACCIÓN  POSITIVA</span></h2>
-  </md-toolbar>
-  <div class="container">
+  <div class="container animated fadeInDown">
     <form method="post" name="winwin.crearForm1" ng-submit="winwin.nexStage()" class="form-crear">
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>
         <div flex>
@@ -17,7 +14,7 @@
               </div>
               <input required name="title" ng-model="winwin.winwin.title">
               <div ng-messages="winwin.crearForm1.title.$error">
-                <div ng-message="required" translate>No se puede crear un WinWin sin nombre!</div>
+                <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> Tu winwins no tiene nombre, ponele uno!</div>
               </div>
             </md-input-container>
           </div>
@@ -39,7 +36,8 @@
                 <md-input-container class="md-block">
                   <input class="numero" type="number" min="2" name="users_amount" placeholder="Ej:200" ng-model="winwin.winwin.users_amount"  ng-required="true" ng-minlength="1"/>
                   <div ng-messages="winwin.crearForm1.users_amount.$error">
-                    <div ng-message="required" translate>Campo requerido.</div>
+                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> 
+Campo requerido.</div>
                   </div>
                 </md-input-container>
                 <div>
@@ -48,9 +46,9 @@
               </div>
               <div layout="column">
                 <md-input-container class="md-block">
-                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required aria-label="what we do"></textarea>
+                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required aria-label="what we do" style="height: 150px;"></textarea>
                   <div ng-messages="winwin.crearForm1.what_we_do.$error">
-                    <div ng-message="required" translate>Campo requerido.</div>
+                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> Campo requerido.</div>
                   </div>
                 </md-input-container>
                 <div>
@@ -71,7 +69,7 @@
   y toda la información que te resulte relevante.
                 </div>
               </div>
-              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus aria-label="description"></textarea>
+              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus aria-label="description" style="height: 150px;" ></textarea>
             </md-input-container>
           </div>
           <div class="wrap-md-input-container">
@@ -86,16 +84,16 @@
             <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-min-date="winwin.minDate" md-placeholder="{{winwin.hoy}}"></md-datepicker>
           </div>
           <div>
-            <tags-input ng-model="winwin.winwin.tags">
-            </tags-input>
+      <!--      <tags-input ng-model="winwin.winwin.tags">
+            </tags-input>-->
           </div>
           <md-input-container class="md-block" flex-gt-sm>
             <md-checkbox class="green" ng-model="winwin.winwin.terms" name="terms" ng-change="winwin.clearError()">
               {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
             </md-checkbox>
-            <div ng-messages="winwin.crearForm1.terms.$error" class="help-block" ng-if="winwin.crearForm1.terms.$error.notTerms">
+           <!-- <div ng-messages="winwin.crearForm1.terms.$error" class="help-block" ng-if="winwin.crearForm1.terms.$error.notTerms">
               <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
-            </div>
+            </div> -->
           </md-input-container>
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="winwin.crearForm1.$invalid" type="submit" name="action" translate aria-label="send">{{ 'CONTINUAR' | translate }}</md-button>
         </div>
@@ -105,9 +103,6 @@
 </md-content>
 
 <md-content class="acme-crearwinwin" ng-show="winwin.stage==2">
-  <md-toolbar class="md-tall md-crear md-violet" layout="row" layout-align="center center">
-    <h2><md-icon md-svg-src="assets/images/icon-flag.svg"></md-icon><span translate>DALE IDENTIDAD A TU WINWIN</span></h2>
-  </md-toolbar>
   <div class="container">
     <form method="post" name="winwin.crearForm2" ng-submit="winwin.tryToSaveWinwin()">
       <div layout="column" layout-gt-sm="row" layout-margin layout-padding>

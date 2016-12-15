@@ -1,8 +1,8 @@
 <div class="main-container" layout="column">
   <div id="header" class="header-container" layout="column" layout-align="space-around center">
-    <div class="texto-utopia">"Nuestra utopía es lograr un gran<br>acuerdo humano, para crear juntos<br>un planeta donde todos podemos<br>vivir mejor, y ser mas felices."</div>
+    <div class="texto-utopia">"Nuestro sue&ntilde;o es lograr un gran<br>acuerdo humano para crear juntos<br>un planeta donde todos podemos<br>vivir mejor y ser mas felices."</div>
     <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()"><i class="fa fa-chevron-right animated infinite flash"></i> SÉ PARTE, SUMATE.</md-button>
-    <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button>
+<!--    <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button> -->
     <md-icon class="arrow-down animated infinite pulse" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
   <div class="video-container">
@@ -16,15 +16,14 @@
 </svg>
 
 
-  <div class="ww-destacados" layout="column"style="  background: url(http://www.fondosblackberry.com/user-content/uploads/wall/o/56/World_MapMapa_mundi_gris.jpg);"  layout-align="space-around center">
+  <div class="ww-destacados" layout="column" layout-align="space-around center">
     <p class="ww-destacados-titulo" style="font-size: 40px; font-weight: bold;">WINWINS DESTACADOS</p>
-    <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">EXPLORA TODOS LOS WINWINS</button>
-  <acme-highlighted items="main.destacados" title="false"style="background:transparent;" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
-  </acme-highlighted>
+
+
     <!--Repeti la linea de arriba, se deberian ver 6 winwins-->
-    <acme-highlighted items="main.destacados"  style="background:transparent; margin-top: -60px;" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
+    <acme-highlighted items="main.destacados"  style="background:transparent;" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
   </acme-highlighted>
-   <button style="background-color: #999; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
+   <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
 </div>
 
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -144,27 +143,35 @@
 
    <!-- Partners provisorio // -->
    <div class="que-es-winwins" style="background: #fff;" layout="column" layout-align="space-around center">
-    <p class="title-que-es">ALGUNAS DE LAS ORGANIZACIONES <br> QUE CONSTRUYEN JUNTO A WINWINS</p>
     <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
       <div class="item-sponsor" layout="column" layout-align="center center">
-      <img src="http://thumbor.dev-winwins.net/200x110/smart/humanet-sponsor.png">
+      
+    <h1><i class="fa fa-lightbulb-o" aria-hidden="true"></i> IDEAS PARA UN WINWIN </h1>
+<div class="ideas-content">
+        <br>
+        Preguntate
+        <br>
+        <br>
+        Qué necesidades tiene mi mundo?<br>Qué podemos hacer para mejorar?<br>Que estaría bueno realizar?<br>Qué me interesa hacer?<br><br>Empezá por casa, tu barrio, tu escuela<br>
+        la facultad, la plaza, el país, y llegá al mundo.<br>Planteate algo simple, para seguir hacia<br>desafíos más grandes.<br><br>También podés buscar ideas en la web<br>
+        y replicar Winwins en tu barrio o ciudad.
+      </div>
       </div>
       <div class="item-sponsor" layout="column" layout-align="center center">
- <img src="http://thumbor.dev-winwins.net/200x110/smart/corbo-sponsor.png">
+   <h1><i class="fa fa-group"></i> LA REGLA DEL QUORUM </h1>
+    <h2> Quorum necesario </h2>
+   Los winwins requieren un quorum minimo participacion.
+       <h2> Quorum necesario </h2>
+         Si se cumple el quorum, considera que los participantes cuentan con vos.
+    <h2> Quorum alcanzado </h2>
+           Si ese quorum no se alcanza, no hay compromisos de participar.<br>
       </div>
       <div class="item-sponsor" layout="column" layout-align="center center">
-        <img src="http://thumbor.dev-winwins.net/200x110/smart/otromundo-sponsor.png">
-      </div>
-    </div>
-        <div class="items-sponsor" layout="row" layout-xs="column" layout-align="center center">
-      <div class="item-sponsor" layout="column" layout-align="center center">
-      <img src="http://thumbor.dev-winwins.net/200x110/smart/camba-sponsor.png">
-      </div>
-      <div class="item-sponsor" layout="column" layout-align="center center">
- <img src="http://thumbor.dev-winwins.net/200x110/smart/chicas-sponsor.png">
-      </div>
-      <div class="item-sponsor" layout="column" layout-align="center center">
-        <img src="http://thumbor.dev-winwins.net/200x110/smart/perian-sponsor.png">
+            <h1> <i class="fa fa-code" aria-hidden="true"></i> CODIGO DE HONOR </h1>
+    <p>
+      1- Evitá sumarte si no estás seguro!<br><br>
+      2- Si en el proceso te arrepentís o no podés <br>participar avisale al creador para que no cuente con vos.<br><br>
+      3- Si pensas que un Winwin va en contra de <br>nuestros terminos y condiciones, reportalo.</p><br><br>
       </div>
     </div>
   </div>
@@ -212,20 +219,14 @@
   </div>
 
 
-
-  <div class="comunidad-container" layout="row" hide-xs>
-
-      <iframe width="560px" height="350px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
-  
-    <p class="comunidad-content">
-      Si hay una comunidad de personas,<br>
-      empresas y marcas que apoyan la<br>
-      evolución social, organizaciones e<br>
-      instituciones accionando en conjunto<br>
+<div layout="row" class="comunidad"layout-wrap>
+  <div flex="60">   <iframe width="100%" height="450px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe></div>
+  <div flex="40" class="comunidad-txt"> Si existe una comunidad de personas,
+       instituciones, empresas, organizaciones e
+       accionando en conjunto
       sus misiones.<br><br>
-      ¿Podemos construir un mundo mejor?<br><br>
-      Nuestra respuesta es Si.
-    </p>
+      ¿Podemos construir un mundo mejor?<br>
+      Nuestra respuesta es Si.</div>
   </div>
 
 
@@ -266,7 +267,10 @@
     <!-- Testimonials // -->
  <div class="testimonial-container">
 <div class="testimonial">
-    <h1>"Nuestra utopia es lograr un gran acuerdo humano, para crear juntos un planeta donde todos podemos vivir mejor y ser mas felices"</h1>
+ <h1>"Nuestra utopia es lograr un gran acuerdo humano, para crear juntos un planeta donde todos podemos vivir mejor y ser mas felices"</h1>
+ <br>
+ <p>Javier Alvarez <p>
+  <h3>Humanet</h3>
 
     </div>
   </div>

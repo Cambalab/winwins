@@ -1,7 +1,7 @@
 @import "../../bower_components/compass-sass-mixins/lib/compass/css3/border-radius";
 
 .acme-highlighted {
-  background: #f1f1f1;
+  background: transparent;
   margin-bottom: 30px;
   .md-card-title-text {
     top: 0;
@@ -23,10 +23,10 @@
 
   }
   .md-user-avatar-members {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     border-radius: 100px;
-    margin-left: 30px;
+    margin-left: 20px;
   }
   .title-container {
     text-align: center;
@@ -137,6 +137,7 @@
       .card-members {
         text-align: center;
         padding-left: 10px;
+        margin-bottom:0px;
         .somos {
           font-size: 14px;
           color: #acacac;
@@ -267,3 +268,37 @@
 
 //manuel
 
+.card {
+  margin-bottom:0px;
+  position: fixed;
+  bottom: 0px;
+
+}
+
+.somos {
+  width: 140px;
+  color: #999;
+  margin-left: 20px;
+  padding: 5px;
+  line-height: 30px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: capitalize;
+
+
+}
+
+.card-num {
+color: #00b285;
+width: 30px;
+font-weight: bold;
+font-size:16px;
+}
+
+.icons-card {
+color: #999;
+float: right;
+margin-left:20px;
+
+
+}
