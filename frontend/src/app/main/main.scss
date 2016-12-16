@@ -1438,6 +1438,7 @@ width: 50px;
 margin: 10px;
 background:#3C66B0;
 margin-top:30px;
+padding-top:7px;
   }
 
 
@@ -1449,7 +1450,7 @@ text-align:center;
 
 
   .ww-destacados {
-  background: #f1f1f1;
+  background: url('../assets/images/noise.jpg')
   }
 
   .ww-destacados-titulo {
@@ -1494,3 +1495,7 @@ margin-top:30px;
 padding: 120px;
   }
 
+
+.item-ideas  {
+background: url('../assets/images/noise.jpg')
+  }
