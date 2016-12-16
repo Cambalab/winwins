@@ -1,22 +1,21 @@
 <div class="main-container" layout="column">
   <div id="header" class="header-container" layout="column" layout-align="space-around center">
-    <div class="texto-utopia">"Nuestro sue&ntilde;o es lograr un gran<br>acuerdo humano para crear juntos<br>un planeta donde todos podemos<br>vivir mejor y ser mas felices."</div>
-    <md-button class="btn-orange-main-login" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()"><i class="fa fa-chevron-right animated infinite flash"></i> SÉ PARTE, SUMATE.</md-button>
+    <div class="texto-utopia animated fadeInUp">"Nuestro sue&ntilde;o es lograr un gran<br>acuerdo humano para crear juntos<br>un planeta donde todos podemos<br>vivir mejor y ser mas felices."</div>
+    <md-button class="btn-orange-main-login animated fadeInRight" ng-show="!main.isAuthenticated()" ng-click="main.showLoginDialog()"><i class="fa fa-chevron-right animated infinite flash"></i> SÉ PARTE, SUMATE.</md-button>
 <!--    <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button> -->
     <md-icon class="arrow-down animated infinite pulse" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
   <div class="ww-destacados" layout="column" layout-align="space-around center">
     <p class="ww-destacados-titulo" style="font-size: 40px; font-weight: bold;">WINWINS DESTACADOS</p>
-
-
+    <div class="ww-destacados-subtitulo">Peque&ntilde;os exitos individuales,<br>grandes exitos colectivos</div>
     <!--Repeti la linea de arriba, se deberian ver 6 winwins-->
     <acme-highlighted items="main.destacados"  style="background:transparent;" title="false" icon="'icon-concretados'" viewmore="false" seeDescription="false" loading="main.loadingDestacados" class="index-winwins">
   </acme-highlighted>
-   <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
+   <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px; font-family: montserrat; margin-top: 0px; margin-bottom:70px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
 </div>
 
-<div class="video-yt" layout="row" layout-align="center center">
-  <div><iframe width="560" height="415" src="https://www.youtube.com/embed/SDdGYotJ4-E" frameborder="0" allowfullscreen></iframe></div>
+<div class="video-yt animated fadeInDown" layout="row" layout-align="center center">
+  <div><iframe width="760" height="515" src="https://www.youtube.com/embed/SDdGYotJ4-E?autoplay=0;rel=0&amp;showinfo=0" allowfullscreen  style="border-radius:5px; border:0px; box-shadow: 2px 2px 50px #999;"></iframe></div>
 </div>
 
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -269,7 +268,7 @@
   </div>
 
 
-<iframe src="http://linkway.me/winwins/social/example_6.html" frameborder="0" height="800px" scrollbar="no"> </iframe>
+<iframe src="http://linkway.me/winwins/social/example_6.html" frameborder="0" height="800px" scrolling="no"> </iframe>
 <!--Float button scroll up 
 
   <div flex class="scroll-top">
@@ -325,3 +324,5 @@ margin: 18px;"></i></a>
   <acme-footer items="main.footer" style="position: fixed; bottom: 0px; width:100%; z-index: 9999"></acme-footer>
 </div>
 </div>
+
+

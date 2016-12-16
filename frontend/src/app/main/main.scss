@@ -7,12 +7,13 @@ $mainHomeSubtitlesFont: Abel,serif;
 .main-container {
 overflow-x: hidden;
 .btn-orange-main {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   border-radius: 100px;
   background: #fff;
   color: #fff;
-  padding: 8px 30px;
+  height:50px;
+  padding: 20px 30px;
   .btn-orange-main:hover {
     background: #FF792D;
   }
@@ -1455,8 +1456,21 @@ text-align:center;
     border-radius: 20px;
     font-size: 40px;
     font-weight: bold;
-    color: #535353;
+    color: #3c6cc1;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 0px;
 
+  }
+    .ww-destacados-subtitulo {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    color: #535353;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
   }
 
     .comunidad {
