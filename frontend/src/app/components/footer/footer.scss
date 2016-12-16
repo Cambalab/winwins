@@ -4,6 +4,7 @@
     .footer-button {
       background: #355ca6;
       color: #fff;
+      font-size: 15px;
       text-transform: capitalize;
       &:hover {
         background: #3872BF;
@@ -11,6 +12,18 @@
     }
     .privacidad {
       color: #fff;
+      font-size: 11px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }
+
+.ver-winwin-button {
+      font: 100% $mainHomeFont;
+      font-size: 15px;
+      color: #fff;
+      background-color: #f60;
+      line-height: 36px;
+      text-transform: capitalize;
+    }

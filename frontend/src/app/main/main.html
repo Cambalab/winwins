@@ -5,17 +5,6 @@
 <!--    <md-button class="facebook-login" ng-show="!main.isAuthenticated()"  ng-click="login.authenticate('facebook')" aria-label="Facebook">o ingresa con Facebook</md-button> -->
     <md-icon class="arrow-down animated infinite pulse" href="#video-container" du-smooth-scroll>keyboard_arrow_down</md-icon>
   </div>
-  <div class="video-container">
-    <div id="video-container">
-      <iframe width="760px" height="350px" ng-src="{{ main.getIframeSrc('SDdGYotJ4-E') }}" frameborder="0" allowfullscreen style="width: 80%;" ></iframe>
-    </div>
-  </div>
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-   width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve">
-<polygon fill="#f1f1f1" points="594.28,27.354 -1,27.354 596.28,0.529 "/>
-</svg>
-
-
   <div class="ww-destacados" layout="column" layout-align="space-around center">
     <p class="ww-destacados-titulo" style="font-size: 40px; font-weight: bold;">WINWINS DESTACADOS</p>
 
@@ -26,11 +15,15 @@
    <button style="background-color: #f60; color: #fff; border:0px; border-radius:40px; font-weight: bold;padding:15px;" ui-sref="home.winwin-list()">VER TODOS LOS WINWINS</button>
 </div>
 
+<div class="video-yt" layout="row" layout-align="center center">
+  <div><iframe width="560" height="415" src="https://www.youtube.com/embed/SDdGYotJ4-E" frameborder="0" allowfullscreen></iframe></div>
+</div>
+
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    width="100%" height="100%" viewBox="0 0 595.28 25.882" enable-background="new 0 0 595.28 25.882" xml:space="preserve">
-<rect y="-8.471" fill="#F1F1F1" width="100%" height="100%"/>
+<rect y="-8.471" fill="#fff" width="100%" height="100%"/>
 <polygon fill="#3C66B0" points="595.28,26.882 0,26.882 595.28,2.764 "/>
-<polygon fill="#F1F1F1" points="-0.985,0.823 597.546,0.823 -0.985,25.293 "/>
+<polygon fill="#fff" points="-0.985,0.823 597.546,0.823 -0.985,25.293 "/>
 </svg>
 
   <div class="como-funciona" layout="column" layout-align="space-around center">
@@ -276,7 +269,7 @@
   </div>
 
 
-<iframe src="http://linkway.me/winwins/social/example_6.html" frameborder="0" height="800px"  scrollbar="no"> </iframe>
+<iframe src="http://linkway.me/winwins/social/example_6.html" frameborder="0" height="800px" scrollbar="no"> </iframe>
 <!--Float button scroll up 
 
   <div flex class="scroll-top">
@@ -285,7 +278,7 @@
     </md-button>
   </div>
 -->
-  <a href="#" style="width:90px; height:90px; background: #f60; border: solid 7px white; border-radius: 50%; display: block; margin-left:auto;margin-right:auto; margin-bottom: -90px; z-index: 999999999999;"><i class="fa fa-chevron-up" style="font-size: 50px;
+  <a href="#" style="width:90px; height:90px; background: #f60; border: solid 7px white; border-radius: 50%; display: block; margin-left:auto;margin-right:auto; margin-bottom: -90px; z-index: 999;"><i class="fa fa-chevron-up" style="font-size: 50px;
 color: white;
 margin: 18px;"></i></a>
    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -293,7 +286,7 @@ margin: 18px;"></i></a>
 <rect y="-8.471" fill="#F1F1F1" width="100%" height="100%"/>
 <polyline fill="#3C66B0" points="0,5.647 0,25.882 297.64,25.882 595.28,25.882 595.28,5.647 297.64,22.02 "/>
 </svg>
-   <div class="footer-v" layout="column" layout-align="space-around center"> 
+   <div class="footer-v"  hide-xs flex layout="column" layout-align="space-around center" style="margin-bottom: 40px;"> 
    <!-- Partners provisorio // -->
    <div class="bottom-logo" layout="column" layout-align="space-around center">
     <div class="items-que-es" layout="row" layout-xs="column" layout-align="center center">
@@ -328,7 +321,7 @@ margin: 18px;"></i></a>
 
 
 
-
-  <acme-footer items="main.footer"></acme-footer>
+<div hide-xs flex>
+  <acme-footer items="main.footer" style="position: fixed; bottom: 0px; width:100%; z-index: 9999"></acme-footer>
 </div>
-
+</div>
