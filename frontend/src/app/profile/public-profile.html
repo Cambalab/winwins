@@ -159,12 +159,10 @@
                 <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.</md-card>
                 <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
                   <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                  <div layout-align="column">
                     <div layout-align="row">
-                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
+                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
+
                     </div>
-                    <p class="titulo {{act.type}}"><a ng-href="{{act.activity_url}}">{{act.titulo}}</a></p>
-                  </div>
                 </md-list-item>
               </md-list>
             </div>

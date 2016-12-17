@@ -136,6 +136,24 @@
       });
     }
 
+    vm.mensaje= function ($http, conversationId) {
+      $mdDialog.show({
+        controller: 'PublicProfileController',
+        controllerAs: 'profile',
+        templateUrl: 'app/profile/modal-mensaje.tmpl.html',
+        clickOutsideToClose: true,
+        parent: angular.element($document.body),
+        locals: {
+          myself_id: user.myself,
+          conversation_id: conversationId,
+          to_user_id: vm.winwin.user_id,
+          winwin_id: vm.winwinId
+        }
+      });
+    };
+
+
+
     vm.showMessageModal = function(conversationId, conversation_messages) {
       $mdDialog.show({
         controller: MessageModalController,
