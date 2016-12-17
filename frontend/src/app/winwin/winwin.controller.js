@@ -19,22 +19,7 @@
     vm.post = {};
     vm.postInputFocus = false;
 
-    account.getProfile().then(function(data) {
-      vm.account = data.profile;
-      vm.user_id = data.user.id;
-      vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
-        return notification.type == "CAMPANADA" && notification.object_id == vm.winwinId; 
-      });
-    });
-
-    user.getUser(vm.userId)
-      .then(function(user_data) {
-        if (user_data.myself)
-            vm.conversation_title = "Mensajes con los participantes:";
-          else
-            vm.conversation_title = "Mensajes con el creador del Winwin:";
-        });
-
+    
 
     winwin.getWinwin(vm.winwinId).then(function(winwin_data) {
 
@@ -44,6 +29,19 @@
 
       vm.conversations = vm.winwin.conversations.filter(function (element) {
         return element.winwin_id == vm.winwinId;
+      });
+
+      account.getProfile().then(function(data) {
+        vm.account = data.profile;
+        vm.user_id = data.user.id;
+        vm.campanadas = $window._.filter(data.user.notifications, function(notification) {
+          return notification.type == "CAMPANADA" && notification.object_id == vm.winwinId; 
+        });
+        if (winwin_data.user_id == vm.user_id)
+            vm.conversation_title = "Mensajes con los participantes:";
+          else
+            vm.conversation_title = "Mensajes con el creador del Winwin:";
+        vm.showSendMessageButton = (winwin_data.user_id != vm.user_id && vm.conversations.length == 0);
       });
       
       $window._.each(vm.polls, function(poll) {
@@ -136,24 +134,6 @@
       });
     }
 
-    vm.mensaje= function ($http, conversationId) {
-      $mdDialog.show({
-        controller: 'PublicProfileController',
-        controllerAs: 'profile',
-        templateUrl: 'app/profile/modal-mensaje.tmpl.html',
-        clickOutsideToClose: true,
-        parent: angular.element($document.body),
-        locals: {
-          myself_id: user.myself,
-          conversation_id: conversationId,
-          to_user_id: vm.winwin.user_id,
-          winwin_id: vm.winwinId
-        }
-      });
-    };
-
-
-
     vm.showMessageModal = function(conversationId, conversation_messages) {
       $mdDialog.show({
         controller: MessageModalController,
@@ -161,7 +141,7 @@
         templateUrl: 'app/profile/message-modal-controller.tmpl.html',
         clickOutsideToClose: true,
         locals: {
-          myself_id: user.myself,
+          //myself_id: user.myself, //esta linea no tiene sentido, user.myself es boolean no un id
           conversation_id: conversationId,
           to_user_id: vm.winwin.user_id,
           conversation_messages: conversation_messages,
@@ -496,7 +476,7 @@
   }
 
   /** @ngInject */
-  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, winwin_id, $mdDialog, $timeout){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, winwin_id, $mdDialog, $state, $timeout){
     var vm = this;
 
     vm.imageServer = ENV.imageServer
@@ -518,6 +498,7 @@
       }).then(function(data){
         if(data[0]=='enviado'){
           vm.sendMessageStatus = "Sended";
+          $state.reload();
           $timeout(function() {
             $mdDialog.hide(data);
           }, 3000);
