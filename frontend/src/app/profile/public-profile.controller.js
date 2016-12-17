@@ -304,6 +304,17 @@
     vm.isAuthenticated = function() {
       return $auth.isAuthenticated();
     };
+
+    vm.canShowSendMessageButton = function() {
+      return !vm.user.myself && vm.user.already_following && vm.conversations.length == 0;
+    };
+
+    vm.canShowConversations = function() {
+      if (vm.conversations)
+        return vm.conversations.length > 0 && (vm.user.already_following || vm.user.myself);
+      else
+        return undefined;
+    };
   }
 
   function CropAvatarController($scope, $mdDialog) {
@@ -349,6 +360,9 @@
         if(data[0]=='enviado'){
           vm.sendMessageStatus = "Sended";
           $state.reload();
+          $timeout(function() {
+            $mdDialog.hide(data);
+          }, 3000);
         }
       });
     }
