@@ -1,27 +1,25 @@
-<md-dialog aria-label="List dialog">
-<md-dialog-content>
-  <div class="wrap-caja-mensaje lightbox-mensaje" ng-if="vm.sendMessageStatus == notSended" style="height: 500px;">
-  <md-list>
+<md-dialog aria-label="List dialog" class="messagedialog" >
+<md-dialog-content ng-init="window.scrollTo([0],[0])">
+  <div  ng-if="vm.sendMessageStatus == notSended" style="height: 500px; min-width: 360px;">
+    <md-list>
     <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row">
       <div layout="row">
-        <img class="msg-avatar" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
+        <img class="msg-avatar" ng-class="{'last':$last}" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
         <p class="msg-name">{{message.name}}</p>
       </div>
-      <md-card class="bubble you" ng-show="message.user_id != msgController.userId">{{message.body}}</md-card>
-      <md-card class="bubble me" ng-show="message.user_id == msgController.userId">{{message.body}}</md-card>
+      <md-card class="bubble you" ng-class="{'last':$last}" ng-show="message.user_id != msgController.userId">{{message.body}}</md-card>
     </md-list-item>
   </md-list>
-<div class="caja-mensaje" id="input-msg" ng-Form name="messageForm">
+    <div class="caja-mensaje" id="input-msg" ng-Form name="messageForm">
   <div ng-if="(msgController.sendMessageStatus == 'Sended')" layout="column" layout-align="center center">
-    <md-button aria-label="ok"><md-icon class="messageSent" md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
+    <md-button aria-label="ok" ng-click="close()"><md-icon class="messageSent" md-svg-src="assets/images/icon-ok.svg"></md-icon></md-button>
   </div>
   <md-input-container class="block-mensaje">
     <label class="placeholder-mensaje">Ingresa tu mensaje (Maximo 140 caracteres)</label>
-    <textarea ng-required="true" class="Mensaje" name="mensaje" ng-model="msgController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0" >
+    <textarea ng-required="true" class="Mensaje" name="mensaje" ng-model="msgController.mensaje" md-maxlength="140" rows="4" md-select-on-focus style="border: 0; background: #fff; padding: 20px;" >
         </textarea>
+    <md-button class="boton-enviar" ng-click="messageForm.$valid && msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
   </md-input-container>
-  <md-button  class="boton-enviar" ng-click="messageForm.$valid && msgController.sendMessage(cnv.conversation_id = conversation_id)">ENVIAR</md-button>
-</div>
 </div>
   </div>
 </md-dialog-content>

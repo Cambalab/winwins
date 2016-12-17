@@ -1,17 +1,14 @@
 
 
 <div class="confirmationBoxContainer" layout="column" layout-align="space-around center" ng-show="vm.status == 'honorCode'">
-	<img src="assets/images/handshake.png">
-	<strong>Codigo De Honor</strong>
-	<p> {{vm.winwin.title}} </p>
-	<md-dialog-content class="confirmationBoxText"><md-content>blablablablablablablablablablablablablablablablabla
-		blablablablablablablabla<br>blablablablablablablabl
-		ablablablablab<br>lablablablablablablabla
-		blablablablablablablabl<br>ablablablablablablablablablabla
-		blablablablablablablablabla</md-content>
+	
+	<h1><i class="fa fa-code animated fadeInDown"></i><br>Codigo De Honor</h1>
+	<md-dialog-content class="confirmationBoxText"><p>1- Evitá sumarte si no estás seguro!<br><br>
+      2- Si en el proceso no podés <br>participar avisale al creador para que no cuente con vos.<br><br>
+      3- Si pensas que un Winwin va en contra de <br>nuestros terminos y condiciones, reportalo.</p><br><br>
 		<md-dialog-actions>
-			<md-button ng-click="vm.cancel()" class="bt-red">CANCELAR</md-button>
-			<md-button ng-click="vm.join()" class="bt-green">CONFIRMAR</md-button>
+		  <div flex="100"> 	<md-button ng-click="vm.cancel()" class="primary ">LO VOY A PENSAR</md-button></div> 
+		  <div flex="100">   <md-button ng-click="vm.join()" class="primary bt-default">SI, ACEPTO!</md-button></div>
 		</md-dialog-actions>
 	</md-dialog-content>
 </div>

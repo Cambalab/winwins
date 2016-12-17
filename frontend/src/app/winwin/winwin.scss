@@ -1,43 +1,18 @@
 .confirmationBoxContainer {
-  background: #888888;
+  background: #fff;
   display: flex;
-  color: #fff;
-  font-size: 35px;
+  color: #585858;
+  font-size: 25px;
   margin: 10px;
   text-align: center;
 
   .confirmationBoxText {
-    font-family: Arial;
-    font-size: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    .bt-red {
-      text-align: center;
-      padding: 5px;
-      background: #ae0006;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 0;
-      height: 32px;
-      width: 100%;
-      margin: 20px;
-    }
-
-    .bt-green {
-      text-align: center;
-      padding: 5px;
-      background: #4cae4e;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 0;
-      height: 32px;
-      width: 100%;
-      margin: 20px;
-    }
+font-family: montserrat;
+background: #fff;
+font-size: 20px;
+margin-bottom: 10px;
+padding: 30px;
+padding-top: 0px;
 
   }
   .name-creador {
@@ -954,6 +929,7 @@
   }
 }
 .wrap-caja-mensaje.lightbox-mensaje {
+  width: 415px;
   height: 125px;
   form {
     padding: 4px;
@@ -1121,10 +1097,10 @@
   margin: 0 auto;
   width: 100%;
   @media (min-width: 960px) {
-    width: 500px;
+    width: 650px;
   }
   .caja-mensaje {
-    width: 460px;
+    width: 415px;
     padding-left: 20px;
     background: #4a6dce;
     @media (min-width: 960px) {

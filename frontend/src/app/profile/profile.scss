@@ -217,8 +217,8 @@
     }
 
     .bt-green {
-      line-height: 30px;
       &:before {
+        line-height: 30px;
         width: 0;
         height: 0;
         border-top: 7px solid transparent;
@@ -400,9 +400,8 @@ md-card.public-profile {
       border-radius: 100px;
     }
     .name {
-      font-size: 3vmin;
+      font-size: 4vmin;
       text-transform: capitalize;
-      margin-top:-30px;
     }
     .bt-green.md-button {
       height: inherit;
@@ -558,9 +557,9 @@ md-card.public-profile {
         margin: 10px 20px;
         border-bottom: 1px;
         h3 {
-          margin-top: 7px;
-          margin-right: 5px;
-          display: inline;
+          margin-top: 6px;
+          margin-right: 8px;
+          display: block;
           font-size: 14px;
           text-transform: uppercase;
           color: #666;
@@ -719,7 +718,7 @@ md-card.public-profile {
           width: 100%;
           max-width: 100%;
           height: 500px;
-          background: #fafafa;
+          background: #fff;
           margin: 10px;
           border: 0;
           .input-mensaje {
@@ -781,6 +780,8 @@ md-card.public-profile {
     background: #fff;
     height: 80px;
 
+
+
     .titulo.WW_JOIN {
       color: #EE874F;
     }
@@ -800,7 +801,7 @@ md-card.public-profile {
       color: #5EA645
     }
     .mensajito {
-      line-height: 0px;
+      line-height: 0;
       font-weight: normal;
     }
     .mensajito:first-letter {
@@ -1054,24 +1055,24 @@ md-card.public-profile {
     height: 100%;
   }
 }
+.modalmessage {
+  height: 250px;
+  width: 360px;
+}
 .caja-mensaje {
-  width: 100%;
   background: #fafafa;
-  padding: 15px;
+  padding-top: 5px;
   padding-right: 88px;
-  padding-left: 50px;
-  padding-bottom: 40px;
+  padding-left: 78px;
+  padding-bottom: 5px;
   position: absolute;
   bottom: 0;
+  width: 68%;
   .boton-enviar {
-    margin-top: 15px;
     background: #548ed8;
     color: #fff;
     box-shadow: 2px 2px 5px #999;
   }
-}
-md-dialog.md-transition-in {
-  overflow-y: hidden;
 }
 .inbox {
   .sin-mensajes {
@@ -1115,6 +1116,7 @@ md-dialog.md-transition-in {
   vertical-align: top;
   font-size: 14px;
   margin: 5px;
+  word-break: break-all;
 }
 
 .bubble::before {
@@ -1143,7 +1145,7 @@ md-dialog.md-transition-in {
 }
 
 .last { @media (min-width: 640px) {
-  margin-bottom: 150px !important;
+  margin-bottom: 165px !important;
 }
   margin-bottom: 200px !important;
 }
@@ -1185,7 +1187,6 @@ md-dialog.md-transition-in {
   margin-right: 0;
 }
 #bottom {
-  visibility: hidden;
 }
 .btn-login-msg {
   margin: auto;
