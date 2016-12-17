@@ -41,7 +41,7 @@
           <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
           <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following && profile.conversations.length == 0" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
-          <md-button class="bt-blue" ng-if="!profile.user.myself && profile.user.already_following" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
+          <md-button class="bt-blue" ng-if="!profile.user.myself && profile.user.already_following && profile.conversations.length == 0" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
         </div>
         <div class="bioTotal" layout="row" layout-align="center start">
           <div class="bio-Info" layout="column" layout-align="center strech">
@@ -128,19 +128,19 @@
               <div class="button" ng-if="profile.conversations.length == 0 && !profile.user.myself && profile.user.already_following">
             <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
             </div>
-            <md-card class="inbox-title" style="cursor: default;" ng-if="profile.conversations.length == 0 && profile.user.myself">INBOX
+            <md-card class="inbox-title" style="cursor: default;" ng-if="!profile.canShowSendMessageButton() && profile.conversations.length == 0 && profile.user.myself">{{profile.conversation_title}}
               <div class="sin-mensajes">
                 No hay mensajes...
               </div>
             </md-card>
               <md-card class="mensajeriaPrivada">
                 <div class="inbox">
-                  <md-card class="inbox-title" ng-if="profile.conversations == null && profile.user.myself">INBOX
+                  <md-card class="inbox-title" ng-if="!profile.canShowSendMessageButton() && profile.conversations == null && profile.user.myself">{{profile.conversation_title}}
                     <div class="sin-mensajes">
                       No hay mensajes...
                     </div>
                   </md-card>
-                  <div ng-if="profile.conversations.length > 0">
+                  <div ng-if="profile.canShowConversations()">
                     <md-card class="inbox-title" style="cursor: default;">{{profile.conversation_title}}</md-card>
                     <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                       <div ng-repeat="message in cnv.messages">
@@ -159,12 +159,10 @@
                 <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.</md-card>
                 <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
                   <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                  <div layout-align="column">
                     <div layout-align="row">
-                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>
+                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
+
                     </div>
-                    <p class="titulo {{act.type}}"><a ng-href="{{act.activity_url}}">{{act.titulo}}</a></p>
-                  </div>
                 </md-list-item>
               </md-list>
             </div>
@@ -222,7 +220,7 @@
 
           <md-card class="mensajeriaPrivada">
             <div class="inbox">
-              <md-card class="inbox-title" ng-if="profile.conversations == null && profile.user.myself">INBOX
+              <md-card class="inbox-title" ng-if="!profile.canShowSendMessageButton() && profile.conversations == null && profile.user.myself">Bandeja de Entrada
                 <div class="sin-mensajes">
                   No hay mensajes...
                 </div>

@@ -5,16 +5,10 @@
     .module('winwins')
     .controller('PublicProfileController', PublicProfileController);
 
-  angular
-      .module('winwins')
-      .directive("scroll", function ($window, $document) {
-        return function(scope, element, attrs) {
-          angular.element($window).bind("scroll", function() {
-            scope.boolChangeClass = this.pageYOffset >= 0 && $document[0].body.scrollHeight - this.pageYOffset - $window.innerHeight >= 0;
-            scope.$apply();
-          });
-        };
-      });
+
+
+
+
 
   /** @ngInject */
   function PublicProfileController(user, $q, ENV, $state, $document, $stateParams, $window, account, $mdDialog, winwin, $auth, $rootScope, $log) {
@@ -268,9 +262,13 @@
         });
     };
 
+    vm.gotoBottom = function($scope, $location, $anchorScroll) {
+      $location.hash('bottom');
+      $anchorScroll();
+    };
 
    vm.showMessageModal = function(conversationId, conversation_messages) {
-    $mdDialog.show({
+     $mdDialog.show({
         controller: MessageModalController,
         controllerAs: 'msgController',
       templateUrl: 'app/profile/message-modal-controller.tmpl.html',
@@ -284,7 +282,7 @@
     }).then(function(data){
       if(data[0]=='enviado'){
         vm.sendMessageStatus = "Sended";
-        $state.reload();
+        // $state.reload();
       }
     })
   };
@@ -305,6 +303,17 @@
     };
     vm.isAuthenticated = function() {
       return $auth.isAuthenticated();
+    };
+
+    vm.canShowSendMessageButton = function() {
+      return !vm.user.myself && vm.user.already_following && vm.conversations.length == 0;
+    };
+
+    vm.canShowConversations = function() {
+      if (vm.conversations)
+        return vm.conversations.length > 0 && (vm.user.already_following || vm.user.myself);
+      else
+        return undefined;
     };
   }
 
@@ -333,7 +342,6 @@
   /** @ngInject */
   function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, $mdDialog, $state, $timeout){
     var vm = this;
-
     vm.imageServer = ENV.imageServer
     vm.conversation_messages = conversation_messages,
     vm.toUserId = to_user_id;
@@ -352,6 +360,9 @@
         if(data[0]=='enviado'){
           vm.sendMessageStatus = "Sended";
           $state.reload();
+          $timeout(function() {
+            $mdDialog.hide(data);
+          }, 3000);
         }
       });
     }
