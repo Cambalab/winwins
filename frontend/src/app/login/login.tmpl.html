@@ -44,12 +44,11 @@
                 </md-button></div> -->
               </div>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-show="login.login_status == 'success'">
-                           <div flex><md-button aria-label="ok"><i class="fa fa-check animated wobble" style="font-size: 90px; color:green;"></i></md-button></div>
+                           <div flex><md-button aria-label="ok"><i class="fa fa-check animated wobble check"></i></md-button></div>
                 <div flex><h2 class="gray" translate>Genial!</h2><p> Vamos a tu cuenta</p></div>
               </div>
               <div layout="column" layout-align="center center" class="login-ok envio-correo" ng-if="login.login_status == 'error'" ng-click="login.login_status = 'login'">
-                <div flex><md-button><md-icon md-svg-src="assets/images/icon-error.svg" class="s44"></md-icon></md-button></div>
-                <div flex><p class="gray" translate>Usuario/password no correctos<br /></div>
+                <div flex><md-button><i class="fa fa-exclamation-circle animated wobble danger" style="font-size: 60px;"></i><br>Usuario o Contrase&ntilde;a incorrectos. <br><i class="fa fa-chevron-left"></i> Volver</md-button></div>
               </div>
             </md-content>
           </md-tab-body>
@@ -97,14 +96,14 @@
                     <label translate>Repetí Contraseña</label>
                     <input id="rpassword" type="password" length="12" name="rpassword" class="validate"  ng-model="login.register.rpassword" required data-password-verify="login.register.password">
                     <div ng-messages="registerForm.rpassword.$error" ng-if="registerForm.rpassword.$touched" class="help-block">
-                      <p class="small" ng-message="passwordVerify" translate>Las contraseñas ingresadas no son iguales.</p>
+                      <p class="small" ng-message="passwordVerify" translate>Las contraseñas ingresadas no coinciden.</p>
                     </div>
                   </md-input-container>
                 </div>
                 <div layout-gt-sm="row">
                   <md-input-container class="md-block" flex-gt-sm>
                     <md-checkbox class="green" ng-model="login.register.terms" name="terms">
-                      {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
+                      {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>Términos y condiciones</a>.
                     </md-checkbox>
                     <div ng-messages="registerForm.terms.$error" class="help-block" ng-if="registerForm.terms.$error.notTerms">
                       <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>

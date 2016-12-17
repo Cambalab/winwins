@@ -129,7 +129,7 @@
             <div class="col-right">
               <h2 class="main-title">{{winwin.winwin.title}}</h2>
               <div layout="col" layout-align="center start">
-                <div flex="83">
+                <div flex="100">
                   <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
                   </p>
                   <p><strong>te sumarías?</strong></p>
@@ -141,15 +141,16 @@
                       <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles" ng-show="winwin.winwin.description">
                         <p><pre>{{winwin.winwin.description}}</pre></p>
                       </div>
-                      <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
+
+                    <!--  <div layout="row" layout-align="space-between center" layout-padding class="slide-detalles">
                         <md-button  ng-click="winwin.showMessageModal(0, {})">Enviar mensaje al Creador de este winwin</md-button>
                         <div><h3>Estado:</h3> <p class="activo"><md-icon>done</md-icon>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</p></div>
-                        <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>
+                     <!--   <div><h3>Escala:</h3> <p class="escala"><md-icon>public</md-icon> <strong>{{winwin.winwin.scope}}</strong>{{winwin.winwin.location.formatted_address}}</p></div>-->
                         <div>
                           <h3>Reportar:</h3>
                           <p>
                             <md-button ng-href ng-click="winwin.reportWinwin()" class="no-padding">
-                              <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin
+                             Reportar este Winwin
                             </md-button>
                           </p>
                         </div>
@@ -182,42 +183,7 @@
                     </md-button>
                   </div>
                 </div>
-                <div flex="15" layout="column" class="content-social-media">
-                  <div
-                    socialshare
-                    socialshare-provider="facebook"
-                    socialshare-type="feed"
-                    socialshare-text="{{winwin.winwin.title}}"
-                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}"
-                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-                    socialshare-via="{{winwin.facebookId}}">
-                    <md-button class="md-icon-button" ng-href aria-label="facebook">
-                      <md-icon md-svg-src="assets/images/icon-facebook.svg"></md-icon>
-                    </md-button>
-                  </div>
-                  <div
-                    socialshare  
-                    socialshare-text="{{winwin.winwin.title}}" 
-                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}"
-                    socialshare-provider="twitter">
-                    <md-button class="md-icon-button" ng-href aria-label="twitter">
-                      <md-icon md-svg-src="assets/images/icon-twitter.svg"></md-icon>
-                    </md-button>
-                  </div>
-                  <div
-                    socialshare 
-                    socialshare-provider="google" 
-                    socialshare-text="{{winwin.winwin.title}}" 
-                    socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-                    socialshare-url="{{winwin.base}}/#/winwin/{{winwin.winwin.id}}">
-                    <md-button class="md-icon-button" ng-href aria-label="google">
-                      <md-icon md-svg-src="assets/images/icon-google.svg"></md-icon>
-                    </md-button>
-                  </div>
-                  <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
-                    <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
-                  </md-button></div>
-                </div>
+    
               </div>
               <div class="creadores" layout="row">
                 <div hide show-xs flex>
@@ -231,7 +197,7 @@
           <div layout-gt-sm="row" layout-padding layout-align-gt-sm="center start" layout-align="center center" layout="column" class="content-central">
             <div class="sponsors" hide show-gt-sm>
               <h3 class="title">
-                <md-icon md-svg-src="assets/images/icon-sponsors-subtitle.svg"></md-icon>{{ 'SPONSORS' | translate }}
+                </md-icon>{{ 'SPONSORS' | translate }}
               </h3>
               <div layout="row" layout-gt-sm="column" layout-align="center center" layout-margin layout-wrap>
                 <div ng-repeat="sponsor in winwin.sponsors">
@@ -295,7 +261,7 @@
               </div>
 
               <div ng-repeat="item_post in winwin.posts">
-                <md-card class="md-whiteframe-7dp" >
+                <md-card class="md-whiteframe-7dp rounded"  >
                   <div class="card-labels">
                     <md-button ng-if="(winwin.winwin.is_moderator || item_post.user.id == winwin.account.id)" ng-click="winwin.removePost(item_post)" class="md-icon-button" aria-label="eliminar">
                       <md-icon class="icon" md-svg-src="assets/images/icon-delete.svg"></md-icon>
@@ -325,7 +291,7 @@
                     </div>
                   </md-card-content>
                     <md-card-actions layout="row" layout-margin layout-align="start end">
-                      <div><md-icon class="icon icon-access_time">access_time</md-icon>{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
+                      <div><md-icon class="icon icon-access_time">access_time</md-icon><p style="font-size: 10px;">{{item_post.created_at | moment: 'DD/MM/YYYY' }} </span></div>
                       <div class="green">
                         <md-button ng-disabled="!winwin.winwin.already_joined" ng-click="winwin.vote(item_post, true)" class="md-icon-button">
                           <md-icon class="icon thumb_up">thumb_up</md-icon>
@@ -418,16 +384,16 @@
                     </div>
                   </div>
                 </div>
-                <div>
+    
                   <md-button class="bt-blue" ng-click="winwin.showRequestSponsorshipMessageModal()">Solicitar ser Sponsor</md-button>
-                </div>
-                <div class="content-bg">
+          
+                <!--<div class="content-bg">
                   <h4><md-icon md-svg-src="assets/images/icon-state.svg"></md-icon>Estado: <strong>{{winwin.winwin.published? 'Activo' : 'Inactivo'}}</strong></h4>
-                </div>
-                <div class="content-bg">
-                  <h4><md-icon md-svg-src="assets/images/icon-world.svg"></md-icon>Escala: <strong>{{winwin.winwin.scope}}</strong></h4>
-                  <p>{{winwin.winwin.location.formatted_address}}</p>
-                </div>
+                </div>-->
+
+                <!--  <h4><md-icon md-svg-src="assets/images/icon-world.svg"></md-icon>Escala: <strong>{{winwin.winwin.scope}}</strong></h4> 
+                  <p>{{winwin.winwin.location.formatted_address}}</p>-->
+
                 <div class="content-bg" ng-if="winwin.winwin.interests.length > 0">
                   <h4>Categorías: </h4>
                   {{winwin.formattedCategories(winwin.winwin.interests)}}
@@ -438,7 +404,7 @@
                 <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined && !winwin.winwin.canceled && !winwin.winwin.is_creator">
                   <p>
                     <md-button ng-href ng-click="winwin.left()" class="no-padding">
-                      <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+                     Abandonar este Winwin
                     </md-button>
                   </p>
                 </div>
@@ -456,17 +422,17 @@
                     </md-button>
                   </p>
                 </div>
-                <div class="content-bg">
+                <div>
                   <p>
                     <md-button ng-href ng-click="winwin.reportWinwin()" class="no-padding">
-                      <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin
+                      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Reportar este Winwin
                     </md-button>
                   </p>
                 </div>
               </div>
               <md-list ng-cloak>
                 <h3 class="title">
-                  <md-icon md-svg-src="assets/images/icon-participantes-title.svg"></md-icon>{{ 'PARTICIPANTES' | translate }}
+                  </md-icon>{{ 'PARTICIPANTES' | translate }}
                 </h3>
                 <md-list-item ng-repeat="participante in winwin.winwin.users | limitTo: 5">
                   <img ng-src="{{winwin.imageServer}}/smart/{{participante.photo}}" alt="" class="md-avatar" ui-sref="home.public-profile({userId: participante.id})">
@@ -482,9 +448,6 @@
         </md-tab-body>
         </md-tab>
         <md-tab md-on-select="winwin.show_box_muro = false">
-          <md-tab-label>
-            <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
-          </md-tab-label>
           <md-tab-body>
             <div class="notice-star" ng-if="!winwin.sponsors.length">
               <md-icon>star_rate</md-icon>
@@ -544,8 +507,13 @@
       </md-tabs>
       </div>
     </md-content>
-    <!-- <div class="caja-mensaje" ng-if="winwin.winwin.already_joined"> -->
-    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro" ng-if="winwin.winwin.already_joined && !winwin.winwin.canceled">
+
+  
+<div hide-xs flex>
+  <acme-footer items="main.footer" style="position: fixed; bottom: 0px; width:100%; z-index: 9999"></acme-footer>
+</div>
+  <div class="caja-mensaje" ng-if="winwin.winwin.already_joined">
+    <div class="wrap-caja-mensaje caja-flotante" ng-show="winwin.show_box_muro">
       <div ng-if="winwin.post.media_type" class="content-img-video">
         <img ng-if="winwin.post.media_type == 'IMAGE'" ng-src="{{ winwin.cover_post_image.file }}"  style="height:190px;">
         </img>
@@ -581,4 +549,12 @@
       </div>
     </div>
   </div>
+
 </md-content>
+
+  
+<div hide-xs flex>
+  <acme-footer items="main.footer" style="position: fixed; bottom: 0px; width:100%; z-index: 9999"></acme-footer>
+</div>
+
+

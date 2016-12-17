@@ -2,7 +2,7 @@
   background: #fff;
   width: 100%;
   @media (max-width: 960px) {
-    background: #f1f1f1;
+      background: url('../assets/images/noise.jpg');
     width: 100%;
   }
   .container {
@@ -11,7 +11,7 @@
       width: 100%;
     }
     .profile-bg-top {
-      background: #f1f1f1;
+      background: url('../assets/images/noise.jpg');
       padding-top: 25px;
       margin-bottom: 4px;
       @media (max-width: 960px) {

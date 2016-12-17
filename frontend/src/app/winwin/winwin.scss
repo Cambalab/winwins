@@ -23,7 +23,7 @@ padding-top: 0px;
 
 }
 .acme-winwin {
-  background: #fff;
+  background: url('../assets/images/noise.jpg');
   .card-social-media {
     display: none;
   }
@@ -321,7 +321,7 @@ padding-top: 0px;
     background: #f1f1f1;
   }
   .avatar-creador {
-    border: solid 6px #144a9d;
+
     @media (max-width: 960px) {
       width: 100px;
       height: 100px;
@@ -711,6 +711,7 @@ padding-top: 0px;
     div {
       margin-top: 0;
       margin-bottom: 5px;
+      background:#e5e5e5;
     }
   }
   .aside {
@@ -1254,3 +1255,7 @@ padding-top: 0px;
     }
   }
 }
+
+.rounded  {
+    border-radius: 5px;
+    }

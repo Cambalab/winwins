@@ -30,7 +30,7 @@
 			</md-button>
 
 			<md-button class="md-primary register-button" ng-if="!vm.isAuthenticated()" ng-href ng-click="vm.showLoginDialog()">
-				<translate> Ingresar</translate>
+				<translate><i class="fa fa-sign-in"></i> Ingresar</translate>
 			</md-button>
 
 			<md-button class="avatar-button" ng-if="vm.isAuthenticated()" ui-sref="home.public-profile({userId: vm.account.id})" aria-label="avatar">
