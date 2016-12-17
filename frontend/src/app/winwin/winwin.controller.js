@@ -476,7 +476,7 @@
   }
 
   /** @ngInject */
-  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, winwin_id, $mdDialog, $timeout){
+  function MessageModalController(ENV, conversation_id, to_user_id, conversation_messages, user, winwin_id, $mdDialog, $state, $timeout){
     var vm = this;
 
     vm.imageServer = ENV.imageServer
@@ -498,9 +498,10 @@
       }).then(function(data){
         if(data[0]=='enviado'){
           vm.sendMessageStatus = "Sended";
-          $timeout(function() {
+          $state.reload();
+          /*$timeout(function() {
             $mdDialog.hide(data);
-          }, 3000);
+          }, 3000);*/
         }
       });
     }
