@@ -1273,6 +1273,19 @@ margin-top: -5px;
   font-size: 12px;
 }
 
-.follow{
+.follow {
   color: red;
+}
+
+.content-profile {
+max-width: 960px;
+}
+
+
+.ww-profile {
+min-height: 100px;
+}
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 350px;
+    height: 800px;
 }
