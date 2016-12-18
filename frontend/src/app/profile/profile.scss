@@ -798,13 +798,12 @@ md-card.public-profile {
     }
     .titulo.USER_UNFOLLOW {
       color: #FF2626;
-      margin: 0px;
     }
     .titulo.GROUP_JOIN {
-      color: #5EA645
+      color: #5EA645;
     }
     .titulo.GROUP_CREATED {
-      color: #5EA645
+      color: #5EA645;
       margin: 0px;
     }
     .mensajito {
@@ -1207,6 +1206,7 @@ md-card.public-profile {
   text-align: center;
   color: #666;
   padding: 10px;
+  font-size: 14px;
   strong {
     color: #548ed8;
   }
@@ -1289,3 +1289,14 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     min-height: 350px;
     height: 800px;
 }
+
+.btn-unfollow {
+
+    background: transparent;
+    border: 1px solid white;
+    box-shadow: 0px 0px 0px;
+    color: white;
+    font-size: 12px;
+    text-transform: none;
+
+    }
