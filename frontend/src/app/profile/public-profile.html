@@ -1,6 +1,35 @@
+
 <div class="acme-public-profile" layout="column" layout-align="center center">
+
+   <md-card class="public-profile">
+              <md-card-content style="box-shadow: 2px 2px 10px black;">
+                <img ng-src="http://previews.123rf.com/images/ktsdesign/ktsdesign1409/ktsdesign140900056/32058059-Abstract-background-of-pipes-and-connections--Stock-Photo-connection-neuron-brain.jpg" class="md-card-image" alt="">
+                <md-card-title style="padding:0px;">
+                  <div style="width: 350px; margin-left:50px; float: left; background: rgba(60, 108, 193, 0.84); margin:0px;">
+                  <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="" style="border-radius: 100%; margin-top:20px; width: 110px; height: 110px; background-shadow: 5x 5px 15px black;">
+             <p style="text-transform: capitalize; font-size: 20px;"><strong>{{profile.user.name}} <br>{{profile.user.lastname}}  <i class="fa fa-check fadeInLeft" style="color: #fff; background: green; padding: 5px; border-radius: 100%;"></i></strong></p>  
+             <p style="font-size: 14px; text-transform: capitalize;">
+     <i class="fa fa-trophy" aria-hidden="true"></i> 10 Alas 
+                  <br> 
+                               <i class="fa fa-creative-commons" aria-hidden="true"></i> 2300 WinPoints</br>  
+               <i class="fa fa-comments-o"></i>  {{profile.winwins_length}}  Winwins </br>
+                  <i class="fa fa-share"></i> {{profile.user.followers_amount}} Seguidores</br>
+
+                </p>
+                            <md-button class="primary md-raised" style="color: #fff; background: rgb(235, 106, 36); padding: 0px 15px 0px 15px; " ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share  animated infinite flash"></i> Seguir a {{profile.user.name}}</md-button>
+
+                </md-card-title>
+              </md-card-content>
+            </md-card>
+</div>
+<!-- <div class="acme-public-profile" layout="column" layout-align="center center">
   <md-tabs class="responsiveTabs" md-dynamic-height md-selected="myTabIndex">
-    <md-tab>
+    <md-tab>     <div layout="column" layout-align="left left" style="background:">
+                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                      <div ng-if="!profile.user.myself"></div>
+               <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
+                    <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
+                  </div> 
       <md-tab-label>
         <md-icon md-svg-icon="assets/images/icon-sponsors-title.svg"></md-icon>
       </md-tab-label>
@@ -12,34 +41,29 @@
                 <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
                 <md-card-title>
                   <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
-                    <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
+                  <!--  <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Winwins</h3>
                       <p>{{profile.winwins_length}}</p>
-                    </div>
-                    <div layout="column" layout-align="center center">
+                    </div> 
+                    <div layout="column" layout-align="left left">
                       <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
-                      <div ng-if="!profile.user.myself" class="invisible-space"></div>
-                      <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
-                      <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
-                      <div ng-if="!profile.user.private || profile.user.myself">
-                        <md-button hide-xs hide-sm class="primary bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
-                        <md-button hide-xs hide-sm class="primary bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
-                        <md-button hide-xs hide-sm class="primary bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
-                      </div>
+                      <div ng-if="!profile.user.myself"></div>
+                     <!-- <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>-->
+                      <!-- <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div> -->
                     </div>
-                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                  <!--  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Seguidores</h3>
                       <p>{{profile.user.followers_amount}}</p>
                     </div>
-                  </div>
+                  </div> 
                 </md-card-title>
               </md-card-content>
             </md-card>
           </div>
         </div>
         <div class="buttons-xs-sm" layout="row" hide-gt-sm ng-if="profile.isAuthenticated()">
-          <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
-          <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
+          <md-button class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share"></i>Seguir a {{profile.user.name}}</md-button>
+          <md-button class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir"> <i class="fa fa-cancel"></i> Dejar de Seguir</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself && !profile.user.already_following && profile.conversations.length == 0" ng-click="profile.follow(profile.userId)" aria-label="seguir">Debes seguir a {{profile.user.name}} para poder enviarle un mensaje</md-button>
           <md-button class="bt-blue" ng-if="!profile.user.myself && profile.user.already_following && profile.conversations.length == 0" ng-click="profile.showMessageModal(0, {})">Manda un mensaje<br>a {{profile.user.name}}</md-button>
         </div>
@@ -50,10 +74,11 @@
                 <h3><strong>BIO</strong></h3>
               </div>
               <div class="bioContent">
-                <p>
+                <p>Soy {{profile.user.name}}
                   {{profile.user.about}}
                 </p>
-                <p><strong>Estoy interesado en:</strong></p>
+                <hr>
+                <p class="intereses"><strong>Estoy interesado en:</strong></p>
                 <md-chips>
                   <md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip>
                 </md-chips>
@@ -124,9 +149,9 @@
           </div>
           <div class="bio-Actions" layout="column" hide-xs hide-sm>
             <div ng-if="profile.isAuthenticated()">
-              <md-card ng-if="!profile.user.already_following && !profile.user.myself" class="not-following-msj">Debes <strong ng-click="profile.follow(profile.userId)" aria-label="seguir">seguir a {{profile.user.name}}</strong> para poder enviarle un mensaje</md-card>
+              <md-card ng-if="!profile.user.already_following && !profile.user.myself" class="not-following-msj">Debes <strong ng-click="profile.follow(profile.userId)" aria-label="seguir"> Seguir a {{profile.user.name}}</strong> para poder enviarle un mensaje</md-card>
               <div class="button" ng-if="profile.conversations.length == 0 && !profile.user.myself && profile.user.already_following">
-            <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})">ENVIAR MENSAJE A {{profile.user.name}}</md-button>
+            <md-button class="mensajeria" ng-click="profile.showMessageModal(0, {})"><i class="fa fa-envelope-o"></i>ENVIAR MENSAJE A {{profile.user.name}}</md-button>
             </div>
             <md-card class="inbox-title" style="cursor: default;" ng-if="!profile.canShowSendMessageButton() && profile.conversations.length == 0 && profile.user.myself">{{profile.conversation_title}}
               <div class="sin-mensajes">
@@ -153,6 +178,11 @@
                 </div>
               </md-card>
             </div>
+                  <div ng-if="!profile.user.private || profile.user.myself">
+                        <md-button hide-xs hide-sm class="md-raised primary seguir"  style="background-color: #00b285; color: #fff;" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share"></i> Seguir a {{profile.user.name}}</md-button>
+                        <md-button hide-xs hide-sm class="primary seguir" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir"> <i class="fa fa-cancel"></i>"></i>  Dejar de Seguir</md-button>
+                        <md-button hide-xs hide-sm class="primary seguir" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                      </div>
             <md-card class="actividadReciente">ACTIVIDAD RECIENTE</md-card>
             <div layout-align="row">
               <md-list class="actividadRecienteContainer">
@@ -160,7 +190,7 @@
                 <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
                   <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
                     <div layout-align="row">
-                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
+                      <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
 
                     </div>
                 </md-list-item>
@@ -183,22 +213,21 @@
               <md-card-content>
                 <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
                 <md-card-title>
-                  <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+              <!--    <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
                     <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Winwins</h3>
                       <p>{{profile.winwins_length}}</p>
                     </div>
                     <div layout="column" layout-align="center center">
-                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt="">
+                      <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt=""> <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
-                      <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="!profile.user.private || profile.user.myself">
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir">Seguir</md-button>
                         <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir">Dejar de Seguir</md-button>
                         <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar" style="line-height: 30px;">Editar</md-button>
                       </div>
                     </div>
-                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                  <!--  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                       <h3>Seguidores</h3>
                       <p>{{profile.seguidores.length}}</p>
                     </div>
@@ -261,11 +290,11 @@
                       <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
                       <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <div ng-if="profile.isAuthenticated() && !profile.user.myself">
-                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir">Seguir a {{profile.user.name}}</md-button>
-                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar">Editar</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ng-show="!profile.user.myself" ng-click="profile.showSeguirDialog()" aria-label="seguir"><i class="fa fa-share"></i> Seguir a {{profile.user.name}}</md-button>
+                        <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar"><i class="fa fa-edit"></i>"></i>   Editar</md-button>
                       </div>
                     </div>
-                    <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                 <!--   <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Seguidores</h3>
                       <p>{{profile.user.followers_amount}}</p>
                     </div>
@@ -275,7 +304,7 @@
             </md-card>
           </div>
         </div>
-        <div class="blueBlock" layout="column"><strong>Actividad Reciente</strong></div>
+        <div class="blueBlock" layout="column"><strong> <i class="fa fa-activity"></i> Actividad Reciente</strong></div>
         <div class="blueArrow"></div>
         <div layout-align="row">
           <md-list class="actividadRecienteContainer">

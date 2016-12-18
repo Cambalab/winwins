@@ -1,5 +1,9 @@
+body 
+    {
+          background: url('../assets/images/noise.jpg');
+    }
+
 .acme-profile {
-  background: #fff;
   width: 100%;
   @media (max-width: 960px) {
       background: url('../assets/images/noise.jpg');
@@ -386,13 +390,15 @@
 md-card.public-profile {
   @media (min-width: 960px) {
     width: 960px;
+    margin-top:0px;
   }
   .md-card-members {
     width: 100%;
     .md-card-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
+    width: 12px;
+    height: 120px;
+    border-radius: 100px;
+    box-shadow: 2px 2px 10px black;
     }
     .upload-image {
       width: 70px;
@@ -416,6 +422,7 @@ md-card.public-profile {
     }
     .md-item-text {
       h3 {
+        display: block;
         color: #fff;
         background: #38383a;
         font-size: 0.8em;
@@ -479,6 +486,7 @@ md-card.public-profile {
 }
 .acme-public-profile {
   width: 100%;
+  background: url('../assets/images/noise.jpg');
   @media (max-width: 960px) {
   }
   .buttons-xs-sm {
@@ -530,11 +538,9 @@ md-card.public-profile {
         }
       }
       .bioContent {
-        background: #f7f7f7;
-        padding: 20px;
+        padding: 0px 10px;
       }
       p {
-        font-size: 14px;
         color: #666;
         padding-left: 10px;
       }
@@ -548,8 +554,7 @@ md-card.public-profile {
       .my-Winwins-Container {
         .length {
           height: 25px;
-          background: #EC8645;
-          color: #fff;
+          color: #EC8645;
           border-radius: 5px;
           display: inline;
           padding: 6px 6px 2px 6px;
@@ -573,8 +578,7 @@ md-card.public-profile {
         margin: 10px 20px;
         .length {
           height: 25px;
-          background: #EC8645;
-          color: #fff;
+          color: #EC8645;
           border-radius: 5px;
           display: inline;
           padding: 6px 6px 2px 6px;
@@ -597,8 +601,7 @@ md-card.public-profile {
         padding: 10px;
         margin: 10px 20px;
         .length {
-          background: #496ccc;
-          color: #fff;
+          color: #496ccc;
           border-radius: 5px;
           display: inline;
           padding: 6px;
@@ -639,8 +642,7 @@ md-card.public-profile {
         margin: 10px 20px;
         border-bottom: 1px;
         .length {
-          background: #496ccc;
-          color: #fff;
+          color: #496ccc;
           border-radius: 5px;
           display: inline;
           padding: 6px;
@@ -788,21 +790,26 @@ md-card.public-profile {
     }
     .titulo.WW_CREATED {
       color: #EE874F;
+      margin: 0px;
     }
     .titulo.USER_FOLLOW {
       color: #FF2626;
+      margin: 0px;
     }
     .titulo.USER_UNFOLLOW {
       color: #FF2626;
+      margin: 0px;
     }
     .titulo.GROUP_JOIN {
       color: #5EA645
     }
     .titulo.GROUP_CREATED {
       color: #5EA645
+      margin: 0px;
     }
     .mensajito {
       font-weight: normal;
+      margin-bottom: 0px;
     }
     .mensajito:first-letter {
       text-transform: uppercase;
@@ -1233,4 +1240,39 @@ md-card.public-profile {
   z-index: 1;
   background: #548ed8;
   border-radius: 3px;
+}
+
+//Manuel
+.seguir{
+  background-color: #666;
+  width:100%;
+  color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.link-activity {
+text-decoration: none;
+color:#548ed8;
+margin-top: -5px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(236, 134, 69);; 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.intereses{
+  font-size: 12px;
+}
+
+.follow{
+  color: red;
 }
