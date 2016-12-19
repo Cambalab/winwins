@@ -16,6 +16,12 @@
     _winwin.getInterests = function() {
       return rParametric.customGET('interests');
     };
+
+    _winwin.getQuorums = function() {
+      return rParametric.customGET('quorums');
+    };
+
+
     _winwin.getTags = function() {
       return rParametric.customGET('tags');
     };
@@ -107,13 +113,13 @@
     _winwin.activate = function(id) {
       return Restangular.one('winwins/activate', id).get();
     }
-    
+
     _winwin.join = function(id) {
       return Restangular.one('winwins/join', id).get();
     }
 
     _winwin.left = function(id) {
-     return Restangular.one('winwins/left', id).get(); 
+     return Restangular.one('winwins/left', id).get();
     }
 
     _winwin.close = function(id, reason) {
@@ -152,15 +158,15 @@
     }
 
     _winwin.reportWinwin = function(report) {
-       return Restangular.one('report/create').customPOST({ 
+       return Restangular.one('report/create').customPOST({
         reference_id: report.winwinId,
         type: report.type,
-        reason: report.report_reason  
+        reason: report.report_reason
       }, undefined, undefined, undefined);
     }
 
     _winwin.requestSponsorship = function(model) {
-      return Restangular.one('winwins', model.winwinId).customPOST({org: model.org, contact: model.contact, 
+      return Restangular.one('winwins', model.winwinId).customPOST({org: model.org, contact: model.contact,
         tel: model.tel, msj: model.mensaje}, 'request/sponsorship', undefined, undefined);
     }
 

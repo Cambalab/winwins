@@ -44,5 +44,9 @@ class Winwin extends Model {
         return $this->belongsTo('Winwins\Location');
     }
 
+    public function quorum() {
+        return $this->belongsTo('Winwins\Quorum','tipo_quorum');
+    }
+
 
 }

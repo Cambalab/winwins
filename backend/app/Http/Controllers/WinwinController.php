@@ -65,11 +65,15 @@ class WinwinController extends Controller {
             default:
                 $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         }
-      foreach($winwins as $win){ Log::info($win->id); $win->users = DB::table('users')
-        ->join('winwins_users', 'users.id', '=', 'winwins_users.user_id')
-        ->select('users.id', 'users.username', 'users.photo')
-        ->where('winwins_users.winwin_id', '=', $win->id)
-        ->get(); }
+        foreach($winwins as $win) {
+            Log::info($win->id);
+            $win->users = DB::table('users')
+            ->join('winwins_users', 'users.id', '=', 'winwins_users.user_id')
+            ->select('users.id', 'users.username', 'users.photo')
+            ->where('winwins_users.winwin_id', '=', $win->id)
+            ->get();
+            $win->quorum_data = $win->quorum()->get();
+        }
 
         //$winwins = Winwin::where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         //$winwins = DB::table('winwins')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
@@ -145,6 +149,7 @@ class WinwinController extends Controller {
 
             $winwin->sponsors;
             $winwin->user;
+            $winwin->quorum_data = $winwin->quorum()->get();
         });
         return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
 	}
@@ -322,6 +327,8 @@ class WinwinController extends Controller {
         $winwin->previous_id = Winwin::where('id', '<', $winwin->id)->max('id');
         $winwin->next_id = Winwin::where('id', '>', $winwin->id)->min('id');
 
+        $winwin->quorum_data = $winwin->quorum()->get();
+
         //return $winwin;
         return response()->json($winwin, 200, [], JSON_NUMERIC_CHECK);
 	}
@@ -443,7 +450,8 @@ class WinwinController extends Controller {
             }
             $winwin->description = $request->input('description');
             $winwin->title = $request->input('title');
-            $winwin->users_amount = $request->input('users_amount');
+            $winwin->users_amount = ($request->input('users_amount') === null) ? 0 : $request->input('users_amount');
+            $winwin->min_users_amount = ($request->input('min_users_amount') === null) ? 0 : $request->input('min_users_amount');
             $winwin->what_we_do = $request->input('what_we_do');
             $winwin->scope = $request->input('scope');
             $winwin->image = $request->input('image');
@@ -493,6 +501,7 @@ class WinwinController extends Controller {
                     $winwin->save();
                 }
             }
+            $winwin->tipo_quorum = $request->input('tipo_quorum');
 
             $winwin->save();
 
