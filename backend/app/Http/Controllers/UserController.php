@@ -285,6 +285,21 @@ class UserController extends Controller {
                                               
                                                  
                                                   ORDER BY created_at DESC ');
+
+      $following = DB::table('user_details')
+        ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
+        ->join('followers', 'user_details.user_id', '=', 'followers.followed_id')
+        ->where('followers.follower_id', '=', $id)
+        ->get();
+
+      $followingActivities = DB::table('notifications')
+          ->join('users', 'users.id', '=', 'notifications.user_id')
+          ->join('followers', 'followed_id', '=', 'users.id')
+          ->where('followers.follower_id', '=', $id)
+          ->orderBy('sent_at', 'desc')
+          ->get();
+      $userDetail->followingActivities = $followingActivities;
+
       //$userDetail->followers = $user->followers;
       //$userDetail->following = $user->following;
 
