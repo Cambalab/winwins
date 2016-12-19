@@ -145,6 +145,7 @@ Route::resource('api/parametric/tags', 'TagController');
 Route::resource('api/parametric/marital', 'MaritalStatusController');
 Route::resource('api/parametric/languages', 'LanguageController');
 Route::resource('api/parametric/activities', 'ActivityTypeController');
+Route::resource('api/parametric/quorums', 'QuorumController');
 
 Route::get('api/ww/search', ['uses' => 'SearchController@search']);
 Route::get('api/translation', ['uses' => 'LanguageController@translation']);

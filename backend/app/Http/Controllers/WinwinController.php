@@ -65,11 +65,15 @@ class WinwinController extends Controller {
             default:
                 $winwins = Winwin::where('published', '=', 1)->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         }
-      foreach($winwins as $win){ Log::info($win->id); $win->users = DB::table('users')
-        ->join('winwins_users', 'users.id', '=', 'winwins_users.user_id')
-        ->select('users.id', 'users.username', 'users.photo')
-        ->where('winwins_users.winwin_id', '=', $win->id)
-        ->get(); }
+        foreach($winwins as $win) {
+            Log::info($win->id);
+            $win->users = DB::table('users')
+            ->join('winwins_users', 'users.id', '=', 'winwins_users.user_id')
+            ->select('users.id', 'users.username', 'users.photo')
+            ->where('winwins_users.winwin_id', '=', $win->id)
+            ->get();
+            $win->quorum_data = $win->quorum()->get();
+        }
 
         //$winwins = Winwin::where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
         //$winwins = DB::table('winwins')->where('canceled', '=', 0)->skip($page * $amount)->take($amount)->get();
@@ -137,7 +141,7 @@ class WinwinController extends Controller {
             if($winwin->users_amount) {
                 $winwin->users_left = ($winwin->users_amount - $users_count);
             }
-            
+
             $winwin->popular = $winwin->users_joined > 5;
             $winwin->finishing = $winwin->closing_date < Carbon::now()->addDay(2) && $winwin->closing_date > Carbon::now();
             $winwin->remarkable = $winwin->selected;
@@ -145,6 +149,7 @@ class WinwinController extends Controller {
 
             $winwin->sponsors;
             $winwin->user;
+            $winwin->quorum_data = $winwin->quorum()->get();
         });
         return response()->json($collection, 200, [], JSON_NUMERIC_CHECK);
 	}
@@ -173,10 +178,10 @@ class WinwinController extends Controller {
         $ww_user = $winwin->user;
         $ww_user->detail;
 
-    Log::info($ww_user);
+        Log::info($ww_user);
 
 
-    $users = $winwin->users;
+        $users = $winwin->users;
         $sponsors = $winwin->sponsors;
         $location = $winwin->location;
 
@@ -231,7 +236,7 @@ class WinwinController extends Controller {
                 $model->detail;
                 $model->my_self = ($model->id == $user->id);
                 if($model->my_self && $model->pivot->moderator ) {
-                   $winwin->is_moderator = true; 
+                   $winwin->is_moderator = true;
                 }
 
 
@@ -259,7 +264,7 @@ class WinwinController extends Controller {
                 if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                     array_push($active_sponsors, $sponsor);
                 }
-                
+
                 if($is_sponsor && ($sponsor->user_id == $user->id)) {
                     if($sponsor->pivot->ww_accept == 1 && $sponsor->pivot->sponsor_accept == 1) {
                         $winwin->already_sponsored = true;
@@ -322,6 +327,8 @@ class WinwinController extends Controller {
         $winwin->previous_id = Winwin::where('id', '<', $winwin->id)->max('id');
         $winwin->next_id = Winwin::where('id', '>', $winwin->id)->min('id');
 
+        $winwin->quorum_data = $winwin->quorum()->get();
+
         //return $winwin;
         return response()->json($winwin, 200, [], JSON_NUMERIC_CHECK);
 	}
@@ -373,7 +380,7 @@ class WinwinController extends Controller {
 
     }
 
-    
+
 	public function winwinSponsorsCandidates(Request $request, $id) {
         $winwin = Winwin::find($id);
         $user = false;
@@ -428,7 +435,7 @@ class WinwinController extends Controller {
         if($user->active == 0) {
             return response()->json(['message' => 'operation_not_until_activate_account'], 400);
         }
-        
+
         if($request->has('id')) {
             return $this->update($request, $request->input('id'));
         }
@@ -443,7 +450,8 @@ class WinwinController extends Controller {
             }
             $winwin->description = $request->input('description');
             $winwin->title = $request->input('title');
-            $winwin->users_amount = $request->input('users_amount');
+            $winwin->users_amount = ($request->input('users_amount') === null) ? 0 : $request->input('users_amount');
+            $winwin->min_users_amount = ($request->input('min_users_amount') === null) ? 0 : $request->input('min_users_amount');
             $winwin->what_we_do = $request->input('what_we_do');
             $winwin->scope = $request->input('scope');
             $winwin->image = $request->input('image');
@@ -470,7 +478,7 @@ class WinwinController extends Controller {
                 $winwin->categories_text = implode(" ",$text_interest);
             }
 
-            
+
             $winwin->published = 1;
             $winwin->status = 'PUBLISHED';
 
@@ -493,6 +501,7 @@ class WinwinController extends Controller {
                     $winwin->save();
                 }
             }
+            $winwin->tipo_quorum = $request->input('tipo_quorum');
 
             $winwin->save();
 
@@ -712,7 +721,7 @@ class WinwinController extends Controller {
                         ->regarding($winwin)
                         ->deliver();
                 });
- 
+
 
             }
         }
@@ -741,7 +750,7 @@ class WinwinController extends Controller {
 
     /**
      * Send a notification to winwin members
-     * @deprecated 
+     * @deprecated
      *
      * @param Request $request
      * @param $id
@@ -816,13 +825,13 @@ class WinwinController extends Controller {
     public function requestSponsorship(Request $request, Mailer $mailer, $id) {
         //Log::info($request['msj']);
         //Log::info($id);
-        $template_name = 'winwin_request_sponsorship'; 
+        $template_name = 'winwin_request_sponsorship';
         $winwin = Winwin::find($id);
         $user_email = $winwin->user->email;
         $message = new Message($template_name, array(
                 'meta' => array(
                     'base_url' => Config::get('app.url'),
-                    
+
                     'logo_url' => 'http://dev-winwins.net/assets/imgs/logo-winwins_es.gif'
                 ),
                 'sender' => array(
@@ -1015,7 +1024,7 @@ class WinwinController extends Controller {
 
         $user = User::find($request['user']['sub']);
 
-        if(!$request->hasFile('file')) { 
+        if(!$request->hasFile('file')) {
             return Response::json(['error' => 'no_file_sent']);
         }
 
@@ -1042,7 +1051,7 @@ class WinwinController extends Controller {
             'bucket' => 'S3',
             'type' => 'IMAGE'
         ]);
-        
+
         $filename = 'winwin_'.md5(strtolower(trim($image->name))).'_'.$image->id . '.' . $image->ext;
 
         Storage::disk('s3-gallery')->put('/' . $filename, file_get_contents($file), 'public');
@@ -1111,7 +1120,7 @@ class WinwinController extends Controller {
 
 
         return response()->json(['message' => 'winwin_rated'], 200);
-        
+
 	}
 
     public function processGeoValue($geo) {
@@ -1140,7 +1149,7 @@ class WinwinController extends Controller {
                     if($key_code == 'sublocality_level_1') {
                         $key_code = 'sublocality';
                     }
-                    $result[$key_code] = $component['short_name']; 
+                    $result[$key_code] = $component['short_name'];
                 }
             }
         }
@@ -1149,7 +1158,7 @@ class WinwinController extends Controller {
             $result['latitude'] = $coordinates['lat'];
             $result['longitude'] = $coordinates['lng'];
         }
-    
+
         return $result;
     }
 

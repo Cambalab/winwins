@@ -12,18 +12,20 @@
     vm.base = ENV.base;
     vm.imageServer = ENV.imageServer;
     vm.facebookId = ENV.satellizer.facebook.clientId;
-    vm.stage = 1; 
+    vm.stage = 1;
     vm.emailsOK = false;
 
     vm.mails = [];
     vm.minDate = new Date();
     vm.hoy = new Date().toLocaleDateString();
+
     vm.winwin = {
       interests:[],
       tags:[],
+      tipo_quorum: 1,
       scope: 'GLOBAL'
     };
-    
+
     vm.nexStage = function() {
       if (!vm.winwin.terms){
         vm.crearForm1.terms.$setValidity("notTerms", false);
@@ -48,8 +50,8 @@
             });
         });
     };
-    
-    
+
+
     vm.tryToSaveWinwin = function() {
       if ($auth.isAuthenticated()) {
         vm.saveWinwin();
@@ -62,14 +64,16 @@
           controllerAs: 'login',
           templateUrl: 'app/login/login.tmpl.html',
           parent: angular.element($document.body),
-          clickOutsideToClose:true          
+          clickOutsideToClose:true
         }).then(function(success) {
-          account.getProfile()
-          .then(function(data) {
-            vm.isActive = data.active;
-          });
-          if (vm.isActive)
-            vm.saveWinwin();
+            if (success) {
+            account.getProfile()
+            .then(function(data) {
+              vm.isActive = data.active;
+            });
+            if (vm.isActive)
+              vm.saveWinwin();
+            }
         });
       }
     };
@@ -134,6 +138,50 @@
     winwin.getInterests().then(function(data) {
       vm.interests = data;
     });
+
+    winwin.getQuorums().then(function(data) {
+      vm.quorums = data;
+    });
+
+    vm.translate = function(code) {
+      var res = "";
+      switch(code) {
+        case 'QUORUM_FIJO':
+          res = "Quorum fijo";
+          break;
+        case 'QUORUM_MOVIL':
+          res = "Quorum movil";
+          break;
+        case "QUORUM_ILIMITADO":
+          res = "Quorum ilimitado";
+          break;
+        default:
+          res = code;
+      }
+      return res;
+    }
+
+    vm.getCurrentQuorum = function() {
+      if (vm.quorums) {
+        var quorum = vm.quorums.filter(function(obj) {
+            return obj.id == vm.winwin.tipo_quorum;
+        })[0];
+        return quorum;
+      }
+      else {
+        return undefined;
+      }
+    }
+
+    vm.showAmounts = function() {
+      var quorum = vm.getCurrentQuorum();
+      return quorum && quorum.name != "QUORUM_ILIMITADO";
+    }
+
+    vm.showMinAmount = function() {
+      var quorum = vm.getCurrentQuorum();
+      return quorum && quorum.name == "QUORUM_MOVIL";
+    }
 
     winwin.getTags().then(function(data) {
       vm.tags = data;

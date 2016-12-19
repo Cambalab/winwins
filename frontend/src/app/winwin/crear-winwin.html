@@ -29,76 +29,91 @@
                   <p translate>Procurá ser concreto, preciso y realista acerca de lo que esperás de los participantes, y que el número de adhesiones que pusiste sea acorde a la meta.</p>
                 </div>
               </div>
-              <div layout="row" layout-align="space-between center">
+              <md-radio-group ng-model="winwin.winwin.tipo_quorum">
+                <md-radio-button ng-repeat="quorum in winwin.quorums" ng-value="quorum.id" aria-label="{{ winwin.translate(quorum.name) }}">
+                 {{ winwin.translate(quorum.name) }}
+                </md-radio-button>
+             </md-radio-group>
+              <div layout="row" layout-align="space-between center" ng-if="winwin.showAmounts()">
                 <div>
-                  <strong class="enfasis" translate>¿Si supieras que somos </strong>
+                  <strong class="enfasis" translate>¿Si supieras que somos {{winwin.showMinAmount() ? "entre" : ""}}</strong>
                 </div>
+                <md-input-container class="md-block" ng-if="winwin.showMinAmount()">
+                  <input class="numero" type="number" min="2" name="min_users_amount" placeholder="Ej:200" ng-model="winwin.winwin.min_users_amount"  ng-required="winwin.showMinAmount()" ng-minlength="1"/>
+                  <div ng-messages="winwin.crearForm1.min_users_amount.$error">
+                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i>
+                      Campo requerido.</div>
+                    </div>
+                  </md-input-container>
+                  <div>
+                    <strong class="enfasis" translate>{{winwin.showMinAmount() ? "y" : ""}}</strong>
+                  </div>
                 <md-input-container class="md-block">
                   <input class="numero" type="number" min="2" name="users_amount" placeholder="Ej:200" ng-model="winwin.winwin.users_amount"  ng-required="true" ng-minlength="1"/>
                   <div ng-messages="winwin.crearForm1.users_amount.$error">
-                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> 
-Campo requerido.</div>
+                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="winwin.showAmounts()"></i>
+                      Campo requerido.</div>
+                    </div>
+                  </md-input-container>
+                  <div>
+                    <strong class="enfasis" translate>para</strong>
                   </div>
-                </md-input-container>
-                <div>
-                  <strong class="enfasis" translate>para</strong>
                 </div>
-              </div>
-              <div layout="column">
-                <md-input-container class="md-block">
-                  <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required aria-label="what we do" style="height: 150px;"></textarea>
-                  <div ng-messages="winwin.crearForm1.what_we_do.$error">
-                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> Campo requerido.</div>
+                <div layout="column">
+                  <md-input-container class="md-block">
+                    <textarea name="what_we_do" ng-model="winwin.winwin.what_we_do" md-maxlength="250" rows="5" md-select-on-focus required aria-label="what we do" style="height: 150px;"></textarea>
+                    <div ng-messages="winwin.crearForm1.what_we_do.$error">
+                      <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i> Campo requerido.</div>
+                    </div>
+                  </md-input-container>
+                  <div>
+                    <strong class="enfasis" translate>te sumarías?</strong>
                   </div>
-                </md-input-container>
-                <div>
-                  <strong class="enfasis" translate>te sumarías?</strong>
                 </div>
-              </div>
-            </md-input-container>
+              </md-input-container>
+            </div>
           </div>
-        </div>
-        <div flex>
-          <div class="wrap-md-input-container">
-            <md-input-container class="md-block">
-              <label translate>Más detalles del Winwin</label>
+          <div flex>
+            <div class="wrap-md-input-container">
+              <md-input-container class="md-block">
+                <label translate>Más detalles del Winwin</label>
+                <div class="wrap-tooltip">
+                  <span class="icon-help">?</span>
+                  <div class="tooltip-text" translate>
+                    Acá ingresa información detallada del Winwin, datos e información importante. Lugares, fechas, acciones
+                    y toda la información que te resulte relevante.
+                  </div>
+                </div>
+                <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus aria-label="description" style="height: 150px;" ></textarea>
+              </md-input-container>
+            </div>
+            <div class="wrap-md-input-container">
               <div class="wrap-tooltip">
                 <span class="icon-help">?</span>
                 <div class="tooltip-text" translate>
-                  Acá ingresa información detallada del Winwin, datos e información importante. Lugares, fechas, acciones
-  y toda la información que te resulte relevante.
-                </div>
-              </div>
-              <textarea name="description" ng-model="winwin.winwin.description" md-maxlength="1000" rows="5" md-select-on-focus aria-label="description" style="height: 150px;" ></textarea>
-            </md-input-container>
-          </div>
-          <div class="wrap-md-input-container">
-            <div class="wrap-tooltip">
-                <span class="icon-help">?</span>
-                <div class="tooltip-text" translate>
-                   Algunos Winwins requieren fecha
-  límite para su concreción, si el tuyo 
-  es uno de ellos, ingresala aquí.
-                </div>
-              </div>
-            <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-min-date="winwin.minDate" md-placeholder="{{winwin.hoy}}"></md-datepicker>
-          </div>
-          <div>
+                 Algunos Winwins requieren fecha
+                 límite para su concreción, si el tuyo
+                 es uno de ellos, ingresala aquí.
+               </div>
+             </div>
+             <md-datepicker name="closing_date" ng-model="winwin.winwin.closing_date" md-min-date="winwin.minDate" md-placeholder="{{winwin.hoy}}"></md-datepicker>
+           </div>
+           <div>
       <!--      <tags-input ng-model="winwin.winwin.tags">
-            </tags-input>-->
-          </div>
-          <md-input-container class="md-block" flex-gt-sm>
-            <md-checkbox class="green" ng-model="winwin.winwin.terms" name="terms" ng-change="winwin.clearError()">
-              {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
-            </md-checkbox>
+    </tags-input>-->
+  </div>
+  <md-input-container class="md-block" flex-gt-sm>
+    <md-checkbox class="green" ng-model="winwin.winwin.terms" name="terms" ng-change="winwin.clearError()">
+      {{ 'He leído y acepto los' | translate }} <a ng-href="/#/terms" target="_blank" translate>términos y condiciones</a>.
+    </md-checkbox>
            <!-- <div ng-messages="winwin.crearForm1.terms.$error" class="help-block" ng-if="winwin.crearForm1.terms.$error.notTerms">
               <p class="small" ng-message="notTerms" translate>Acepta los terminos y condiciones.</p>
             </div> -->
           </md-input-container>
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" ng-disabled="winwin.crearForm1.$invalid" type="submit" name="action" translate aria-label="send">{{ 'CONTINUAR' | translate }}</md-button>
         </div>
-      </div> 
-    </form> 
+      </div>
+    </form>
   </div>
 </md-content>
 
@@ -181,7 +196,7 @@ Campo requerido.</div>
           <md-button md-no-ink class="md-raised md-primary bt-green md-whiteframe-5dp" type="submit" name="action" ng-disabled="loadingFlag" translate aria-label="send">{{ 'CONTINUAR' | translate }}</md-button>
         </div>
       </div>
-    </form> 
+    </form>
   </div>
 </md-content>
 
@@ -197,60 +212,60 @@ Campo requerido.</div>
     </div>
     <div layout="row" layout-align="center center" layout-margin class="comparti-social-media">
       <div
-        socialshare
-        socialshare-provider="facebook" 
-        socialshare-text="{{winwin.winwin.title}}" 
-        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"  
-        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-        socialshare-via="{{winwin.facebookId}}">
-        <md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
-      </div>
-      <div
-        socialshare  
-        socialshare-text="{{winwin.winwin.title}}" 
-        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}" 
-        socialshare-provider="twitter">
-        <md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
-      </div>
-      <div
-        socialshare 
-        socialshare-provider="google" 
-        socialshare-text="{{winwin.winwin.title}}" 
-        socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
-        socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
-        <md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon>
-      </div>
+      socialshare
+      socialshare-provider="facebook"
+      socialshare-text="{{winwin.winwin.title}}"
+      socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"
+      socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+      socialshare-via="{{winwin.facebookId}}">
+      <md-icon md-svg-src="assets/images/icon-facebook-share.svg" ng-href="#" target="_blank"></md-icon>
     </div>
-    <div layout="row" layout-align="center center">
-      <div layout="column" class="comparti" flex-xs="80" flex="40" ng-show="!winwin.emailsOK">
-        <p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
-        <div class="wrap-md-input-container">
-          <md-input-container class="md-icon-float md-icon-right md-block">
-            <label>Ingresa mails para invitar</label>
-            <md-chips ng-model="winwin.mails" md-on-add="winwin.validateMail($chip)">
-              <input type="email" length="30" class="validate">
-            </md-chips>
-            <md-button class="md-fab send" aria-label="send" ng-click="winwin.sentInvitations()" ng-disabled="loadingFlag">
-              <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
-            </md-button>
-          </md-input-container>
-        </div>
-      </div>
-      <div layout="column" layout-align="center center" ng-show="winwin.emailsOK">
-        <div flex>
-          <md-button aria-label="send"><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
-        </div>
-        <div flex>
-          <p class="gray">Las invitaciones fueron enviadas!</p>
-        </div>
-      </div>
-    </div>
-    <div layout="row" layout-align="center center">
-      <div layout="column" class="comparti" flex-xs="80" flex="40">
-        <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})" aria-label="send">IR AL WINWIN</md-button>
-      </div>
+    <div
+    socialshare
+    socialshare-text="{{winwin.winwin.title}}"
+    socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}"
+    socialshare-provider="twitter">
+    <md-icon md-svg-src="assets/images/icon-twitter-share.svg" ng-href="#" target="_blank"></md-icon>
+  </div>
+  <div
+  socialshare
+  socialshare-provider="google"
+  socialshare-text="{{winwin.winwin.title}}"
+  socialshare-media="{{winwin.imageServer}}/{{winwin.winwin.image}}"
+  socialshare-url="{{winwin.base}}/ww/{{winwin.winwin.id}}">
+  <md-icon md-svg-src="assets/images/icon-google-share.svg" ng-href="#" target="_blank"></md-icon>
+</div>
+</div>
+<div layout="row" layout-align="center center">
+  <div layout="column" class="comparti" flex-xs="80" flex="40" ng-show="!winwin.emailsOK">
+    <p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
+    <div class="wrap-md-input-container">
+      <md-input-container class="md-icon-float md-icon-right md-block">
+        <label>Ingresa mails para invitar</label>
+        <md-chips ng-model="winwin.mails" md-on-add="winwin.validateMail($chip)">
+          <input type="email" length="30" class="validate">
+        </md-chips>
+        <md-button class="md-fab send" aria-label="send" ng-click="winwin.sentInvitations()" ng-disabled="loadingFlag">
+          <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
+        </md-button>
+      </md-input-container>
     </div>
   </div>
+  <div layout="column" layout-align="center center" ng-show="winwin.emailsOK">
+    <div flex>
+      <md-button aria-label="send"><md-icon md-svg-src="assets/images/icon-oks.svg" class="s44"></md-icon></md-button>
+    </div>
+    <div flex>
+      <p class="gray">Las invitaciones fueron enviadas!</p>
+    </div>
+  </div>
+</div>
+<div layout="row" layout-align="center center">
+  <div layout="column" class="comparti" flex-xs="80" flex="40">
+    <md-button class="md-raised md-primary md-grey" ui-sref="home.winwin({winwinId: winwin.winwin.id})" aria-label="send">IR AL WINWIN</md-button>
+  </div>
+</div>
+</div>
 </md-content>
 
 
@@ -296,8 +311,8 @@ Campo requerido.</div>
           <md-input-container class="md-icon-float md-icon-right md-block">
             <label>Ingresa mails para invitar</label>
             <input required name="name" ng-model="crear.name">
-              <div ng-messages="crearForm.name.$error">
-                <div ng-message="required" translate>Campo requerido.</div>
+            <div ng-messages="crearForm.name.$error">
+              <div ng-message="required" translate>Campo requerido.</div>
             </div>
             <md-button class="md-fab send" aria-label="send">
               <md-icon md-svg-src="assets/images/icon-send.svg"></md-icon>
