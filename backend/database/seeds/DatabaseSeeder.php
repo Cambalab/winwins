@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SponsorsTableSeeder');
     $this->command->info('Sponsors seeded!');
 
+    $this->call('QuorumsTableSeeder');
+    $this->command->info('Quorums seeded!');
+
 	}
 
 }
