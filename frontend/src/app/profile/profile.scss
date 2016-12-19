@@ -1066,11 +1066,9 @@ md-card.public-profile {
     height: 100%;
   }
 }
-.messageHeader {
-  position: fixed;
-  background: #fafafa;
-  color: #000000;
-  padding: 30px;
+.modalmessage {
+  height: 250px;
+  width: 360px;
 }
 .caja-mensaje {
   background: #fafafa;
