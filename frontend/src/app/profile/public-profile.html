@@ -8,7 +8,7 @@
    <div class="acme-public-profile" layout="column" layout-align="center center">
 
    <md-card class="public-profile">
-              <md-card-content style="box-shadow: 2px 2px 10px black;">
+              <md-card-content>
                 <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" style="min-height: 450px;" alt="">
                 <md-card-title style="padding:0px;">
                   <div style="width: 350px; margin-left:50px; float: left; background: rgba(60, 108, 193, 0.84); margin:0px;">
@@ -21,7 +21,7 @@
                 </p>
                             <md-button class="primary md-raised" style="color: #fff; background: rgb(235, 106, 36); padding: 0px 15px 0px 15px; " ng-show="!profile.user.myself && !profile.user.already_following" ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share"></i> Seguir a {{profile.user.name}}</md-button>    
                            <md-button class="primary md-raised btn-unfollow" ng-show="!profile.user.myself && profile.user.already_following" ng-click="profile.unfollow(profile.userId)" aria-label="dejar de seguir"> <i class="fa fa-ban"></i> Dejar de Seguir</md-button>
-                                  <md-button hide-xs hide-sm class="primary md-raised" style="background: transparent;" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar"><i class="fa fa-edit"></i> Editar</md-button>
+                                  <md-button hide-xs hide-sm class="primary md-raised" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar"><i class="fa fa-edit"></i> Editar</md-button>
    
           </div>
 
