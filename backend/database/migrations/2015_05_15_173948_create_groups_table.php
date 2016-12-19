@@ -22,7 +22,7 @@ class CreateGroupsTable extends Migration {
             $table->boolean('confirm_ww')->default(FALSE);
             $table->boolean('canceled')->default(FALSE);
 
-            $table->mediumText('canceled_reason')->nullable();
+            //$table->mediumText('canceled_reason')->nullable();
 
 
 			$table->timestamps();
