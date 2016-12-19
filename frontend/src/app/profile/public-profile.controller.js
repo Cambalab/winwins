@@ -87,55 +87,55 @@
       }
 
       vm.user.followingActivities;
-      for(var i = 0;i<vm.user.followingActivities.length;i++) {
-        vm.user.followingActivities[i].type = user_data.followingActivities[i].type;
-        vm.user.followingActivities[i].title = user_data.followingActivities[i].title;
-        vm.user.followingActivities[i].username;
+      for(var l = 0;l<vm.user.followingActivities.length;i++) {
+        vm.user.followingActivities[l].type = user_data.followingActivities[l].type;
+        vm.user.followingActivities[l].title = user_data.followingActivities[l].title;
+        vm.user.followingActivities[l].username;
 
-        switch (vm.user.followingActivities[i].type.split('_')[0]) {
+        switch (vm.user.followingActivities[l].type.split('_')[0]) {
           case "WW":
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
-                '/#/winwin/' + vm.user.followingActivities[i].id;
+            vm.user.followingActivities[l].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+                '/#/winwin/' + vm.user.followingActivities[l].id;
             break;
           case "GROUP":
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
-                '/#/grupo/' + vm.user.followingActivities[i].id;
+            vm.user.followingActivities[l].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+                '/#/grupo/' + vm.user.followingActivities[l].id;
             break;
 
           default:
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
-                '/#/profile/' + vm.user.followingActivities[i].id;
+            vm.user.followingActivities[l].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+                '/#/profile/' + vm.user.followingActivities[l].id;
         }
 
-        switch (user_data.followingActivities[i].type) {
+        switch (user_data.followingActivities[l].type) {
           case 'WW_JOIN':
-            vm.user.followingActivities[i].mensajito = ' se unió al winwin ';
+            vm.user.followingActivities[l].mensajito = ' se unió al winwin ';
             break;
           case 'WW_LEFT' :
-            vm.user.followingActivities[i].mensajito = ' abandonó el winwin ';
+            vm.user.followingActivities[l].mensajito = ' abandonó el winwin ';
             break;
           case 'WW_CREATED':
-            vm.user.followingActivities[i].mensajito = ' creó el winwin ';
+            vm.user.followingActivities[l].mensajito = ' creó el winwin ';
             break;
           case 'WW_SUCCESSFUL':
-            vm.user.followingActivities[i].mensajito = ' participó en el winwin ';
+            vm.user.followingActivities[l].mensajito = ' participó en el winwin ';
             break;
           case 'GROUP_CREATED':
-            vm.user.followingActivities[i].mensajito = ' creó el grupo ';
+            vm.user.followingActivities[l].mensajito = ' creó el grupo ';
             break;
           case 'GROUP_JOIN':
-            vm.user.followingActivities[i].mensajito = ' unió al grupo ';
+            vm.user.followingActivities[l].mensajito = ' unió al grupo ';
             break;
           case 'GROUP_LEFT':
-            vm.user.followingActivities[i].mensajito = ' abandonó el grupo ';
+            vm.user.followingActivities[l].mensajito = ' abandonó el grupo ';
             break;
 
           case 'FOLLOWING':
-            vm.user.followingActivities[i].mensajito = ' ahora es seguido por ';
+            vm.user.followingActivities[l].mensajito = ' ahora es seguido por ';
             break;
 
           case 'UNFOLLOWING':
-            vm.user.followingActivities[i].mensajito = ' no es mas seguido por ';
+            vm.user.followingActivities[l].mensajito = ' no es mas seguido por ';
             break;
         }
       }
