@@ -12,11 +12,13 @@ class AddTipoQuorumToWinwins extends Migration
      */
     public function up()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::table('winwins', function ($table) {
             $table->integer('tipo_quorum')->unsigned()->default(1);
             $table->foreign('tipo_quorum')->references('id')->on('quorums');
 
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
     /**
