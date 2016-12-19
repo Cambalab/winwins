@@ -183,6 +183,20 @@
       return quorum && quorum.name == "QUORUM_MOVIL";
     }
 
+    vm.maxMinUsersAmount = function() {
+      if (vm.winwin.users_amount)
+        return vm.winwin.users_amount;
+      else
+        return 10000000000;
+    }
+
+    vm.minUsersAmount = function() {
+      if (vm.winwin.min_users_amount)
+        return vm.winwin.min_users_amount + 1;
+      else
+        return 1;
+    }
+
     winwin.getTags().then(function(data) {
       vm.tags = data;
     });
