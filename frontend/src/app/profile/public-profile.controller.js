@@ -87,7 +87,7 @@
       }
 
       vm.user.followingActivities;
-      for(var i = 0;i<vm.user.followingActivities.length;i++) {
+      for(i = 0;i<vm.user.followingActivities.length;i++) {
         vm.user.followingActivities[i].type = user_data.followingActivities[i].type;
         vm.user.followingActivities[i].title = user_data.followingActivities[i].title;
         vm.user.followingActivities[i].username;

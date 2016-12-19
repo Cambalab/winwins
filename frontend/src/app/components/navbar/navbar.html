@@ -122,7 +122,7 @@
   </md-content>
 </md-sidenav>
 	<div>
-<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" style="height: 75px;">
+<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive && profile.userId != null" style="height: 75px;">
   <p>
     <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}.
 	  <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span>
