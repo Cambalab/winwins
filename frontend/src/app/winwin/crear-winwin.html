@@ -39,29 +39,29 @@
                   <strong class="enfasis" translate>¿Si supieras que somos {{winwin.showMinAmount() ? "entre" : ""}}</strong>
                 </div>
                 <md-input-container class="md-block" ng-if="winwin.showMinAmount()">
-                  <input class="numero" type="number" min="0" max="{{winwin.maxMinUsersAmount()}}" name="min_users_amount" placeholder="Ej:200" ng-model="winwin.winwin.min_users_amount"  ng-required="winwin.showMinAmount()" ng-minlength="1"/>
-                  <div ng-messages="winwin.crearForm1.min_users_amount.$error">
-
+                  <input class="numero" type="number" min="0" ng-max="winwin.maxMinUsersAmount()" name="min_users_amount" placeholder="Ej:200" ng-model="winwin.winwin.min_users_amount"  ng-required="winwin.showMinAmount()" ng-minlength="1"/>
+                  <div ng-messages="winwin.crearForm1.min_users_amount.$error" ng-messages-multiple md-auto-hide="false" ng-if="winwin.crearForm1.min_users_amount.$touched">
                     <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i>
-                      Campo requerido.</div>
-                    <div ng-message="max" translate>
-                      El valor de la izquierda no puede ser mayor que el de la derecha.</div>
+                      Requerido.
                     </div>
+                    <div ng-message="max" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i>
+                      Inv&aacute;lido.
                     </div>
-
+                  </div>
                   </md-input-container>
                   <div>
                     <strong class="enfasis" translate>{{winwin.showMinAmount() ? "y" : ""}}</strong>
                   </div>
                 <md-input-container class="md-block">
-                  <input class="numero" type="number" min="{{winwin.minUsersAmount()}}" name="users_amount" placeholder="Ej:200" ng-model="winwin.winwin.users_amount"  ng-required="true" ng-minlength="1"/>
-                  <div ng-messages="winwin.crearForm1.users_amount.$error">
-                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="winwin.showAmounts()"></i>
-                      Campo requerido.</div>
-                      <div ng-message="min" translate>
-                      El valor de la derecha no puede ser menor que el de la izquierda.</div>
+                  <input class="numero" type="number" min="2" ng-min="winwin.minUsersAmount()" name="users_amount" placeholder="Ej:200" ng-model="winwin.winwin.users_amount"  ng-required="true" ng-minlength="1"/>
+                  <div ng-messages="winwin.crearForm1.users_amount.$error" ng-messages-multiple md-auto-hide="false" ng-if="winwin.crearForm1.users_amount.$touched">
+                    <div ng-message="required" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i>
+                      Requerido.
                     </div>
+                    <div ng-message="min" translate><i class="fa fa-exclamation-circle animated infinite flash" aria-hidden="true"></i>
+                      Inv&aacute;lido.
                     </div>
+                  </div>
                   </md-input-container>
                   <div>
                     <strong class="enfasis" translate>para</strong>
