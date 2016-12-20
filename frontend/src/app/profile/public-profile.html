@@ -159,6 +159,8 @@
                         <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
                       </div>
                 </md-list-item>
+                <md-list-item class="actividadRecienteContent" ng-repeat="fact in profile.user.followingActivities">
+                    <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="home.public-profile{{user.id}}" >
               </md-list>
             </div>
             <md-card class="actividadReciente">ACTIVIDAD USUARIOS SIGUIENDO</md-card>
@@ -172,9 +174,17 @@
                       <a class="activityUsername" ng-href="{{fact.activity_url}}">{{fact.username}}</a>
                       <p class="mensajito">{{fact.mensajito}}</p>
                       <p class="titulo {{fact.type}}"><a class="link-activity" ng-href="{{fact.activity_url}}">{{fact.titulo}}</a></p>
+                      <p class="titulo {{fact.type}}" ng-if="profile.user.type = 'following' || 'unfollowing'">{{profile.user.name}}</p>
                       <p class="titulo {{fact.type}}" ng-if="profile.type = 'following' || 'unfollowing'">{{profile.user.name}}</p>
                     </div>
                   </md-list-item>
+              </md-list>
+
+            </div>
+
+
+
+              </div>
                 </md-list>
               </div>
         </div>
