@@ -1,6 +1,6 @@
 <md-dialog aria-label="List dialog" class="messagedialog" >
 <md-dialog-content ng-init="window.scrollTo([0],[0])">
-  <div  ng-if="vm.sendMessageStatus == notSended" style="height: 500px; min-width: 360px;">
+  <div ng-if="vm.sendMessageStatus == notSended" style="height: 500px; width: 550px;">
     <md-list>
     <md-list-item ng-repeat="message in msgController.conversation_messages"  layout="row">
       <div layout="row">

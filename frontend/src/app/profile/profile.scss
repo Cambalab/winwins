@@ -792,29 +792,30 @@ md-card.public-profile {
 
 
     .titulo.WW_JOIN {
-      color: #EE874F;
+      color:#548ed8;
+
     }
     .titulo.WW_CREATED {
+      color:#548ed8;
+    }
+    .titulo.FOLLOWING {
       color: #EE874F;
-      margin: 0px;
     }
-    .titulo.USER_FOLLOW {
-      color: #FF2626;
-      margin: 0px;
-    }
-    .titulo.USER_UNFOLLOW {
-      color: #FF2626;
+    .titulo.UNFOLLOWING {
+      color: #EE874F;
     }
     .titulo.GROUP_JOIN {
       color: #5EA645;
     }
     .titulo.GROUP_CREATED {
       color: #5EA645;
-      margin: 0px;
+    }
+    .activityUsername {
+      color: #000;
+      font-weight: normal;
     }
     .mensajito {
       font-weight: normal;
-      margin-bottom: 0px;
     }
     .mensajito:first-letter {
       text-transform: uppercase;
