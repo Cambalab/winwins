@@ -308,6 +308,8 @@ class UserController extends Controller {
           ->where('followers.follower_id', '=', $id)
           ->orderBy('sent_at', 'desc')
           ->get();
+      $userDetail->followingActivities = $followingActivities;
+
 
       //$userDetail->followers = $user->followers;
       //$userDetail->following = $user->following;
