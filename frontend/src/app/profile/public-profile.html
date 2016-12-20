@@ -39,14 +39,13 @@
                 <h3><strong>BIO</strong></h3>
               </div>
               <div class="bioContent">
-                    <hr class="light">
                 <p>
                   {{profile.user.about}}
                 </p>
                 <hr>
-                <p class="small-text"><strong>Estoy interesado en:</strong></p>
+                <p><strong>Estoy interesado en:</strong></p>
                 <md-chips>
-                  <md-chip ng-repeat="category in profile.user.interests_list" style="background: #f5f5f5;">{{category.description}}</md-chip>
+                  <md-chip ng-repeat="category in profile.user.interests_list">{{category.description}}</md-chip>
                 </md-chips>
                 <p ng-if="profile.user.myself && profile.user.interests_list.length == 0">Aun no completaste tus intereses, <a ui-sref="home.profile">completalos!</a>
                 </p>
@@ -115,7 +114,7 @@
           </div>
           <div class="bio-Actions" layout="column" hide-xs hide-sm>
             <div ng-if="profile.isAuthenticated()">
-              <md-card ng-if="!profile.user.already_following && !profile.user.myself" class="not-following-msj"><strong ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share"></i>  Segui a {{profile.user.name}}</strong> para enviarle un mensaje</md-card>
+              <md-card ng-if="!profile.user.already_following && !profile.user.myself" class="not-following-msj"><strong ng-click="profile.follow(profile.userId)" aria-label="seguir"> <i class="fa fa-share"></i>  Segui a {{profile.user.name}}</strong> para poder enviarle un mensaje</md-card>
               <div class="button" ng-if="profile.conversations.length == 0 && !profile.user.myself && profile.user.already_following">
             <md-button class="primary md-raised mensajeria" ng-click="profile.showMessageModal(0, {})"><i class="fa fa-envelope-o"></i> ENVIAR MENSAJE A {{profile.user.name}}</md-button>
             </div>
@@ -124,7 +123,7 @@
                 No hay mensajes...
               </div>
             </md-card>
-              <md-card class="mensajeriaPrivada" style="margin:0px;">
+              <md-card class="mensajeriaPrivada">
                 <div class="inbox">
                   <md-card class="inbox-title" ng-if="!profile.canShowSendMessageButton() && profile.conversations == null && profile.user.myself">{{profile.conversation_title}}
                     <div class="sin-mensajes">
@@ -160,15 +159,8 @@
                         <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
                       </div>
                 </md-list-item>
-                <md-list-item class="actividadRecienteContent" ng-repeat="fact in profile.user.followingActivities">
-                    <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="home.public-profile{{user.id}}" >
               </md-list>
             </div>
-            <br>
-
-
-         <!--//Las cards de actividad reciente tienen que verse en el box de arriba //
-
             <md-card class="actividadReciente">ACTIVIDAD USUARIOS SIGUIENDO</md-card>
               <div layout-align="row">
                 <md-list class="actividadRecienteContainer">
@@ -180,19 +172,11 @@
                       <a class="activityUsername" ng-href="{{fact.activity_url}}">{{fact.username}}</a>
                       <p class="mensajito">{{fact.mensajito}}</p>
                       <p class="titulo {{fact.type}}"><a class="link-activity" ng-href="{{fact.activity_url}}">{{fact.titulo}}</a></p>
-                      <p class="titulo {{fact.type}}" ng-if="profile.user.type = 'following' || 'unfollowing'">{{profile.user.name}}</p>
                       <p class="titulo {{fact.type}}" ng-if="profile.type = 'following' || 'unfollowing'">{{profile.user.name}}</p>
                     </div>
                   </md-list-item>
-              </md-list>
-
-            </div>
-
-
-
-              </div>
                 </md-list>
-              </div> -->
+              </div>
         </div>
           </div>
       </md-tab-body>
