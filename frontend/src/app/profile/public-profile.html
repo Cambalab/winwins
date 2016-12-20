@@ -153,30 +153,29 @@
               <md-list class="actividadRecienteContainer">
                 <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.
                 </md-card>
-                <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-                    <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}" ng-if="profile.user.activities">
-                      <div layout-align="row" ng-if="profile.user.activities">
+                <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities | orderBy:id:expression">
+                    <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+                      <div layout-align="row">
                         <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
                       </div>
                 </md-list-item>
+                <md-list-item class="actividadRecienteContent" ng-if="profile.isAuthenticated()" ng-repeat="fact in profile.user.followingActivities | orderBy:id:expression">
+                  <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="home.public-profile{{user.id}}" >
+                  <div layout-align="row" class="actividadFollowingContainer">
+                    <a class="activityUsername" ng-href="{{fact.activity_url}}">{{fact.username}}</a>
+                    <p class="mensajito">{{fact.mensajito}}</p>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_JOIN'">{{fact.title}}</a>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_CREATED'">{{fact.title}}</a>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_SUCCESFUL'">{{fact.title}}</a>
+                    <p class="titulo {{fact.type}}" ng-if="fact.type == 'FOLLOWING'">{{profile.user.name}}</p>
+                    <p class="titulo {{fact.type}}" ng-if="fact.type == 'UNFOLLOWING'">{{profile.user.name}}</p>
+                  </div>
+                </md-list-item>
               </md-list>
             </div>
-            <md-card class="actividadReciente">ACTIVIDAD USUARIOS SIGUIENDO</md-card>
-              <div layout-align="row">
-                <md-list class="actividadRecienteContainer">
-                  <md-card class="sinActividad" ng-if="profile.user.following.length == 0">{{profile.user.name}} Aún no sigué a nadie.
-                  </md-card>
-                  <md-list-item class="actividadRecienteContent" ng-repeat="fact in profile.user.followingActivities">
-                    <img ng-src="http://images.dev-winwins.net/smart/{{fact.photo}}" class="md-avatar" ui-sref="home.public-profile{{user.id}}" >
-                    <div layout-align="row" class="actividadFollowingContainer" ng-if="profile.user.followingActivities">
-                      <a class="activityUsername" ng-href="{{fact.activity_url}}">{{fact.username}}</a>
-                      <p class="mensajito">{{fact.mensajito}}</p>
-                      <p class="titulo {{fact.type}}"><a class="link-activity" ng-href="{{fact.activity_url}}">{{fact.titulo}}</a></p>
-                      <p class="titulo {{fact.type}}" ng-if="profile.type = 'following' || 'unfollowing'">{{profile.user.name}}</p>
-                    </div>
-                  </md-list-item>
-                </md-list>
-              </div>
+
+
+
         </div>
           </div>
       </md-tab-body>

@@ -94,16 +94,16 @@
 
         switch (vm.user.followingActivities[i].type.split('_')[0]) {
           case "WW":
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+            vm.user.followingActivities[i].followingActivity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
                 '/#/winwin/' + vm.user.followingActivities[i].id;
             break;
           case "GROUP":
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+            vm.user.followingActivities[i].followingActivity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
                 '/#/grupo/' + vm.user.followingActivities[i].id;
             break;
 
           default:
-            vm.user.followingActivities[i].activity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
+            vm.user.followingActivities[i].followingActivity_url = "http://" + $window.location["hostname"] + ":" + $window.location["port"] +
                 '/#/profile/' + vm.user.followingActivities[i].id;
         }
 
@@ -117,7 +117,7 @@
           case 'WW_CREATED':
             vm.user.followingActivities[i].mensajito = ' creó el winwin ';
             break;
-          case 'WW_SUCCESSFUL':
+          case 'WW_SUCCESFUL':
             vm.user.followingActivities[i].mensajito = ' participó en el winwin ';
             break;
           case 'GROUP_CREATED':

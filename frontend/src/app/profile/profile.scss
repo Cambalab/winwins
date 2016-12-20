@@ -788,16 +788,21 @@ md-card.public-profile {
 
     .titulo.WW_JOIN {
       color:#548ed8;
-
+      margin: 0;
     }
     .titulo.WW_CREATED {
       color:#548ed8;
+      margin: 0;
     }
     .titulo.FOLLOWING {
       color: #EE874F;
+      margin: 0;
+
     }
     .titulo.UNFOLLOWING {
       color: #EE874F;
+      margin: 0;
+
     }
     .titulo.GROUP_JOIN {
       color: #5EA645;
@@ -811,15 +816,14 @@ md-card.public-profile {
     }
     .mensajito {
       font-weight: normal;
+      margin: 0;
     }
     .mensajito:first-letter {
       text-transform: uppercase;
     }
   }
 }
-.actividadFollowingContainer {
-  line-height: 4px;
-}
+
 
 .responsiveTabs {
   max-width: 100%;

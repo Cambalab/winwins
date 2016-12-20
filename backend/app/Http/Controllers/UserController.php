@@ -21,10 +21,19 @@ use Winwins\Model\Repository\UserRepository;
 use Winwins\Post;
 use Winwins\Skill;
 use Winwins\User;
+use Winwins\Winwin;
 use Winwins\UserDetail;
 use Winwins\UserSkills;
 
 class UserController extends Controller {
+
+
+
+  public function all() {
+    $winwins = Winwin::all();
+    return $winwins;
+  }
+
 
     public function __construct() {
         $this->middleware('auth', ['except' => ['paginate', 'index', 'show', 'search', 'getUserTimeline', 'sentMailContact']]);
@@ -119,7 +128,7 @@ class UserController extends Controller {
             ->select('user_details.photo', 'user_details.cover_photo', 'users.id', 'user_details.name', 'user_details.lastname') 
             ->skip($page * $amount)
             ->take($amount)
-            ->orderBy('id', 'desc')
+            ->orderBy('name', 'asc')
             ->get();
 
         $collection = Collection::make($users);
@@ -295,10 +304,12 @@ class UserController extends Controller {
       $followingActivities = DB::table('notifications')
           ->join('users', 'users.id', '=', 'notifications.user_id')
           ->join('followers', 'followed_id', '=', 'users.id')
+          ->join('winwins', 'winwins.id', '=', 'object_id')
           ->where('followers.follower_id', '=', $id)
           ->orderBy('sent_at', 'desc')
           ->get();
       $userDetail->followingActivities = $followingActivities;
+
 
       //$userDetail->followers = $user->followers;
       //$userDetail->following = $user->following;
