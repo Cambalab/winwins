@@ -113,7 +113,7 @@
               <div layout="column" layout-align="center center">
                 <div class="creadores">
                   <img ng-src="{{winwin.imageServer}}/{{winwin.winwin.user.photo}}" alt="" class="avatar-creador style-rounded"  ui-sref="home.public-profile({userId: winwin.winwin.user.id})"/>
-                  <md-button ui-sref="home.public-profile({userId: winwin.winwin.user.id})">{{winwin.winwin.user.detail.name}} {{winwin.winwin.user.detail.lastname}}</md-button>
+                  <md-button ui-sref="home.public-profile({userId: winwin.winwin.user.id})" >{{winwin.winwin.user.detail.name}} <br> {{winwin.winwin.user.detail.lastname}}</md-button>
                   <strong>CREADOR</strong>
                 </div>
                 <div class="activadores">
@@ -130,9 +130,8 @@
               <h2 class="main-title">{{winwin.winwin.title}}</h2>
               <div layout="col" layout-align="center start">
                 <div flex="83">
-                  <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}} <br/>
+                  <p class="detalle"><strong>Si supieras que somos {{winwin.winwin.users_amount}} personas</strong> para {{winwin.winwin.what_we_do}}, te sumarías?<br/>
                   </p>
-                  <p><strong>te sumarías?</strong></p>
                   <div class="more-details">
                     <md-button aria-label="menu" class="md-raised" ng-click="open = !open">
                       Más detalles
@@ -149,7 +148,7 @@
                           <h3>Reportar:</h3>
                           <p>
                             <md-button ng-href ng-click="winwin.reportWinwin()" class="no-padding">
-                              <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin
+                              <i class="fa fa-exclamation-circle danger"></i>Reportar este Winwin
                             </md-button>
                           </p>
                         </div>
@@ -182,7 +181,7 @@
                     </md-button>
                   </div>
                 </div>
-                <div flex="15" layout="column" class="content-social-media">
+           <!--     <div flex="15" layout="column" class="content-social-media">
                   <div
                     socialshare
                     socialshare-provider="facebook"
@@ -217,7 +216,7 @@
                   <div><md-button class="md-icon-button" ng-href aria-label="email" ng-click="winwin.showModalShareEmailDialog()">
                     <md-icon md-svg-src="assets/images/icon-email.svg"></md-icon>
                   </md-button></div>
-                </div>
+                </div>-->
               </div>
               <div class="creadores" layout="row">
                 <div hide show-xs flex>
@@ -443,28 +442,28 @@
                 <div class="content-bg" ng-if="!winwin.winwin.is_successful && winwin.winwin.already_joined && !winwin.winwin.canceled && !winwin.winwin.is_creator">
                   <p>
                     <md-button ng-href ng-click="winwin.left()" class="no-padding">
-                      <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon>Abandonar este Winwin
+                      <md-icon md-svg-src="assets/images/icon-entrar.svg"></md-icon> Abandonar este Winwin
                     </md-button>
                   </p>
                 </div>
                 <div class="content-bg" ng-if="winwin.winwin.is_creator && !winwin.winwin.canceled">
                   <p>
                     <md-button ng-href ng-click="winwin.close()" class="no-padding">
-                      <i class="fa fa-ban" aria-hidden="true"></i>Cancelar Winwin
+                      <i class="fa fa-ban" aria-hidden="true"></i> Cancelar Winwin
                     </md-button>
                   </p>
                 </div>
                 <div class="content-bg" ng-if="winwin.winwin.is_creator">
                   <p class="crear-encuesta">
                     <md-button ng-href ng-click="winwin.showModalPollDialog()" class="no-padding">
-                      <md-icon md-svg-src="assets/images/icon-poll.svg"></md-icon>Crear Encuesta
+                      <md-icon md-svg-src="assets/images/icon-poll.svg"></md-icon> Crear Encuesta
                     </md-button>
                   </p>
                 </div>
                 <div class="content-bg">
                   <p>
                     <md-button ng-href ng-click="winwin.reportWinwin()" class="no-padding">
-                      <md-icon md-svg-src="assets/images/icon-report.svg"></md-icon>Reportar este Winwin
+                       <i class="fa fa-exclamation-circle danger"></i> Reportar este Winwin
                     </md-button>
                   </p>
                 </div>

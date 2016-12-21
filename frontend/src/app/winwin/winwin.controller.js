@@ -310,8 +310,8 @@
       });
     }
 
-    vm.removePoll = function(poll, index) {
-      winwin.removePoll(poll.id).then(function() {
+    vm.destroy = function(poll, index) {
+      winwin.destroy(poll.id).then(function() {
         vm.polls.splice(index, 1);
       });
     }
