@@ -128,7 +128,7 @@ class UserController extends Controller {
             ->select('user_details.photo', 'user_details.cover_photo', 'users.id', 'user_details.name', 'user_details.lastname') 
             ->skip($page * $amount)
             ->take($amount)
-            ->orderBy('name', 'asc')
+            ->orderBy('lastname', 'asc')
             ->get();
 
         $collection = Collection::make($users);
@@ -216,84 +216,6 @@ class UserController extends Controller {
         ->select('skills.id', 'skills.name as text')
         ->get();
 
-      $userDetail->activities = DB::select(' SELECT notifications.type,
-
-                                                          notifications.created_at,
-
-                                                          winwins.title,
-
-                                                          winwins.id
-
-                                                   FROM   notifications,
-
-                                                          winwins
-
-                                                   WHERE  notifications.user_id = ' . $user->id . '
-
-                                                   AND    (
-
-                                                           notifications.type="ww_join"
-
-                                                           || notifications.type="ww_successful"
-
-                                                           || notifications.type="ww_created")
-
-                                                   AND    notifications.object_id = winwins.id
-
-                                                   UNION
-
-                                                   SELECT notifications.type,
-
-                                                          notifications.created_at,
-
-                                                          groups.NAME,
-
-                                                          groups.id
-
-                                                   FROM   notifications,
-
-                                                          groups
-
-                                                   WHERE  notifications.user_id = ' . $user->id . '
-
-                                                   AND    (
-
-                                                          notifications.type="group_join"
-
-                                                           || notifications.type="group_left"
-
-                                                           || notifications.type="group_created")
-
-                                                  AND    notifications.object_id = groups.id
-
-                                                  UNION
-
-                                                  SELECT   notifications.type,
-
-                                                           notifications.created_at,
-
-                                                           users.username,
-
-                                                           users.id
-
-                                                  FROM     notifications,
-
-                                                           users
-
-                                                  WHERE    notifications.user_id = ' . $user->id . ' 
-                                                  
-
-                                                  AND      (
-
-                                                          notifications.type="following"
-
-                                                           || notifications.type="unfollowing")
-
-                                                  AND      notifications.object_id = users.id
-                                                  
-                                              
-                                                 
-                                                  ORDER BY created_at DESC ');
 
       $following = DB::table('user_details')
         ->select('user_details.name', 'user_details.lastname', 'user_details.photo', 'user_details.user_id')
@@ -301,14 +223,16 @@ class UserController extends Controller {
         ->where('followers.follower_id', '=', $id)
         ->get();
 
-      $followingActivities = DB::table('notifications')
+      $activities = DB::table('notifications')
           ->join('users', 'users.id', '=', 'notifications.user_id')
-          ->join('followers', 'followed_id', '=', 'users.id')
+          ->leftJoin('followers', 'followed_id', '=', 'users.id')
           ->join('winwins', 'winwins.id', '=', 'object_id')
-          ->where('followers.follower_id', '=', $id)
+          ->where('notifications.user_id','=', $user->id)
+          ->orWhere('sender_id','=', $user->id)
+          ->orWhere('followers.follower_id', '=', $id)
           ->orderBy('sent_at', 'desc')
           ->get();
-      $userDetail->followingActivities = $followingActivities;
+      $userDetail->activities = $activities;
 
 
       //$userDetail->followers = $user->followers;

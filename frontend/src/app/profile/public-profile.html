@@ -135,7 +135,7 @@
                     <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                       <div ng-repeat="message in cnv.messages">
                         <md-card href="#send-message" du-smooth-scroll class="msg-container" layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
-                          <img class="msg-avatar" ng-src="{{profile.avatar}}"  alt="">
+                          <img class="msg-avatar" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
                           <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
                       </div>
                     </div>
@@ -153,22 +153,23 @@
               <md-list class="actividadRecienteContainer">
                 <md-card class="sinActividad" ng-if="profile.user.activities.length == 0">{{profile.user.name}} no tiene actividad reciente.
                 </md-card>
-                <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities | orderBy:id:expression">
-                    <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
-                      <div layout-align="row">
-                        <p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>
-                      </div>
-                </md-list-item>
-                <md-list-item class="actividadRecienteContent" ng-if="profile.isAuthenticated()" ng-repeat="fact in profile.user.followingActivities | orderBy:id:expression">
-                  <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="home.public-profile{{user.id}}" >
+                <!--<md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities | orderBy:id:expression">-->
+                    <!--<img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">-->
+                      <!--<div layout-align="row">-->
+                        <!--<p class="mensajito">{{profile.user.name}} {{act.mensajito}} <p class="titulo {{act.type}}"><a class="link-activity" ng-href="{{act.activity_url}}">{{act.titulo}}</a></p></p>-->
+                      <!--</div>-->
+                <!--</md-list-item>-->
+                <md-list-item class="actividadRecienteContent" ng-if="profile.isAuthenticated()" ng-repeat="fact in profile.user.activities">
+                  <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="/#/profile/{{fact.sender_id}}" >
                   <div layout-align="row" class="actividadFollowingContainer">
-                    <a class="activityUsername" ng-href="{{fact.activity_url}}">{{fact.username}}</a>
+                    <a class="activityUsername" ng-href="/#/profile/{{fact.sender_id}}">{{fact.username}}</a>
                     <p class="mensajito">{{fact.mensajito}}</p>
                     <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_JOIN'">{{fact.title}}</a>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_LEFT'">{{fact.title}}</a>
                     <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_CREATED'">{{fact.title}}</a>
                     <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'WW_SUCCESFUL'">{{fact.title}}</a>
-                    <p class="titulo {{fact.type}}" ng-if="fact.type == 'FOLLOWING'">{{profile.user.name}}</p>
-                    <p class="titulo {{fact.type}}" ng-if="fact.type == 'UNFOLLOWING'">{{profile.user.name}}</p>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'FOLLOWING'">{{profile.user.name}} {{profile.user.lastname}}</a>
+                    <a class="titulo {{fact.type}}" ng-href="{{fact.activity_url}}" ng-if="fact.type == 'UNFOLLOWING'">{{profile.user.name}} {{profile.user.lastname}}</a>
                   </div>
                 </md-list-item>
               </md-list>
