@@ -108,21 +108,21 @@
 				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Winwin</translate></md-button>
 			</div>
 			<div>
-				<md-button class="md-primary" ui-sref="home.grupo-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Grupos</translate></md-button>
+		<!--		<md-button class="md-primary" ui-sref="home.grupo-list" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-cuenta.svg"></md-icon><translate>Ver Grupos</translate></md-button> 
 			</div>
 			<div>
 				<md-button class="md-primary" ui-sref="home.grupo-creacion" ng-click="vm.openLeftMenu()" ng-if="vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Grupo</translate></md-button>
 
-				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Grupo</translate></md-button>
+				<md-button class="md-primary" ng-href ng-click="vm.openLeftMenu(); vm.showLoginDialog('home.crear-winwin');" ng-if="!vm.isAuthenticated()"><md-icon md-svg-src="assets/images/icon-crear-winwins.svg"></md-icon><translate> Crear Grupo</translate></md-button>-->
 			</div>
-			<div><md-button class="md-primary" ui-sref="home.miembros" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Miembros</translate></md-button></div>
+			<div><md-button class="md-primary" ui-sref="home.miembros" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-miembros.svg"></md-icon><translate> Usuarios</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ui-sref="home.profile" ng-click="vm.openLeftMenu()"><md-icon md-svg-src="assets/images/icon-perfil.svg"></md-icon><translate>Editar Perfil</translate></md-button></div>
 			<div ng-if="vm.isAuthenticated()"><md-button class="md-primary" ng-href="#" ng-click="vm.openLeftMenu(); vm.logout();"><md-icon md-svg-src="assets/images/icon-salir.svg"></md-icon><translate> Salir</translate></md-button></div>
 	  </div>
   </md-content>
 </md-sidenav>
 	<div>
-<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive" style="height: 75px;">
+<md-toolbar class="md-accent notice" ng-class="{ true: 'green', false: 'warning' }[ vm.sentActivationMail ]" layout="row" layout-align="center center" ng-show="!vm.isActive && profile.userId != null" style="height: 75px;">
   <p>
     <md-icon md-svg-src="assets/images/icon-error.svg"></md-icon> <strong translate>ACTIVA TU CUENTA</strong> - {{ 'Te enviamos un correo a' | translate }} {{vm.account.email}}.
 	  <span ng-show="!vm.sentActivationMail">{{ 'No te llegó? Hace' | translate }}</span>

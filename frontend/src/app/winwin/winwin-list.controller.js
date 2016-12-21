@@ -11,7 +11,7 @@
     vm.awesomeThings = [];
     vm.classAnimation = '';
 
-    vm.current_page = 0
+    vm.current_page = 0;
 
     winwin.getList(vm.current_page, 'last', 9).then(function(data) {
       vm.winwins = data;

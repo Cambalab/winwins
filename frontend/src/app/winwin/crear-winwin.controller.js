@@ -147,13 +147,13 @@
       var res = "";
       switch(code) {
         case 'QUORUM_FIJO':
-          res = "Quorum fijo";
+          res = "Quorum fijo *Un numero exacto de personas necesarias.";
           break;
         case 'QUORUM_MOVIL':
-          res = "Quorum movil";
+          res = "Quorum movil *Un numero entre un minimo y un maximo de personas necesarias";
           break;
         case "QUORUM_ILIMITADO":
-          res = "Quorum ilimitado";
+          res = "Quorum ilimitado *Cantidad ilimitada de personas";
           break;
         default:
           res = code;

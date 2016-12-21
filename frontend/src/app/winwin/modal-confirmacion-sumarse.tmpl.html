@@ -26,7 +26,7 @@
 
 <div layout="column" layout-padding class="lightbox-crear" ng-show="vm.status == 'share'">
 	<md-dialog-content class="acme-crearwinwin">
-		<div class="container">
+		<div class="container" style="padding:0px;">
 			<div layout="column" layout-align="center center" class="comparti">
 				<h2 translate>Compartí tu Winwin</h2>
 				<p translate>en las redes sociales y sumá personas para concretarlo!
@@ -61,6 +61,7 @@
 		</div>
 		<div layout="row" layout-align="center center">
 		<div layout="column" class="comparti" flex-xs="100" flex="80" ng-show="!vm.emailsOK">
+			<hr>
 		<p class="enfasis" translate>Invitá amigos a tu Winwin por email</p>
 		<div class="wrap-md-input-container">
 		<md-input-container class="md-icon-float md-icon-right md-block">

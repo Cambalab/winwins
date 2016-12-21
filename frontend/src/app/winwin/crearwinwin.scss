@@ -10,7 +10,6 @@
     background: #f1f1f1;
     padding:30px;
     border-radius: 3px;
-    margin-top: 8%;
     form {
       @media (min-width: 960px) { 
         max-width: 100%;
@@ -195,9 +194,11 @@
   }
   .comparti {
     h2 {
-      color: #fb8c00;
+      color: rgb(78, 95, 193);
       font-size: 36px;
       margin-bottom: 10px;
+      margin-top:0px;
+      padding:0px;
       @media (max-width: 480px) { 
         font-size: 28px;
       }
@@ -396,6 +397,7 @@ md-toolbar.md-tall.md-crear {
   .acme-crearwinwin {
     background: #e7e6e6;
     padding: 25px 40px;
+    max-height: 350px;
     .comparti-social-media {
       margin-bottom: 0;
     }
@@ -480,3 +482,7 @@ md-toolbar.md-tall.md-crear {
 }
 
 //manuel
+
+.ww-share{
+    padding: 0px;
+  }
