@@ -310,11 +310,11 @@
       });
     }
 
-    vm.destroy = function(poll, index) {
-      winwin.destroy(poll.id).then(function() {
+    vm.removePoll = function(poll, index) {
+      winwin.removePoll(poll.id).then(function() {
         vm.polls.splice(index, 1);
       });
-    }
+    };
 
     vm.percentage_votes = function(poll, answer) {
       if(!poll.data.total_votes) {

@@ -135,7 +135,7 @@
                     <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                       <div ng-repeat="message in cnv.messages">
                         <md-card href="#send-message" du-smooth-scroll class="msg-container" layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
-                          <img class="msg-avatar" ng-src="{{msgController.imageServer}}/smart/{{ message.photo }}"  alt="">
+                          <img class="msg-avatar" ng-src="{{profile.imageServer}}/smart/{{ message.photo }}"  alt="">
                           <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
                       </div>
                     </div>
@@ -160,7 +160,7 @@
                       <!--</div>-->
                 <!--</md-list-item>-->
                 <md-list-item class="actividadRecienteContent" ng-if="profile.isAuthenticated()" ng-repeat="fact in profile.user.activities">
-                  <img ng-src="{{fact.photo}}" class="md-avatar" ui-sref="/#/profile/{{fact.sender_id}}" >
+                  <img ng-src="{{profile.imageServer}}/smart/{{fact.photo}}" class="md-avatar" ui-sref="/#/profile/{{fact.sender_id}}" >
                   <div layout-align="row" class="actividadFollowingContainer">
                     <a class="activityUsername" ng-href="/#/profile/{{fact.sender_id}}">{{fact.username}}</a>
                     <p class="mensajito">{{fact.mensajito}}</p>
@@ -194,11 +194,11 @@
               <md-card-content>
                 <img ng-src="{{profile.imageServer}}/{{profile.user.cover_photo}}" class="md-card-image" alt="">
                 <md-card-title>
-              <!--    <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
+                <div layout="row" layout-align="space-around end" layout-margin class="md-card-members">
                     <div class="md-item-text bg-violet" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Winwins</h3>
                       <p>{{profile.winwins_length}}</p>
-                    </div>-->
+                    </div>
                     <div layout="column" layout-align="center center">
                       <img ng-src="{{profile.avatar}}" class="md-card-avatar" alt=""> <div class="name">{{profile.user.name}} {{profile.user.lastname}}</div>
                       <md-button ng-click="profile.showCropAvatarDialog()" aria-label="changeAvatar" ng-if="profile.user.myself"><md-icon class="upload-image" md-svg-icon="assets/images/upload_image.svg"></md-icon> </md-button>
@@ -208,11 +208,11 @@
                         <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar" style="line-height: 30px;">Editar</md-button>
                       </div>
                     </div>
-                  <!--  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                       <h3>Seguidores</h3>
                       <p>{{profile.seguidores.length}}</p>
                     </div>
-                  </div>-->
+                  </div>
                 </md-card-title>
               </md-card-content>
             </md-card>
@@ -240,7 +240,7 @@
                 <div class="mensajes-recibidos-content" ng-repeat="cnv in profile.conversations">
                   <div ng-repeat="message in cnv.messages">
                     <md-card layout="row" ng-click="profile.showMessageModal(cnv.id, cnv.messages)" ng-if="$last" layout-align="space-around-end">
-                      <img class="msg-avatar" ng-src="{{profile.avatar}}"  alt="">
+                      <img class="msg-avatar" ng-src="{{profile.imageServer}}//{{message.photo}}"  alt="">
                       <p class="msg-body">{{ message.body }}</p><p class="msg-name"> {{message.name}}</p>
                   </div>
                 </div>
@@ -275,11 +275,11 @@
                         <md-button hide-xs hide-sm class="bt-green" ui-sref="home.profile" ng-show="profile.user.myself" aria-label="editar"><i class="fa fa-edit"></i>"></i>   Editar</md-button>
                       </div>
                     </div>
-                 <!--   <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
+                  <div class="md-item-text bg-orange" ng-if="!profile.user.private || profile.user.myself">
                       <h3 translate>Seguidores</h3>
                       <p>{{profile.user.followers_amount}}</p>
                     </div>
-                  </div>-->
+                  </div>
                 </md-card-title>
               </md-card-content>
             </md-card>
@@ -291,7 +291,7 @@
           <md-list class="actividadRecienteContainer">
             <md-list-item class="sinActividad" ng-if="profile.user.activities.length == 0">No tiene actividad Reciente</md-list-item>
             <md-list-item class="actividadRecienteContent" ng-repeat="act in profile.user.activities">
-              <img ng-src="{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
+              <img ng-src="{{profile.imageServer}}/smart/{{profile.avatar}}" alt="" class="md-avatar" ui-sref="home.public-profile{{user.id}}">
               <div layout-align="column">
                 <div layout-align="row">
                   <p class="mensajito">{{profile.user.name}} {{act.mensajito}}</p>

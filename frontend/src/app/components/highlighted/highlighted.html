@@ -37,9 +37,12 @@
           <md-button class="md-headline ww-card" ui-sref="home.winwin({winwinId: item.id})">{{item.title}}</md-button>
         </md-card-title-text>
     
-        <div class="ultimos-participantes" layout="row" layout-align="start center">
+        <md-button class="ultimos-participantes" layout="row" layout-align="start center">
           <img ng-repeat="usr in item.users | limitTo: 6" class="md-user-avatar-members" ng-if="usr.id!=item.user.id" ng-src="{{vm.imageServer}}//{{usr.photo}}" ui-sref="home.public-profile({userId: usr.id})">
-        </div>
+          <md-tooltip md-visible="demo.showTooltip" md-direction="{{demo.tipDirection}}">
+            {{item.user.username}}
+          </md-tooltip>
+        </md-button>
 
          <md-card-actions layout="row" class="card" layout-align="start center">
          <div class="somos">Somos
